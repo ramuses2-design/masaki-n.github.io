@@ -121,9 +121,19 @@
   .sheet .mfoot a{font-size:.78rem;color:var(--accent-deep);font-weight:700;border:1px solid var(--line);padding:7px 14px;border-radius:30px;transition:.16s}
   .sheet .mfoot a:hover{border-color:var(--accent);background:#f7f1e8}
   @media(max-width:560px){.brand{font-size:1.6rem}.meta{text-align:left}.top-row{align-items:flex-start}.datepick{justify-content:flex-start}.sheet{padding:24px 20px}}
+  /* --- left sidebar (theme quick-jump) --- */
+  .sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;background:#fff;border-right:1px solid var(--line);padding:20px 14px 28px;display:none;z-index:40}
+  .sidebar .sb-title{font-family:var(--serif);font-size:.82rem;font-weight:600;color:var(--sub);letter-spacing:.1em;margin:2px 10px 12px}
+  .sidebar a{display:block;font-size:.84rem;color:var(--sub);padding:9px 11px;border-radius:10px;margin-bottom:3px;border-left:3px solid transparent;line-height:1.45;transition:.15s}
+  .sidebar a:hover{background:#f1f7f3;color:var(--ink)}
+  .sidebar a.active{background:#eaf5ee;color:var(--h1);border-left-color:var(--h1);font-weight:700}
+  .sidebar a.sb-top{color:var(--accent-deep);font-weight:700;margin-bottom:8px}
+  section.block,.tips{scroll-margin-top:72px}
+  @media(min-width:1200px){body{padding-left:230px}.sidebar{display:block}}
 </style>
 </head>
 <body>
+<aside class="sidebar" id="sidebar" aria-label="テーマ一覧"></aside>
 
 <header class="top">
   <div class="wrap top-row">
@@ -173,6 +183,25 @@ function buildNav(d){
     (d.sections||[]).map(s=>'<a href="#'+esc(s.id)+'">'+esc(s.emoji||"")+' '+esc(s.title)+'</a>').join("");
 }
 
+function buildSidebar(d){
+  const sb=document.getElementById("sidebar"); if(!sb) return;
+  let h='<div class="sb-title">テーマ一覧</div>';
+  h+='<a href="#tips" data-spy="tips" class="sb-top">✦ 今日のまとめ</a>';
+  h+=(d.sections||[]).map(s=>'<a href="#'+esc(s.id)+'" data-spy="'+esc(s.id)+'">'+esc(s.emoji||"")+' '+esc(s.title)+'</a>').join("");
+  sb.innerHTML=h;
+}
+function setupSpy(){
+  const links={}; document.querySelectorAll('.sidebar a[data-spy]').forEach(a=>links[a.dataset.spy]=a);
+  const targets=[document.getElementById("tips")].concat([].slice.call(document.querySelectorAll("section.block"))).filter(Boolean);
+  if(window._spy) window._spy.disconnect();
+  if(!("IntersectionObserver" in window)) return;
+  window._spy=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ e.target._vis=e.isIntersecting; });
+    let cur=null; for(var i=0;i<targets.length;i++){ if(targets[i]._vis){ cur=targets[i].id; break; } }
+    if(cur){ for(var k in links) links[k].classList.remove("active"); if(links[cur]) links[cur].classList.add("active"); }
+  },{rootMargin:"-15% 0px -75% 0px",threshold:0});
+  targets.forEach(function(t){ window._spy.observe(t); });
+}
 function buildBoard(d){
   DATA=d; CARDS=[]; cardById={};
   document.getElementById("date").textContent=d.date||"";
@@ -225,6 +254,8 @@ function buildBoard(d){
 
   document.getElementById("app").innerHTML=html;
   bind();
+  buildSidebar(DATA);
+  setupSpy();
   applyFilters();
 }
 
