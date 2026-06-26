@@ -2,71 +2,374 @@
   "date": "2026年6月26日（金）",
   "updated": "⟳ 毎朝 7:00 自動更新",
   "quickTips": [
-    {"text":"<b>会議の議事録はTeamsのCopilot</b>で自動作成。決定事項とToDoまで。","target":"cp-teams"},
-    {"text":"<b>Excelの集計・分析はCopilot</b>に言葉で依頼（Agent Mode）。","target":"cp-excel"},
-    {"text":"<b>取引先からの物質照会はSVHC 253物質リスト</b>で即チェック。","target":"wk-reach"}
+    {
+      "text": "REACH SVHC候補が253物質に。自社の調達品にn-ヘキサン等が含まれていないか、含有調査を改めて確認しましょう。",
+      "target": "wk-svhc"
+    },
+    {
+      "text": "毎日繰り返すメール処理や承認は、Power Automateでまず1つだけ自動化を試してみましょう。",
+      "target": "it-powerautomate"
+    },
+    {
+      "text": "Word・ExcelのCopilot「Agent Mode」で、議事録要約や表データの整形をまとめて任せてみましょう。",
+      "target": "cp-agentmode"
+    }
   ],
   "sections": [
     {
-      "id": "work", "emoji": "🏭", "title": "仕事（専門）", "barColor": "#2f8f63",
-      "tag": "不織布・品質・生産技術・化学物質", "desc": "不織布業界、品質管理／保証、生産技術、化学物質管理の実務に直結する情報。",
+      "id": "work",
+      "emoji": "🏭",
+      "title": "仕事（専門）",
+      "barColor": "#2f8f63",
+      "tag": "不織布・品質・生産技術・化学物質",
+      "desc": "不織布・品質保証・生産技術・化学物質管理に関わる実務向けトピック。",
       "cards": [
-        {"cat":"不織布","levelClass":"know","levelText":"業界動向","title":"Magneraが世界最大の不織布メーカーに","body":"Berry GlobalとGlatfelterの統合で誕生したMagneraが世界首位に。欧州勢も能力増強が続く。","detail":"2025年、Berry Globalの不織布・ヘルスケア事業とGlatfelterの統合により誕生したMagnera Corporationが、生産能力で世界最大の不織布メーカーとなりました。これによりスパンボンド／メルトブローン分野の業界再編が一段と進んでいます。あわせて、Ahlstromがイタリアで分子ろ過メディアの新ライン、Fitesaがスウェーデンで衛生・医療向けスパンメルト不織布の新ラインを増設するなど、欧州勢の能力増強も相次いでいます。原料の調達先や価格交渉力に影響するため、主要サプライヤーの動向は定点観測しておくと安心です。","source":"Nonwovens Market 2035","url":"https://www.marketresearchfuture.com/reports/nonwovens-market-25419","tags":["不織布","業界","M&A"]},
-        {"cat":"不織布","levelClass":"deep","levelText":"市場/技術","title":"サステナブル素材とスマート不織布が成長軸","body":"市場はCAGR約5〜7.7%で拡大。環境対応素材と高機能化が二大トレンド。","detail":"不織布市場は衛生・医療・産業用途の拡大を背景に、CAGR約5〜7.7%で成長が続く見通しです。プラスチック規制の強化と環境配慮ニーズから、バイオベースポリマー・再生繊維・生分解性素材へのシフトが鮮明になっています。さらに、抗菌処理やセンサー対応層を組み込んだ『スマート不織布』が、ヘルスケア・ろ過・産業安全の分野で採用を広げています。今後の製品企画では『環境対応』と『機能付与』の二軸が差別化のポイントになりそうです。","source":"Coherent / Fortune BI","url":"https://www.coherentmarketinsights.com/market-insight/nonwoven-materials-market-307","tags":["不織布","技術","サステナブル"]},
-        {"cat":"化学物質管理","levelClass":"now","levelText":"要対応","title":"化審法：第一種特定化学物質の指定スケジュール公表","body":"経産省が2/2、クロルピリホス・MCCP・長鎖PFCA等の指定スケジュールを公表。該当原料の棚卸しを。","detail":"経済産業省は2026年2月2日、クロルピリホス、MCCP（中鎖塩素化パラフィン）、および長鎖PFCAとその塩・関連物質を化審法の第一種特定化学物質に指定する方針と、これらを含む輸入禁止製品の指定スケジュールを公表しました。第一種特定化学物質は製造・輸入が原則禁止となります。該当する原料・部材・副資材を使用していないかの棚卸しと、必要に応じた代替素材の検討を早めに進めておく必要があります。","source":"NITE / METI","url":"https://www.nite.go.jp/chem/kasinn/news.html","tags":["化学物質","化審法","規制"]},
-        {"id":"wk-reach","cat":"化学物質管理","levelClass":"now","levelText":"要対応","title":"REACH SVHCが253物質に — n-ヘキサン追加","body":"ECHAが2/4にSVHC候補を2物質追加し計253。n-ヘキサンが対象入り。EU向け製品は要確認。","detail":"欧州化学品庁（ECHA）は2026年2月4日、高懸念物質（SVHC）候補リストに新たに2物質を追加し、合計253物質となりました。今回は汎用溶剤であるn-ヘキサンが対象に入り、神経毒性を主な根拠としてSVHCに追加された初めてのケースとなりました。SVHC候補に該当する物質を成形品中に0.1重量%超で含む場合、EU域内の顧客・消費者への情報伝達義務などが生じます。EU向け製品については、原料・部材の含有状況をあらためて確認しておくことをおすすめします。","source":"EnviX / ECHA","url":"https://www.envix.co.jp/region/europe/eu/svhc-candidate-list/","tags":["化学物質","REACH","規制"]},
-        {"cat":"品質管理","levelClass":"know","levelText":"手法","title":"品質の基本ツールを使い分ける","body":"QC7つ道具・PDCA・TQM・5S・SQC・FMEAを目的で使い分け。標準化が属人化対策に効く。","detail":"品質管理の現場では、QC7つ道具によるデータ分析、PDCAサイクルでの継続的改善、TQM／シックスシグマによる全社的な品質経営、5Sによるムダ・ミスの削減、SQC（統計的品質管理）、FMEAによる潜在不良の事前対策などが基本となります。近年は人手不足と熟練者の高齢化による技能伝承が大きな課題です。手順の標準化と記録・チェックのデジタル化を組み合わせることで、品質のばらつきと業務の属人化を抑える動きが広がっています。","source":"現場と人（kaminashi）","url":"https://kaminashi.jp/media/manufacturing-quality-control","tags":["品質管理","手法"]},
-        {"cat":"生産技術","levelClass":"deep","levelText":"DX","title":"スマートファクトリーは「実行フェーズ」へ","body":"可視化→分析→自動化→デジタルツインの4段階。まずデータ整備とガバナンスから。","detail":"製造業のDXは実証から本格実行のフェーズへ移行しています。スマートファクトリー化は『可視化 → 分析・最適化 → 自動化 → デジタルツイン』の4段階で進むのが一般的で、デジタルツイン市場は2027年に約735億ドル規模へ拡大すると見込まれています。一方で調査では約72%の企業が成熟度の中位にとどまり、最高位に到達しているのは約10%にすぎません。いきなり高度化を狙うより、まずデータの整備とガバナンスを固め、段階的に進めるアプローチが現実的です。","source":"renue（2026年版）","url":"https://renue.co.jp/posts/smart-factory-maturity-model-manufacturing-dx-iiot-guide","tags":["生産技術","DX"]}
+        {
+          "id": "wk-svhc",
+          "cat": "化学物質管理",
+          "levelClass": "now",
+          "levelText": "要対応",
+          "title": "REACH SVHC候補が253物質に、n-ヘキサンが神経毒性で初の追加",
+          "body": "ECHAは2026年2月にSVHC候補物質を追加し、候補リストは計253物質に。n-ヘキサンが神経毒性を理由に初めて指定された。",
+          "detail": "欧州化学品庁（ECHA）は2026年2月4日、REACH規則の高懸念物質（SVHC）候補リストを更新し、掲載物質は合計253となった。新規には難燃剤DBDPE（vPvBを理由に収載）やビスフェノールAF（生殖毒性）が含まれ、特にn-ヘキサンは反復暴露による神経毒性が発がん性等と同等の懸念（ELOC）と判断され、神経毒性を主因とする初のSVHC指定となった。成形品中にSVHCが0.1wt%超で含まれる場合、受領者・消費者への情報伝達義務（第33条）とECHAへの届出義務（第7条）が発生する。自社の調達品・部材の含有状況を改めて確認したい。",
+          "source": "EnviX / 日本バルブ工業会",
+          "url": "https://www.envix.co.jp/region/europe/eu/svhc-candidate-list/",
+          "tags": ["REACH", "SVHC", "化学物質"]
+        },
+        {
+          "id": "wk-nonwoven-market",
+          "cat": "不織布",
+          "levelClass": "know",
+          "levelText": "市況",
+          "title": "不織布の世界市場は2030年へ年6〜8%成長も、過剰能力で競争激化",
+          "body": "不織布の世界需要は拡大基調が続く一方、パンデミック期の急拡大による生産能力の過剰が競争環境を厳しくしている。",
+          "detail": "複数の市場調査によると、不織布の世界市場規模は2025年の約215億ドルから2026年に約232億ドル（年率約7.7%）へ拡大し、2030年には約314億ドル規模に達する見通し。需要を牽引するのは使い捨て衛生用品・医療用テキスタイル・産業用途の拡大と、生分解性・バイオ由来素材への移行。一方でコロナ禍に各社が能力増強した結果、足元では供給過剰が顕在化し、価格・収益面の圧力が強まっている。これは技術革新を促す「市場の調整局面」とも受け止められている。",
+          "source": "Nonwovens Industry / Business Research Insights",
+          "url": "https://www.nonwovens-industry.com/smithers-report-tracks-the-future-of-global-nonwovens-to-2030/",
+          "tags": ["不織布", "市場動向", "サステナビリティ"]
+        },
+        {
+          "id": "wk-index2026",
+          "cat": "不織布",
+          "levelClass": "know",
+          "levelText": "業界",
+          "title": "不織布の世界最大級展示会 INDEX 2026 が5月にジュネーブで開催",
+          "body": "EDANA主催の国際展示会 INDEX 2026 が2026年5月19〜22日にスイス・ジュネーブのPalexpoで開催された。",
+          "detail": "INDEXはEDANAが主催する不織布業界の世界的な集積イベントで、2026年は5月19〜22日にジュネーブのPalexpoで開催された。今回はサステナビリティと循環経済が中核テーマで、リサイクルやバイオ由来素材の最新技術が紹介された。またBerryとGlatfelterの合併で誕生したMagneraが世界最大級の不織布メーカーの一つとなるなど、業界再編も話題となった。軽量化・高機能化に向けた素材・接着技術の動向は、日本の実務者にとっても素材選定の参考になる。",
+          "source": "EDANA / Nonwovens News",
+          "url": "https://www.edana.org/about-us/news/index-2026-navigating-a-new-era-for-nonwovens",
+          "tags": ["不織布", "展示会", "循環経済"]
+        },
+        {
+          "id": "wk-quality",
+          "cat": "品質保証",
+          "levelClass": "know",
+          "levelText": "基本",
+          "title": "人手不足下の品質保証は「源流管理」と標準化・デジタル化がカギ",
+          "body": "熟練者不足と製品の複雑化が進むなか、日々のトラブル対応に追われず根本改善に向かう品質保証体制づくりが課題となっている。",
+          "detail": "製造業の品質管理は、原材料の受入検査・工程確認・完成品の予防/是正措置などを通じ、顧客が信頼できる品質を安定供給することが目的。近年は熟練人材の不足、グローバル競争によるコスト・品質要求の高まり、顧客ニーズの多様化による製品の複雑化が重なり、特に中小では日々のトラブル対応に追われ根本改善に手が回らない構造的課題が指摘される。対策としてPDCAサイクルを工程全体で継続的に回し、検査・記録のデジタル化と作業標準の整備で属人化を抑えることが有効とされる。",
+          "source": "カミナシ / NECソリューションイノベータ",
+          "url": "https://kaminashi.jp/media/manufacturing-quality-control",
+          "tags": ["品質保証", "QC", "標準化"]
+        },
+        {
+          "id": "wk-smartfactory",
+          "cat": "生産技術",
+          "levelClass": "know",
+          "levelText": "DX",
+          "title": "工場DXは「見える化→自動化→最適化」で段階的に、生成AI検査も拡大",
+          "body": "工場のデジタル化は一足飛びでなく、見える化から自動化・最適化へ段階的に進めるのが現実的とされる。",
+          "detail": "製造業のDXは単なるIT導入ではなく業務プロセスそのものの変革であり、現実的には「見える化→自動化→最適化」の順で段階的に進めるのが定石とされる。スマートファクトリーはIoT・AI・ビッグデータ分析・産業用ネットワークを中核に構成され、足元では生成AIやAI外観検査、フィジカルAI、生産管理システムが注目分野。トヨタの工場IoT活用やダイキンの「工場IoTプラットフォーム」など、設備をネットワークで結びデータを迅速にフィードバックする事例が広がる。デジタルツイン市場は2027年に735億ドル規模へ成長する見通しとされる。",
+          "source": "DAIKO XTECH / 電通総研",
+          "url": "https://www.daiko-xtech.co.jp/daiko-plus/production-control/dx-trend/",
+          "tags": ["生産技術", "スマートファクトリー", "AI検査"]
+        },
+        {
+          "id": "wk-sustainability",
+          "cat": "不織布",
+          "levelClass": "deep",
+          "levelText": "技術",
+          "title": "不織布業界、軽量化と循環経済へ 素材メーカーが相次ぎ投資",
+          "body": "サステナビリティを軸に、不織布各社が軽量化・バイオ由来・リサイクル対応の素材開発と設備投資を加速している。",
+          "detail": "不織布業界では循環経済への対応が中核テーマとなり、リサイクルやバイオ由来材料の開発が進む。素材大手Borealisは独Burghausen工場に約4,900万ユーロを投じ、軽量化と性能向上を両立する「Borstar Nextension PP」の増産を発表した。これは衛生・医療向け不織布の薄手・軽量化ニーズに応える動きで、原料樹脂段階からの環境配慮が競争力を左右しつつある。日本の実務でも、規格適合と環境性能を両立する素材選定の重要性が増している。",
+          "source": "INDA / Nonwovens Industry",
+          "url": "https://www.inda.org/inda-2026-supply-report-highlights-resilient-growth-and-sustainability-focus-in-north-american-nonwovens-industry/",
+          "tags": ["不織布", "軽量化", "投資"]
+        }
       ]
     },
     {
-      "id": "ittools", "emoji": "🧰", "title": "社内ITツール活用", "barColor": "#3f8f86",
-      "tag": "Kintone・SharePoint・Teams・Power Platform・Sotas", "desc": "社内で使っているITツールの「便利な使い方」。日々の業務を軽くするヒント。",
+      "id": "ittools",
+      "emoji": "🧰",
+      "title": "社内ITツール活用",
+      "barColor": "#3f8f86",
+      "tag": "Kintone・SharePoint・Teams・Power Platform・Sotas",
+      "desc": "社内で使っているツールを使いこなすための実用的なコツとアップデート。",
       "notice": "💡 <b>社内で使っているツールを使いこなすコツ集です。</b>まずは1つ、今日の業務で試してみてください。",
       "noticeType": "ok",
       "cards": [
-        {"cat":"Kintone","levelClass":"now","levelText":"すぐ使える","title":"脱Excelで一元管理＋自動集計・通知","body":"台帳・案件・日報をアプリ化。条件集計をグラフ化し、リマインドや宛先指定コメントで対応漏れも防止。","detail":"Kintoneは、これまでExcelで管理していた顧客台帳・案件管理・日報などをクラウド上のアプリにして一元管理できます。保存したデータは条件を指定して集計し、表やグラフで可視化が可能です。さらに、日時・条件を指定したリマインド通知や、宛先を指定したコメント（相手に『自分宛て』として通知）で、登録・更新の見落としや対応漏れを防げます。メール連絡を減らし、情報共有と引き継ぎをスムーズにします。","source":"kintoneの歩き方（サイボウズ）","url":"https://kintone.cybozu.co.jp/support/arukikata/pages/02-05.html","tags":["Kintone","業務効率","集計","通知"]},
-        {"cat":"SharePoint","levelClass":"know","levelText":"知っておく","title":"文書を一元管理：版管理と社内ポータル","body":"バージョン管理・共同編集・権限管理を一元化。リストやサイトで台帳や社内ポータルも作れる。","detail":"SharePointは、社内文書をクラウドで一元管理できるツールです。ファイルのバージョン管理や同時共同編集、フォルダ／サイト単位での権限管理により、『最新版はどれ？』『どこに保存した？』といった混乱を減らせます。リストやサイト機能を使えば、社内ポータルや各種台帳・申請の置き場も手早く作成可能です。後述のPower Automateと組み合わせると、保存をトリガーにした自動処理も実現できます。","source":"Microsoft Learn","url":"https://learn.microsoft.com/ja-jp/power-automate/sharepoint-overview","tags":["SharePoint","文書管理","共有"]},
-        {"cat":"Teams","levelClass":"now","levelText":"すぐ使える","title":"Teams本体の整理術：チャネル・タブ・Planner","body":"話題ごとにチャネルを分け、タブにファイルやPlanner・Listsを固定。ピン留めとメンションで確実に。","detail":"Teamsは会議だけでなく、情報整理のハブとしても活用できます。話題ごとにチャネルを分け、各チャネルのタブにファイルやPlanner（タスク）、Lists、よく使うサイトを固定すると、必要な情報に最短でたどり着けます。重要メッセージはピン留め・保存し、メンションで確実に相手へ通知。ファイルの実体はSharePointに保存されるため、版管理や権限とも自然に連携します。","source":"Microsoft Teams","url":"https://www.microsoft.com/ja-jp/microsoft-teams/group-chat-software","tags":["Teams","整理","タスク"]},
-        {"cat":"Power Platform","levelClass":"know","levelText":"知っておく","title":"申請・通知を自動化（Power Automate / Apps）","body":"SharePoint/Outlook/Teamsを連携し、承認・休暇申請・メール保存・通知を自動化。Power Appsで業務アプリも。","detail":"Power Automateは、SharePoint・Outlook・Teamsなどをつないで定型業務を自動化するツールです。たとえば、休暇や購買などの申請承認フロー、受信メールの添付をSharePointへ自動保存、特定の更新をTeamsへ通知、といった処理をノーコード／ローコードで構築できます。100種類以上のSharePointテンプレートから始められ、Power Appsを使えばエンジニアでなくても入力フォームや業務アプリを作成可能です。手作業の時間とミスを減らせます。","source":"Microsoft Learn","url":"https://learn.microsoft.com/ja-jp/power-automate/sharepoint-overview","tags":["Power Automate","Power Apps","自動化"]},
-        {"cat":"Copilot Studio","levelClass":"deep","levelText":"深掘り","title":"自社用AIエージェントをローコードで作成","body":"社内データに接続したAIエージェントを自然言語＋ローコードで構築。FAQ応答や定型業務の自動化に。","detail":"Copilot Studioは、自社専用のAIエージェント（チャットボット）をローコードで作成できるツールです。社内データやシステムに接続し、自然言語で『どんな受け答えをさせたいか』を記述するだけでエージェントを構築・公開できます。FAQ対応や定型問い合わせの一次受け、複数ステップの業務の自動化などに活用可能です。2026年5月にはPCを操作するエージェント機能が一般提供化。なお2026年6月末以降、作成は専用のCopilot Studio Webアプリで行う形に変わります。","source":"Microsoft Learn","url":"https://learn.microsoft.com/ja-jp/microsoft-copilot-studio/fundamentals-what-is-copilot-studio","tags":["Copilot Studio","エージェント","自動化"]},
-        {"cat":"Sotas","levelClass":"know","levelText":"知っておく","title":"化学業界特化SaaS：素材DB・法令調査・工程管理","body":"カタログ/TDSのアップで自社素材DBを構築。法令調査・SDS管理、工程・生産実績管理まで化学現場のDXを支援。","detail":"Sotasは、化学・素材業界に特化したSaaSを提供する国内スタートアップです（大手化学メーカーを中心に約200社が導入、国家プロジェクトにも採択）。主力は3つで、『Sotasデータベース』はカタログやTDSをアップロードするだけで自社専用の素材データベースを構築でき、『Sotas化学調査』は法令調査やSDS管理など煩雑な化学物質調査業務を効率化、『Sotas工程管理』は製造現場の工程・生産実績を管理します。化学・不織布まわりの『データの分断』の解消に役立ちます。","source":"Sotas株式会社","url":"https://sotas.co.jp/products/","tags":["Sotas","化学","データ管理","SDS"]}
+        {
+          "id": "it-kintone",
+          "cat": "Kintone",
+          "levelClass": "now",
+          "levelText": "時短",
+          "title": "Kintone：紙・Excel業務をノーコードでアプリ化、現場で即始められる",
+          "body": "見積・日報・点検記録などの定型業務をドラッグ&ドロップでアプリ化でき、拠点間でリアルタイムに情報共有できる。",
+          "detail": "Kintoneは「アプリ作成」「データ管理・可視化」「チーム共有」が得意な業務改善ツール。プログラミング不要で、ドラッグ&ドロップでフォームを作り、項目を選ぶだけで承認経路（ワークフロー）も設定できる。紙やExcelで行っていた見積・日報・点検記録・不良連絡票などをアプリ化すれば、拠点間でリアルタイムに共有でき、転記の手間や入力ミスも減らせる。まずは1つの定型業務（例：クレーム受付や不良連絡）をアプリ化するのが始めやすい。2026年6月にはkintone AIが正式提供開始となり、既存ユーザーは追加契約なしでAI機能を利用できるようになった。",
+          "source": "サイボウズ / Toyokumo",
+          "url": "https://toyokumo-blog.kintoneapp.com/kintone-how-to-use/",
+          "tags": ["Kintone", "ノーコード", "業務改善"]
+        },
+        {
+          "id": "it-powerautomate",
+          "cat": "Power Platform",
+          "levelClass": "now",
+          "levelText": "自動化",
+          "title": "Power Automate：メール・承認・ファイル処理を自然言語で自動化",
+          "body": "定型のメール処理・データ入力・承認フローを自動化でき、CopilotやAIエージェント連携で自然言語での作成も可能に。",
+          "detail": "Power AutomateはMicrosoftのクラウド型自動化サービスで、アプリやサービスを連携させて定型業務を自動化する。受信メールの仕分け・添付保存、フォーム回答からの自動通知、承認プロセスの回付などを「フロー」として組める。2026年現在はCopilotやAIエージェントとの統合が進み、自然言語で「こういう自動化をしたい」と指示してフローを作れるようになった。大手損保では導入数週間で300人超が、トヨタでは約5,000人規模のコミュニティが活用するなど、現場主導の普及が進む。まずは毎日繰り返す1作業（例：定例メールの保存・通知）から自動化すると効果を実感しやすい。",
+          "source": "シースリーインデックス / テクバン",
+          "url": "https://www.c3index.co.jp/blog/blog_1994/",
+          "tags": ["Power Automate", "自動化", "Copilot連携"]
+        },
+        {
+          "id": "it-sharepoint",
+          "cat": "SharePoint",
+          "levelClass": "know",
+          "levelText": "注意",
+          "title": "SharePoint：資料置き場＋共同編集が便利、旧ワークフローは2026年廃止",
+          "body": "案件ごとの資料置き場やマニュアル集約に便利だが、従来型ワークフローは2026年4月に廃止予定でPower Automateへの移行が必要。",
+          "detail": "SharePointはファイル共有・ドキュメント管理・社内ポータル作成ができるMicrosoft 365のコラボ基盤。実務では案件ごとの資料置き場、議事録のリアルタイム共同編集、テンプレート集やマニュアルの集約、顧客とのファイル共有などに使える。Teamsから開いたファイルも実体はSharePointに保存されるため、両者は一体で使うのが効率的。注意点として、従来型のSharePointワークフロー機能は2026年4月2日に廃止予定でPower Automate等への移行が推奨される。またSharePoint Server 2016/2019は2026年7月14日にサポート終了となるため、オンプレ利用組織はSharePoint Onlineへの移行検討を。",
+          "source": "ジョーシスクリエイト / CTCS",
+          "url": "https://www.josys-create.co.jp/sharepoint-online-gyomu-kaizen/",
+          "tags": ["SharePoint", "共同編集", "移行"]
+        },
+        {
+          "id": "it-teams",
+          "cat": "Teams",
+          "levelClass": "know",
+          "levelText": "活用",
+          "title": "Teams：純正機能だけでも会議・ファイル・タスクを一元化",
+          "body": "チャット・会議・ファイル共有を一画面にまとめ、チャネルごとに業務やプロジェクトを整理できる。",
+          "detail": "Teamsは純正機能だけでもチャット・Web会議・ファイル共有・タスク管理を一元化できる。チャネルを業務や案件ごとに分け、関連ファイルはタブにピン留めしておくと毎回探さずに済む。会議では録画・自動文字起こし（トランスクリプト）を活用すれば、議事録作成の手間を減らせる。共有ファイルの実体はSharePointに保存されるため、外出先からも同じ最新版にアクセス可能。まずは「チャネル整理」と「よく使うファイルのタブ固定」から始めると、情報の散乱を防げる。Power Automateと組み合わせれば、特定の投稿をトリガーに通知や記録を自動化することもできる。",
+          "source": "ソフィア",
+          "url": "https://www.sofia-inc.com/blog/16212.html",
+          "tags": ["Teams", "会議", "ファイル共有"]
+        },
+        {
+          "id": "it-copilotstudio",
+          "cat": "Power Platform",
+          "levelClass": "deep",
+          "levelText": "新機能",
+          "title": "Copilot Studio：コンピューター操作エージェントが一般提供、UI越しの自動化へ",
+          "body": "ローコードで自社AIエージェントを作れるCopilot Studioで、WebやデスクトップアプリをUI越しに操作するエージェントが一般提供された。",
+          "detail": "Copilot Studioは自社専用のAIチャットボットやエージェントをローコード/ノーコードで構築・管理できるプラットフォーム。2026年5月の更新で「コンピューター操作エージェント」が一般提供され、エージェントがWebサイトやデスクトップアプリをユーザーインターフェース越しに直接操作できるようになった。これによりAPIのない旧来システムでも画面操作ベースの自動化が可能に。あわせて直感的なビジュアルデザイナーで自動化を組む新しいワークフロー体験や、発信者対応を行うリアルタイム音声エージェントも追加された。現場では、まず社内FAQ応答や定型問い合わせ対応のエージェント化から検討するとよい。",
+          "source": "Impress AI watch / Microsoft",
+          "url": "https://ai.watch.impress.co.jp/docs/news/2112571.html",
+          "tags": ["Copilot Studio", "エージェント", "ローコード"]
+        },
+        {
+          "id": "it-sotas",
+          "cat": "Sotas",
+          "levelClass": "know",
+          "levelText": "化学特化",
+          "title": "Sotas：SDS作成・chemSHERPA対応・法規調査を自動化する化学業界特化SaaS",
+          "body": "化学業界特化のSotasは、素材データベース・化学調査/SDS管理・工程管理を一元化し、最新法規に沿ったSDSをワンクリックで作成できる。",
+          "detail": "Sotasは化学業界に特化したDXサービス群で、優良サプライヤー情報を集約した素材データベース、化学調査/SDS管理、工程管理などを提供する。「Sotas化学調査」はNITE-CHRIPやchemSHERPAとリアルタイム連携し自動更新されるため、ボタン一つで最新規制に準拠したSDSを作成でき、専門知識が要るGHS分類も自動生成される。サプライヤーへの資料依頼や顧客への納品もSotas上で完結し、依頼忘れ・納品漏れといったメール業務の課題を解消。Sotasデータベースは数万件規模の素材・企業情報を検索・分析でき、調達先探索にも役立つ。REACH/化審法対応の負荷軽減を検討する化学・素材系部門は要チェック。",
+          "source": "Sotas株式会社 / 化学工業日報",
+          "url": "https://sotas.co.jp/products/chemical-survey/",
+          "tags": ["Sotas", "SDS", "化学物質管理"]
+        }
       ]
     },
     {
-      "id": "ai-copilot", "emoji": "🟦", "title": "AI｜Copilot（社内利用OK）", "barColor": "#3b7fb0",
-      "tag": "Microsoft 365 Copilot", "desc": "社内で承認済みのCopilotで、今日からできる業務活用。",
+      "id": "ai-copilot",
+      "emoji": "🟦",
+      "title": "AI｜Copilot（社内利用OK）",
+      "barColor": "#3b7fb0",
+      "tag": "Microsoft 365 Copilot",
+      "desc": "社内で利用が認められているMicrosoft 365 Copilotの新機能と実務での使い方。",
       "notice": "✅ <b>社内で利用が認められているのはCopilotです。</b>日常業務はまずCopilotの活用から。",
       "noticeType": "ok",
       "cards": [
-        {"id":"cp-teams","cat":"Teams","levelClass":"now","levelText":"すぐ使える","title":"会議の議事録・ToDoを自動作成","body":"会議を自動で文字起こし→要約し、決定事項とToDoを抽出。欠席しても要点を把握できる。","detail":"Microsoft 365 CopilotをTeamsで使うと、会議の音声を自動で文字起こしして要約し、決定事項とアクションアイテム（ToDo）まで抽出できます。会議に出られなかった場合でも、後から要点と次にやるべきことをすぐ把握できます。議事録作成の手間が大きく減り、議論そのものに集中できるのが利点です。社内で正式に利用が認められているツールなので、まず日常の会議運用から取り入れるのがおすすめです。","source":"Microsoft 365 Copilot活用ガイド","url":"https://www.iimhs.co.jp/services/ms365/copilot/m365-copilot.html","tags":["Copilot","会議","議事録"]},
-        {"cat":"Outlook","levelClass":"now","levelText":"すぐ使える","title":"メールの要約と返信下書き","body":"長いスレッドの要点整理と返信文の起案を支援。一次処理の時間を短縮できる。","detail":"OutlookのCopilotは、長くなったメールスレッドの要点整理や、返信文のたたき台作成を支援します。たとえば『丁寧にお礼を述べつつ、納期を確認する返信を作成して』のように指示すると下書きが生成され、あとは事実確認と微修正だけで送信できます。メールの一次処理にかかる時間を短縮でき、対応漏れの防止にもつながります。","source":"NTTドコモビジネス","url":"https://www.ntt.com/bizon/copilot.html","tags":["Copilot","メール"]},
-        {"id":"cp-excel","cat":"Excel","levelClass":"know","levelText":"知っておく","title":"Excel分析をCopilotに依頼（Agent Mode）","body":"数式・集計・グラフを言葉で指示。Agent Modeは分析を自律実行し属人化を解消。","detail":"ExcelのCopilotには、数式の作成、集計、グラフ化、傾向の説明などを言葉で依頼できます。さらにAgent Modeでは、指示に基づいて分析の手順そのものを自律的に実行します。これまで特定の担当者しかできなかった分析業務の属人化を解消し、誰でも一定品質の分析にアクセスできるようになります。品質データや生産データの一次集計・可視化の効率化に有効です。","source":"AI Tools Lab","url":"https://aitools-lab.com/microsoft-copilot-365-guide/","tags":["Copilot","Excel","分析"]},
-        {"cat":"Word/PPT","levelClass":"know","levelText":"知っておく","title":"報告書・企画書・研修資料のドラフト生成","body":"Wordで報告書/企画書、PowerPointで研修・営業資料の初稿を素早く作成。","detail":"WordのCopilotは議事録・報告書・企画書などのたたき台を、PowerPointのCopilotは営業資料や社内研修資料の初稿を素早く生成します。ゼロから書き起こす負担が減り、構成や表現のブラッシュアップに時間を充てられます。社内テンプレートや既存資料を下敷きにして指示すると、より自社のトーンに沿った成果物になります。","source":"Microsoft 365 Copilot活用ガイド","url":"https://www.iimhs.co.jp/services/ms365/copilot/m365-copilot.html","tags":["Copilot","資料作成"]},
-        {"cat":"検索","levelClass":"know","levelText":"知っておく","title":"社内ナレッジを横断検索","body":"SharePoint/OneDriveの社内文書を横断検索し、根拠付きで回答。規程・手順書探しに。","detail":"Copilotは、SharePointやOneDrive上の社内文書を横断的に検索し、参照元（根拠）を示しながら質問に答えます。『この規格の最新版はどこ？』『この手順書の該当箇所は？』といった探し物が速くなり、属人化しがちな社内ナレッジの活用が進みます。ユーザーのアクセス権の範囲内で動作するため、権限管理を適切に保つことが前提となります。","source":"Microsoft Learn","url":"https://learn.microsoft.com/ja-jp/microsoft-365/copilot/microsoft-365-copilot-overview","tags":["Copilot","検索","ナレッジ"]},
-        {"cat":"最新","levelClass":"deep","levelText":"深掘り","title":"Copilotがマルチモデルに（Claude選択可）","body":"2026年1月よりClaudeが既定利用可。GPTとClaudeを選択でき、5月にOpus 4.8対応。","detail":"2026年1月から、Microsoftのエンタープライズデータ保護（EDP）の対象としてAnthropicのClaudeがCopilot内で既定利用できるようになり、Word・PowerPoint・Researcher等でGPT系とClaudeを選べるマルチモデル環境が整いました。さらに5月下旬にはOpus 4.8に対応し、複雑な多段階タスクや長時間の自律的な処理能力が強化されています。用途に応じてモデルを使い分けることで、より高品質な出力が得られます。","source":"AI総研／Windows Blog","url":"https://www.ai-souken.com/article/m365-copilot-updates-2026","tags":["Copilot","最新","モデル"]}
+        {
+          "id": "cp-agentmode",
+          "cat": "Copilot",
+          "levelClass": "now",
+          "levelText": "新機能",
+          "title": "Word・Excel・PowerPointに「Agent Mode」が展開、複数手順をまとめて実行",
+          "body": "2026年初頭からWord/Excel/PowerPointでAgent Modeのロールアウトが始まり、複数ステップの作業をCopilotにまとめて任せられる。",
+          "detail": "Microsoft 365 Copilotでは2026年1月以降、Word・Excel・PowerPointの3アプリで「Agent Mode」の展開が始まった。従来の単発の指示だけでなく、複数手順を要する作業（例：データ集計→グラフ作成→要約スライド化）をエージェントが段階的に実行できる。あわせてWord/Excel/PowerPointでは、Copilotが挿入した新規コンテンツを「変更履歴」として確認・採否できる機能も追加され、AIの提案を安心して取り込めるようになった。日常業務では、議事録の要約や表データの整形など定型作業から試すのがおすすめ。機密情報の取り扱いには引き続き注意を。",
+          "source": "Windows Blog for Japan",
+          "url": "https://blogs.windows.com/japan/2026/02/19/whats-new-in-microsoft-365-copilot-january-2026-4488916/",
+          "tags": ["Copilot", "Agent Mode", "Office"]
+        },
+        {
+          "id": "cp-excelpython",
+          "cat": "Copilot",
+          "levelClass": "know",
+          "levelText": "強化",
+          "title": "Copilot in ExcelがPython対応、WordではClaudeモデルも選択可能に",
+          "body": "ExcelのCopilotでPythonによる高度なデータ分析ができるようになり、Wordでは応答モデルとしてClaudeも選べるようになった。",
+          "detail": "2026年のアップデートで、Copilot in ExcelがPythonをサポートし、自然言語の指示から統計処理や高度なデータ分析・可視化を実行できるようになった。またCopilot in Wordでは、生成に用いるモデルとしてAnthropicのClaudeがサポートされ、用途に応じてモデルを選べる。OutlookではメールスレッドをそのままCopilot Chatの文脈として渡せるようになり、長い経緯の要約や返信ドラフト作成が容易に。いずれも社内で許可されたCopilot上の機能であり、扱う情報の機密区分を確認したうえで活用したい。",
+          "source": "AI総合研究所 / Windows Blog",
+          "url": "https://www.ai-souken.com/article/m365-copilot-updates-2026",
+          "tags": ["Copilot", "Excel", "Python"]
+        },
+        {
+          "id": "cp-notebook",
+          "cat": "Copilot",
+          "levelClass": "know",
+          "levelText": "活用",
+          "title": "Copilotノートブックが強化、SharePoint/OneNoteを参照して調べ物を効率化",
+          "body": "Copilotノートブックが作成・共同作業・学習面で強化され、SharePointコンテンツやOneNoteを参照源にできるようになった。",
+          "detail": "Copilotノートブックは、関連資料をまとめて文脈として与え、要約・整理・学習を支援する機能。2026年の更新で作成・共同作業・学習の各体験が強化され、SharePoint上のコンテンツやOneNoteノートブックの内容を参照ソースとして取り込めるようになった。これにより、部署の規格類やマニュアルを束ねて「この範囲だけを根拠に答えて」という使い方がしやすくなる。社内ナレッジを根拠にした回答は、外部の一般的な生成AIに機密を入力せずに済む点でも安全。まずは自部門の公開可能な手順書をまとめたノートブック作成から試すとよい。",
+          "source": "Windows Blog for Japan",
+          "url": "https://blogs.windows.com/japan/2026/04/20/whats-new-in-microsoft-365-copilot-march-2026-4506322/",
+          "tags": ["Copilot", "ノートブック", "ナレッジ"]
+        },
+        {
+          "id": "cp-teams",
+          "cat": "Copilot",
+          "levelClass": "now",
+          "levelText": "活用",
+          "title": "Copilot ChatがTeamsのチャット・チャネル・会議へ拡大",
+          "body": "Microsoft 365 Copilot ChatがTeamsのチャット・チャネル・会議に統合され、会話の文脈を踏まえた要約や下書きが可能に。",
+          "detail": "Microsoft 365 Copilot ChatのTeams統合が拡大し、チャット・チャネル・会議の中でCopilotを直接呼び出せるようになった（モバイル対応も近日提供予定）。会議では議論の要点整理や決定事項・宿題の抽出、チャネルでは長いスレッドの要約に使える。OutlookやTeamsから会話の文脈をそのままCopilotに渡せるため、別アプリへコピーする手間が減る。社内で許可されたCopilot上の機能なので安心して使えるが、外部参加者を含む会議の記録・要約の共有範囲には配慮したい。",
+          "source": "Windows Blog for Japan / Qiita",
+          "url": "https://qiita.com/sadabon444/items/b5a7d69109d39ca0a587",
+          "tags": ["Copilot", "Teams", "会議要約"]
+        },
+        {
+          "id": "cp-governance",
+          "cat": "Copilot",
+          "levelClass": "deep",
+          "levelText": "管理",
+          "title": "管理者がCopilotアプリに自社フッターを追加可能に、信頼して使える環境へ",
+          "body": "組織の管理者がMicrosoft 365 Copilotアプリに自社ブランドのフッターを表示でき、利用上の注意喚起などを添えられる。",
+          "detail": "2026年の管理・ガバナンス強化として、組織の管理者がMicrosoft 365 Copilotアプリに独自ブランドのフッターを追加できるようになった。利用ガイドや問い合わせ先、機密情報の取り扱い注意などを常時表示でき、ユーザーが安心してCopilotを使える環境づくりに役立つ。生成AIの社内定着では「情報の正確性」や「情報漏洩リスク」への不安が上位課題として挙がっており、こうしたガバナンス機能は現場の心理的ハードルを下げる。利用ルールの周知とあわせて活用したい。",
+          "source": "Windows Blog for Japan",
+          "url": "https://blogs.windows.com/japan/2026/05/28/whats-new-in-microsoft-365-copilot-april-2026-4510935/",
+          "tags": ["Copilot", "ガバナンス", "管理"]
+        }
       ]
     },
     {
-      "id": "ai-other", "emoji": "🧪", "title": "AI｜その他（参考・社外動向）", "barColor": "#7a6fc0",
-      "tag": "参考情報", "desc": "Copilot以外の生成AIに関する社外動向。利用可否は社内規程に従ってください。",
+      "id": "ai-other",
+      "emoji": "🧪",
+      "title": "AI｜その他（参考・社外動向）",
+      "barColor": "#7a6fc0",
+      "tag": "参考情報",
+      "desc": "社外の生成AI動向の参考情報です。社内での業務利用はCopilotのみが認められています。",
       "notice": "⚠ <b>重要：Copilot以外の生成AI（ChatGPT・Gemini・Perplexity・Notta等）は、社内での業務利用が制限されています。</b>以下は社外動向の参考情報です。許可されたツールでも、<b>機密情報・個人情報・顧客情報・図面/規格/品質データ・未公開の技術情報は入力しないでください。</b>判断に迷う場合は情報システム部門に確認を。",
       "noticeType": "warn",
       "cards": [
-        {"cat":"動向","levelClass":"know","levelText":"参考","title":"主要AIツールは目的別に多様化","body":"文章生成・出典付き検索・社内文書Q&A・画像生成など用途別に発展。社内では業務利用が制限。","detail":"社外では、生成AIが用途別に多様化しています。文章生成（ChatGPT等）、出典付きのAI検索（Perplexity等）、社内文書に絞ったQ&A（NotebookLM等）、画像生成（Gemini等）と、目的に応じた使い分けが一般的になっています。ただし当社で業務利用が認められているのはCopilotのみです。これはあくまで社外の動向を知るための参考情報としてご覧ください。外部AIサービスへの業務データの入力は行わないでください。","source":"ITセレクト","url":"https://www.itmedia.co.jp/itselect/ai_tool/","tags":["AI動向","参考"]},
-        {"cat":"事例","levelClass":"deep","levelText":"参考","title":"他社の生成AI活用で業務効率30%の事例","body":"問い合わせ・文書作成・検索への組込みで定型業務を削減した他社事例。自社利用は不可。","detail":"他社では、問い合わせ対応・文書作成・社内ナレッジ検索などに生成AIを組み込み、定型業務の工数を大きく削減した事例が報告されています（業務効率30%向上といった例も）。一方で、こうした導入はセキュリティ要件の確認、情報の取り扱いルール、社内規程の整備が前提です。当社では外部AIを業務に使うことはできないため、考え方やユースケースの参考としてとらえてください。","source":"Panasonic IS","url":"https://service.is-c.jpn.panasonic.com/column/generative_ai","tags":["AI動向","事例","参考"]},
-        {"cat":"会議AI","levelClass":"know","levelText":"参考","title":"会議文字起こしツールの進化","body":"外部の文字起こしサービスが普及。社内ではTeamsのCopilotを推奨、外部AIは制限。","detail":"Notta等の文字起こしサービスは、Zoom・Teams・Meetに接続してリアルタイムに会議を文字起こしし、終了後に要約まで自動で行います。社外では普及が進んでいますが、当社の会議ではTeamsのCopilotの利用を推奨しており、外部の生成AIサービスの業務利用は制限されています。会議内容や資料の入力先には十分ご注意ください。","source":"業務効率化AIツール15選","url":"https://aipicks.jp/mag/ai-tools-for-business-efficiency","tags":["AI動向","会議","参考"]}
+        {
+          "id": "ao-agent",
+          "cat": "社外動向",
+          "levelClass": "know",
+          "levelText": "参考",
+          "title": "2026年は生成AIが業務に「組み込まれる」年、AIエージェントが主役に",
+          "body": "生成AIは「試す」段階から業務やツールに組み込まれる段階へ移行し、AIエージェントが最重要キーワードとされる（社外動向）。",
+          "detail": "各種調査では、2026年は生成AIが「試す年」から業務・ツールに組み込まれる年への転換点と位置づけられる。最重要キーワードは「AIエージェント」で、複数の作業を自律的にこなす形態が広がりつつあるが、本格的にエージェント機能を有効化している企業は2026年時点で15%未満とされ、普及はこれから。テキストに加え画像・音声・動画を横断するマルチモーダルが事実上の標準となり、物理世界で動く「フィジカルAI」も注目される。あくまで社外の一般動向であり、社内では許可されたCopilotの利用を基本とし、機密情報は入力しないこと。",
+          "source": "PwC Japan / HP Tech&Device",
+          "url": "https://www.pwc.com/jp/ja/knowledge/thoughtleadership/generative-ai-survey2026-consideration.html",
+          "tags": ["生成AI", "AIエージェント", "参考"]
+        },
+        {
+          "id": "ao-adoption",
+          "cat": "社外動向",
+          "levelClass": "know",
+          "levelText": "参考",
+          "title": "企業の生成AI活用は34.5%、効果実感も「使いこなせない層」が課題（社外調査）",
+          "body": "国内調査では生成AIを業務活用する企業は34.5%で、活用企業の約87%が効果を実感する一方、使いこなせない層の業務支障も指摘される。",
+          "detail": "帝国データバンク等の国内調査によると、生成AIを業務で活用している企業は34.5%で、活用企業の86.7%が業務効果を実感している。業務利用されるツールはChatGPTが57.7%、Geminiが39.3%、Microsoft Copilotが30.3%と報告されるが、これは社外の一般的な利用実態であり、自社では業務利用が認められているのはCopilotのみである点に注意。懸念点では「情報の正確性」が50.4%で最多、次いで専門人材・ノウハウ不足、情報漏洩リスクが挙がる。約9割の企業が今後のAI投資拡大に前向きとされる。",
+          "source": "帝国データバンク / commercepick",
+          "url": "https://www.tdb.co.jp/report/economic/20260514-genai/",
+          "tags": ["生成AI", "利用実態", "参考"]
+        },
+        {
+          "id": "ao-market",
+          "cat": "社外動向",
+          "levelClass": "deep",
+          "levelText": "参考",
+          "title": "生成AIの業界地図2026：新興勢力の台頭と連携で競争激化（社外動向）",
+          "body": "生成AI市場は大手に加え新興勢力が台頭し、提携・連携が進んで競争が激化しているとされる（社外参考情報）。",
+          "detail": "報道では、2026年の生成AI市場は既存大手に新興勢力が加わり、各社の連携・提携が進んで競争が激化しているとされる。マルチモーダル化や推論性能の向上、企業向けエージェント基盤の整備が競争軸となっている。こうした動向は技術トレンドの理解には有用だが、社内では業務利用が認められているのはMicrosoft 365 Copilotのみであり、ChatGPT・Gemini・Perplexity・Notta等の業務利用は制限されている。参考情報として把握しつつ、機密・個人・顧客情報や図面/規格/品質データは入力しないこと。",
+          "source": "日経BOOKプラス",
+          "url": "https://bookplus.nikkei.com/atcl/column/020500658/020500001/",
+          "tags": ["生成AI", "業界動向", "参考"]
+        }
       ]
     },
     {
-      "id": "society", "emoji": "🌐", "title": "社会情勢（一般ニュース）", "barColor": "#d98e3d",
-      "tag": "政治・経済・世界", "desc": "国内政治と世界情勢の動き。取引・調達・為替に効く話題を中心に。",
+      "id": "society",
+      "emoji": "🌐",
+      "title": "社会情勢（一般ニュース）",
+      "barColor": "#d98e3d",
+      "tag": "政治・経済・世界",
+      "desc": "政治・経済・世界の一般ニュース。中立的な参考情報として要点を要約。",
       "cards": [
-        {"cat":"国内政治","levelClass":"know","levelText":"知っておく","title":"国会で防衛・税・「副首都」法案が審議大詰め","body":"防衛省設置法改正を審議。副首都法案は住民投票規定を修正し了承。食料品消費税も議論継続。","detail":"国会では会期末に向け、防衛省設置法の改正案などの審議が大詰めを迎えています。与党内では『副首都』構想の関連法案について、住民投票の規定を修正したうえで了承する動きがありました。また食料品に対する消費税のあり方をめぐっては、税率ゼロを求める意見も含めて議論が続いています。物価・税制は調達コストや消費動向に波及するため、方向性を押さえておきたいテーマです。","source":"時事 / NHK（6/23–24）","url":"https://www.jiji.com/jc/archives?g=int_archive_0","tags":["政治","国内"]},
-        {"cat":"為替","levelClass":"now","levelText":"すぐ効く","title":"財務相、為替に「断固たる措置」発言","body":"急変動に「断固たる措置」と言及。輸入原材料コスト・調達計画に影響しうる。","detail":"片山財務相は、為替市場の急激な変動に対して『断固たる措置』も辞さない姿勢を示し、日米間の合意は『揺るぎない』と発言しました。為替の急変は輸入原材料のコストや調達計画に直接影響します。仕入れ・価格設定に関わる部門は、相場の振れと当局の発言の両方に注意しておくと安心です。","source":"時事通信（6/23）","url":"https://www.jiji.com/jc/archives?g=eco_archive_0","tags":["経済","為替"]},
-        {"cat":"世界情勢","levelClass":"know","levelText":"知っておく","title":"中東で米・イスラエル・イランが応酬、停戦に不透明感","body":"湾岸で緊張再燃。双方が当面の停止を表明も不透明。エネルギー・海上輸送に波及の可能性。","detail":"中東・湾岸地域では緊張が再燃し、米国・イスラエル・イランの間でミサイルの応酬がありました。その後、双方が『当面は』攻撃を停止する姿勢を示したものの、情勢は依然として不透明です。原油などエネルギー価格や、海上輸送ルートのリスクに波及する可能性があり、物流・コスト面での影響を見ておく必要があります。","source":"WEF（6月）","url":"https://www.weforum.org/stories/2026/06/uncertainty-around-us-iran-ceasefire-and-other-geopolitical-stories-to-know-this-month/","tags":["世界","地政学","エネルギー"]},
-        {"cat":"地経学","levelClass":"deep","levelText":"深掘り","title":"「地経学的対立」が2026年の最大リスクに","body":"WEF報告で短期最大リスク(18%)。重要鉱物の輸出規制や過剰生産が焦点。","detail":"世界経済フォーラム（WEF）のグローバルリスク報告では、『地経学的対立』が短期的に最も警戒されるリスク（約18%）に挙げられました。中国による重要鉱物（テルル等）の輸出規制や、欧州における中国製品の過剰生産能力問題が焦点です。サプライチェーンの分断・再編は、原材料の調達先や価格に影響しうるため、調達戦略の観点でも注視が必要です。","source":"WEF Global Risks 2026","url":"https://www.weforum.org/press/2026/01/global-risks-report-2026-geopolitical-and-economic-risks-rise-in-new-age-of-competition/","tags":["世界","経済","リスク"]},
-        {"cat":"米中","levelClass":"know","levelText":"知っておく","title":"米中首脳会談で関係安定化を模索","body":"関係安定を図る一方で覇権争いの懸念は継続。サプライチェーン再編が進む。","detail":"米中首脳会談では関係の安定化が図られた一方、長期的な覇権争い（いわゆる『トゥキディデスの罠』）への懸念は続いています。中ロの連携も多極化を後押ししており、世界のサプライチェーン再編が一段と進む見通しです。特定地域・特定企業への依存度が高い調達は、リスク分散の観点で見直しの検討余地があります。","source":"EY Geostrategic（6月）","url":"https://www.ey.com/en_gl/insights/geostrategy/geostrategic-analysis","tags":["世界","地政学"]}
+        {
+          "id": "so-iran",
+          "cat": "世界",
+          "levelClass": "now",
+          "levelText": "速報",
+          "title": "米・イランが停戦で合意、60日間の「ロードマップ」へ 原油は80ドル割れ",
+          "body": "スイスでの協議を経て米・イランが停戦で合意し、恒久的な枠組みに向けた60日間のロードマップで一致。国際原油価格は1バレル80ドルを下回った。",
+          "detail": "海外報道によると、スイスでの協議を経て米国とイランが停戦で合意し、より恒久的な合意に向けた60日間の「ロードマップ」で一致した。これを受けて国際的な原油価格は1バレル80ドルを下回る水準に低下した。中東では水インフラが戦略的な標的として浮上したとの指摘もあり、今後の紛争のあり方に影響する可能性がある。エネルギー価格は化学・製造業のコストに直結するため、原油・ナフサ市況の落ち着きは原料コスト面で注目される。情勢は流動的で、停戦の持続性には不透明感が残る。",
+          "source": "U.S. News",
+          "url": "https://www.usnews.com/news/national-news/articles/2026-06-22/geopolitics-inflation-to-dominate-economic-news",
+          "tags": ["世界", "中東", "原油"]
+        },
+        {
+          "id": "so-japan-econ",
+          "cat": "経済",
+          "levelClass": "know",
+          "levelText": "国内",
+          "title": "東京株式市場が連日の最高値更新、日銀は追加利上げと報道",
+          "body": "報道によると東京株式市場は最高値の更新が続き、中東情勢の緊張緩和期待が買いを後押し。日銀は追加利上げを実施したと伝えられる。",
+          "detail": "時事ドットコム等の報道によると、東京株式市場は最高値圏での推移が続き、中東情勢の緊張緩和への期待がリスク選好を後押ししたとされる。為替は円安水準で推移し、輸出関連の業績期待も支援要因となった。日本銀行は追加利上げを実施したと報じられ、金融機関の収益改善が見込まれる一方、貸出競争の激化や格差拡大への懸念も指摘される。相場は原油・為替・地政学に左右されやすく、調達コストや為替の前提を扱う実務では最新の市況確認が重要。具体的な数値や政策の詳細は一次情報を確認したい。",
+          "source": "時事ドットコム",
+          "url": "https://www.jiji.com/jc/archives?g=eco_archive_0",
+          "tags": ["経済", "株式", "日銀"]
+        },
+        {
+          "id": "so-eu-tech",
+          "cat": "世界",
+          "levelClass": "know",
+          "levelText": "政策",
+          "title": "欧州委、デジタル主権へ「Cloud and AI Development Act」など提案",
+          "body": "欧州委員会は2026年6月3日、クラウド・AI法やChips Act 2など、域内のデジタル能力を強化する一連の法案を発表した。",
+          "detail": "海外報道によると、欧州委員会は2026年6月3日、「Cloud and AI Development Act」や「Chips Act 2」を含む一連の法案を発表し、域内のクラウド・AI・半導体能力の強化（デジタル主権）を打ち出した。背景には地政学・地経学的な競争の高まりがあり、重要技術のサプライチェーン自立を狙う。半導体・素材・化学に関わる産業では、EUの規制・産業政策の動向が調達やコンプライアンスに影響しうるため、中期的に注視したいテーマ。具体的な適用範囲や時期は今後の立法プロセス次第。",
+          "source": "EY（Geostrategic Analysis）",
+          "url": "https://www.ey.com/en_gl/insights/geostrategy/geostrategic-analysis",
+          "tags": ["世界", "EU", "政策"]
+        },
+        {
+          "id": "so-china",
+          "cat": "経済",
+          "levelClass": "know",
+          "levelText": "世界",
+          "title": "中国、固定資産投資が前年比4.1%減 一方で輸出は約20%増",
+          "body": "報道によると2026年1〜5月の中国の固定資産投資は前年比4.1%減と2020年5月以来の落ち込み。一方で輸出はAI関連需要を背景に約20%増となった。",
+          "detail": "Deloitte等の分析によると、2026年1〜5月の中国の固定資産投資は前年同期比4.1%減と、2020年5月以来最大の落ち込みを記録した。一方で輸出は前年比19.6%増と堅調で、半導体やコンピュータ機器などAI関連製品への強い需要が支えたとみられる。欧州では中国の過剰生産能力への対応が焦点となり、EVに加え風力部品・太陽光・半導体へ論点が広がりつつある。供給過剰は不織布を含む素材分野でも価格圧力の一因となりうるため、調達・販売価格の前提を見直す際の参考になる。",
+          "source": "Deloitte Insights",
+          "url": "https://www.deloitte.com/us/en/insights/topics/economy/global-economic-outlook/weekly-update.html",
+          "tags": ["経済", "中国", "貿易"]
+        },
+        {
+          "id": "so-wef-risks",
+          "cat": "世界",
+          "levelClass": "deep",
+          "levelText": "リスク",
+          "title": "WEF：2026年の最大リスクは「地経学的対立」、景気後退とインフレも上昇",
+          "body": "世界経済フォーラムのグローバルリスク報告書2026は、地経学的対立を最大の世界リスクと位置づけ、短期では景気後退とインフレ懸念も高まると指摘した。",
+          "detail": "世界経済フォーラム（WEF）の「グローバルリスク報告書2026」は、地経学的な対立（geoeconomic confrontation）を2026年の最大の世界リスクと位置づけた。短期的な見通しでは景気後退とインフレの双方への懸念が高まっており、「新たな競争の時代」における地政学・経済リスクの上昇を強調している。関税や輸出規制、サプライチェーンの分断は、原材料調達やコストに直結する経営リスク。製造業の実務では、調達先の多元化や規制対応の体制づくりがリスク緩和に有効とされる。あくまで中立的な参考情報として把握したい。",
+          "source": "World Economic Forum",
+          "url": "https://www.weforum.org/press/2026/01/global-risks-report-2026-geopolitical-and-economic-risks-rise-in-new-age-of-competition/",
+          "tags": ["世界", "リスク", "経済"]
+        }
       ]
     }
   ]
