@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/dist/tabler-icons.min.css">
 <style>
   :root{
     --s0:#f3f2ec; --s1:#faf9f4; --s2:#ffffff;
@@ -39,7 +38,9 @@
   body{margin:0;background:var(--s0);color:var(--tp);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1020px;margin:0 auto;padding:0 22px}
-  .ti{vertical-align:-2px}
+  .ic{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .ico{display:inline-flex}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
   header.top{background:var(--s2);border-bottom:1px solid var(--bd);padding:26px 0 20px}
   .top-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
@@ -47,10 +48,11 @@
   .sub{font-size:.84rem;color:var(--ts);margin-top:5px}
   .stats{display:flex;gap:7px;margin-top:11px}
   .pill{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;color:var(--ts);background:var(--s1);border:1px solid var(--bd);padding:4px 11px;border-radius:30px}
-  .pill .ti{font-size:15px}
+  .pill .ic{font-size:15px}
   .meta{text-align:right;font-size:.82rem}
   .meta .date{font-family:var(--serif);font-size:1.1rem;font-weight:600}
   .updated{display:inline-flex;align-items:center;gap:6px;margin-top:7px;background:var(--acc-bg);color:var(--acc-t);padding:4px 12px;border-radius:30px;font-size:.72rem}
+  .updated .ic{font-size:14px}
   .datepick{margin-top:11px;display:flex;gap:7px;align-items:center;justify-content:flex-end}
   .datepick label{font-size:.72rem;color:var(--tm)}
   .datepick select{font-size:.78rem;padding:6px 11px;border-radius:var(--radius);border:1px solid var(--bd);background:var(--s2);color:var(--tp);font-family:var(--sans)}
@@ -60,7 +62,7 @@
   nav.jump .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:11px;padding-bottom:11px}
   nav.jump a{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:.8rem;color:var(--ts);padding:7px 14px;border-radius:30px;border:1px solid var(--bd);background:var(--s2)}
   nav.jump a:hover{color:var(--acc-t);border-color:var(--acc)}
-  nav.jump a .ti{font-size:15px}
+  nav.jump a .ic{font-size:15px}
 
   .sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;overflow-y:auto;background:var(--s2);border-right:1px solid var(--bd);padding:20px 14px 28px;display:none;z-index:50}
   .sidebar .sb-brand{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--tp);padding:4px 10px 0}
@@ -68,12 +70,12 @@
   .sidebar a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:var(--radius);font-size:.85rem;color:var(--ts);line-height:1.35;margin-bottom:2px;transition:background .15s,color .15s}
   .sidebar a:hover{background:var(--s1);color:var(--tp)}
   .sidebar a.active{background:var(--acc-bg);color:var(--acc-t);font-weight:500}
-  .sidebar a .ti{font-size:18px;flex:none}
+  .sidebar a .ic{font-size:18px}
   .sidebar .sdot{width:9px;height:9px;border-radius:50%;flex:none}
 
   .tips{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:24px 0 6px}
   .tips-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-  .tips-h .ti{font-size:20px;color:var(--acc-t)}
+  .tips-h .ic{font-size:20px;color:var(--acc-t)}
   .tips-h span.lbl{font-size:1.04rem;font-weight:700}
   .tips-h .hint{font-size:.72rem;color:var(--tm)}
   .tiplist{display:flex;flex-direction:column;margin-top:13px}
@@ -89,7 +91,7 @@
   .frow:last-child{margin-bottom:0}
   .flab{font-size:.74rem;font-weight:500;color:var(--tm);min-width:46px}
   .srch-wrap{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:var(--s1);border:1px solid var(--bd);border-radius:30px;padding:0 14px}
-  .srch-wrap .ti{font-size:17px;color:var(--tm)}
+  .srch-wrap .ic{font-size:17px;color:var(--tm)}
   .search{flex:1;font-size:.88rem;padding:9px 0;border:none;background:transparent;color:var(--tp);font-family:var(--sans)}
   .search:focus{outline:none}
   .chip{font-size:.78rem;font-weight:500;padding:6px 13px;border-radius:30px;border:1px solid var(--bd);background:var(--s2);color:var(--ts);cursor:pointer;transition:.15s}
@@ -105,12 +107,12 @@
   #tips{scroll-margin-top:64px}
   .sec-head{display:flex;align-items:center;gap:12px;margin:0 0 5px;flex-wrap:wrap}
   .sec-tile{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}
-  .sec-tile .ti{font-size:20px}
+  .sec-tile .ic{font-size:20px}
   .sec-head h2{font-family:var(--serif);margin:0;font-size:1.32rem;font-weight:600;letter-spacing:.02em}
   .sec-head .cnt{font-size:.73rem;color:var(--ts);background:var(--s1);border:1px solid var(--bd);padding:3px 12px;border-radius:30px}
   .sec-desc{color:var(--ts);font-size:.84rem;margin:3px 0 16px}
   .notice{border-radius:12px;padding:12px 16px;margin:0 0 16px;font-size:.84rem;line-height:1.7;border:1px solid var(--bd)}
-  .notice .ti{margin-right:6px;font-size:16px}
+  .notice .ic{margin-right:6px;font-size:16px}
   .notice.warn{background:var(--dang-bg);color:var(--dang-t)}
   .notice.ok{background:var(--ok-bg);color:var(--ok-t)}
   .notice.info{background:var(--acc-bg);color:var(--acc-t)}
@@ -126,6 +128,11 @@
   .lvl.now{background:var(--ok-bg);color:var(--ok-t)}
   .lvl.know{background:var(--acc-bg);color:var(--acc-t)}
   .lvl.deep{background:var(--warn-bg);color:var(--warn-t)}
+  .flag{font-size:.68rem;font-weight:500;padding:2px 9px;border-radius:30px;display:inline-flex;align-items:center;gap:4px;line-height:1.4}
+  .flag.new{background:var(--pro-bg);color:var(--pro-t)}
+  .flag.soon{background:var(--warn-bg);color:var(--warn-t)}
+  .flag.ended{background:var(--s1);color:var(--tm)}
+  .flag.due{background:var(--s1);color:var(--ts);border:1px solid var(--bd)}
   .card h3{font-family:var(--serif);margin:2px 0 9px;font-size:1.06rem;line-height:1.55;font-weight:600}
   .card p{margin:0 0 13px;font-size:.86rem;color:var(--ts);line-height:1.75}
   .card .chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 13px}
@@ -169,13 +176,13 @@
       <h1 class="brand">Daily Insight Board</h1>
       <div class="sub">仕事・IT・AI・社会情勢の、毎朝の「使える情報」まとめ</div>
       <div class="stats">
-        <span class="pill"><i class="ti ti-layout-grid" aria-hidden="true"></i><span id="secCount">—</span> テーマ</span>
-        <span class="pill"><i class="ti ti-cards" aria-hidden="true"></i><span id="cardCount">—</span> トピック</span>
+        <span class="pill"><span class="ico" data-ic="layout-grid"></span><span id="secCount">—</span> テーマ</span>
+        <span class="pill"><span class="ico" data-ic="cards"></span><span id="cardCount">—</span> トピック</span>
       </div>
     </div>
     <div class="meta">
       <div class="date" id="date">—</div>
-      <span class="updated" id="updated"><i class="ti ti-refresh" aria-hidden="true"></i>毎朝 7:00 自動更新</span>
+      <span class="updated" id="updated"><span class="ico" data-ic="refresh"></span>毎朝 7:00 自動更新</span>
       <div class="datepick"><label for="datePick">表示日</label><select id="datePick"><option>最新</option></select></div>
     </div>
   </div>
@@ -197,14 +204,29 @@
 </div>
 
 <script>
+const ICONS={"building-factory":`<path d="M4 21c1.147 -4.02 1.983 -8.027 2 -12h6c.017 3.973 .853 7.98 2 12" /> <path d="M12.5 13h4.5c.025 2.612 .894 5.296 2 8" /> <path d="M9 5a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1" /> <path d="M3 21l19 0" />`,"tools":`<path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" /> <path d="M14.5 5.5l4 4" /> <path d="M12 8l-5 -5l-4 4l5 5" /> <path d="M7 8l-1.5 1.5" /> <path d="M16 12l5 5l-4 4l-5 -5" /> <path d="M16 17l-1.5 1.5" />`,"cash":`<path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3" /> <path d="M7 10a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" /> <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />`,"calendar-event":`<path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" /> <path d="M16 3l0 4" /> <path d="M8 3l0 4" /> <path d="M4 11l16 0" /> <path d="M8 15h2v2h-2l0 -2" />`,"robot":`<path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4" /> <path d="M12 2v2" /> <path d="M9 12v9" /> <path d="M15 12v9" /> <path d="M5 16l4 -2" /> <path d="M15 14l4 2" /> <path d="M9 18h6" /> <path d="M10 8v.01" /> <path d="M14 8v.01" />`,"flask":`<path d="M9 3l6 0" /> <path d="M10 9l4 0" /> <path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6" />`,"world":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M3.6 9h16.8" /> <path d="M3.6 15h16.8" /> <path d="M11.5 3a17 17 0 0 0 0 18" /> <path d="M12.5 3a17 17 0 0 1 0 18" />`,"sparkles":`<path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />`,"layout-grid":`<path d="M4 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M14 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M4 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M14 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" />`,"cards":`<path d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1 1 0 0 1 -.514 1.304l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.903a1 1 0 0 1 .514 -1.304l0 .001" /> <path d="M15 4h1a1 1 0 0 1 1 1v3.5" /> <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374" />`,"refresh":`<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /> <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />`,"bulb":`<path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /> <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /> <path d="M9.7 17l4.6 0" />`,"search":`<path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /> <path d="M21 21l-6 -6" />`,"arrow-right":`<path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" />`,"alert-triangle":`<path d="M12 9v4" /> <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /> <path d="M12 16h.01" />`,"circle-check":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />`,"info-circle":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 9h.01" /> <path d="M11 12h1v4h1" />`,"external-link":`<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /> <path d="M11 13l9 -9" /> <path d="M15 4h5v5" />`,"point":`<path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />`};
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ic = n => '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+(ICONS[n]||ICONS.point||"")+'</svg>';
+function hydrateIcons(root){(root||document).querySelectorAll("[data-ic]").forEach(e=>{e.innerHTML=ic(e.dataset.ic);});}
 const lvlClass = v => (["now","know","deep"].includes(v)?v:"know");
 const lvlName = {now:"すぐ使える",know:"知っておく",deep:"深掘り"};
 const SECICON = {work:"building-factory",ittools:"tools",subsidy:"cash",events:"calendar-event","ai-copilot":"robot","ai-other":"flask",society:"world"};
-const ic = n => '<i class="ti ti-'+n+'" aria-hidden="true"></i>';
 function hexA(hex,a){const h=(hex||"#888888").replace("#","");return "rgba("+parseInt(h.substr(0,2),16)+","+parseInt(h.substr(2,2),16)+","+parseInt(h.substr(4,2),16)+","+a+")";}
-let DATA=null, CARDS=[], cardById={};
+let DATA=null, CARDS=[], cardById={}, NEWIDS=new Set();
 const F={q:"",level:"all",tag:null};
+
+function dueBadge(due){
+  if(!due||!due.date) return "";
+  const d=new Date(due.date+"T00:00:00"); if(isNaN(d.getTime())) return "";
+  const now=new Date(); now.setHours(0,0,0,0);
+  const days=Math.round((d-now)/86400000);
+  const lab=esc(due.label||"締切");
+  if(days<0) return '<span class="flag ended">'+lab+' 終了</span>';
+  if(days===0) return '<span class="flag soon">'+lab+' 本日</span>';
+  if(days<=14) return '<span class="flag soon">'+lab+' あと'+days+'日</span>';
+  return '<span class="flag due">'+lab+' '+(d.getMonth()+1)+'/'+d.getDate()+'</span>';
+}
+function collectIds(d){const s=new Set();(d.sections||[]).forEach(x=>(x.cards||[]).forEach(c=>{if(c.id)s.add(c.id);}));return s;}
 
 function filterTags(d){
   const m={};(d.sections||[]).forEach(s=>(s.cards||[]).forEach(c=>(c.tags||[]).forEach(t=>{if(t)m[t]=(m[t]||0)+1;})));
@@ -274,8 +296,9 @@ function buildBoard(d){
       const tg=(c.tags||[]);
       const text=((c.title||"")+" "+(c.body||"")+" "+(c.detail||"")+" "+(c.cat||"")+" "+tg.join(" ")).toLowerCase();
       const cid=c.id?(' id="'+esc(c.id)+'"'):'';
+      const flagNew=(c.id&&NEWIDS.has(c.id))?'<span class="flag new">新着</span>':'';
       html+='<article class="card"'+cid+' data-idx="'+idx+'" data-card data-level="'+lvlClass(c.levelClass)+'" data-tags="'+esc(tg.join("|"))+'" data-text="'+esc(text)+'">';
-      html+='<div class="tagrow"><span class="cat"><span class="cdot" style="background:'+color+'"></span>'+esc(c.cat||"")+'</span><span class="lvl '+lvlClass(c.levelClass)+'">'+esc(c.levelText||lvlName[lvlClass(c.levelClass)])+'</span></div>';
+      html+='<div class="tagrow"><span class="cat"><span class="cdot" style="background:'+color+'"></span>'+esc(c.cat||"")+'</span><span class="lvl '+lvlClass(c.levelClass)+'">'+esc(c.levelText||lvlName[lvlClass(c.levelClass)])+'</span>'+flagNew+dueBadge(c.due)+'</div>';
       html+='<h3>'+esc(c.title)+'</h3>';
       html+='<p>'+esc(c.body)+'</p>';
       if(tg.length) html+='<div class="chips">'+tg.map(t=>'<span class="tg" data-tag="'+esc(t)+'">#'+esc(t)+'</span>').join("")+'</div>';
@@ -299,7 +322,7 @@ function openDetail(c){
   const color=c._color||"#1f6feb", lc=lvlClass(c.levelClass);
   document.getElementById("mrow").innerHTML=
     '<span class="cat"><span class="cdot" style="background:'+color+'"></span>'+esc(c.cat||"")+'</span>'+
-    '<span class="lvl '+lc+'">'+esc(c.levelText||lvlName[lc])+'</span>'+
+    '<span class="lvl '+lc+'">'+esc(c.levelText||lvlName[lc])+'</span>'+dueBadge(c.due)+
     '<button class="mclose" id="mclose" aria-label="閉じる">×</button>';
   document.getElementById("mtitle").textContent=c.title||"";
   document.getElementById("mbody").textContent=c.detail||c.body||"";
@@ -307,7 +330,7 @@ function openDetail(c){
   document.getElementById("mtags").innerHTML=tg.map(t=>'<span class="tg" data-tag="'+esc(t)+'">#'+esc(t)+'</span>').join("");
   document.getElementById("mfoot").innerHTML='<span class="ms">出典：'+esc(c.source||"—")+'</span>'+(c.url?'<a href="'+esc(c.url)+'" target="_blank" rel="noopener">原文を開く '+ic("external-link")+'</a>':'');
   const m=document.getElementById("modal"); m.classList.add("open"); m.setAttribute("aria-hidden","false"); document.body.style.overflow="hidden";
-  document.getElementById("mclose").addEventListener("click",closeModal);
+  const cb=document.getElementById("mclose"); cb.addEventListener("click",closeModal); cb.focus();
   document.querySelectorAll("#mtags .tg").forEach(el=>el.addEventListener("click",()=>{closeModal();setTag(el.dataset.tag);}));
 }
 function closeModal(){const m=document.getElementById("modal");m.classList.remove("open");m.setAttribute("aria-hidden","true");document.body.style.overflow="";}
@@ -354,10 +377,18 @@ function applyFilters(){
 function loadData(file,isArchive,label){
   const url=file+(file.indexOf("?")>=0?"&":"?")+"_="+Date.now();
   fetch(url).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(d=>{
-    buildBoard(d);
-    const an=document.getElementById("archnote");
-    if(isArchive){an.style.display="block";an.innerHTML="過去のアーカイブ（"+esc(label||"")+"）を表示中。最新に戻すには「表示日」を最新に切り替えてください。";}
-    else an.style.display="none";
+    const finish=()=>{buildBoard(d);const an=document.getElementById("archnote");if(isArchive){an.style.display="block";an.innerHTML="過去のアーカイブ（"+esc(label||"")+"）を表示中。最新に戻すには「表示日」を最新に切り替えてください。";}else an.style.display="none";};
+    if(isArchive){NEWIDS=new Set();finish();return;}
+    const cur=collectIds(d);
+    fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
+      const dates=(m&&Array.isArray(m.dates))?m.dates.slice().sort().reverse():[];
+      if(dates.length<2){NEWIDS=new Set();finish();return;}
+      fetch("archive/"+dates[1]+".json?_="+Date.now()).then(r=>r.ok?r.json():null).then(pd=>{
+        NEWIDS=new Set();
+        if(pd){const prev=collectIds(pd);cur.forEach(id=>{if(!prev.has(id))NEWIDS.add(id);});}
+        finish();
+      }).catch(()=>{NEWIDS=new Set();finish();});
+    }).catch(()=>{NEWIDS=new Set();finish();});
   }).catch(e=>{document.getElementById("app").innerHTML='<div class="state">データを読み込めませんでした（'+esc(e.message)+'）。しばらくして再読み込みしてください。</div>';});
 }
 function initDatePicker(){
@@ -368,6 +399,7 @@ function initDatePicker(){
     sel.addEventListener("change",()=>{if(sel.value==="__latest__")loadData("data.json",false);else loadData("archive/"+sel.value+".json",true,sel.value);});
   }).catch(()=>{});
 }
+hydrateIcons();
 loadData("data.json",false);
 initDatePicker();
 </script>
