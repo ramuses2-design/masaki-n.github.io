@@ -202,6 +202,20 @@
     .card{margin-bottom:10px}
     header.top{border:none}
   }
+  /* --- theme history --- */
+  .hist{margin-top:18px;border-top:1px dashed var(--bds);padding-top:14px}
+  .hist-toggle{display:inline-flex;align-items:center;gap:8px;background:var(--s1);border:1px solid var(--bd);border-radius:30px;padding:7px 15px;font-size:.82rem;font-weight:500;color:var(--ts);cursor:pointer;font-family:var(--sans)}
+  .hist-toggle:hover{border-color:var(--acc);color:var(--acc-t)}
+  .hist-toggle .ic{font-size:16px}
+  .hist-toggle .hist-n{background:var(--s2);border:1px solid var(--bd);border-radius:30px;font-size:.72rem;padding:0 8px;color:var(--tm)}
+  .hist-toggle svg:last-child{transition:transform .2s}
+  .hist-toggle.open svg:last-child{transform:rotate(180deg)}
+  .hist-list{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+  .histitem{display:flex;align-items:center;gap:11px;background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:9px 13px;cursor:pointer;text-align:left;font-family:var(--sans);color:var(--tp);width:100%}
+  .histitem:hover{border-color:var(--acc)}
+  .histitem .histdate{flex:none;font-size:.72rem;font-weight:600;color:var(--tm);font-variant-numeric:tabular-nums;background:var(--s1);border:1px solid var(--bd);border-radius:6px;padding:2px 8px}
+  .histitem .histtitle{flex:1;font-size:.84rem;line-height:1.5;color:var(--ts);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  @media print{.hist{display:none!important}}
 </style>
 </head>
 <body>
@@ -221,7 +235,7 @@
     <div class="meta">
       <div class="date" id="date">—</div>
       <span class="updated" id="updated"><span class="ico" data-ic="refresh"></span>毎朝 7:00 自動更新</span>
-      <div class="datepick"><label for="datePick">表示日</label><select id="datePick"><option>最新</option></select></div>
+      
     </div>
   </div>
   <div class="wrap"><div class="archnote" id="archnote"></div></div>
@@ -244,7 +258,7 @@
 <button class="totop" id="totop" aria-label="ページ上部へ戻る" title="上部へ戻る">↑</button>
 
 <script>
-const ICONS={"building-factory":`<path d="M4 21c1.147 -4.02 1.983 -8.027 2 -12h6c.017 3.973 .853 7.98 2 12" /> <path d="M12.5 13h4.5c.025 2.612 .894 5.296 2 8" /> <path d="M9 5a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1" /> <path d="M3 21l19 0" />`,"tools":`<path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" /> <path d="M14.5 5.5l4 4" /> <path d="M12 8l-5 -5l-4 4l5 5" /> <path d="M7 8l-1.5 1.5" /> <path d="M16 12l5 5l-4 4l-5 -5" /> <path d="M16 17l-1.5 1.5" />`,"cash":`<path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3" /> <path d="M7 10a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" /> <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />`,"calendar-event":`<path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" /> <path d="M16 3l0 4" /> <path d="M8 3l0 4" /> <path d="M4 11l16 0" /> <path d="M8 15h2v2h-2l0 -2" />`,"robot":`<path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4" /> <path d="M12 2v2" /> <path d="M9 12v9" /> <path d="M15 12v9" /> <path d="M5 16l4 -2" /> <path d="M15 14l4 2" /> <path d="M9 18h6" /> <path d="M10 8v.01" /> <path d="M14 8v.01" />`,"flask":`<path d="M9 3l6 0" /> <path d="M10 9l4 0" /> <path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6" />`,"world":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M3.6 9h16.8" /> <path d="M3.6 15h16.8" /> <path d="M11.5 3a17 17 0 0 0 0 18" /> <path d="M12.5 3a17 17 0 0 1 0 18" />`,"sparkles":`<path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />`,"layout-grid":`<path d="M4 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M14 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M4 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M14 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" />`,"cards":`<path d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1 1 0 0 1 -.514 1.304l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.903a1 1 0 0 1 .514 -1.304l0 .001" /> <path d="M15 4h1a1 1 0 0 1 1 1v3.5" /> <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374" />`,"refresh":`<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /> <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />`,"bulb":`<path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /> <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /> <path d="M9.7 17l4.6 0" />`,"search":`<path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /> <path d="M21 21l-6 -6" />`,"arrow-right":`<path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" />`,"alert-triangle":`<path d="M12 9v4" /> <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /> <path d="M12 16h.01" />`,"circle-check":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />`,"info-circle":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 9h.01" /> <path d="M11 12h1v4h1" />`,"external-link":`<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /> <path d="M11 13l9 -9" /> <path d="M15 4h5v5" />`,"point":`<path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />`};
+const ICONS={"building-factory":`<path d="M4 21c1.147 -4.02 1.983 -8.027 2 -12h6c.017 3.973 .853 7.98 2 12" /> <path d="M12.5 13h4.5c.025 2.612 .894 5.296 2 8" /> <path d="M9 5a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1" /> <path d="M3 21l19 0" />`,"tools":`<path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" /> <path d="M14.5 5.5l4 4" /> <path d="M12 8l-5 -5l-4 4l5 5" /> <path d="M7 8l-1.5 1.5" /> <path d="M16 12l5 5l-4 4l-5 -5" /> <path d="M16 17l-1.5 1.5" />`,"cash":`<path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3" /> <path d="M7 10a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" /> <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />`,"calendar-event":`<path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" /> <path d="M16 3l0 4" /> <path d="M8 3l0 4" /> <path d="M4 11l16 0" /> <path d="M8 15h2v2h-2l0 -2" />`,"robot":`<path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4" /> <path d="M12 2v2" /> <path d="M9 12v9" /> <path d="M15 12v9" /> <path d="M5 16l4 -2" /> <path d="M15 14l4 2" /> <path d="M9 18h6" /> <path d="M10 8v.01" /> <path d="M14 8v.01" />`,"flask":`<path d="M9 3l6 0" /> <path d="M10 9l4 0" /> <path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6" />`,"world":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M3.6 9h16.8" /> <path d="M3.6 15h16.8" /> <path d="M11.5 3a17 17 0 0 0 0 18" /> <path d="M12.5 3a17 17 0 0 1 0 18" />`,"sparkles":`<path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />`,"layout-grid":`<path d="M4 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M14 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M4 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M14 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" />`,"cards":`<path d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1 1 0 0 1 -.514 1.304l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.903a1 1 0 0 1 .514 -1.304l0 .001" /> <path d="M15 4h1a1 1 0 0 1 1 1v3.5" /> <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374" />`,"refresh":`<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /> <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />`,"bulb":`<path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /> <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /> <path d="M9.7 17l4.6 0" />`,"search":`<path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /> <path d="M21 21l-6 -6" />`,"arrow-right":`<path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" />`,"alert-triangle":`<path d="M12 9v4" /> <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /> <path d="M12 16h.01" />`,"circle-check":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />`,"info-circle":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 9h.01" /> <path d="M11 12h1v4h1" />`,"external-link":`<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /> <path d="M11 13l9 -9" /> <path d="M15 4h5v5" />`,"history":`<path d="M12 8l0 4l3 1" /> <path d="M3.05 11a9 9 0 1 0 .5 -4m-.5 -5v5h5" />`,"chevron-down":`<path d="M6 9l6 6l6 -6" />`,"point":`<path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />`};
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const ic = n => '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+(ICONS[n]||ICONS.point||"")+'</svg>';
 function hydrateIcons(root){(root||document).querySelectorAll("[data-ic]").forEach(e=>{e.innerHTML=ic(e.dataset.ic);});}
@@ -252,7 +266,7 @@ const lvlClass = v => (["now","know","deep"].includes(v)?v:"know");
 const lvlName = {now:"すぐ使える",know:"知っておく",deep:"深掘り"};
 const SECICON = {work:"building-factory",ittools:"tools",subsidy:"cash",events:"calendar-event","ai-copilot":"robot","ai-other":"flask",society:"world"};
 function hexA(hex,a){const h=(hex||"#888888").replace("#","");return "rgba("+parseInt(h.substr(0,2),16)+","+parseInt(h.substr(2,2),16)+","+parseInt(h.substr(4,2),16)+","+a+")";}
-let DATA=null, CARDS=[], cardById={}, NEWIDS=new Set(); let lastFocus=null;
+let DATA=null, CARDS=[], cardById={}, NEWIDS=new Set(); let lastFocus=null; let HISTORY={};
 const F={q:"",level:"all",tag:null};
 
 function dueBadge(due){
@@ -436,10 +450,42 @@ function applyFilters(){
   const _es=document.getElementById("emptystate"); if(_es) _es.hidden=!((F.q||F.tag||F.level!=="all")&&shown===0);
 }
 
+function loadThemeHistory(){
+  fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
+    const dates=(m&&Array.isArray(m.dates))?m.dates.slice().sort().reverse():[];
+    if(!dates.length) return;
+    Promise.all(dates.map(dt=>fetch("archive/"+dt+".json?_="+Date.now()).then(r=>r.ok?r.json():null).then(d=>({dt:dt,d:d})).catch(()=>({dt:dt,d:null}))))
+    .then(list=>{
+      const curIds=new Set(); (DATA&&DATA.sections||[]).forEach(s=>(s.cards||[]).forEach(c=>{if(c.id)curIds.add(s.id+"::"+c.id);}));
+      HISTORY={}; const seen={};
+      list.forEach(o=>{ if(!o.d||!o.d.sections) return;
+        o.d.sections.forEach(s=>{ (s.cards||[]).forEach(c=>{ if(!c.id) return;
+          const key=s.id+"::"+c.id; if(curIds.has(key)||seen[key]) return; seen[key]=true;
+          (HISTORY[s.id]=HISTORY[s.id]||[]).push(Object.assign({},c,{_color:s.barColor||"#1f6feb",_date:o.dt}));
+        });});
+      });
+      renderHistory();
+    });
+  }).catch(()=>{});
+}
+function renderHistory(){
+  Object.keys(HISTORY).forEach(sid=>{
+    const items=HISTORY[sid]; if(!items||!items.length) return;
+    const sec=document.getElementById(sid); if(!sec||sec.querySelector(".hist")) return;
+    const wrap=document.createElement("div"); wrap.className="hist";
+    wrap.innerHTML='<button class="hist-toggle" aria-expanded="false">'+ic("history")+'<span>過去の記事（このテーマ）</span><span class="hist-n">'+items.length+'</span>'+ic("chevron-down")+'</button><div class="hist-list" hidden></div>';
+    const list=wrap.querySelector(".hist-list");
+    list.innerHTML=items.map((c,i)=>'<button class="histitem" data-sid="'+esc(sid)+'" data-i="'+i+'"><span class="histdate">'+esc(c._date)+'</span><span class="histtitle">'+esc(c.title||"")+'</span>'+dueBadge(c.due)+'</button>').join("");
+    sec.appendChild(wrap);
+    const tgl=wrap.querySelector(".hist-toggle");
+    tgl.addEventListener("click",()=>{const willOpen=list.hidden;list.hidden=!willOpen;tgl.setAttribute("aria-expanded",String(willOpen));tgl.classList.toggle("open",willOpen);});
+    list.querySelectorAll(".histitem").forEach(el=>el.addEventListener("click",()=>openDetail(HISTORY[el.dataset.sid][+el.dataset.i])));
+  });
+}
 function loadData(file,isArchive,label){
   const url=file+(file.indexOf("?")>=0?"&":"?")+"_="+Date.now();
   fetch(url).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(d=>{
-    const finish=()=>{buildBoard(d);const an=document.getElementById("archnote");if(isArchive){an.style.display="block";an.innerHTML="過去のアーカイブ（"+esc(label||"")+"）を表示中。最新に戻すには「表示日」を最新に切り替えてください。";}else an.style.display="none";};
+    const finish=()=>{buildBoard(d);loadThemeHistory();const an=document.getElementById("archnote");if(isArchive){an.style.display="block";an.innerHTML="過去のアーカイブ（"+esc(label||"")+"）を表示中。最新に戻すには「表示日」を最新に切り替えてください。";}else an.style.display="none";};
     if(isArchive){NEWIDS=new Set();finish();return;}
     const cur=collectIds(d);
     fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
@@ -464,7 +510,6 @@ function initDatePicker(){
 hydrateIcons();
 (function(){var b=document.getElementById("totop");if(b){window.addEventListener("scroll",function(){b.classList.toggle("show",window.scrollY>560);},{passive:true});b.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});}})();
 loadData("data.json",false);
-initDatePicker();
 </script>
 </body>
 </html>
