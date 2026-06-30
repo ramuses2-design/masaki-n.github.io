@@ -216,6 +216,8 @@
   .histitem .histdate{flex:none;font-size:.72rem;font-weight:600;color:var(--tm);font-variant-numeric:tabular-nums;background:var(--s1);border:1px solid var(--bd);border-radius:6px;padding:2px 8px}
   .histitem .histtitle{flex:1;font-size:.84rem;line-height:1.5;color:var(--ts);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   @media print{.hist{display:none!important}}
+  .hb-link{display:inline-flex;align-items:center;gap:6px;margin-top:9px;font-size:.8rem;font-weight:600;color:var(--acc-t);background:var(--acc-bg);border:1px solid var(--bd);padding:5px 13px;border-radius:30px}
+  .hb-link:hover{border-color:var(--acc)}
 </style>
 </head>
 <body>
@@ -227,6 +229,7 @@
     <div>
       <h1 class="brand">Daily Insight Board</h1>
       <div class="sub">仕事・IT・AI・社会情勢の、毎朝の「使える情報」まとめ</div>
+      <a class="hb-link" href="handbook/">📘 品質保証グループ ハンドブック</a>
       <div class="stats">
         <span class="pill"><span class="ico" data-ic="layout-grid"></span><span id="secCount">—</span> テーマ</span>
         <span class="pill"><span class="ico" data-ic="cards"></span><span id="cardCount">—</span> トピック</span>
@@ -470,7 +473,7 @@ function loadThemeHistory(){
 }
 function renderHistory(){
   Object.keys(HISTORY).forEach(sid=>{
-    const items=HISTORY[sid]; if(!items||!items.length) return;
+    const items=(HISTORY[sid]||[]).slice(0,5); if(!items.length) return;
     const sec=document.getElementById(sid); if(!sec||sec.querySelector(".hist")) return;
     const wrap=document.createElement("div"); wrap.className="hist";
     wrap.innerHTML='<button class="hist-toggle" aria-expanded="false">'+ic("history")+'<span>過去の記事（このテーマ）</span><span class="hist-n">'+items.length+'</span>'+ic("chevron-down")+'</button><div class="hist-list" hidden></div>';
