@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daily Insight Board｜仕事・IT・AI・社会情勢の今日のまとめ</title>
+<meta name="description" content="仕事（不織布・品質・生産技術・化学物質管理）・社内ITツール・補助金・展示会・AI（Copilot）・社会情勢の『今日の使える情報』を毎朝7:00に自動更新する社内向けダッシュボード。">
+<meta name="theme-color" content="#f3f2ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="Daily Insight Board">
+<meta property="og:title" content="Daily Insight Board｜今日の使える情報まとめ">
+<meta property="og:description" content="仕事・IT・補助金・展示会・AI（Copilot）・社会情勢の要点を毎朝7:00に自動更新。">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%231f6feb'/%3E%3Crect%20x='5'%20y='6'%20width='6'%20height='5'%20rx='1'%20fill='white'/%3E%3Crect%20x='13'%20y='6'%20width='6'%20height='5'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='5'%20y='13'%20width='6'%20height='5'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='13'%20y='13'%20width='6'%20height='5'%20rx='1'%20fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
@@ -164,6 +174,34 @@
 
   @media(min-width:1200px){body{padding-left:240px}.sidebar{display:block}nav.jump{display:none}}
   @media(max-width:560px){.brand{font-size:1.4rem}.meta{text-align:left}.top-inner{align-items:flex-start}.datepick{justify-content:flex-start}.sheet{padding:24px 20px}}
+  /* --- enhancements --- */
+  .duebar{background:var(--s2);border:1px solid var(--bd);border-left:3px solid var(--warn-t);border-radius:12px;padding:14px 16px;margin:16px 0 6px}
+  .duebar-h{display:flex;align-items:center;gap:8px;font-size:.92rem;font-weight:700;color:var(--tp)}
+  .duebar-h .ic{font-size:18px;color:var(--warn-t)}
+  .duebar-h .duebar-hint{font-size:.7rem;font-weight:400;color:var(--tm);margin-left:auto}
+  .duelist{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}
+  .dueitem{display:inline-flex;align-items:center;gap:9px;background:var(--s1);border:1px solid var(--bd);border-radius:30px;padding:6px 13px;cursor:pointer;font-family:var(--sans);color:var(--ts);text-align:left;max-width:100%}
+  .dueitem:hover{border-color:var(--acc);color:var(--tp)}
+  .dueitem .duewhen{font-size:.72rem;font-weight:700;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:30px;padding:1px 9px;flex:none}
+  .dueitem.soon .duewhen{background:var(--warn-bg);color:var(--warn-t);border-color:var(--warn-bg)}
+  .dueitem .duename{font-size:.8rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .dueitem .duelabel{font-size:.7rem;color:var(--tm);flex:none}
+  .emptystate{text-align:center;padding:46px 18px;color:var(--tm);background:var(--s2);border:1px dashed var(--bds);border-radius:14px;margin:16px 0}
+  .emptystate p{margin:0 0 14px;font-size:.9rem}
+  .emptystate button{font-size:.8rem;font-weight:500;color:#fff;background:var(--acc);border:none;border-radius:30px;padding:8px 18px;cursor:pointer;font-family:var(--sans)}
+  .totop{position:fixed;right:18px;bottom:18px;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid var(--bd);background:var(--s2);color:var(--ts);font-size:1.2rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.14);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+  .totop.show{opacity:1;visibility:visible}
+  .totop:hover{color:var(--acc-t);border-color:var(--acc)}
+  [data-card]:focus-visible,.dueitem:focus-visible,.tipitem:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+  @media print{
+    nav.jump,.sidebar,.filter,.totop,.datepick,.archnote,.duebar-hint,.tips-h .hint,.cardfoot .more,.sec-head .cnt{display:none!important}
+    body{padding-left:0!important;background:#fff;color:#000}
+    .wrap{max-width:none;padding:0 10px}
+    .grid{display:block}
+    .card,.tips,.duebar,.notice{break-inside:avoid;page-break-inside:avoid;border:1px solid #ccc!important;box-shadow:none!important;transform:none!important}
+    .card{margin-bottom:10px}
+    header.top{border:none}
+  }
 </style>
 </head>
 <body>
@@ -203,6 +241,8 @@
   </div>
 </div>
 
+<button class="totop" id="totop" aria-label="ページ上部へ戻る" title="上部へ戻る">↑</button>
+
 <script>
 const ICONS={"building-factory":`<path d="M4 21c1.147 -4.02 1.983 -8.027 2 -12h6c.017 3.973 .853 7.98 2 12" /> <path d="M12.5 13h4.5c.025 2.612 .894 5.296 2 8" /> <path d="M9 5a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1" /> <path d="M3 21l19 0" />`,"tools":`<path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" /> <path d="M14.5 5.5l4 4" /> <path d="M12 8l-5 -5l-4 4l5 5" /> <path d="M7 8l-1.5 1.5" /> <path d="M16 12l5 5l-4 4l-5 -5" /> <path d="M16 17l-1.5 1.5" />`,"cash":`<path d="M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3" /> <path d="M7 10a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" /> <path d="M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />`,"calendar-event":`<path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" /> <path d="M16 3l0 4" /> <path d="M8 3l0 4" /> <path d="M4 11l16 0" /> <path d="M8 15h2v2h-2l0 -2" />`,"robot":`<path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4" /> <path d="M12 2v2" /> <path d="M9 12v9" /> <path d="M15 12v9" /> <path d="M5 16l4 -2" /> <path d="M15 14l4 2" /> <path d="M9 18h6" /> <path d="M10 8v.01" /> <path d="M14 8v.01" />`,"flask":`<path d="M9 3l6 0" /> <path d="M10 9l4 0" /> <path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6" />`,"world":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M3.6 9h16.8" /> <path d="M3.6 15h16.8" /> <path d="M11.5 3a17 17 0 0 0 0 18" /> <path d="M12.5 3a17 17 0 0 1 0 18" />`,"sparkles":`<path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />`,"layout-grid":`<path d="M4 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M14 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M4 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" /> <path d="M14 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4" />`,"cards":`<path d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1 1 0 0 1 -.514 1.304l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.903a1 1 0 0 1 .514 -1.304l0 .001" /> <path d="M15 4h1a1 1 0 0 1 1 1v3.5" /> <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374" />`,"refresh":`<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /> <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />`,"bulb":`<path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /> <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /> <path d="M9.7 17l4.6 0" />`,"search":`<path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /> <path d="M21 21l-6 -6" />`,"arrow-right":`<path d="M5 12l14 0" /> <path d="M13 18l6 -6" /> <path d="M13 6l6 6" />`,"alert-triangle":`<path d="M12 9v4" /> <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /> <path d="M12 16h.01" />`,"circle-check":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M9 12l2 2l4 -4" />`,"info-circle":`<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 9h.01" /> <path d="M11 12h1v4h1" />`,"external-link":`<path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /> <path d="M11 13l9 -9" /> <path d="M15 4h5v5" />`,"point":`<path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />`};
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -212,7 +252,7 @@ const lvlClass = v => (["now","know","deep"].includes(v)?v:"know");
 const lvlName = {now:"すぐ使える",know:"知っておく",deep:"深掘り"};
 const SECICON = {work:"building-factory",ittools:"tools",subsidy:"cash",events:"calendar-event","ai-copilot":"robot","ai-other":"flask",society:"world"};
 function hexA(hex,a){const h=(hex||"#888888").replace("#","");return "rgba("+parseInt(h.substr(0,2),16)+","+parseInt(h.substr(2,2),16)+","+parseInt(h.substr(4,2),16)+","+a+")";}
-let DATA=null, CARDS=[], cardById={}, NEWIDS=new Set();
+let DATA=null, CARDS=[], cardById={}, NEWIDS=new Set(); let lastFocus=null;
 const F={q:"",level:"all",tag:null};
 
 function dueBadge(due){
@@ -227,6 +267,20 @@ function dueBadge(due){
   return '<span class="flag due">'+lab+' '+(d.getMonth()+1)+'/'+d.getDate()+'</span>';
 }
 function collectIds(d){const s=new Set();(d.sections||[]).forEach(x=>(x.cards||[]).forEach(c=>{if(c.id)s.add(c.id);}));return s;}
+function dueStripHtml(d){
+  const now=new Date(); now.setHours(0,0,0,0); const items=[];
+  (d.sections||[]).forEach(s=>(s.cards||[]).forEach(c=>{
+    if(!c.id||!c.due||!c.due.date) return;
+    const dd=new Date(c.due.date+"T00:00:00"); if(isNaN(dd.getTime())) return;
+    const days=Math.round((dd-now)/86400000); if(days<0||days>21) return;
+    items.push({id:c.id,title:c.title||"",label:c.due.label||"締切",days:days,date:dd});
+  }));
+  if(!items.length) return "";
+  items.sort((a,b)=>a.days-b.days);
+  return '<div class="duebar"><div class="duebar-h">'+ic("calendar-event")+'<span>締切・会期が近い項目</span><span class="duebar-hint">タップで詳細</span></div><div class="duelist">'+
+    items.map(it=>{const when=it.days===0?'本日':('あと'+it.days+'日');const soon=it.days<=7?' soon':'';
+      return '<button class="dueitem'+soon+'" data-jump="'+esc(it.id)+'" aria-label="'+esc(it.title)+'"><span class="duewhen">'+when+'</span><span class="duename">'+esc(it.title)+'</span><span class="duelabel">'+esc(it.label)+' '+(it.date.getMonth()+1)+'/'+it.date.getDate()+'</span></button>';}).join("")+'</div></div>';
+}
 
 function filterTags(d){
   const m={};(d.sections||[]).forEach(s=>(s.cards||[]).forEach(c=>(c.tags||[]).forEach(t=>{if(t)m[t]=(m[t]||0)+1;})));
@@ -274,6 +328,7 @@ function buildBoard(d){
     html+='</div></div>';
   }
 
+  html+=dueStripHtml(d);
   const tags=filterTags(d);
   html+='<div class="filter">';
   html+='<div class="frow"><span class="srch-wrap">'+ic("search")+'<input class="search" id="q" type="text" placeholder="キーワードで絞り込み（タイトル・本文・タグ）"></span><span class="fcount" id="fcount"></span></div>';
@@ -281,6 +336,7 @@ function buildBoard(d){
   if(tags.length) html+='<div class="frow"><span class="flab">タグ</span>'+tags.map(t=>'<span class="chip tagchip" data-tag="'+esc(t)+'">'+esc(t)+'</span>').join("")+'</div>';
   html+='</div>';
 
+  html+='<div class="emptystate" id="emptystate" hidden><p>条件に一致するトピックがありません。</p><button id="emptyReset">条件をクリア</button></div>';
   (d.sections||[]).forEach(sec=>{
     const color=esc(sec.barColor||"#1f6feb");
     html+='<section class="block" id="'+esc(sec.id)+'" data-sec>';
@@ -297,7 +353,7 @@ function buildBoard(d){
       const text=((c.title||"")+" "+(c.body||"")+" "+(c.detail||"")+" "+(c.cat||"")+" "+tg.join(" ")).toLowerCase();
       const cid=c.id?(' id="'+esc(c.id)+'"'):'';
       const flagNew=(c.id&&NEWIDS.has(c.id))?'<span class="flag new">新着</span>':'';
-      html+='<article class="card"'+cid+' data-idx="'+idx+'" data-card data-level="'+lvlClass(c.levelClass)+'" data-tags="'+esc(tg.join("|"))+'" data-text="'+esc(text)+'">';
+      html+='<article class="card"'+cid+' data-idx="'+idx+'" data-card role="button" tabindex="0" aria-label="'+esc(c.title||"")+'" data-level="'+lvlClass(c.levelClass)+'" data-tags="'+esc(tg.join("|"))+'" data-text="'+esc(text)+'">';
       html+='<div class="tagrow"><span class="cat"><span class="cdot" style="background:'+color+'"></span>'+esc(c.cat||"")+'</span><span class="lvl '+lvlClass(c.levelClass)+'">'+esc(c.levelText||lvlName[lvlClass(c.levelClass)])+'</span>'+flagNew+dueBadge(c.due)+'</div>';
       html+='<h3>'+esc(c.title)+'</h3>';
       html+='<p>'+esc(c.body)+'</p>';
@@ -319,6 +375,7 @@ function buildBoard(d){
 
 function openDetail(c){
   if(!c) return;
+  lastFocus=document.activeElement;
   const color=c._color||"#1f6feb", lc=lvlClass(c.levelClass);
   document.getElementById("mrow").innerHTML=
     '<span class="cat"><span class="cdot" style="background:'+color+'"></span>'+esc(c.cat||"")+'</span>'+
@@ -333,7 +390,7 @@ function openDetail(c){
   const cb=document.getElementById("mclose"); cb.addEventListener("click",closeModal); cb.focus();
   document.querySelectorAll("#mtags .tg").forEach(el=>el.addEventListener("click",()=>{closeModal();setTag(el.dataset.tag);}));
 }
-function closeModal(){const m=document.getElementById("modal");m.classList.remove("open");m.setAttribute("aria-hidden","true");document.body.style.overflow="";}
+function closeModal(){const m=document.getElementById("modal");m.classList.remove("open");m.setAttribute("aria-hidden","true");document.body.style.overflow="";if(lastFocus&&lastFocus.focus){try{lastFocus.focus();}catch(e){}}lastFocus=null;}
 
 function setTag(t){
   F.tag=(F.tag===t)?null:t;
@@ -355,6 +412,10 @@ function bind(){
   document.querySelectorAll(".chip.tagchip").forEach(el=>el.addEventListener("click",()=>setTag(el.dataset.tag)));
   const fc=document.getElementById("fclear"); if(fc) fc.addEventListener("click",resetFilters);
   document.querySelectorAll("[data-card]").forEach(card=>card.addEventListener("click",()=>openDetail(CARDS[+card.dataset.idx])));
+  document.querySelectorAll("[data-card]").forEach(card=>card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(CARDS[+card.dataset.idx]);}}));
+  document.querySelectorAll(".dueitem[data-jump]").forEach(el=>el.addEventListener("click",()=>openDetail(cardById[el.dataset.jump])));
+  document.querySelectorAll(".dueitem[data-jump]").forEach(el=>el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(cardById[el.dataset.jump]);}}));
+  const _er=document.getElementById("emptyReset"); if(_er) _er.addEventListener("click",resetFilters);
   document.querySelectorAll(".card .tg").forEach(el=>el.addEventListener("click",e=>{e.stopPropagation();setTag(el.dataset.tag);}));
   document.querySelectorAll(".tipitem[data-jump]").forEach(el=>el.addEventListener("click",()=>openDetail(cardById[el.dataset.jump])));
   const modal=document.getElementById("modal");
@@ -372,6 +433,7 @@ function applyFilters(){
   });
   document.querySelectorAll("[data-sec]").forEach(sec=>{sec.style.display=[...sec.querySelectorAll("[data-card]")].some(c=>c.style.display!=="none")?"":"none";});
   const fcount=document.getElementById("fcount"); if(fcount) fcount.textContent=(F.q||F.tag||F.level!=="all")?("該当 "+shown+" 件"):"";
+  const _es=document.getElementById("emptystate"); if(_es) _es.hidden=!((F.q||F.tag||F.level!=="all")&&shown===0);
 }
 
 function loadData(file,isArchive,label){
@@ -400,6 +462,7 @@ function initDatePicker(){
   }).catch(()=>{});
 }
 hydrateIcons();
+(function(){var b=document.getElementById("totop");if(b){window.addEventListener("scroll",function(){b.classList.toggle("show",window.scrollY>560);},{passive:true});b.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});}})();
 loadData("data.json",false);
 initDatePicker();
 </script>
