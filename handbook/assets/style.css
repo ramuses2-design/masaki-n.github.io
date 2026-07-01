@@ -143,3 +143,5 @@ th{background:var(--a-bg);color:var(--navy);font-weight:700}
   .g-title,.hub-hero h1{font-size:1.5rem}
   .s-head h1{font-size:1.3rem}
 }
+.hub-gcard.g-sales{border-top-color:#c06a2f}.hub-gcard.g-tech{border-top-color:#7a5cb8}.hub-gcard.g-mfg{border-top-color:#2f8f5f}
+.gtag.g-sales{background:#c06a2f}.gtag.g-tech{background:#7a5cb8}.gtag.g-mfg{background:#2f8f5f}
