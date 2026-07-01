@@ -22,3 +22,14 @@
   input.addEventListener('keydown',function(e){ if(e.key==='Escape'){panel.hidden=true;input.blur();} });
   document.addEventListener('click',function(e){ if(e.target!==input && !panel.contains(e.target)) panel.hidden=true; });
 })();
+
+/* ===== sidebar drawer (v2) ===== */
+(function(){
+  var b=document.getElementById('hbburger'), ov=document.getElementById('hbov'), side=document.getElementById('hbside');
+  function close(){document.body.classList.remove('side-open');}
+  if(b){b.addEventListener('click',function(){document.body.classList.toggle('side-open');});}
+  if(ov){ov.addEventListener('click',close);}
+  if(side){ side.addEventListener('click',function(e){ if(e.target.closest('a')) close(); }); }
+  var act=document.querySelector('.side-nav a.on');
+  if(act&&side){ try{act.scrollIntoView({block:'center'});}catch(e){} }
+})();
