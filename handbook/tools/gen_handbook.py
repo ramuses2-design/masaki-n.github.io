@@ -22,7 +22,7 @@ def strip_fm(t):
 master_body=strip_fm(master_raw); play_body=strip_fm(play_raw)
 aud_body=strip_fm(aud_raw) if aud_raw else ""; ts_body=strip_fm(ts_raw) if ts_raw else ""
 
-LAST_UPDATED="2026-07-01"
+LAST_UPDATED="2026-07-03"
 
 GROUPS={
  "A":{"title":"定例・マネジメント","type":"定例","emoji":"📋"},
@@ -179,6 +179,21 @@ def parse_ts(body):
     return entries
 ts_entries=parse_ts(ts_body) if ts_body else []
 ts_title={e["id"]:e["title"] for e in ts_entries}
+CHANGE=os.path.join(CONTENT,"changelog.md")
+change_raw=rd(CHANGE); change_body=strip_fm(change_raw) if change_raw else ""
+def parse_change(body):
+    days=[]; cur=None
+    for raw in body.split("\n"):
+        st=raw.strip()
+        m=re.match(r"^##\s+(\d{4}-\d{2}-\d{2})\s*$", st)
+        if m: cur={"date":m.group(1),"items":[]}; days.append(cur); continue
+        if cur is not None:
+            mm=re.match(r"^-\s+(.*)$", st)
+            if mm: cur["items"].append(mm.group(1).strip())
+    return days
+change_days=parse_change(change_body)
+latest_date=change_days[0]["date"] if change_days else ""
+latest_n=len(change_days[0]["items"]) if change_days else 0
 def tsslug(tid):
     num=re.sub(r"\D","",tid); return f"ts-{num}.html"
 
@@ -245,6 +260,8 @@ def build_sidebar(active):
     p.append('<div class="side-cap">リファレンス</div>')
     p.append(f'<a class="side-item"{on("glossary.html")} href="glossary.html">📑 用語・索引</a>'.replace('class="side-item" class="on"','class="side-item on"'))
     p.append(f'<a class="side-item"{on("review.html")} href="review.html">🟡 要確認リスト</a>'.replace('class="side-item" class="on"','class="side-item on"'))
+    if change_days:
+        p.append(f'<a class="side-item"{on("whatsnew.html")} href="whatsnew.html">🆕 更新履歴</a>'.replace('class="side-item" class="on"','class="side-item on"'))
     p.append('</nav>')
     return "\n".join(p)
 
@@ -255,8 +272,8 @@ def page(title, body, active, desc="", crumb_html=""):
     return f"""<!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{esc(title)}｜品質保証グループ ハンドブック</title>
-<meta name="description" content="{esc(desc or '品質保証グループ ハンドブック')}">
+<title>{esc(title)}｜ものづくりハンドブック</title>
+<meta name="description" content="{esc(desc or 'ものづくりハンドブック')}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -265,7 +282,7 @@ def page(title, body, active, desc="", crumb_html=""):
 <header class="hb-top">
   <div class="hb-top-in">
     <button class="hb-burger" id="hbburger" aria-label="メニューを開閉">☰</button>
-    <a class="hb-brand" href="index.html"><span class="hb-logo">QA</span><span class="hb-brand-t">品質保証グループ ハンドブック</span></a>
+    <a class="hb-brand" href="index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
     <div class="hb-search-wrap">
       <input id="hbsearch" type="text" placeholder="検索（例: クレーム / 特採 / 校正 / 4M / 異物 / 目付）" autocomplete="off" aria-label="ハンドブック内検索">
       <div id="hbresults" class="hb-results" hidden></div>
@@ -282,7 +299,7 @@ def page(title, body, active, desc="", crumb_html=""):
 </div>
 <div class="hb-ov" id="hbov"></div>
 <footer class="hb-foot"><div class="wrap">
-  <div><b>品質保証グループ ハンドブック</b>｜金井重要工業 不織布事業部 品質保証グループ</div>
+  <div><b>ものづくりハンドブック</b></div>
   <div class="hb-foot-sub">本文の正（Single Source of Truth）は <a href="content/playbooks.md">プレイブック集</a> ／ <a href="content/policy-master.md">方針マスター</a> ／ <a href="content/audience-guides.md">読者別ガイド</a> ／ <a href="content/troubleshooting.md">トラブルシューティング</a>。最終更新 {LAST_UPDATED}。運用は <a href="content/README.md">README</a> 参照。</div>
 </div></footer>
 <script src="assets/app.js"></script>
@@ -356,7 +373,7 @@ for g,gi in GROUPS.items():
 policy_html=render_blocks(master_body.split("\n"))
 open(os.path.join(OUT,"policy.html"),"w",encoding="utf-8").write(
     page("方針マスター", '<h1 class="g-title">方針マスター（単一情報源）</h1>'+policy_html, "policy.html",
-         desc="品質保証グループの使命・価値観・ルール・エスカレーション基準",
+         desc="使命・価値観・ルール・エスカレーション基準",
          crumb_html=crumb2("ハンドブック","index.html","方針マスター")))
 search_index.append({"url":"policy.html","title":"方針マスター（使命・ルール・エスカレーション）","g":"方針","t":plain_text(master_body.split("\n"))})
 
@@ -499,10 +516,12 @@ if ts_entries:
     ts_sec=f'''<section class="hub-sec"><h2>トラブルシューティング（症状から引く）</h2>
   <p class="g-sub">不織布の不良を症状から。初動→4M→恒久対策（たたき台・全{len(ts_entries)}症状）。</p>
   <div class="hub-gcard g-ts"><a class="hub-gh" href="ts-index.html"><span class="hub-gemoji">🧯</span><span><b>症状一覧を開く</b><span class="hub-gtype">{len(ts_entries)} 症状</span></span></a><div class="hub-glist">{tscards}</div></div></section>'''
+wn_banner=('<a class="hub-updated" href="whatsnew.html">🆕 最新更新 '+latest_date+'・'+str(latest_n)+'件 — 更新履歴を見る →</a>') if change_days else ''
 body=f'''<div class="hub-hero">
-  <h1>品質保証グループ ハンドブック</h1>
+  <h1>ものづくりハンドブック</h1>
   <p>方針・場面別プレイブック・読者別ガイド・トラブルシューティングを1か所に。左のメニュー、または上の検索から探してください。</p>
 </div>
+{wn_banner}
 <div class="quick">
   <span class="quick-lab">困ったとき</span>
   <a class="quick-b urgent" href="{slug('B2')}">🚑 クレーム・不適合の初動（B2）</a>
@@ -519,10 +538,31 @@ body=f'''<div class="hub-hero">
   <a href="policy.html">📘 方針マスター</a>
   <a href="glossary.html">📑 用語・索引</a>
   <a href="review.html">🟡 要確認リスト</a>
+  <a href="whatsnew.html">🆕 更新履歴</a>
   <a href="../">← Daily Insight Board に戻る</a>
 </section>'''
 open(os.path.join(OUT,"index.html"),"w",encoding="utf-8").write(
-    page("ハンドブック", body, "index.html", desc="品質保証グループ ハンドブック（場面別・読者別・トラブルシューティング）"))
+    page("ハンドブック", body, "index.html", desc="ものづくりハンドブック（場面別・読者別・トラブルシューティング）"))
+
+# ---------- whatsnew (changelog) ----------
+if change_days:
+    tagmap={"改称":"t-brand","追加":"t-add","改善":"t-imp","新設":"t-new","修正":"t-fix"}
+    wn_sections=[]
+    for d in change_days:
+        lis=[]
+        for it in d["items"]:
+            lab=""; txt=it
+            m=re.match(r"^([^:：]{1,6})[:：]\s*(.*)$", it)
+            if m and m.group(1) in tagmap: lab=m.group(1); txt=m.group(2)
+            badge=('<span class="wn-tag '+tagmap.get(lab,"t-other")+'">'+esc(lab)+'</span>') if lab else ''
+            lis.append('<li class="wn-item">'+badge+'<span>'+inline(txt)+'</span></li>')
+        wn_sections.append('<section class="wn-day"><h2 class="wn-date">'+esc(d["date"])+' <span class="wn-count">'+str(len(d["items"]))+'件</span></h2><ul class="wn-list">'+"".join(lis)+'</ul></section>')
+    wn_title="更新履歴（What\'s new）"
+    wn_body='<h1 class="g-title">🆕 '+wn_title+'</h1><p class="g-sub">ハンドブックの追加・改善の記録。毎朝の自動更新でここに積み上がります。</p><div class="wn">'+"".join(wn_sections)+'</div>'
+    open(os.path.join(OUT,"whatsnew.html"),"w",encoding="utf-8").write(
+        page("更新履歴", wn_body, "whatsnew.html", desc="ハンドブックの更新履歴（What\'s new）",
+             crumb_html=crumb2("ハンドブック","index.html","更新履歴")))
+    search_index.append({"url":"whatsnew.html","title":"更新履歴（What\'s new）","g":"更新","t":"更新履歴 whatsnew 更新 "+" ".join(it for d in change_days for it in d["items"])})
 
 open(os.path.join(ASSETS,"search-index.json"),"w",encoding="utf-8").write(json.dumps(search_index,ensure_ascii=False))
 print("scenarios:",len(scenarios))

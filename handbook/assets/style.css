@@ -183,3 +183,15 @@ details[open]>.side-sum::after{transform:rotate(-90deg)}
   body.side-open .hb-ov{display:block}
   .hb-main{padding:16px 16px 54px}
 }
+
+/* --- What's new / changelog + hub updated banner (added 2026-07-03) --- */
+.hub-updated{display:inline-block;margin:0 0 14px;padding:8px 14px;border-radius:8px;background:#eef6f2;border:1px solid #cfe6db;color:#1c5c46;font-weight:700;text-decoration:none;font-size:14px}
+.hub-updated:hover{background:#e2f0ea}
+.wn{margin-top:8px}
+.wn-day{margin:0 0 22px;border-left:3px solid #cfe0ea;padding:0 0 6px 16px}
+.wn-date{font-size:16px;margin:0 0 10px;color:#16314D}
+.wn-count{font-size:12px;font-weight:600;color:#5a7186;background:#eef3f7;border-radius:10px;padding:2px 8px;margin-left:6px}
+.wn-list{list-style:none;margin:0;padding:0}
+.wn-item{display:flex;gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px dashed #edf0f3}
+.wn-tag{flex:0 0 auto;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;color:#fff;white-space:nowrap}
+.t-add{background:#2f8f63}.t-imp{background:#3b7fb0}.t-brand{background:#a6772f}.t-new{background:#7a6fc0}.t-fix{background:#b0518f}.t-other{background:#8895a3}
