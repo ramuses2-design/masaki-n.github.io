@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M6 5S・現場管理と監査の日常準備｜ものづくりハンドブック</title>
-<meta name="description" content="**考え方**：監査は特別なことでなく、日常の延長。日ごろの5Sと識別がそのまま備えになる。">
+<title>含水率・吸湿による特性変動（寸法・強度・変色/カビ）｜ものづくりハンドブック</title>
+<meta name="description" content="**症状**：保管・輸送中の吸湿や乾燥で、寸法・強度・風合いが変動。ひどい場合は変色・カビ・においを伴う。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -96,7 +96,7 @@
 <a href="ag-t9.html">T9 設備保全とデータ活用（予知保全の入口）</a>
 <a href="ag-t10.html">T10 検査の自動化・AI外観検査導入の進め方</a>
 </details>
-<details class="side-grp" open>
+<details class="side-grp">
 <summary class="side-sum"><span class="sd sd-mfg"></span>🏭 製造向け</summary>
 <a href="aud-mfg.html">概要（一覧）</a>
 <a href="ag-m1.html">M1 日常の検査・検査表運用</a>
@@ -104,7 +104,7 @@
 <a href="ag-m3.html">M3 4M変化点の申告（無断で変えない）</a>
 <a href="ag-m4.html">M4 測定器・校正の順守</a>
 <a href="ag-m5.html">M5 不良・ヒヤリの報告とトレーサビリティ</a>
-<a class="on" href="ag-m6.html">M6 5S・現場管理と監査の日常準備</a>
+<a href="ag-m6.html">M6 5S・現場管理と監査の日常準備</a>
 <a href="ag-m7.html">M7 段取り替え・切替時の初物確認</a>
 <a href="ag-m8.html">M8 作業標準の順守と力量</a>
 <a href="ag-m9.html">M9 多能工化と応援時の品質担保</a>
@@ -135,7 +135,7 @@
 <a href="ag-v8.html">V8 継続的な品質改善・情報交換のお願い（お取引先向け）</a>
 </details>
 <div class="side-cap">トラブルシューティング</div>
-<details class="side-grp">
+<details class="side-grp" open>
 <summary class="side-sum"><span class="sd sd-ts"></span>🧯 症状から引く</summary>
 <a href="ts-index.html">一覧</a>
 <a href="ts-1.html">異物・黒点（コンタミネーション）</a>
@@ -154,7 +154,7 @@
 <a href="ts-14.html">静電気・帯電（作業性・異物付着）</a>
 <a href="ts-15.html">梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a>
 <a href="ts-16.html">機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</a>
-<a href="ts-17.html">含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a>
+<a class="on" href="ts-17.html">含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a>
 </details>
 <div class="side-cap">リファレンス</div>
 <a class="side-item" href="glossary.html">📑 用語・索引</a>
@@ -162,12 +162,20 @@
 <a class="side-item" href="whatsnew.html">🆕 更新履歴</a>
 </nav></aside>
   <main class="hb-main">
-  <div class="crumb"><a href="aud-mfg.html">製造向け</a><span class="sep">/</span><span>M6 5S・現場管理と監査の日常準備</span></div>
+  <div class="crumb"><a href="ts-index.html">トラブルシューティング</a><span class="sep">/</span><span>含水率・吸湿による特性変動（寸法・強度・変色/カビ）</span></div>
   <div class="s-head">
-      <div class="s-tags"><span class="gtag g-mfg">🏭 製造向け</span><span class="ttag">連携先：製造現場</span></div>
-      <h1><span class="s-id">M6</span>5S・現場管理と監査の日常準備</h1>
-    </div><div class="purpose"><span class="p-tag">考え方</span><p>監査は特別なことでなく、日常の延長。日ごろの5Sと識別がそのまま備えになる。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">5S（整理・整頓・清掃・清潔・躾）を日常で維持</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">最新版の手順書・検査基準のみ現場に置く（旧版は回収）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">識別・表示（合格／保留／不良、ロット）を明確にする</span></li><li class="chk"><span class="cb"></span><span class="t">記録をすぐ出せる状態にしておく</span></li></ul></div><div class="rel"><h3>関連する場面（品証プレイブック）</h3><div class="rel-list"><a href="s-d3.html"><span class="rel-id">D3</span>監査対応（内部監査・顧客監査・審査）</a><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a></div></div><div class="rel"><h3>同じ読者向けの他トピック</h3><div class="rel-list"><a href="ag-m1.html"><span class="rel-id">M1</span>日常の検査・検査表運用</a><a href="ag-m2.html"><span class="rel-id">M2</span>異常が出たときの初動（まず止める）</a><a href="ag-m3.html"><span class="rel-id">M3</span>4M変化点の申告（無断で変えない）</a><a href="ag-m4.html"><span class="rel-id">M4</span>測定器・校正の順守</a><a href="ag-m5.html"><span class="rel-id">M5</span>不良・ヒヤリの報告とトレーサビリティ</a><a href="ag-m7.html"><span class="rel-id">M7</span>段取り替え・切替時の初物確認</a><a href="ag-m8.html"><span class="rel-id">M8</span>作業標準の順守と力量</a><a href="ag-m9.html"><span class="rel-id">M9</span>多能工化と応援時の品質担保</a><a href="ag-m10.html"><span class="rel-id">M10</span>ヒューマンエラー防止（ポカヨケ・指差呼称・ダブルチェック）</a></div></div>
-    <div class="s-meta">最終更新日：2026-07-03　|　<a href="content/audience-guides.md">原本（Markdown）を開く</a></div>
+      <div class="s-tags"><span class="gtag g-ts">🧯 トラブルシューティング</span><span class="ttag">症状から引く</span></div>
+      <h1><span class="s-id">TS17</span>含水率・吸湿による特性変動（寸法・強度・変色/カビ）</h1>
+    </div><div class="purpose"><span class="p-tag">症状</span><p>保管・輸送中の吸湿や乾燥で、寸法・強度・風合いが変動。ひどい場合は変色・カビ・においを伴う。</p></div><div class="s-body"><h4>まず確認（初動）</h4>
+<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">含水率（または保管環境の温湿度）を測定・記録</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">発生ロットの保管・輸送履歴（期間・場所・季節）を確認</span></li></ul>
+<h4>起こりやすい要因（4M）</h4>
+<div class="tbl-wrap"><table><thead><tr><th>区分</th><th>よくある要因</th></tr></thead><tbody><tr><td>環境</td><td>高湿度保管・結露、直射・温度差、長期在庫</td></tr><tr><td>方法</td><td>防湿梱包の不足、先入れ先出し（FIFO）の未徹底</td></tr><tr><td>材料</td><td>吸湿しやすい繊維・仕上剤、乾燥不足のまま巻取</td></tr></tbody></table></div>
+<h4>切り分け・確認</h4>
+<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">同時期・同保管の他ロットにも出ているか（環境要因か）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">出荷前検査時点の含水率・状態の記録と比較</span></li><li class="chk"><span class="cb"></span><span class="t">梱包仕様（防湿材・乾燥剤）どおりだったか確認</span></li></ul>
+<h4>恒久対策の方向</h4>
+<ul class="checklist"><li class="chk"><span class="cb"></span><span class="t">保管環境（温湿度）の管理値化と在庫期間の上限設定・FIFO徹底</span></li><li class="chk"><span class="cb"></span><span class="t">防湿梱包・乾燥剤の仕様見直しと標準化</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>含水率の社内規格・測定方法・保管温湿度の基準</span></li></ul>
+<p>---</p></div><div class="rel"><h3>関連する場面・症状</h3><div class="rel-list"><a href="ts-15.html"><span class="rel-id">TS15</span>梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a><a href="s-d4.html"><span class="rel-id">D4</span>化学物質管理・法規対応</a></div></div><div class="rel"><h3>他の症状</h3><div class="rel-list"><a href="ts-1.html"><span class="rel-id">TS</span>異物・黒点（コンタミネーション）</a><a href="ts-2.html"><span class="rel-id">TS</span>目付（坪量）ばらつき</a><a href="ts-3.html"><span class="rel-id">TS</span>地合い不良（ムラ・不均一）</a><a href="ts-4.html"><span class="rel-id">TS</span>幅・寸法不良（幅／厚み／長さ）</a><a href="ts-5.html"><span class="rel-id">TS</span>キズ・スジ・線キズ</a><a href="ts-6.html"><span class="rel-id">TS</span>毛羽・毛玉・繊維脱落（発塵）</a><a href="ts-7.html"><span class="rel-id">TS</span>シワ・折れ・カール</a><a href="ts-8.html"><span class="rel-id">TS</span>接着・熱融着不良（強度・剥離）</a><a href="ts-9.html"><span class="rel-id">TS</span>巻き不良（巻きズレ・巻き硬さ・耳不良）</a><a href="ts-10.html"><span class="rel-id">TS</span>汚れ・油染み・変色</a><a href="ts-11.html"><span class="rel-id">TS</span>臭気（におい）</a><a href="ts-12.html"><span class="rel-id">TS</span>強度・引張・伸度不足</a><a href="ts-13.html"><span class="rel-id">TS</span>ピンホール・地合い透け（開孔・薄部）</a><a href="ts-14.html"><span class="rel-id">TS</span>静電気・帯電（作業性・異物付着）</a><a href="ts-15.html"><span class="rel-id">TS</span>梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a><a href="ts-16.html"><span class="rel-id">TS</span>機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</a></div></div>
+    <div class="s-meta">最終更新日：2026-07-03　|　<a href="content/troubleshooting.md">原本（Markdown）を開く</a></div>
   </main>
 </div>
 <div class="hb-ov" id="hbov"></div>
