@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D8 層別工程監査（LPA）・工程パトロールの運用｜ものづくりハンドブック</title>
+<meta name="description" content="**目的**：問題が起きる前に現場のズレを見つける。役職を横断した“層別”の定期監査で、標準どおりの作業・記録・現物を確認する。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
+</head><body>
+<header class="hb-top">
+  <div class="hb-top-in">
+    <button class="hb-burger" id="hbburger" aria-label="メニューを開閉">☰</button>
+    <a class="hb-brand" href="index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
+    <div class="hb-search-wrap">
+      <input id="hbsearch" type="text" placeholder="検索（例: クレーム / 特採 / 校正 / 4M / 異物 / 目付）" autocomplete="off" aria-label="ハンドブック内検索">
+      <div id="hbresults" class="hb-results" hidden></div>
+    </div>
+    <a class="hb-board" href="../" title="Daily Insight Board へ">← ボード</a>
+  </div>
+</header>
+<div class="hb-shell">
+  <aside class="hb-side" id="hbside"><nav class="side-nav">
+<a class="side-home" href="index.html">🏠 ハンドブック トップ</a>
+<a class="side-item" href="policy.html">📘 方針マスター</a>
+<div class="side-cap">場面別プレイブック</div>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-A"></span>📋 A. 定例・マネジメント</summary>
+<a href="group-a.html">概要（一覧）</a>
+<a href="s-a1.html">A1 1on1（育成・面談）</a>
+<a href="s-a2.html">A2 週次ミーティング（グループ内）</a>
+<a href="s-a3.html">A3 月次報告（部門横断：製造係長＋他GL＋事業部長）</a>
+<a href="s-a4.html">A4 目標設定・評価（期初／期中／期末）</a>
+<a href="s-a5.html">A5 教育・力量管理／新任受け入れ</a>
+<a href="s-a6.html">A6 改善提案・小集団活動（QCサークル）の運営</a>
+<a href="s-a7.html">A7 協力会社・外注先との定例品質会議の運営</a>
+</details>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-B"></span>🚨 B. 異常対応</summary>
+<a href="group-b.html">概要（一覧）</a>
+<a href="s-b1.html">B1 優先順位（トリアージ：上から確認）</a>
+<a href="s-b2.html">B2 初動・封じ込め（流出を止める）</a>
+<a href="s-b3.html">B3 原因究明（発生と流出の両面）</a>
+<a href="s-b4.html">B4 是正処置・恒久対策・横展開（8D／CAPA）</a>
+<a href="s-b5.html">B5 特採（特別採用）申請の判断</a>
+<a href="s-b6.html">B6 顧客連絡・対外対応の作法</a>
+<a href="s-b7.html">B7 重大品質問題・リコール級のエスカレーション</a>
+<a href="s-b8.html">B8 是正処置報告書（8D／SCAR）の作成と顧客提出</a>
+</details>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-C"></span>🔧 C. 変化・プロジェクト</summary>
+<a href="group-c.html">概要（一覧）</a>
+<a href="s-c1.html">C1 4M変更管理（人・機械・材料・方法）</a>
+<a href="s-c2.html">C2 新製品・量産立ち上げ（APQP／PPAP 的）</a>
+<a href="s-c3-a.html">C3-a 設備の導入・改善：企画・安全</a>
+<a href="s-c3-b.html">C3-b 設備の導入・改善：品質妥当性・維持</a>
+<a href="s-c4.html">C4 工程・検査基準の制定／改訂</a>
+<a href="s-c5.html">C5 外注・委託先の工程変更・停止対応</a>
+<a href="s-c6.html">C6 顧客起点の仕様・図面変更の受け入れと工程反映</a>
+</details>
+<details class="side-grp" open>
+<summary class="side-sum"><span class="sd sd-D"></span>🛡️ D. 予防・維持・システム</summary>
+<a href="group-d.html">概要（一覧）</a>
+<a href="s-d1.html">D1 日常の検査・検査表運用</a>
+<a href="s-d2.html">D2 測定器・校正・MSA管理</a>
+<a href="s-d3.html">D3 監査対応（内部監査・顧客監査・審査）</a>
+<a href="s-d4.html">D4 化学物質管理・法規対応</a>
+<a href="s-d5.html">D5 文書・記録管理</a>
+<a href="s-d6.html">D6 KPI・品質目標の管理</a>
+<a href="s-d7.html">D7 BCP・災害時の品質維持（緊急時の検査・記録）</a>
+<a class="on" href="s-d8.html">D8 層別工程監査（LPA）・工程パトロールの運用</a>
+</details>
+<div class="side-cap">読者別ガイド</div>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-sales"></span>🤝 営業向け</summary>
+<a href="aud-sales.html">概要（一覧）</a>
+<a href="ag-s1.html">S1 引合い・見積前の品質確認</a>
+<a href="ag-s2.html">S2 顧客要求・仕様書の受け取りと連携</a>
+<a href="ag-s3.html">S3 クレーム・苦情の一次対応</a>
+<a href="ag-s4.html">S4 特採（特別採用）・仕様外品の取り扱い</a>
+<a href="ag-s5.html">S5 納期・出荷可否の約束の線引き</a>
+<a href="ag-s6.html">S6 監査・品質会議・顧客訪問での連携</a>
+<a href="ag-s7.html">S7 提出書類・品質エビデンスの取り交わし</a>
+<a href="ag-s8.html">S8 顧客要求・仕様の変更対応</a>
+<a href="ag-s9.html">S9 クレーム後のフォロー・信頼回復</a>
+<a href="ag-s10.html">S10 値上げ・価格改定交渉時の品質・仕様の整理</a>
+<a href="ag-s11.html">S11 試作・サンプル対応と量産条件の橋渡し</a>
+</details>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-tech"></span>🛠️ 技術向け</summary>
+<a href="aud-tech.html">概要（一覧）</a>
+<a href="ag-t1.html">T1 新製品・量産立ち上げ（APQP／PPAP 的）</a>
+<a href="ag-t2.html">T2 4M変更管理（人・機械・材料・方法）</a>
+<a href="ag-t3.html">T3 工程・検査基準の制定／改訂</a>
+<a href="ag-t4.html">T4 設備の導入・改善</a>
+<a href="ag-t5.html">T5 工程能力・初期流動・データ活用</a>
+<a href="ag-t6.html">T6 化学物質・環境法規の設計織り込み</a>
+<a href="ag-t7.html">T7 不具合の再発防止と設計・標準へのフィードバック</a>
+<a href="ag-t8.html">T8 治具・型・設備の維持管理</a>
+<a href="ag-t9.html">T9 設備保全とデータ活用（予知保全の入口）</a>
+<a href="ag-t10.html">T10 検査の自動化・AI外観検査導入の進め方</a>
+<a href="ag-t11.html">T11 工程FMEA（PFMEA）の作成と活用</a>
+</details>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-mfg"></span>🏭 製造向け</summary>
+<a href="aud-mfg.html">概要（一覧）</a>
+<a href="ag-m1.html">M1 日常の検査・検査表運用</a>
+<a href="ag-m2.html">M2 異常が出たときの初動（まず止める）</a>
+<a href="ag-m3.html">M3 4M変化点の申告（無断で変えない）</a>
+<a href="ag-m4.html">M4 測定器・校正の順守</a>
+<a href="ag-m5.html">M5 不良・ヒヤリの報告とトレーサビリティ</a>
+<a href="ag-m6.html">M6 5S・現場管理と監査の日常準備</a>
+<a href="ag-m7.html">M7 段取り替え・切替時の初物確認</a>
+<a href="ag-m8.html">M8 作業標準の順守と力量</a>
+<a href="ag-m9.html">M9 多能工化と応援時の品質担保</a>
+<a href="ag-m10.html">M10 ヒューマンエラー防止（ポカヨケ・指差呼称・ダブルチェック）</a>
+<a href="ag-m11.html">M11 交替勤務・引き継ぎ時の品質情報の伝達</a>
+</details>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-buy"></span>🧺 購買向け</summary>
+<a href="aud-buy.html">概要（一覧）</a>
+<a href="ag-p1.html">P1 サプライヤーの選定・承認</a>
+<a href="ag-p2.html">P2 受入検査・受入基準</a>
+<a href="ag-p3.html">P3 サプライヤーの4M変更・製造中止管理</a>
+<a href="ag-p4.html">P4 化学物質・法規エビデンスの収集</a>
+<a href="ag-p5.html">P5 サプライヤー不適合・クレーム対応</a>
+<a href="ag-p6.html">P6 サプライヤー監査・品質改善の伴走</a>
+<a href="ag-p7.html">P7 供給BCP・二社購買（供給途絶リスク）</a>
+<a href="ag-p8.html">P8 原材料の値上げ・代替材の評価と切替管理</a>
+<a href="ag-p9.html">P9 受入ロット管理・FIFO と保管品質の維持</a>
+</details>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-vendor"></span>📦 外注先向け</summary>
+<a href="aud-vendor.html">概要（一覧）</a>
+<a href="ag-v1.html">V1 当社が取引先に求める品質の基本</a>
+<a href="ag-v2.html">V2 納入前に必要な提出書類</a>
+<a href="ag-v3.html">V3 4M変更・工程変更の事前連絡</a>
+<a href="ag-v4.html">V4 不適合が発生したときのご連絡と是正</a>
+<a href="ag-v5.html">V5 化学物質・法規への対応</a>
+<a href="ag-v6.html">V6 納入・識別・トレーサビリティ</a>
+<a href="ag-v7.html">V7 品質協定・SLAの基本（お取引の土台）</a>
+<a href="ag-v8.html">V8 継続的な品質改善・情報交換のお願い（お取引先向け）</a>
+</details>
+<div class="side-cap">トラブルシューティング</div>
+<details class="side-grp">
+<summary class="side-sum"><span class="sd sd-ts"></span>🧯 症状から引く</summary>
+<a href="ts-index.html">一覧</a>
+<a href="ts-1.html">異物・黒点（コンタミネーション）</a>
+<a href="ts-2.html">目付（坪量）ばらつき</a>
+<a href="ts-3.html">地合い不良（ムラ・不均一）</a>
+<a href="ts-4.html">幅・寸法不良（幅／厚み／長さ）</a>
+<a href="ts-5.html">キズ・スジ・線キズ</a>
+<a href="ts-6.html">毛羽・毛玉・繊維脱落（発塵）</a>
+<a href="ts-7.html">シワ・折れ・カール</a>
+<a href="ts-8.html">接着・熱融着不良（強度・剥離）</a>
+<a href="ts-9.html">巻き不良（巻きズレ・巻き硬さ・耳不良）</a>
+<a href="ts-10.html">汚れ・油染み・変色</a>
+<a href="ts-11.html">臭気（におい）</a>
+<a href="ts-12.html">強度・引張・伸度不足</a>
+<a href="ts-13.html">ピンホール・地合い透け（開孔・薄部）</a>
+<a href="ts-14.html">静電気・帯電（作業性・異物付着）</a>
+<a href="ts-15.html">梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a>
+<a href="ts-16.html">機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</a>
+<a href="ts-17.html">含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a>
+<a href="ts-18.html">色調・白度のばらつき（色差ΔE・黄変・退色）</a>
+<a href="ts-19.html">通気度・ろ過性能のばらつき（圧損・捕集効率）</a>
+</details>
+<div class="side-cap">リファレンス</div>
+<a class="side-item" href="glossary.html">📑 用語・索引</a>
+<a class="side-item" href="review.html">🟡 要確認リスト</a>
+<a class="side-item" href="whatsnew.html">🆕 更新履歴</a>
+</nav></aside>
+  <main class="hb-main">
+  <div class="crumb"><a href="group-d.html">D 予防・維持・システム</a><span class="sep">/</span><span>D8 層別工程監査（LPA）・工程パトロールの運用</span></div>
+  <div class="s-head">
+      <div class="s-tags"><span class="gtag g-D">🛡️ D・予防・維持・システム</span><span class="ttag">種類：予防</span></div>
+      <h1><span class="s-id">D8</span>層別工程監査（LPA）・工程パトロールの運用</h1>
+    </div><div class="purpose"><span class="p-tag">目的</span><p>問題が起きる前に現場のズレを見つける。役職を横断した“層別”の定期監査で、標準どおりの作業・記録・現物を確認する。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">重要工程を対象に、確認項目を絞ったチェックシートを用意する</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">リーダー・管理者など層を分けて定期的に巡回・確認する（層別監査）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">標準・記録・現物・5S・測定器の状態を“その場で”確認する</span></li><li class="chk"><span class="cb"></span><span class="t">逸脱はその場で是正し、繰り返すものは仕組み（標準・ポカヨケ）を直す</span></li><li class="chk"><span class="cb"></span><span class="t">指摘・是正の記録を残し、傾向を月次でレビューする（D6と連動）</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>対象工程・巡回頻度・チェックシート項目・是正フォロー基準</span></li></ul>
+<p>関連場面: D3, D6, M8</p>
+<p>---</p></div><div class="rel"><h3>関連する場面（同じグループ）</h3><div class="rel-list"><a href="s-d1.html"><span class="rel-id">D1</span>日常の検査・検査表運用</a><a href="s-d2.html"><span class="rel-id">D2</span>測定器・校正・MSA管理</a><a href="s-d3.html"><span class="rel-id">D3</span>監査対応（内部監査・顧客監査・審査）</a><a href="s-d4.html"><span class="rel-id">D4</span>化学物質管理・法規対応</a><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a><a href="s-d6.html"><span class="rel-id">D6</span>KPI・品質目標の管理</a><a href="s-d7.html"><span class="rel-id">D7</span>BCP・災害時の品質維持（緊急時の検査・記録）</a></div></div>
+    <div class="s-meta">最終更新日：2026-07-04　|　<a href="content/playbooks.md">原本（Markdown）を開く</a></div>
+  </main>
+</div>
+<div class="hb-ov" id="hbov"></div>
+<footer class="hb-foot"><div class="wrap">
+  <div><b>ものづくりハンドブック</b></div>
+  <div class="hb-foot-sub">本文の正（Single Source of Truth）は <a href="content/playbooks.md">プレイブック集</a> ／ <a href="content/policy-master.md">方針マスター</a> ／ <a href="content/audience-guides.md">読者別ガイド</a> ／ <a href="content/troubleshooting.md">トラブルシューティング</a>。最終更新 2026-07-04。運用は <a href="content/README.md">README</a> 参照。</div>
+</div></footer>
+<script src="assets/app.js"></script>
+</body></html>
