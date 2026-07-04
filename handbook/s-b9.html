@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>機能加工のムラ・性能未達（親水/撥水・薬剤付着量）｜ものづくりハンドブック</title>
-<meta name="description" content="**症状**：親水・撥水・帯電防止などの後加工で、部分的に性能が出ない／ばらつく。吸水速度・接触角・表面抵抗が規格を外れる。">
+<title>B9 流出後の顧客先在庫・市場品の選別／回収要否の判断｜ものづくりハンドブック</title>
+<meta name="description" content="**目的**：不良が社外へ流出した後の「広がりを止める」動き。顧客先在庫・市場品まで含めて影響範囲を特定し、選別・回収の要否を早く正しく判断する。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -36,7 +36,7 @@
 <a href="s-a7.html">A7 協力会社・外注先との定例品質会議の運営</a>
 <a href="s-a8.html">A8 品質KPIの朝礼・見える化ボード運用（現場への浸透）</a>
 </details>
-<details class="side-grp">
+<details class="side-grp" open>
 <summary class="side-sum"><span class="sd sd-B"></span>🚨 B. 異常対応</summary>
 <a href="group-b.html">概要（一覧）</a>
 <a href="s-b1.html">B1 優先順位（トリアージ：上から確認）</a>
@@ -47,7 +47,7 @@
 <a href="s-b6.html">B6 顧客連絡・対外対応の作法</a>
 <a href="s-b7.html">B7 重大品質問題・リコール級のエスカレーション</a>
 <a href="s-b8.html">B8 是正処置報告書（8D／SCAR）の作成と顧客提出</a>
-<a href="s-b9.html">B9 流出後の顧客先在庫・市場品の選別／回収要否の判断</a>
+<a class="on" href="s-b9.html">B9 流出後の顧客先在庫・市場品の選別／回収要否の判断</a>
 </details>
 <details class="side-grp">
 <summary class="side-sum"><span class="sd sd-C"></span>🔧 C. 変化・プロジェクト</summary>
@@ -148,7 +148,7 @@
 <a href="ag-v8.html">V8 継続的な品質改善・情報交換のお願い（お取引先向け）</a>
 </details>
 <div class="side-cap">トラブルシューティング</div>
-<details class="side-grp" open>
+<details class="side-grp">
 <summary class="side-sum"><span class="sd sd-ts"></span>🧯 症状から引く</summary>
 <a href="ts-index.html">一覧</a>
 <a href="ts-1.html">異物・黒点（コンタミネーション）</a>
@@ -166,7 +166,7 @@
 <a href="ts-13.html">ピンホール・地合い透け（開孔・薄部）</a>
 <a href="ts-14.html">静電気・帯電（作業性・異物付着）</a>
 <a href="ts-15.html">梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a>
-<a class="on" href="ts-16.html">機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</a>
+<a href="ts-16.html">機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</a>
 <a href="ts-17.html">含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a>
 <a href="ts-18.html">色調・白度のばらつき（色差ΔE・黄変・退色）</a>
 <a href="ts-19.html">通気度・ろ過性能のばらつき（圧損・捕集効率）</a>
@@ -179,19 +179,17 @@
 <a class="side-item" href="whatsnew.html">🆕 更新履歴</a>
 </nav></aside>
   <main class="hb-main">
-  <div class="crumb"><a href="ts-index.html">トラブルシューティング</a><span class="sep">/</span><span>機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</span></div>
+  <div class="crumb"><a href="group-b.html">B 異常対応</a><span class="sep">/</span><span>B9 流出後の顧客先在庫・市場品の選別／回収要否の判断</span></div>
   <div class="s-head">
-      <div class="s-tags"><span class="gtag g-ts">🧯 トラブルシューティング</span><span class="ttag">症状から引く</span></div>
-      <h1><span class="s-id">TS16</span>機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</h1>
-    </div><div class="purpose"><span class="p-tag">症状</span><p>親水・撥水・帯電防止などの後加工で、部分的に性能が出ない／ばらつく。吸水速度・接触角・表面抵抗が規格を外れる。</p></div><div class="s-body"><h4>まず確認（初動）</h4>
-<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">どの機能・どの評価項目が外れたか（吸水/撥水/帯電防止など）を特定</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">ロット内・幅方向・MD方向のどこで出るか（分布）を記録</span></li></ul>
-<h4>起こりやすい要因（4M）</h4>
-<div class="tbl-wrap"><table><thead><tr><th>区分</th><th>よくある要因</th></tr></thead><tbody><tr><td>材料</td><td>薬剤濃度・希釈比のばらつき、薬液の劣化・分離</td></tr><tr><td>機械</td><td>塗布/含浸量の不均一、絞り・乾燥条件のブレ</td></tr><tr><td>方法</td><td>付着量（ピックアップ）管理不足、乾燥温度・時間の不適</td></tr></tbody></table></div>
-<h4>切り分け・確認</h4>
-<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">付着量（ピックアップ率）を測り、規格範囲か確認</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">幅方向プロファイルで塗布ムラの有無を確認</span></li><li class="chk"><span class="cb"></span><span class="t">薬液の管理状態（濃度・温度・使用期限）を確認</span></li></ul>
-<h4>恒久対策の方向</h4>
-<ul class="checklist"><li class="chk"><span class="cb"></span><span class="t">付着量・濃度・乾燥条件の管理値化と記録（工程条件の標準化）</span></li><li class="chk"><span class="cb"></span><span class="t">塗布/絞り機構の点検・清掃周期の設定</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>機能規格値・評価方法（吸水速度/接触角/表面抵抗）と社内許容幅</span></li></ul></div><div class="rel"><h3>関連する場面・症状</h3><div class="rel-list"><a href="s-d4.html"><span class="rel-id">D4</span>化学物質管理・法規対応</a><a href="s-b2.html"><span class="rel-id">B2</span>初動・封じ込め（流出を止める）</a></div></div><div class="rel"><h3>他の症状</h3><div class="rel-list"><a href="ts-1.html"><span class="rel-id">TS</span>異物・黒点（コンタミネーション）</a><a href="ts-2.html"><span class="rel-id">TS</span>目付（坪量）ばらつき</a><a href="ts-3.html"><span class="rel-id">TS</span>地合い不良（ムラ・不均一）</a><a href="ts-4.html"><span class="rel-id">TS</span>幅・寸法不良（幅／厚み／長さ）</a><a href="ts-5.html"><span class="rel-id">TS</span>キズ・スジ・線キズ</a><a href="ts-6.html"><span class="rel-id">TS</span>毛羽・毛玉・繊維脱落（発塵）</a><a href="ts-7.html"><span class="rel-id">TS</span>シワ・折れ・カール</a><a href="ts-8.html"><span class="rel-id">TS</span>接着・熱融着不良（強度・剥離）</a><a href="ts-9.html"><span class="rel-id">TS</span>巻き不良（巻きズレ・巻き硬さ・耳不良）</a><a href="ts-10.html"><span class="rel-id">TS</span>汚れ・油染み・変色</a><a href="ts-11.html"><span class="rel-id">TS</span>臭気（におい）</a><a href="ts-12.html"><span class="rel-id">TS</span>強度・引張・伸度不足</a><a href="ts-13.html"><span class="rel-id">TS</span>ピンホール・地合い透け（開孔・薄部）</a><a href="ts-14.html"><span class="rel-id">TS</span>静電気・帯電（作業性・異物付着）</a><a href="ts-15.html"><span class="rel-id">TS</span>梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a><a href="ts-17.html"><span class="rel-id">TS</span>含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a><a href="ts-18.html"><span class="rel-id">TS</span>色調・白度のばらつき（色差ΔE・黄変・退色）</a><a href="ts-19.html"><span class="rel-id">TS</span>通気度・ろ過性能のばらつき（圧損・捕集効率）</a><a href="ts-20.html"><span class="rel-id">TS</span>スリット・断裁部の毛羽・バリ・寸法不良（切断品質）</a><a href="ts-21.html"><span class="rel-id">TS</span>硬さ・風合い（剛軟度・ドレープ性）のばらつき</a></div></div>
-    <div class="s-meta">最終更新日：2026-07-05　|　<a href="content/troubleshooting.md">原本（Markdown）を開く</a></div>
+      <div class="s-tags"><span class="gtag g-B">🚨 B・異常対応</span><span class="ttag">種類：異常</span></div>
+      <h1><span class="s-id">B9</span>流出後の顧客先在庫・市場品の選別／回収要否の判断</h1>
+    </div><div class="purpose"><span class="p-tag">目的</span><p>不良が社外へ流出した後の「広がりを止める」動き。顧客先在庫・市場品まで含めて影響範囲を特定し、選別・回収の要否を早く正しく判断する。</p></div><div class="s-body"><h4>初動（広がりの特定）</h4>
+<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">流出ロットの範囲（製造～出荷～納入先）をトレーサビリティで特定する</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">顧客先・倉庫・市場のどこに、どれだけ在庫があるかを至急確認する</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">安全・法規・機能への影響度から、選別・回収・現地対応の要否を判断する</span></li></ul>
+<h4>実行・記録</h4>
+<ul class="checklist"><li class="chk"><span class="cb"></span><span class="t">選別（ソーティング）の基準・方法・実施者を決め、良品と不良品を確実に分ける</span></li><li class="chk"><span class="cb"></span><span class="t">回収要否・範囲は上位判断とし、顧客連絡はB6・重大時はB7に従う</span></li><li class="chk"><span class="cb"></span><span class="t">対応の記録（範囲・数量・処置）を残し、是正・横展開（B4）へつなぐ</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>回収判断の権限者・選別基準・費用負担の取り決め</span></li></ul>
+<p>関連場面: B2, B6, B4</p>
+<p>---</p></div><div class="rel"><h3>関連する場面（同じグループ）</h3><div class="rel-list"><a href="s-b1.html"><span class="rel-id">B1</span>優先順位（トリアージ：上から確認）</a><a href="s-b2.html"><span class="rel-id">B2</span>初動・封じ込め（流出を止める）</a><a href="s-b3.html"><span class="rel-id">B3</span>原因究明（発生と流出の両面）</a><a href="s-b4.html"><span class="rel-id">B4</span>是正処置・恒久対策・横展開（8D／CAPA）</a><a href="s-b5.html"><span class="rel-id">B5</span>特採（特別採用）申請の判断</a><a href="s-b6.html"><span class="rel-id">B6</span>顧客連絡・対外対応の作法</a><a href="s-b7.html"><span class="rel-id">B7</span>重大品質問題・リコール級のエスカレーション</a><a href="s-b8.html"><span class="rel-id">B8</span>是正処置報告書（8D／SCAR）の作成と顧客提出</a></div></div>
+    <div class="s-meta">最終更新日：2026-07-05　|　<a href="content/playbooks.md">原本（Markdown）を開く</a></div>
   </main>
 </div>
 <div class="hb-ov" id="hbov"></div>

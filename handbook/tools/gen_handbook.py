@@ -22,7 +22,7 @@ def strip_fm(t):
 master_body=strip_fm(master_raw); play_body=strip_fm(play_raw)
 aud_body=strip_fm(aud_raw) if aud_raw else ""; ts_body=strip_fm(ts_raw) if ts_raw else ""
 
-LAST_UPDATED="2026-07-04"
+LAST_UPDATED="2026-07-05"
 
 GROUPS={
  "A":{"title":"定例・マネジメント","type":"定例","emoji":"📋"},

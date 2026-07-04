@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>機能加工のムラ・性能未達（親水/撥水・薬剤付着量）｜ものづくりハンドブック</title>
-<meta name="description" content="**症状**：親水・撥水・帯電防止などの後加工で、部分的に性能が出ない／ばらつく。吸水速度・接触角・表面抵抗が規格を外れる。">
+<title>T12 統計的工程管理（SPC）・管理図の導入と工程能力の見える化｜ものづくりハンドブック</title>
+<meta name="description" content="**考え方**：検査で「選り分ける」から、工程で「作り込む」へ。重要特性のばらつきを管理図で監視し、異常を早期に捉えて工程を安定させる。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -89,7 +89,7 @@
 <a href="ag-s11.html">S11 試作・サンプル対応と量産条件の橋渡し</a>
 <a href="ag-s12.html">S12 環境・サステナビリティ要求（脱炭素・リサイクル素材・エコ認証）への対応窓口</a>
 </details>
-<details class="side-grp">
+<details class="side-grp" open>
 <summary class="side-sum"><span class="sd sd-tech"></span>🛠️ 技術向け</summary>
 <a href="aud-tech.html">概要（一覧）</a>
 <a href="ag-t1.html">T1 新製品・量産立ち上げ（APQP／PPAP 的）</a>
@@ -103,7 +103,7 @@
 <a href="ag-t9.html">T9 設備保全とデータ活用（予知保全の入口）</a>
 <a href="ag-t10.html">T10 検査の自動化・AI外観検査導入の進め方</a>
 <a href="ag-t11.html">T11 工程FMEA（PFMEA）の作成と活用</a>
-<a href="ag-t12.html">T12 統計的工程管理（SPC）・管理図の導入と工程能力の見える化</a>
+<a class="on" href="ag-t12.html">T12 統計的工程管理（SPC）・管理図の導入と工程能力の見える化</a>
 </details>
 <details class="side-grp">
 <summary class="side-sum"><span class="sd sd-mfg"></span>🏭 製造向け</summary>
@@ -148,7 +148,7 @@
 <a href="ag-v8.html">V8 継続的な品質改善・情報交換のお願い（お取引先向け）</a>
 </details>
 <div class="side-cap">トラブルシューティング</div>
-<details class="side-grp" open>
+<details class="side-grp">
 <summary class="side-sum"><span class="sd sd-ts"></span>🧯 症状から引く</summary>
 <a href="ts-index.html">一覧</a>
 <a href="ts-1.html">異物・黒点（コンタミネーション）</a>
@@ -166,7 +166,7 @@
 <a href="ts-13.html">ピンホール・地合い透け（開孔・薄部）</a>
 <a href="ts-14.html">静電気・帯電（作業性・異物付着）</a>
 <a href="ts-15.html">梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a>
-<a class="on" href="ts-16.html">機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</a>
+<a href="ts-16.html">機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</a>
 <a href="ts-17.html">含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a>
 <a href="ts-18.html">色調・白度のばらつき（色差ΔE・黄変・退色）</a>
 <a href="ts-19.html">通気度・ろ過性能のばらつき（圧損・捕集効率）</a>
@@ -179,19 +179,13 @@
 <a class="side-item" href="whatsnew.html">🆕 更新履歴</a>
 </nav></aside>
   <main class="hb-main">
-  <div class="crumb"><a href="ts-index.html">トラブルシューティング</a><span class="sep">/</span><span>機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</span></div>
+  <div class="crumb"><a href="aud-tech.html">技術向け</a><span class="sep">/</span><span>T12 統計的工程管理（SPC）・管理図の導入と工程能力の見える化</span></div>
   <div class="s-head">
-      <div class="s-tags"><span class="gtag g-ts">🧯 トラブルシューティング</span><span class="ttag">症状から引く</span></div>
-      <h1><span class="s-id">TS16</span>機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</h1>
-    </div><div class="purpose"><span class="p-tag">症状</span><p>親水・撥水・帯電防止などの後加工で、部分的に性能が出ない／ばらつく。吸水速度・接触角・表面抵抗が規格を外れる。</p></div><div class="s-body"><h4>まず確認（初動）</h4>
-<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">どの機能・どの評価項目が外れたか（吸水/撥水/帯電防止など）を特定</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">ロット内・幅方向・MD方向のどこで出るか（分布）を記録</span></li></ul>
-<h4>起こりやすい要因（4M）</h4>
-<div class="tbl-wrap"><table><thead><tr><th>区分</th><th>よくある要因</th></tr></thead><tbody><tr><td>材料</td><td>薬剤濃度・希釈比のばらつき、薬液の劣化・分離</td></tr><tr><td>機械</td><td>塗布/含浸量の不均一、絞り・乾燥条件のブレ</td></tr><tr><td>方法</td><td>付着量（ピックアップ）管理不足、乾燥温度・時間の不適</td></tr></tbody></table></div>
-<h4>切り分け・確認</h4>
-<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">付着量（ピックアップ率）を測り、規格範囲か確認</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">幅方向プロファイルで塗布ムラの有無を確認</span></li><li class="chk"><span class="cb"></span><span class="t">薬液の管理状態（濃度・温度・使用期限）を確認</span></li></ul>
-<h4>恒久対策の方向</h4>
-<ul class="checklist"><li class="chk"><span class="cb"></span><span class="t">付着量・濃度・乾燥条件の管理値化と記録（工程条件の標準化）</span></li><li class="chk"><span class="cb"></span><span class="t">塗布/絞り機構の点検・清掃周期の設定</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>機能規格値・評価方法（吸水速度/接触角/表面抵抗）と社内許容幅</span></li></ul></div><div class="rel"><h3>関連する場面・症状</h3><div class="rel-list"><a href="s-d4.html"><span class="rel-id">D4</span>化学物質管理・法規対応</a><a href="s-b2.html"><span class="rel-id">B2</span>初動・封じ込め（流出を止める）</a></div></div><div class="rel"><h3>他の症状</h3><div class="rel-list"><a href="ts-1.html"><span class="rel-id">TS</span>異物・黒点（コンタミネーション）</a><a href="ts-2.html"><span class="rel-id">TS</span>目付（坪量）ばらつき</a><a href="ts-3.html"><span class="rel-id">TS</span>地合い不良（ムラ・不均一）</a><a href="ts-4.html"><span class="rel-id">TS</span>幅・寸法不良（幅／厚み／長さ）</a><a href="ts-5.html"><span class="rel-id">TS</span>キズ・スジ・線キズ</a><a href="ts-6.html"><span class="rel-id">TS</span>毛羽・毛玉・繊維脱落（発塵）</a><a href="ts-7.html"><span class="rel-id">TS</span>シワ・折れ・カール</a><a href="ts-8.html"><span class="rel-id">TS</span>接着・熱融着不良（強度・剥離）</a><a href="ts-9.html"><span class="rel-id">TS</span>巻き不良（巻きズレ・巻き硬さ・耳不良）</a><a href="ts-10.html"><span class="rel-id">TS</span>汚れ・油染み・変色</a><a href="ts-11.html"><span class="rel-id">TS</span>臭気（におい）</a><a href="ts-12.html"><span class="rel-id">TS</span>強度・引張・伸度不足</a><a href="ts-13.html"><span class="rel-id">TS</span>ピンホール・地合い透け（開孔・薄部）</a><a href="ts-14.html"><span class="rel-id">TS</span>静電気・帯電（作業性・異物付着）</a><a href="ts-15.html"><span class="rel-id">TS</span>梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a><a href="ts-17.html"><span class="rel-id">TS</span>含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a><a href="ts-18.html"><span class="rel-id">TS</span>色調・白度のばらつき（色差ΔE・黄変・退色）</a><a href="ts-19.html"><span class="rel-id">TS</span>通気度・ろ過性能のばらつき（圧損・捕集効率）</a><a href="ts-20.html"><span class="rel-id">TS</span>スリット・断裁部の毛羽・バリ・寸法不良（切断品質）</a><a href="ts-21.html"><span class="rel-id">TS</span>硬さ・風合い（剛軟度・ドレープ性）のばらつき</a></div></div>
-    <div class="s-meta">最終更新日：2026-07-05　|　<a href="content/troubleshooting.md">原本（Markdown）を開く</a></div>
+      <div class="s-tags"><span class="gtag g-tech">🛠️ 技術向け</span><span class="ttag">連携先：生産技術・開発</span></div>
+      <h1><span class="s-id">T12</span>統計的工程管理（SPC）・管理図の導入と工程能力の見える化</h1>
+    </div><div class="purpose"><span class="p-tag">考え方</span><p>検査で「選り分ける」から、工程で「作り込む」へ。重要特性のばらつきを管理図で監視し、異常を早期に捉えて工程を安定させる。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">管理対象の重要特性（目付・幅・強度等）を、影響の大きい工程から絞って選ぶ</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">Xbar-R管理図などで時系列監視し、管理限界を外れる前の傾向を捉える</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">工程能力（Cp／Cpk）を算出し、規格に対する余裕度を見える化する</span></li><li class="chk"><span class="cb"></span><span class="t">異常（管理限界逸脱・連続上昇等）が出たときの対応ルールを決めておく（M2と連動）</span></li><li class="chk"><span class="cb"></span><span class="t">データはPower Automate/kintone等で自動集計し、記録の手間を減らす</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>重要特性の管理限界・Cpk目標値・サンプリング頻度・使用帳票</span></li></ul>
+<p>---</p></div><div class="rel"><h3>関連する場面（品証プレイブック）</h3><div class="rel-list"><a href="s-d6.html"><span class="rel-id">D6</span>KPI・品質目標の管理</a></div></div><div class="rel"><h3>同じ読者向けの他トピック</h3><div class="rel-list"><a href="ag-t1.html"><span class="rel-id">T1</span>新製品・量産立ち上げ（APQP／PPAP 的）</a><a href="ag-t2.html"><span class="rel-id">T2</span>4M変更管理（人・機械・材料・方法）</a><a href="ag-t3.html"><span class="rel-id">T3</span>工程・検査基準の制定／改訂</a><a href="ag-t4.html"><span class="rel-id">T4</span>設備の導入・改善</a><a href="ag-t5.html"><span class="rel-id">T5</span>工程能力・初期流動・データ活用</a><a href="ag-t6.html"><span class="rel-id">T6</span>化学物質・環境法規の設計織り込み</a><a href="ag-t7.html"><span class="rel-id">T7</span>不具合の再発防止と設計・標準へのフィードバック</a><a href="ag-t8.html"><span class="rel-id">T8</span>治具・型・設備の維持管理</a><a href="ag-t9.html"><span class="rel-id">T9</span>設備保全とデータ活用（予知保全の入口）</a><a href="ag-t10.html"><span class="rel-id">T10</span>検査の自動化・AI外観検査導入の進め方</a><a href="ag-t11.html"><span class="rel-id">T11</span>工程FMEA（PFMEA）の作成と活用</a></div></div>
+    <div class="s-meta">最終更新日：2026-07-05　|　<a href="content/audience-guides.md">原本（Markdown）を開く</a></div>
   </main>
 </div>
 <div class="hb-ov" id="hbov"></div>
