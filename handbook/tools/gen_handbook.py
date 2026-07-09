@@ -22,7 +22,7 @@ def strip_fm(t):
 master_body=strip_fm(master_raw); play_body=strip_fm(play_raw)
 aud_body=strip_fm(aud_raw) if aud_raw else ""; ts_body=strip_fm(ts_raw) if ts_raw else ""
 
-LAST_UPDATED="2026-07-05"
+LAST_UPDATED="2026-07-10"
 
 GROUPS={
  "A":{"title":"定例・マネジメント","type":"定例","emoji":"📋"},
@@ -275,10 +275,11 @@ def page(title, body, active, desc="", crumb_html=""):
 <title>{esc(title)}｜ものづくりハンドブック</title>
 <meta name="description" content="{esc(desc or 'ものづくりハンドブック')}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
 </head><body>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../">📊 今日の情報</a><a href="../workboard.html">🗂 仕事ボード</a><a class="on" href="index.html">📘 ハンドブック</a></nav></div></div>
 <header class="hb-top">
   <div class="hb-top-in">
     <button class="hb-burger" id="hbburger" aria-label="メニューを開閉">☰</button>
@@ -287,7 +288,6 @@ def page(title, body, active, desc="", crumb_html=""):
       <input id="hbsearch" type="text" placeholder="検索（例: クレーム / 特採 / 校正 / 4M / 異物 / 目付）" autocomplete="off" aria-label="ハンドブック内検索">
       <div id="hbresults" class="hb-results" hidden></div>
     </div>
-    <a class="hb-board" href="../" title="Daily Insight Board へ">← ボード</a>
   </div>
 </header>
 <div class="hb-shell">

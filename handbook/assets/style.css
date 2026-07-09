@@ -1,22 +1,22 @@
 :root{
-  --navy:#16314D; --navy-2:#1f4569; --teal:#0E8074; --teal-d:#0a6359;
-  --ink:#1d2733; --muted:#5b6573; --faint:#8a93a0;
-  --line:#e3e7ec; --line-2:#d3d9e0; --bg:#f5f7f9; --card:#ffffff;
+  --navy:#1e293b; --navy-2:#28374d; --teal:#2563eb; --teal-d:#1d4ed8;
+  --ink:#1b2431; --muted:#5a6474; --faint:#8b94a3;
+  --line:#e4e8ee; --line-2:#d3d9e2; --bg:#f6f7f9; --card:#ffffff;
   --star:#b54708; --star-bg:#fff4e8;
   --rev:#9a6a00; --rev-bg:#fff8e6; --rev-line:#f0dca8;
-  --a:#0E8074; --a-bg:#e6f3f1;
+  --a:#2563eb; --a-bg:#e9f0fe;
   --radius:11px;
-  --serif:"Shippori Mincho",serif;
+  --serif:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
   --sans:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --navy:#0f2238; --navy-2:#16314D; --teal:#27a594; --teal-d:#1f8576;
-    --ink:#e7ebf0; --muted:#aab3bf; --faint:#7e8794;
-    --line:#2b3744; --line-2:#3a4756; --bg:#141b22; --card:#1c2530;
+    --navy:#101927; --navy-2:#1a2438; --teal:#3b82f6; --teal-d:#5e8cf0;
+    --ink:#e8ebf1; --muted:#aab3c2; --faint:#7d8697;
+    --line:#2e3644; --line-2:#3d4657; --bg:#141821; --card:#222835;
     --star:#e8a35f; --star-bg:#33260f;
     --rev:#e3bd6a; --rev-bg:#2e2710; --rev-line:#4a3d18;
-    --a:#3fb3a2; --a-bg:#123430;
+    --a:#7aa5f8; --a-bg:#1d2c47;
   }
 }
 *{box-sizing:border-box}
@@ -195,3 +195,13 @@ details[open]>.side-sum::after{transform:rotate(-90deg)}
 .wn-item{display:flex;gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px dashed #edf0f3}
 .wn-tag{flex:0 0 auto;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;color:#fff;white-space:nowrap}
 .t-add{background:#2f8f63}.t-imp{background:#3b7fb0}.t-brand{background:#a6772f}.t-new{background:#7a6fc0}.t-fix{background:#b0518f}.t-other{background:#8895a3}
+
+/* --- portal tabs (共通ナビ) --- */
+.ptabs{background:var(--card);border-bottom:1px solid var(--line)}
+.ptabs-in{display:flex;align-items:center;gap:10px;padding:10px 20px;flex-wrap:wrap;max-width:1400px;margin:0 auto}
+.pbrand{font-size:.8rem;font-weight:800;color:var(--muted);letter-spacing:.06em;margin-right:auto}
+.ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+.ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--muted);padding:6px 13px;border-radius:30px}
+.ptabs nav a:hover{color:var(--teal-d);background:var(--a-bg)}
+.ptabs nav a.on{background:var(--teal);color:#fff}
+@media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}

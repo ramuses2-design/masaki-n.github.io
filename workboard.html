@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仕事ボード｜ものづくりポータル</title>
+<meta name="description" content="抱えている案件の状況・優先度・次の一手を一覧できる仕事の整理ボード。Slack投稿から自動取込・毎日自動更新。">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141821" media="(prefers-color-scheme: dark)">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%232563eb'/%3E%3Crect%20x='5'%20y='5'%20width='14'%20height='3.4'%20rx='1.2'%20fill='white'/%3E%3Crect%20x='5'%20y='10.3'%20width='14'%20height='3.4'%20rx='1.2'%20fill='white'%20opacity='.75'/%3E%3Crect%20x='5'%20y='15.6'%20width='9'%20height='3.4'%20rx='1.2'%20fill='white'%20opacity='.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --s0:#f6f7f9; --s1:#eef1f5; --s2:#ffffff;
+    --tp:#1b2431; --ts:#5a6474; --tm:#8b94a3;
+    --bd:#e4e8ee; --bds:#d3d9e2;
+    --acc:#2563eb; --acc-t:#1d4ed8; --acc-bg:#e9f0fe;
+    --ok-t:#0f6e56; --ok-bg:#e3f4ed;
+    --warn-t:#9a4a16; --warn-bg:#fbeede;
+    --dang-t:#a32d2d; --dang-bg:#fcecec;
+    --pro-t:#3c3489; --pro-bg:#eeedfe;
+    --radius:10px;
+    --sans:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --s0:#141821; --s1:#1b202b; --s2:#222835;
+      --tp:#e8ebf1; --ts:#aab3c2; --tm:#7d8697;
+      --bd:#2e3644; --bds:#3d4657;
+      --acc:#7aa5f8; --acc-t:#a9c4fa; --acc-bg:#1d2c47;
+      --ok-t:#7fd8b8; --ok-bg:#123a30;
+      --warn-t:#efb86a; --warn-bg:#3c2a11;
+      --dang-t:#f0a0a0; --dang-bg:#3e1d1d;
+      --pro-t:#c4bef2; --pro-bg:#29244f;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--s0);color:var(--tp);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 22px}
+
+  .ptabs{background:var(--s2);border-bottom:1px solid var(--bd)}
+  .ptabs-in{display:flex;align-items:center;gap:10px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .pbrand{font-size:.8rem;font-weight:800;color:var(--ts);letter-spacing:.06em;margin-right:auto}
+  .ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+  .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
+  .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
+  .ptabs nav a.on{background:var(--acc);color:#fff}
+  @media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}
+
+  header.top{background:var(--s2);border-bottom:1px solid var(--bd);padding:26px 0 20px}
+  .top-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
+  .brand{font-size:1.55rem;font-weight:800;margin:0;letter-spacing:.02em}
+  .sub{font-size:.84rem;color:var(--ts);margin-top:5px}
+  .stats{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;color:var(--ts);background:var(--s1);border:1px solid var(--bd);padding:4px 11px;border-radius:30px}
+  .pill b{color:var(--tp)}
+  .updated{display:inline-flex;align-items:center;gap:6px;background:var(--acc-bg);color:var(--acc-t);padding:4px 12px;border-radius:30px;font-size:.72rem}
+  @media(max-width:560px){.brand{font-size:1.3rem}.top-inner{align-items:flex-start}}
+
+  .notice{border-radius:12px;padding:12px 16px;margin:18px 0 0;font-size:.84rem;line-height:1.7;border:1px solid var(--bd);background:var(--acc-bg);color:var(--acc-t)}
+  .notice b{font-weight:700}
+
+  .filter{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:15px 18px;margin:18px 0 8px}
+  .frow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:11px}
+  .frow:last-child{margin-bottom:0}
+  .flab{font-size:.74rem;font-weight:500;color:var(--tm);min-width:46px}
+  .srch-wrap{flex:1;min-width:180px;display:flex;align-items:center;gap:8px;background:var(--s1);border:1px solid var(--bd);border-radius:30px;padding:0 14px}
+  .search{flex:1;font-size:.88rem;padding:9px 0;border:none;background:transparent;color:var(--tp);font-family:var(--sans)}
+  .search:focus{outline:none}
+  .chip{font-size:.78rem;font-weight:500;padding:6px 13px;border-radius:30px;border:1px solid var(--bd);background:var(--s2);color:var(--ts);cursor:pointer;transition:.15s}
+  .chip:hover{border-color:var(--acc)}
+  .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .fclear{font-size:.76rem;color:var(--acc-t);cursor:pointer;font-weight:500;margin-left:auto}
+  .fcount{font-size:.74rem;color:var(--tm);margin-left:8px}
+  label.tgl{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ts);cursor:pointer}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:14px}
+  .card{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:17px 18px;display:flex;flex-direction:column;cursor:pointer;transition:border-color .15s,transform .15s}
+  .card:hover{transform:translateY(-2px);border-color:var(--bds)}
+  .tagrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+  .cat{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:500;padding:3px 10px;border-radius:30px;background:var(--s1);border:1px solid var(--bd);color:var(--ts)}
+  .cat .cdot{width:8px;height:8px;border-radius:50%;flex:none}
+  .bdg{font-size:.7rem;font-weight:500;padding:3px 10px;border-radius:30px}
+  .p-高{background:var(--dang-bg);color:var(--dang-t)}
+  .p-中{background:var(--warn-bg);color:var(--warn-t)}
+  .p-低{background:var(--acc-bg);color:var(--acc-t)}
+  .p-未定{background:var(--s1);color:var(--tm)}
+  .s-進行中{background:var(--ok-bg);color:var(--ok-t)}
+  .s-未着手{background:var(--s1);color:var(--ts)}
+  .s-相手待ち{background:var(--warn-bg);color:var(--warn-t)}
+  .s-止まってる{background:var(--dang-bg);color:var(--dang-t)}
+  .s-完了{background:var(--s1);color:var(--tm)}
+  .b-ball{background:var(--pro-bg);color:var(--pro-t)}
+  .b-cand{background:var(--warn-bg);color:var(--warn-t);border:1px dashed var(--warn-t)}
+  .card h3{margin:2px 0 8px;font-size:1.02rem;line-height:1.55;font-weight:700}
+  .card.done h3{color:var(--tm);text-decoration:line-through}
+  .next{font-size:.83rem;color:var(--tp);background:var(--s1);border-left:3px solid var(--acc);border-radius:8px;padding:8px 11px;margin:0 0 10px;line-height:1.65}
+  .next .nl{font-size:.68rem;font-weight:700;color:var(--acc-t);display:block}
+  .memo{font-size:.8rem;color:var(--ts);margin:0 0 12px;line-height:1.65}
+  .cardfoot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--bd);padding-top:10px}
+  .cardfoot .grp{font-size:.72rem;color:var(--tm)}
+  .cardfoot .more{font-size:.76rem;font-weight:500;color:var(--acc-t)}
+
+  .emptystate{text-align:center;padding:46px 18px;color:var(--tm);background:var(--s2);border:1px dashed var(--bds);border-radius:14px;margin:16px 0}
+  .emptystate button{font-size:.8rem;font-weight:500;color:#fff;background:var(--acc);border:none;border-radius:30px;padding:8px 18px;cursor:pointer;font-family:var(--sans)}
+  .state{padding:64px 18px;text-align:center;color:var(--tm)}
+
+  footer{margin:42px 0 30px;padding-top:20px;border-top:1px solid var(--bd);color:var(--tm);font-size:.79rem;line-height:1.75}
+
+  .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(15,20,30,.5)}
+  .modal.open{display:flex}
+  .sheet{background:var(--s2);border:1px solid var(--bd);border-radius:18px;max-width:600px;width:100%;max-height:86vh;overflow-y:auto;padding:26px 28px 24px}
+  .sheet .mrow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+  .sheet .mclose{margin-left:auto;border:1px solid var(--bd);background:var(--s1);color:var(--ts);width:34px;height:34px;border-radius:50%;font-size:1.05rem;cursor:pointer;line-height:1}
+  .sheet h3{font-size:1.3rem;font-weight:800;line-height:1.5;margin:0 0 13px}
+  .sheet .mbody{font-size:.92rem;line-height:1.9;color:var(--tp)}
+  .mlog{margin-top:16px;border-top:1px solid var(--bd);padding-top:13px}
+  .mlog .lt{font-size:.72rem;font-weight:700;color:var(--tm);letter-spacing:.08em;margin-bottom:8px}
+  .logitem{display:flex;gap:10px;font-size:.82rem;color:var(--ts);padding:6px 0;border-bottom:1px dashed var(--bd)}
+  .logitem:last-child{border-bottom:none}
+  .logitem .ld{flex:none;font-size:.72rem;font-weight:600;color:var(--tm);font-variant-numeric:tabular-nums;background:var(--s1);border:1px solid var(--bd);border-radius:6px;padding:1px 8px;height:fit-content}
+  @media(max-width:560px){.sheet{padding:22px 18px}}
+  [data-card]:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a class="on" href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a></nav></div></div>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div>
+      <h1 class="brand">🗂 仕事ボード</h1>
+      <div class="sub">抱えている案件の「状況・優先度・次の一手」を一覧で。</div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div><span class="updated" id="updated">⟳ 自動更新</span></div>
+  </div>
+  <div class="wrap"><div class="notice">💡 <b>このボードは自動で更新されます。</b>新しい案件・進捗は Slack <b>#claude-memo</b> に投稿すると自動で取り込まれ（1日2回 7:00/18:00 に棚卸し）、サイトには毎日反映されます。ここでの表示は閲覧専用です。</div></div>
+</header>
+
+<main class="wrap">
+  <div class="filter">
+    <div class="frow"><span class="srch-wrap">🔍<input class="search" id="q" type="text" placeholder="案件名・メモ・次の一手で絞り込み"></span><span class="fcount" id="fcount"></span></div>
+    <div class="frow"><span class="flab">分類</span><span id="catChips"></span><span class="fclear" id="fclear">条件をクリア</span></div>
+    <div class="frow"><span class="flab">状況</span><span id="stChips"></span></div>
+    <div class="frow"><span class="flab">優先度</span><span id="prChips"></span>
+      <label class="tgl" style="margin-left:auto"><input type="checkbox" id="hideDone" checked> 完了を隠す</label>
+      <label class="tgl"><input type="checkbox" id="hideCand"> 候補を隠す</label>
+    </div>
+  </div>
+  <div class="emptystate" id="emptystate" hidden><p>条件に一致する案件がありません。</p><button id="emptyReset">条件をクリア</button></div>
+  <div class="grid" id="grid"><div class="state">読み込み中…</div></div>
+  <footer>
+    <p><b>仕事ボード</b>｜案件の追加・更新は Slack #claude-memo への投稿から自動取込。表示は毎日自動で最新化されます。<a href="./" style="color:var(--acc-t);font-weight:500">📊 今日の情報</a>・<a href="handbook/" style="color:var(--acc-t);font-weight:500">📘 ものづくりハンドブック</a></p>
+  </footer>
+</main>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true">
+    <div class="mrow" id="mrow"></div>
+    <h3 id="mtitle"></h3>
+    <div class="mbody" id="mbody"></div>
+    <div class="mlog" id="mlog"></div>
+  </div>
+</div>
+
+<script>
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const CATCOLOR = {"品証・標準化":"#2f8f63","設備・システム":"#3b7fb0","開発・技術":"#7a6fc0","文書・教育":"#b0518f"};
+const PRIO_ORDER = {"高":0,"中":1,"低":2,"未定":3};
+const ST_ORDER = {"進行中":0,"止まってる":1,"相手待ち":2,"未着手":3,"完了":4};
+let ITEMS=[]; let lastFocus=null;
+const F={q:"",cat:null,st:null,pr:null,hideDone:true,hideCand:false};
+
+function latestLog(it){const l=(it.log||[]);return l.length?l[l.length-1].d:"";}
+function render(){
+  const grid=document.getElementById("grid");
+  let list=ITEMS.slice().sort((a,b)=>(PRIO_ORDER[a.prio]??9)-(PRIO_ORDER[b.prio]??9)||(ST_ORDER[a.status]??9)-(ST_ORDER[b.status]??9)||String(a.id).localeCompare(String(b.id)));
+  let html="",shown=0;
+  list.forEach((it,i)=>{
+    const okQ=!F.q||((it.name||"")+(it.memo||"")+(it.next||"")+(it.group||"")).toLowerCase().includes(F.q);
+    const ok=okQ&&(!F.cat||it.cat===F.cat)&&(!F.st||it.status===F.st)&&(!F.pr||it.prio===F.pr)&&(!F.hideDone||it.status!=="完了")&&(!F.hideCand||!it.cand);
+    if(!ok) return; shown++;
+    const c=CATCOLOR[it.cat]||"#8b94a3";
+    html+='<article class="card'+(it.status==="完了"?" done":"")+'" data-card data-id="'+esc(it.id)+'" role="button" tabindex="0" aria-label="'+esc(it.name)+'">';
+    html+='<div class="tagrow"><span class="cat"><span class="cdot" style="background:'+c+'"></span>'+esc(it.cat||"未分類")+'</span>';
+    html+='<span class="bdg p-'+esc(it.prio||"未定")+'">優先度 '+esc(it.prio||"未定")+'</span>';
+    html+='<span class="bdg s-'+esc(it.status||"未着手")+'">'+esc(it.status||"未着手")+'</span>';
+    if(it.ball&&it.ball!=="未定") html+='<span class="bdg b-ball">ボール：'+esc(it.ball)+'</span>';
+    if(it.cand) html+='<span class="bdg b-cand">候補</span>';
+    html+='</div><h3>'+esc(it.name)+'</h3>';
+    if(it.next) html+='<div class="next"><span class="nl">▶ 次の一手</span>'+esc(it.next)+'</div>';
+    if(it.memo) html+='<p class="memo">'+esc(it.memo)+'</p>';
+    const ll=latestLog(it);
+    html+='<div class="cardfoot"><span class="grp">'+esc(it.group&&it.group!=="不明"?it.group:"")+(ll?(" ・ 更新 "+esc(ll)):"")+'</span><span class="more">経緯を見る →</span></div></article>';
+  });
+  grid.innerHTML=html||"";
+  document.getElementById("emptystate").hidden=shown>0;
+  const on=F.q||F.cat||F.st||F.pr;
+  document.getElementById("fcount").textContent=on?("該当 "+shown+" 件"):"";
+  grid.querySelectorAll("[data-card]").forEach(el=>{
+    el.addEventListener("click",()=>openDetail(el.dataset.id));
+    el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(el.dataset.id);}});
+  });
+}
+function chip(label,key,val){return '<span class="chip" data-k="'+key+'" data-v="'+esc(val)+'">'+esc(label)+'</span>';}
+function buildFilters(){
+  const cats=[...new Set(ITEMS.map(i=>i.cat).filter(Boolean))];
+  document.getElementById("catChips").innerHTML=cats.map(c=>chip(c,"cat",c)).join("");
+  document.getElementById("stChips").innerHTML=["進行中","未着手","相手待ち","止まってる","完了"].map(s=>chip(s,"st",s)).join("");
+  document.getElementById("prChips").innerHTML=["高","中","低","未定"].map(p=>chip(p,"pr",p)).join("");
+  document.querySelectorAll(".chip").forEach(el=>el.addEventListener("click",()=>{
+    const k=el.dataset.k,v=el.dataset.v;
+    F[k]=(F[k]===v)?null:v;
+    document.querySelectorAll('.chip[data-k="'+k+'"]').forEach(x=>x.classList.toggle("on",F[k]===x.dataset.v));
+    if(k==="st"&&F.st==="完了"){F.hideDone=false;document.getElementById("hideDone").checked=false;}
+    render();
+  }));
+  const q=document.getElementById("q");
+  q.addEventListener("input",()=>{F.q=q.value.trim().toLowerCase();render();});
+  document.getElementById("hideDone").addEventListener("change",e=>{F.hideDone=e.target.checked;render();});
+  document.getElementById("hideCand").addEventListener("change",e=>{F.hideCand=e.target.checked;render();});
+  const clr=()=>{F.q="";F.cat=null;F.st=null;F.pr=null;q.value="";document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));render();};
+  document.getElementById("fclear").addEventListener("click",clr);
+  document.getElementById("emptyReset").addEventListener("click",clr);
+}
+function buildStats(){
+  const n=ITEMS.length, act=ITEMS.filter(i=>i.status==="進行中").length,
+        hi=ITEMS.filter(i=>i.prio==="高"&&i.status!=="完了").length,
+        cand=ITEMS.filter(i=>i.cand).length, done=ITEMS.filter(i=>i.status==="完了").length;
+  document.getElementById("stats").innerHTML=
+    '<span class="pill">全案件 <b>'+n+'</b></span><span class="pill">進行中 <b>'+act+'</b></span><span class="pill">高優先 <b>'+hi+'</b></span><span class="pill">候補 <b>'+cand+'</b></span><span class="pill">完了 <b>'+done+'</b></span>';
+}
+function openDetail(id){
+  const it=ITEMS.find(x=>String(x.id)===String(id)); if(!it) return;
+  lastFocus=document.activeElement;
+  const c=CATCOLOR[it.cat]||"#8b94a3";
+  document.getElementById("mrow").innerHTML=
+    '<span class="cat"><span class="cdot" style="background:'+c+'"></span>'+esc(it.cat||"未分類")+'</span>'+
+    '<span class="bdg p-'+esc(it.prio||"未定")+'">優先度 '+esc(it.prio||"未定")+'</span>'+
+    '<span class="bdg s-'+esc(it.status||"未着手")+'">'+esc(it.status||"未着手")+'</span>'+
+    (it.ball&&it.ball!=="未定"?'<span class="bdg b-ball">ボール：'+esc(it.ball)+'</span>':"")+
+    (it.cand?'<span class="bdg b-cand">候補</span>':"")+
+    '<button class="mclose" id="mclose" aria-label="閉じる">×</button>';
+  document.getElementById("mtitle").textContent=it.name||"";
+  let b="";
+  if(it.next) b+='<div class="next" style="margin-bottom:10px"><span class="nl">▶ 次の一手</span>'+esc(it.next)+'</div>';
+  if(it.memo) b+='<p class="memo">'+esc(it.memo)+'</p>';
+  if(it.group&&it.group!=="不明") b+='<p class="memo">グループ：'+esc(it.group)+'</p>';
+  document.getElementById("mbody").innerHTML=b||'<p class="memo">メモ・次の一手は未記入です。</p>';
+  const logs=(it.log||[]).slice().reverse();
+  document.getElementById("mlog").innerHTML=logs.length?('<div class="lt">これまでの経緯</div>'+logs.map(l=>'<div class="logitem"><span class="ld">'+esc(l.d)+'</span><span>'+esc(l.t)+'</span></div>').join("")):"";
+  const m=document.getElementById("modal");m.classList.add("open");m.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+  const cb=document.getElementById("mclose");cb.addEventListener("click",closeModal);cb.focus();
+}
+function closeModal(){const m=document.getElementById("modal");m.classList.remove("open");m.setAttribute("aria-hidden","true");document.body.style.overflow="";if(lastFocus&&lastFocus.focus){try{lastFocus.focus();}catch(e){}}lastFocus=null;}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+document.getElementById("modal").addEventListener("click",e=>{if(e.target===document.getElementById("modal"))closeModal();});
+
+fetch("workboard.json?_="+Date.now()).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(d=>{
+  ITEMS=Array.isArray(d)?d:(d.items||[]);
+  if(d.updated) document.getElementById("updated").textContent="⟳ 最終反映 "+d.updated;
+  buildStats();buildFilters();render();
+}).catch(e=>{document.getElementById("grid").innerHTML='<div class="state">データを読み込めませんでした（'+esc(e.message)+'）。しばらくして再読み込みしてください。</div>';});
+</script>
+</body>
+</html>

@@ -3,40 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Insight Board｜仕事・IT・AI・社会情勢の今日のまとめ</title>
-<meta name="description" content="仕事（不織布・品質・生産技術・化学物質管理）・社内ITツール・補助金・展示会・AI（Copilot）・社会情勢の『今日の使える情報』を毎朝7:00に自動更新する社内向けダッシュボード。">
-<meta name="theme-color" content="#f3f2ec" media="(prefers-color-scheme: light)">
+<title>Daily Insight Board｜仕事・ITツール&AI・補助金・展示会・社会情勢</title>
+<meta name="description" content="仕事（不織布・品質・生産技術・化学物質管理）・ITツール&AI・補助金・展示会・社会情勢の5テーマの『今日の使える情報』を毎朝7:00に自動更新。仕事ボード・ものづくりハンドブックと一体のポータル。">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="Daily Insight Board">
 <meta property="og:title" content="Daily Insight Board｜今日の使える情報まとめ">
-<meta property="og:description" content="仕事・IT・補助金・展示会・AI（Copilot）・社会情勢の要点を毎朝7:00に自動更新。">
+<meta property="og:description" content="仕事・ITツール&AI・補助金・展示会・社会情勢の要点を毎朝7:00に自動更新。仕事ボード・ハンドブックと一体のポータル。">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%231f6feb'/%3E%3Crect%20x='5'%20y='6'%20width='6'%20height='5'%20rx='1'%20fill='white'/%3E%3Crect%20x='13'%20y='6'%20width='6'%20height='5'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='5'%20y='13'%20width='6'%20height='5'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='13'%20y='13'%20width='6'%20height='5'%20rx='1'%20fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --s0:#f3f2ec; --s1:#faf9f4; --s2:#ffffff;
-    --tp:#2c2b27; --ts:#615f57; --tm:#8c8a7e;
-    --bd:#e8e6dd; --bds:#d8d6cc;
-    --acc:#1f6feb; --acc-t:#185fa5; --acc-bg:#e9f1fb;
+    --s0:#f6f7f9; --s1:#eef1f5; --s2:#ffffff;
+    --tp:#1b2431; --ts:#5a6474; --tm:#8b94a3;
+    --bd:#e4e8ee; --bds:#d3d9e2;
+    --acc:#2563eb; --acc-t:#1d4ed8; --acc-bg:#e9f0fe;
     --ok-t:#0f6e56; --ok-bg:#e3f4ed;
     --warn-t:#9a4a16; --warn-bg:#fbeede;
     --dang-t:#a32d2d; --dang-bg:#fcecec;
     --pro-t:#3c3489; --pro-bg:#eeedfe;
-    --radius:9px;
-    --serif:"Shippori Mincho",serif;
+    --radius:10px;
+    --serif:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
     --sans:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --s0:#1b1a18; --s1:#232220; --s2:#2a2926;
-      --tp:#ece9e0; --ts:#b4b2a7; --tm:#87857b;
-      --bd:#37352f; --bds:#49473f;
-      --acc:#6ea8f0; --acc-t:#9cc4f5; --acc-bg:#16304c;
+      --s0:#141821; --s1:#1b202b; --s2:#222835;
+      --tp:#e8ebf1; --ts:#aab3c2; --tm:#7d8697;
+      --bd:#2e3644; --bds:#3d4657;
+      --acc:#7aa5f8; --acc-t:#a9c4fa; --acc-bg:#1d2c47;
       --ok-t:#7fd8b8; --ok-bg:#123a30;
       --warn-t:#efb86a; --warn-bg:#3c2a11;
       --dang-t:#f0a0a0; --dang-bg:#3e1d1d;
@@ -52,6 +52,14 @@
   .ico{display:inline-flex}
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
+  .ptabs{background:var(--s2);border-bottom:1px solid var(--bd)}
+  .ptabs-in{display:flex;align-items:center;gap:10px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .pbrand{font-size:.8rem;font-weight:800;color:var(--ts);letter-spacing:.06em;margin-right:auto}
+  .ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+  .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
+  .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
+  .ptabs nav a.on{background:var(--acc);color:#fff}
+  @media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}
   header.top{background:var(--s2);border-bottom:1px solid var(--bd);padding:26px 0 20px}
   .top-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
   .brand{font-family:var(--serif);font-size:1.7rem;font-weight:700;margin:0;letter-spacing:.03em;color:var(--tp)}
@@ -224,12 +232,13 @@
 
 <aside class="sidebar" id="sidebar" aria-label="テーマ一覧"></aside>
 
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a class="on" href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a></nav></div></div>
+
 <header class="top">
   <div class="wrap top-inner">
     <div>
       <h1 class="brand">Daily Insight Board</h1>
-      <div class="sub">仕事・IT・AI・社会情勢の、毎朝の「使える情報」まとめ</div>
-      <a class="hb-link" href="handbook/">📘 品質保証グループ ハンドブック</a>
+      <div class="sub">仕事・ITツール&AI・補助金・展示会・社会情勢 — 毎朝の「使える情報」まとめ</div>
       <div class="stats">
         <span class="pill"><span class="ico" data-ic="layout-grid"></span><span id="secCount">—</span> テーマ</span>
         <span class="pill"><span class="ico" data-ic="cards"></span><span id="cardCount">—</span> トピック</span>
@@ -267,7 +276,7 @@ const ic = n => '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+(ICONS
 function hydrateIcons(root){(root||document).querySelectorAll("[data-ic]").forEach(e=>{e.innerHTML=ic(e.dataset.ic);});}
 const lvlClass = v => (["now","know","deep"].includes(v)?v:"know");
 const lvlName = {now:"すぐ使える",know:"知っておく",deep:"深掘り"};
-const SECICON = {work:"building-factory",ittools:"tools",subsidy:"cash",events:"calendar-event","ai-copilot":"robot","ai-other":"flask",society:"world"};
+const SECICON = {work:"building-factory",ittools:"tools","tools-ai":"tools",subsidy:"cash",events:"calendar-event","ai-copilot":"robot","ai-other":"flask",society:"world"};
 function hexA(hex,a){const h=(hex||"#888888").replace("#","");return "rgba("+parseInt(h.substr(0,2),16)+","+parseInt(h.substr(2,2),16)+","+parseInt(h.substr(4,2),16)+","+a+")";}
 let DATA=null, CARDS=[], cardById={}, NEWIDS=new Set(); let lastFocus=null; let HISTORY={};
 const F={q:"",level:"all",tag:null};
@@ -313,6 +322,7 @@ function buildSidebar(d){
   let h='<div class="sb-brand">Daily Insight Board</div><div class="sb-title">テーマ一覧</div>';
   h+='<a href="#tips" data-spy="tips">'+ic("sparkles")+'今日のまとめ</a>';
   h+=(d.sections||[]).map(s=>'<a href="#'+esc(s.id)+'" data-spy="'+esc(s.id)+'"><span class="sdot" style="background:'+esc(s.barColor||"#888888")+'"></span>'+esc(s.title)+'</a>').join("");
+  h+='<div class="sb-title">サイト内ページ</div><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a>';
   sb.innerHTML=h;
 }
 function setupSpy(){
@@ -361,7 +371,8 @@ function buildBoard(d){
     if(sec.tag) html+='<span class="cnt">'+esc(sec.tag)+'</span>';
     html+='</div>';
     if(sec.desc) html+='<p class="sec-desc">'+esc(sec.desc)+'</p>';
-    if(sec.notice){const nt=["warn","ok","info"].includes(sec.noticeType)?sec.noticeType:"info";const ni=nt==="warn"?"alert-triangle":(nt==="ok"?"circle-check":"info-circle");html+='<div class="notice '+nt+'">'+ic(ni)+sec.notice+'</div>';}
+    const nlist=Array.isArray(sec.notices)?sec.notices:(sec.notice?[{type:sec.noticeType,text:sec.notice}]:[]);
+    nlist.forEach(n=>{const nt=["warn","ok","info"].includes(n.type)?n.type:"info";const ni=nt==="warn"?"alert-triangle":(nt==="ok"?"circle-check":"info-circle");html+='<div class="notice '+nt+'">'+ic(ni)+(n.text||"")+'</div>';});
     html+='<div class="grid">';
     (sec.cards||[]).forEach(c=>{
       const idx=CARDS.length; const rec=Object.assign({},c,{_color:color}); CARDS.push(rec);
@@ -381,7 +392,7 @@ function buildBoard(d){
     html+='</div></section>';
   });
 
-  html+='<footer><p><b>Daily Insight Board</b>｜仕事・IT・AI・社会情勢の「使える情報」を毎朝7:00に自動更新。カードをタップすると、サイト内で要約の詳細を読めます。</p>'
+  html+='<footer><p><b>Daily Insight Board</b>｜仕事・ITツール&AI・補助金・展示会・社会情勢の「使える情報」を毎朝7:00に自動更新。カードをタップすると、サイト内で要約の詳細を読めます。<a href="workboard.html" style="color:var(--acc-t);font-weight:500">🗂 仕事ボード</a>・<a href="handbook/" style="color:var(--acc-t);font-weight:500">📘 ものづくりハンドブック</a> もあわせてどうぞ。</p>'
      +'<div class="disclaimer">各項目は公開情報をもとに編集部（自動）が要約しています。重要な判断・対外対応の前には一次情報をご確認ください。規制・法令（化審法・REACH等）や補助金・展示会の日程は更新されます。生成AIの利用は社内規程に従ってください。</div></footer>';
 
   document.getElementById("app").innerHTML=html;
@@ -491,28 +502,4 @@ function loadData(file,isArchive,label){
     const finish=()=>{buildBoard(d);loadThemeHistory();const an=document.getElementById("archnote");if(isArchive){an.style.display="block";an.innerHTML="過去のアーカイブ（"+esc(label||"")+"）を表示中。最新に戻すには「表示日」を最新に切り替えてください。";}else an.style.display="none";};
     if(isArchive){NEWIDS=new Set();finish();return;}
     const cur=collectIds(d);
-    fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
-      const dates=(m&&Array.isArray(m.dates))?m.dates.slice().sort().reverse():[];
-      if(dates.length<2){NEWIDS=new Set();finish();return;}
-      fetch("archive/"+dates[1]+".json?_="+Date.now()).then(r=>r.ok?r.json():null).then(pd=>{
-        NEWIDS=new Set();
-        if(pd){const prev=collectIds(pd);cur.forEach(id=>{if(!prev.has(id))NEWIDS.add(id);});}
-        finish();
-      }).catch(()=>{NEWIDS=new Set();finish();});
-    }).catch(()=>{NEWIDS=new Set();finish();});
-  }).catch(e=>{document.getElementById("app").innerHTML='<div class="state">データを読み込めませんでした（'+esc(e.message)+'）。しばらくして再読み込みしてください。</div>';});
-}
-function initDatePicker(){
-  fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
-    if(!m||!Array.isArray(m.dates)||!m.dates.length) return;
-    const sel=document.getElementById("datePick");const dates=m.dates.slice().sort().reverse();
-    sel.innerHTML='<option value="__latest__">最新</option>'+dates.map(d=>'<option value="'+esc(d)+'">'+esc(d)+'</option>').join("");
-    sel.addEventListener("change",()=>{if(sel.value==="__latest__")loadData("data.json",false);else loadData("archive/"+sel.value+".json",true,sel.value);});
-  }).catch(()=>{});
-}
-hydrateIcons();
-(function(){var b=document.getElementById("totop");if(b){window.addEventListener("scroll",function(){b.classList.toggle("show",window.scrollY>560);},{passive:true});b.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});}})();
-loadData("data.json",false);
-</script>
-</body>
-</html>
+    fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.j
