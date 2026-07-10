@@ -472,10 +472,11 @@ function loadThemeHistory(){
     .then(list=>{
       const curIds=new Set(); (DATA&&DATA.sections||[]).forEach(s=>(s.cards||[]).forEach(c=>{if(c.id)curIds.add(s.id+"::"+c.id);}));
       HISTORY={}; const seen={};
+      const SECMAP={ittools:"tools-ai","ai-copilot":"tools-ai","ai-other":"tools-ai"};
       list.forEach(o=>{ if(!o.d||!o.d.sections) return;
-        o.d.sections.forEach(s=>{ (s.cards||[]).forEach(c=>{ if(!c.id) return;
-          const key=s.id+"::"+c.id; if(curIds.has(key)||seen[key]) return; seen[key]=true;
-          (HISTORY[s.id]=HISTORY[s.id]||[]).push(Object.assign({},c,{_color:s.barColor||"#1f6feb",_date:o.dt}));
+        o.d.sections.forEach(s=>{ const sid=SECMAP[s.id]||s.id; (s.cards||[]).forEach(c=>{ if(!c.id) return;
+          const key=sid+"::"+c.id; if(curIds.has(key)||seen[key]) return; seen[key]=true;
+          (HISTORY[sid]=HISTORY[sid]||[]).push(Object.assign({},c,{_color:s.barColor||"#1f6feb",_date:o.dt}));
         });});
       });
       renderHistory();
