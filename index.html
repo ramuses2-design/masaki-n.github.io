@@ -502,4 +502,28 @@ function loadData(file,isArchive,label){
     const finish=()=>{buildBoard(d);loadThemeHistory();const an=document.getElementById("archnote");if(isArchive){an.style.display="block";an.innerHTML="過去のアーカイブ（"+esc(label||"")+"）を表示中。最新に戻すには「表示日」を最新に切り替えてください。";}else an.style.display="none";};
     if(isArchive){NEWIDS=new Set();finish();return;}
     const cur=collectIds(d);
-    fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.j
+    fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
+      const dates=(m&&Array.isArray(m.dates))?m.dates.slice().sort().reverse():[];
+      if(dates.length<2){NEWIDS=new Set();finish();return;}
+      fetch("archive/"+dates[1]+".json?_="+Date.now()).then(r=>r.ok?r.json():null).then(pd=>{
+        NEWIDS=new Set();
+        if(pd){const prev=collectIds(pd);cur.forEach(id=>{if(!prev.has(id))NEWIDS.add(id);});}
+        finish();
+      }).catch(()=>{NEWIDS=new Set();finish();});
+    }).catch(()=>{NEWIDS=new Set();finish();});
+  }).catch(e=>{document.getElementById("app").innerHTML='<div class="state">データを読み込めませんでした（'+esc(e.message)+'）。しばらくして再読み込みしてください。</div>';});
+}
+function initDatePicker(){
+  fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
+    if(!m||!Array.isArray(m.dates)||!m.dates.length) return;
+    const sel=document.getElementById("datePick");const dates=m.dates.slice().sort().reverse();
+    sel.innerHTML='<option value="__latest__">最新</option>'+dates.map(d=>'<option value="'+esc(d)+'">'+esc(d)+'</option>').join("");
+    sel.addEventListener("change",()=>{if(sel.value==="__latest__")loadData("data.json",false);else loadData("archive/"+sel.value+".json",true,sel.value);});
+  }).catch(()=>{});
+}
+hydrateIcons();
+(function(){var b=document.getElementById("totop");if(b){window.addEventListener("scroll",function(){b.classList.toggle("show",window.scrollY>560);},{passive:true});b.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});}})();
+loadData("data.json",false);
+</script>
+</body>
+</html>
