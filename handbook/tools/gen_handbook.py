@@ -22,7 +22,7 @@ def strip_fm(t):
 master_body=strip_fm(master_raw); play_body=strip_fm(play_raw)
 aud_body=strip_fm(aud_raw) if aud_raw else ""; ts_body=strip_fm(ts_raw) if ts_raw else ""
 
-LAST_UPDATED="2026-07-10"
+LAST_UPDATED="2026-07-11"
 
 GROUPS={
  "A":{"title":"定例・マネジメント","type":"定例","emoji":"📋"},
@@ -125,10 +125,14 @@ def parse_play(body):
         if mg:
             cur_g=mg.group(1); groups.setdefault(cur_g,{"title":mg.group(2).strip(),"scenarios":[],"note":[]}); cur_s=None; continue
         if ms:
-            cur_s={"id":ms.group(1),"title":ms.group(2).strip(),"group":cur_g,"lines":[]}
+            cur_s={"id":ms.group(1),"title":ms.group(2).strip(),"group":cur_g,"lines":[],"related":[]}
             groups[cur_g]["scenarios"].append(cur_s); order.append(cur_s); continue
         if line.startswith("# ") and "更新" in line: cur_g=None; cur_s=None; continue
-        if cur_s is not None: cur_s["lines"].append(raw)
+        if cur_s is not None:
+            mr=re.match(r"^関連場面[:：]\s*(.+)$", line.strip())
+            if mr:
+                cur_s["related"]=[x.strip() for x in re.split(r"[,、/\s]+", mr.group(1)) if x.strip()]; continue
+            cur_s["lines"].append(raw)
         elif cur_g is not None:
             if line.strip() and not line.startswith("---"): groups[cur_g]["note"].append(raw)
     return groups, order
@@ -197,11 +201,15 @@ latest_n=len(change_days[0]["items"]) if change_days else 0
 def tsslug(tid):
     num=re.sub(r"\D","",tid); return f"ts-{num}.html"
 
+a_title={t["id"]:t["title"] for t in atopics}
 def rel_links(ids):
-    out=[]
+    out=[]; seen=set()
     for r in ids:
+        if r in seen: continue
+        seen.add(r)
         if r in sc_title: out.append((slug(r), r, sc_title[r]))
         elif r in ts_title: out.append((tsslug(r), r, ts_title[r]))
+        elif r in a_title: out.append((aslug(r), r, a_title[r]))
     return out
 
 # ---------- master parse ----------
@@ -344,11 +352,12 @@ for s in scenarios:
     sibs=[x for x in pgroups[g]["scenarios"] if x["id"]!=s["id"]]
     rel='<div class="rel"><h3>関連する場面（同じグループ）</h3><div class="rel-list">'+ "".join(
         f'<a href="{slug(x["id"])}"><span class="rel-id">{esc(x["id"])}</span>{esc(x["title"])}</a>' for x in sibs)+'</div></div>'
+    crossrel=related_box("関連する場面（他カテゴリ）", s.get("related",[]))
     head=f'''<div class="s-head">
       <div class="s-tags"><span class="gtag g-{g}">{gi["emoji"]} {esc(g)}・{esc(gi["title"])}</span><span class="ttag">種類：{esc(gi["type"])}</span></div>
       <h1><span class="s-id">{esc(s["id"])}</span>{esc(s["title"])}</h1>
     </div>'''
-    body=f'''{head}{purpose_box(purpose)}<div class="s-body">{body_html}</div>{rel}
+    body=f'''{head}{purpose_box(purpose)}<div class="s-body">{body_html}</div>{crossrel}{rel}
     <div class="s-meta">最終更新日：{LAST_UPDATED}　|　<a href="content/playbooks.md">原本（Markdown）を開く</a></div>'''
     cr=crumb2(f"{g} {gi['title']}", f"group-{g.lower()}.html", f"{s['id']} {s['title']}")
     open(os.path.join(OUT,slug(s["id"])),"w",encoding="utf-8").write(
@@ -431,7 +440,7 @@ for t in atopics:
       <div class="s-tags"><span class="gtag g-{ai["key"]}">{ai["emoji"]} {esc(ai["title"])}</span><span class="ttag">連携先：{esc(ai["who"])}</span></div>
       <h1><span class="s-id">{esc(t["id"])}</span>{esc(t["title"])}</h1>
     </div>'''
-    body=f'''{head}{purpose_box(purpose)}<div class="s-body">{render_blocks(rest)}</div>{related_box("関連する場面（品証プレイブック）",t["related"])}{sibhtml}
+    body=f'''{head}{purpose_box(purpose)}<div class="s-body">{render_blocks(rest)}</div>{related_box("関連する場面",t["related"])}{sibhtml}
     <div class="s-meta">最終更新日：{LAST_UPDATED}　|　<a href="content/audience-guides.md">原本（Markdown）を開く</a></div>'''
     cr=crumb2(ai["title"], ahub(code), f"{t['id']} {t['title']}")
     open(os.path.join(OUT,aslug(t["id"])),"w",encoding="utf-8").write(
