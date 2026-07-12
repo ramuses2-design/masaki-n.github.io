@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>V8 継続的な品質改善・情報交換のお願い（お取引先向け）｜ものづくりハンドブック</title>
-<meta name="description" content="**考え方**：不具合の連絡だけでなく、平時からの情報交換が再発防止と安定供給につながります（社外共有可）。">
+<title>T15 品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方｜ものづくりハンドブック</title>
+<meta name="description" content="**目的／考え方**：是正処置申請・変更申請・検査記録などの紙／メール運用を、ノーコードツールで内製の電子ワークフローに置き換え、記入漏れ・滞留・所在不明を仕組みで防ぐ。ツール導入が目的ではなく、「止まっている業務の流れを直す」ことが目的。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -95,7 +95,7 @@
 <a href="ag-s13.html">S13 海外顧客・輸出対応（言語・規格・化学法規の差異）の窓口</a>
 <a href="ag-s14.html">S14 相見積り・競合対応時の「品質価値」の伝え方（価格以外の訴求）</a>
 </details>
-<details class="side-grp">
+<details class="side-grp" open>
 <summary class="side-sum"><span class="sd sd-tech"></span>🛠️ 技術向け</summary>
 <a href="aud-tech.html">概要（一覧）</a>
 <a href="ag-t1.html">T1 新製品・量産立ち上げ（APQP／PPAP 的）</a>
@@ -112,7 +112,7 @@
 <a href="ag-t12.html">T12 統計的工程管理（SPC）・管理図の導入と工程能力の見える化</a>
 <a href="ag-t13.html">T13 トレーサビリティ設計（ロット管理・識別の作り込み）</a>
 <a href="ag-t14.html">T14 測定システム解析（MSA／Gage R&amp;R）の実施と判断</a>
-<a href="ag-t15.html">T15 品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</a>
+<a class="on" href="ag-t15.html">T15 品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</a>
 </details>
 <details class="side-grp">
 <summary class="side-sum"><span class="sd sd-mfg"></span>🏭 製造向け</summary>
@@ -148,7 +148,7 @@
 <a href="ag-p11.html">P11 輸入材・調達リスク管理（為替・関税・長納期の変動対応）</a>
 <a href="ag-p12.html">P12 受入データの活用・サプライヤー品質スコアリング（受入不良率の見える化）</a>
 </details>
-<details class="side-grp" open>
+<details class="side-grp">
 <summary class="side-sum"><span class="sd sd-vendor"></span>📦 外注先向け</summary>
 <a href="aud-vendor.html">概要（一覧）</a>
 <a href="ag-v1.html">V1 当社が取引先に求める品質の基本</a>
@@ -158,7 +158,7 @@
 <a href="ag-v5.html">V5 化学物質・法規への対応</a>
 <a href="ag-v6.html">V6 納入・識別・トレーサビリティ</a>
 <a href="ag-v7.html">V7 品質協定・SLAの基本（お取引の土台）</a>
-<a class="on" href="ag-v8.html">V8 継続的な品質改善・情報交換のお願い（お取引先向け）</a>
+<a href="ag-v8.html">V8 継続的な品質改善・情報交換のお願い（お取引先向け）</a>
 </details>
 <div class="side-cap">トラブルシューティング</div>
 <details class="side-grp">
@@ -198,12 +198,12 @@
 <a class="side-item" href="whatsnew.html">🆕 更新履歴</a>
 </nav></aside>
   <main class="hb-main">
-  <div class="crumb"><a href="aud-vendor.html">外注先向け</a><span class="sep">/</span><span>V8 継続的な品質改善・情報交換のお願い（お取引先向け）</span></div>
+  <div class="crumb"><a href="aud-tech.html">技術向け</a><span class="sep">/</span><span>T15 品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</span></div>
   <div class="s-head">
-      <div class="s-tags"><span class="gtag g-vendor">📦 外注先向け</span><span class="ttag">連携先：お取引先（社外共有可）</span></div>
-      <h1><span class="s-id">V8</span>継続的な品質改善・情報交換のお願い（お取引先向け）</h1>
-    </div><div class="purpose"><span class="p-tag">考え方</span><p>不具合の連絡だけでなく、平時からの情報交換が再発防止と安定供給につながります（社外共有可）。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">定期的に工程能力・不良傾向など品質状況を共有いただく</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">4M変更や工程改善の予定は、事前に情報共有をお願いします</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">是正処置は「対策後の効果（再発の有無）」まで確認・ご報告ください</span></li><li class="chk"><span class="cb"></span><span class="t">相互の改善事例・ヒヤリ情報を交換し、未然防止に活かします</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>情報交換の頻度・様式・窓口（品質協定に紐づけ）</span></li></ul>
-<p>---</p></div><div class="rel"><h3>関連する場面</h3><div class="rel-list"><a href="ag-v3.html"><span class="rel-id">V3</span>4M変更・工程変更の事前連絡</a><a href="ag-v4.html"><span class="rel-id">V4</span>不適合が発生したときのご連絡と是正</a><a href="ag-v7.html"><span class="rel-id">V7</span>品質協定・SLAの基本（お取引の土台）</a></div></div><div class="rel"><h3>同じ読者向けの他トピック</h3><div class="rel-list"><a href="ag-v1.html"><span class="rel-id">V1</span>当社が取引先に求める品質の基本</a><a href="ag-v2.html"><span class="rel-id">V2</span>納入前に必要な提出書類</a><a href="ag-v3.html"><span class="rel-id">V3</span>4M変更・工程変更の事前連絡</a><a href="ag-v4.html"><span class="rel-id">V4</span>不適合が発生したときのご連絡と是正</a><a href="ag-v5.html"><span class="rel-id">V5</span>化学物質・法規への対応</a><a href="ag-v6.html"><span class="rel-id">V6</span>納入・識別・トレーサビリティ</a><a href="ag-v7.html"><span class="rel-id">V7</span>品質協定・SLAの基本（お取引の土台）</a></div></div>
+      <div class="s-tags"><span class="gtag g-tech">🛠️ 技術向け</span><span class="ttag">連携先：生産技術・開発</span></div>
+      <h1><span class="s-id">T15</span>品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</h1>
+    </div><div class="purpose"><span class="p-tag">目的／考え方</span><p>是正処置申請・変更申請・検査記録などの紙／メール運用を、ノーコードツールで内製の電子ワークフローに置き換え、記入漏れ・滞留・所在不明を仕組みで防ぐ。ツール導入が目的ではなく、「止まっている業務の流れを直す」ことが目的。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">対象業務を1つに絞る（帳票が単純・関係者が少ない・頻度が高いものから）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">現状の流れ（誰が→何を→どこへ）を1枚に描き、滞留・手戻りの発生箇所を特定する</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">「入力する項目」と「判断する項目」を分け、必須項目・選択肢・単位を様式側に組み込む</span></li><li class="chk star"><span class="cb"></span><span class="t">承認ルート・期限・未処理時のリマインドを設計する（承認が形骸化しない仕組みに）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">小さく作って現場で2週間試し、使われなかった理由を聞いて直す（作りきってから配らない）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">記録の正本・保存年限・アクセス権限・監査証跡を、運用開始前に決めておく（TS27の予防）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>利用可能なツールと申請手順、電子記録の社内要件、内製アプリの管理責任者</span></li></ul>
+<blockquote>業務で利用が認められている生成AIは Microsoft 365 Copilot のみ。機密情報・図面・規格値・品質データは、いかなるツールにも入力しない。</blockquote></div><div class="rel"><h3>関連する場面</h3><div class="rel-list"><a href="ag-t3.html"><span class="rel-id">T3</span>工程・検査基準の制定／改訂</a><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a><a href="ag-m5.html"><span class="rel-id">M5</span>不良・ヒヤリの報告とトレーサビリティ</a></div></div><div class="rel"><h3>同じ読者向けの他トピック</h3><div class="rel-list"><a href="ag-t1.html"><span class="rel-id">T1</span>新製品・量産立ち上げ（APQP／PPAP 的）</a><a href="ag-t2.html"><span class="rel-id">T2</span>4M変更管理（人・機械・材料・方法）</a><a href="ag-t3.html"><span class="rel-id">T3</span>工程・検査基準の制定／改訂</a><a href="ag-t4.html"><span class="rel-id">T4</span>設備の導入・改善</a><a href="ag-t5.html"><span class="rel-id">T5</span>工程能力・初期流動・データ活用</a><a href="ag-t6.html"><span class="rel-id">T6</span>化学物質・環境法規の設計織り込み</a><a href="ag-t7.html"><span class="rel-id">T7</span>不具合の再発防止と設計・標準へのフィードバック</a><a href="ag-t8.html"><span class="rel-id">T8</span>治具・型・設備の維持管理</a><a href="ag-t9.html"><span class="rel-id">T9</span>設備保全とデータ活用（予知保全の入口）</a><a href="ag-t10.html"><span class="rel-id">T10</span>検査の自動化・AI外観検査導入の進め方</a><a href="ag-t11.html"><span class="rel-id">T11</span>工程FMEA（PFMEA）の作成と活用</a><a href="ag-t12.html"><span class="rel-id">T12</span>統計的工程管理（SPC）・管理図の導入と工程能力の見える化</a><a href="ag-t13.html"><span class="rel-id">T13</span>トレーサビリティ設計（ロット管理・識別の作り込み）</a><a href="ag-t14.html"><span class="rel-id">T14</span>測定システム解析（MSA／Gage R&amp;R）の実施と判断</a></div></div>
     <div class="s-meta">最終更新日：2026-07-11　|　<a href="content/audience-guides.md">原本（Markdown）を開く</a></div>
   </main>
 </div>
