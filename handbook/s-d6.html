@@ -2,7 +2,7 @@
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>D6 KPI・品質目標の管理｜ものづくりハンドブック</title>
-<meta name="description" content="KPI・品質目標の管理">
+<meta name="description" content="**目的**：数字を「並べる」のではなく、数字で「打ち手を決める」。見ても何も変わらない指標は、指標ではない。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -131,6 +131,7 @@
 <a href="ag-m12.html">M12 現場の温湿度・環境管理（吸湿・静電気・異物の予防）</a>
 <a href="ag-m13.html">M13 始業前点検・設備コンディション確認（チョコ停・品質異常の予防）</a>
 <a href="ag-m14.html">M14 限度見本・現物基準の現場運用（保管・更新・照合）</a>
+<a href="ag-m15.html">M15 改善提案・気づきの出し方（小さな異常を言葉にする）</a>
 </details>
 <details class="side-grp">
 <summary class="side-sum"><span class="sd sd-buy"></span>🧺 購買向け</summary>
@@ -191,6 +192,7 @@
 <a href="ts-25.html">検針・金属検出の異常（検出漏れ・過検出）と管理</a>
 <a href="ts-26.html">法改正・規制物質の新規指定への対応漏れ（該非判定・SDSの未更新）</a>
 <a href="ts-27.html">記録・帳票の電子化移行に伴う記録不備（紙→電子の切り替え時）</a>
+<a href="ts-28.html">見える化・IoTを入れたのに改善が回らない（ダッシュボード止まり・アラート疲れ）</a>
 </details>
 <div class="side-cap">リファレンス</div>
 <a class="side-item" href="glossary.html">📑 用語・索引</a>
@@ -202,8 +204,13 @@
   <div class="s-head">
       <div class="s-tags"><span class="gtag g-D">🛡️ D・予防・維持・システム</span><span class="ttag">種類：予防</span></div>
       <h1><span class="s-id">D6</span>KPI・品質目標の管理</h1>
-    </div><div class="s-body"><ul class="checklist"><li class="chk"><span class="cb"></span><span class="t">目標を設定（不良率・クレーム件数・是正リードタイム・コスト・納期・改善件数）</span></li><li class="chk star"><span class="cb"></span><span class="t">測定方法・定義を統一（解釈のブレを無くす）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">月次でモニタし傾向分析（パレート・推移）</span></li><li class="chk star"><span class="cb"></span><span class="t">未達時のアクションを決める（放置しない）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">全員で共有（自分ごと化）</span></li><li class="chk"><span class="cb"></span><span class="t">期ごとに目標を見直す</span></li></ul>
-<div class="callout review"><span class="rev-badge">要確認</span><span>KPIの正式定義・目標値・集計方法。</span></div></div><div class="rel"><h3>関連する場面（他カテゴリ）</h3><div class="rel-list"><a href="s-a3.html"><span class="rel-id">A3</span>月次報告（部門横断：製造係長＋他GL＋事業部長）</a><a href="s-a8.html"><span class="rel-id">A8</span>品質KPIの朝礼・見える化ボード運用（現場への浸透）</a><a href="s-d8.html"><span class="rel-id">D8</span>層別工程監査（LPA）・工程パトロールの運用</a></div></div><div class="rel"><h3>関連する場面（同じグループ）</h3><div class="rel-list"><a href="s-d1.html"><span class="rel-id">D1</span>日常の検査・検査表運用</a><a href="s-d2.html"><span class="rel-id">D2</span>測定器・校正・MSA管理</a><a href="s-d3.html"><span class="rel-id">D3</span>監査対応（内部監査・顧客監査・審査）</a><a href="s-d4.html"><span class="rel-id">D4</span>化学物質管理・法規対応</a><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a><a href="s-d7.html"><span class="rel-id">D7</span>BCP・災害時の品質維持（緊急時の検査・記録）</a><a href="s-d8.html"><span class="rel-id">D8</span>層別工程監査（LPA）・工程パトロールの運用</a></div></div>
+    </div><div class="purpose"><span class="p-tag">目的</span><p>数字を「並べる」のではなく、数字で「打ち手を決める」。見ても何も変わらない指標は、指標ではない。</p></div><div class="s-body"><h4>設計（立ち上げ時）</h4>
+<ul class="checklist"><li class="chk"><span class="cb"></span><span class="t">目標を設定（不良率・クレーム件数・是正リードタイム・コスト・納期・改善件数）</span></li><li class="chk star"><span class="cb"></span><span class="t">測定方法・定義を統一（分子・分母・集計期間・除外条件まで文章で固定する）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">指標は「行動につながる粒度」まで割る（総不良率ではなく、工程別・原因別・製品別に割れているか）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">各指標に「未達のときに誰が何をするか」を1行で書く。書けない指標は採用しない</span><span class="star-badge">重点</span></li></ul>
+<h4>運用（月次）</h4>
+<ul class="checklist"><li class="chk"><span class="cb"></span><span class="t">月次でモニタし傾向分析（パレート・推移）。単月の上下ではなく傾向で判断する</span></li><li class="chk star"><span class="cb"></span><span class="t">未達時のアクションを決める（放置しない）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">「数字を見て変えた打ち手」を毎月1件以上、記録に残す（KPIが機能している唯一の証拠）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">全員で共有（自分ごと化）。現場ボード（A8）と定義・数字を一致させる</span></li><li class="chk"><span class="cb"></span><span class="t">期ごとに目標を見直す（達成し続けている指標・誰も見ていない指標は入れ替える）</span></li></ul>
+<h4>よくあるつまずき</h4>
+<ul><li>定義が曖昧なまま運用し、部署ごとに違う数字が出て議論が止まる</li><li>指標が多すぎて全部が「見るだけ」になる（絞る勇気が要る）</li><li>ダッシュボードを作った時点で満足し、打ち手が出ないまま形骸化する（TS28）</li></ul>
+<div class="callout review"><span class="rev-badge">要確認</span><span>KPIの正式定義・目標値・集計方法、未達時のアクションと責任者。</span></div></div><div class="rel"><h3>関連する場面（他カテゴリ）</h3><div class="rel-list"><a href="s-a3.html"><span class="rel-id">A3</span>月次報告（部門横断：製造係長＋他GL＋事業部長）</a><a href="s-a8.html"><span class="rel-id">A8</span>品質KPIの朝礼・見える化ボード運用（現場への浸透）</a><a href="s-d8.html"><span class="rel-id">D8</span>層別工程監査（LPA）・工程パトロールの運用</a><a href="ts-28.html"><span class="rel-id">TS28</span>見える化・IoTを入れたのに改善が回らない（ダッシュボード止まり・アラート疲れ）</a></div></div><div class="rel"><h3>関連する場面（同じグループ）</h3><div class="rel-list"><a href="s-d1.html"><span class="rel-id">D1</span>日常の検査・検査表運用</a><a href="s-d2.html"><span class="rel-id">D2</span>測定器・校正・MSA管理</a><a href="s-d3.html"><span class="rel-id">D3</span>監査対応（内部監査・顧客監査・審査）</a><a href="s-d4.html"><span class="rel-id">D4</span>化学物質管理・法規対応</a><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a><a href="s-d7.html"><span class="rel-id">D7</span>BCP・災害時の品質維持（緊急時の検査・記録）</a><a href="s-d8.html"><span class="rel-id">D8</span>層別工程監査（LPA）・工程パトロールの運用</a></div></div>
     <div class="s-meta">最終更新日：2026-07-11　|　<a href="content/playbooks.md">原本（Markdown）を開く</a></div>
   </main>
 </div>

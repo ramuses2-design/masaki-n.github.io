@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D7 BCP・災害時の品質維持（緊急時の検査・記録）｜ものづくりハンドブック</title>
-<meta name="description" content="**目的**：地震・停電・設備トラブル・感染症などの非常時でも、「出してはいけない物を出さない」最低限の品質を守る。">
+<title>M15 改善提案・気づきの出し方（小さな異常を言葉にする）｜ものづくりハンドブック</title>
+<meta name="description" content="**目的／考え方**：大きな不良は、たいてい「なんとなく変」を誰も口に出さなかったところから始まる。うまく言えなくていいので、気づいた時点で出すことが最大の予防になる。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -64,7 +64,7 @@
 <a href="s-c5.html">C5 外注・委託先の工程変更・停止対応</a>
 <a href="s-c6.html">C6 顧客起点の仕様・図面変更の受け入れと工程反映</a>
 </details>
-<details class="side-grp" open>
+<details class="side-grp">
 <summary class="side-sum"><span class="sd sd-D"></span>🛡️ D. 予防・維持・システム</summary>
 <a href="group-d.html">概要（一覧）</a>
 <a href="s-d1.html">D1 日常の検査・検査表運用</a>
@@ -73,7 +73,7 @@
 <a href="s-d4.html">D4 化学物質管理・法規対応</a>
 <a href="s-d5.html">D5 文書・記録管理</a>
 <a href="s-d6.html">D6 KPI・品質目標の管理</a>
-<a class="on" href="s-d7.html">D7 BCP・災害時の品質維持（緊急時の検査・記録）</a>
+<a href="s-d7.html">D7 BCP・災害時の品質維持（緊急時の検査・記録）</a>
 <a href="s-d8.html">D8 層別工程監査（LPA）・工程パトロールの運用</a>
 </details>
 <div class="side-cap">読者別ガイド</div>
@@ -114,7 +114,7 @@
 <a href="ag-t14.html">T14 測定システム解析（MSA／Gage R&amp;R）の実施と判断</a>
 <a href="ag-t15.html">T15 品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</a>
 </details>
-<details class="side-grp">
+<details class="side-grp" open>
 <summary class="side-sum"><span class="sd sd-mfg"></span>🏭 製造向け</summary>
 <a href="aud-mfg.html">概要（一覧）</a>
 <a href="ag-m1.html">M1 日常の検査・検査表運用</a>
@@ -131,7 +131,7 @@
 <a href="ag-m12.html">M12 現場の温湿度・環境管理（吸湿・静電気・異物の予防）</a>
 <a href="ag-m13.html">M13 始業前点検・設備コンディション確認（チョコ停・品質異常の予防）</a>
 <a href="ag-m14.html">M14 限度見本・現物基準の現場運用（保管・更新・照合）</a>
-<a href="ag-m15.html">M15 改善提案・気づきの出し方（小さな異常を言葉にする）</a>
+<a class="on" href="ag-m15.html">M15 改善提案・気づきの出し方（小さな異常を言葉にする）</a>
 </details>
 <details class="side-grp">
 <summary class="side-sum"><span class="sd sd-buy"></span>🧺 購買向け</summary>
@@ -200,12 +200,12 @@
 <a class="side-item" href="whatsnew.html">🆕 更新履歴</a>
 </nav></aside>
   <main class="hb-main">
-  <div class="crumb"><a href="group-d.html">D 予防・維持・システム</a><span class="sep">/</span><span>D7 BCP・災害時の品質維持（緊急時の検査・記録）</span></div>
+  <div class="crumb"><a href="aud-mfg.html">製造向け</a><span class="sep">/</span><span>M15 改善提案・気づきの出し方（小さな異常を言葉にする）</span></div>
   <div class="s-head">
-      <div class="s-tags"><span class="gtag g-D">🛡️ D・予防・維持・システム</span><span class="ttag">種類：予防</span></div>
-      <h1><span class="s-id">D7</span>BCP・災害時の品質維持（緊急時の検査・記録）</h1>
-    </div><div class="purpose"><span class="p-tag">目的</span><p>地震・停電・設備トラブル・感染症などの非常時でも、「出してはいけない物を出さない」最低限の品質を守る。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">非常時に最優先で守る品質項目（安全・法規・重要特性）を事前に決める</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">電源・測定器・システム停止時の代替手段（手記録・応急検査）を用意</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">復旧後は、非常時ロットの追跡・再検査・隔離解除の判断基準を明確化</span></li><li class="chk"><span class="cb"></span><span class="t">記録が取れなかった期間のトレーサビリティ確保（範囲の特定）</span></li><li class="chk"><span class="cb"></span><span class="t">復旧手順・連絡網・代替供給を含むBCPを年1回は見直し・訓練</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>非常時の必須品質項目・代替検査手段・再開判定の権限</span></li></ul></div><div class="rel"><h3>関連する場面（他カテゴリ）</h3><div class="rel-list"><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a><a href="s-b7.html"><span class="rel-id">B7</span>重大品質問題・リコール級のエスカレーション</a><a href="s-c1.html"><span class="rel-id">C1</span>4M変更管理（人・機械・材料・方法）</a></div></div><div class="rel"><h3>関連する場面（同じグループ）</h3><div class="rel-list"><a href="s-d1.html"><span class="rel-id">D1</span>日常の検査・検査表運用</a><a href="s-d2.html"><span class="rel-id">D2</span>測定器・校正・MSA管理</a><a href="s-d3.html"><span class="rel-id">D3</span>監査対応（内部監査・顧客監査・審査）</a><a href="s-d4.html"><span class="rel-id">D4</span>化学物質管理・法規対応</a><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a><a href="s-d6.html"><span class="rel-id">D6</span>KPI・品質目標の管理</a><a href="s-d8.html"><span class="rel-id">D8</span>層別工程監査（LPA）・工程パトロールの運用</a></div></div>
-    <div class="s-meta">最終更新日：2026-07-11　|　<a href="content/playbooks.md">原本（Markdown）を開く</a></div>
+      <div class="s-tags"><span class="gtag g-mfg">🏭 製造向け</span><span class="ttag">連携先：製造現場</span></div>
+      <h1><span class="s-id">M15</span>改善提案・気づきの出し方（小さな異常を言葉にする）</h1>
+    </div><div class="purpose"><span class="p-tag">目的／考え方</span><p>大きな不良は、たいてい「なんとなく変」を誰も口に出さなかったところから始まる。うまく言えなくていいので、気づいた時点で出すことが最大の予防になる。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">「いつもと違う」と感じたら、原因が分からなくてもその場で口に出す・書き留める（原因の特定は自分の仕事ではない）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">出すときは「いつ・どの設備/ロット・何がどう違ったか」の3点だけ添える（きれいな文章にする必要はない）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">「自分だけかも」「今さら言いにくい」は理由にしない。空振りの報告は歓迎される（見逃しの方がはるかに高くつく）</span></li><li class="chk"><span class="cb"></span><span class="t">改善提案は、まず自分の手元の「毎日ちょっと面倒な作業」から選ぶ（大きなテーマでなくてよい）</span></li><li class="chk"><span class="cb"></span><span class="t">提案が採用されなかった場合も、理由を聞いておくと次の精度が上がる</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>気づき・提案の提出先と様式、フィードバックの返し方、表彰・工数の扱い</span></li></ul></div><div class="rel"><h3>関連する場面</h3><div class="rel-list"><a href="s-a6.html"><span class="rel-id">A6</span>改善提案・小集団活動（QCサークル）の運営</a><a href="ag-m2.html"><span class="rel-id">M2</span>異常が出たときの初動（まず止める）</a><a href="ag-m5.html"><span class="rel-id">M5</span>不良・ヒヤリの報告とトレーサビリティ</a><a href="ag-m13.html"><span class="rel-id">M13</span>始業前点検・設備コンディション確認（チョコ停・品質異常の予防）</a></div></div><div class="rel"><h3>同じ読者向けの他トピック</h3><div class="rel-list"><a href="ag-m1.html"><span class="rel-id">M1</span>日常の検査・検査表運用</a><a href="ag-m2.html"><span class="rel-id">M2</span>異常が出たときの初動（まず止める）</a><a href="ag-m3.html"><span class="rel-id">M3</span>4M変化点の申告（無断で変えない）</a><a href="ag-m4.html"><span class="rel-id">M4</span>測定器・校正の順守</a><a href="ag-m5.html"><span class="rel-id">M5</span>不良・ヒヤリの報告とトレーサビリティ</a><a href="ag-m6.html"><span class="rel-id">M6</span>5S・現場管理と監査の日常準備</a><a href="ag-m7.html"><span class="rel-id">M7</span>段取り替え・切替時の初物確認</a><a href="ag-m8.html"><span class="rel-id">M8</span>作業標準の順守と力量</a><a href="ag-m9.html"><span class="rel-id">M9</span>多能工化と応援時の品質担保</a><a href="ag-m10.html"><span class="rel-id">M10</span>ヒューマンエラー防止（ポカヨケ・指差呼称・ダブルチェック）</a><a href="ag-m11.html"><span class="rel-id">M11</span>交替勤務・引き継ぎ時の品質情報の伝達</a><a href="ag-m12.html"><span class="rel-id">M12</span>現場の温湿度・環境管理（吸湿・静電気・異物の予防）</a><a href="ag-m13.html"><span class="rel-id">M13</span>始業前点検・設備コンディション確認（チョコ停・品質異常の予防）</a><a href="ag-m14.html"><span class="rel-id">M14</span>限度見本・現物基準の現場運用（保管・更新・照合）</a></div></div>
+    <div class="s-meta">最終更新日：2026-07-11　|　<a href="content/audience-guides.md">原本（Markdown）を開く</a></div>
   </main>
 </div>
 <div class="hb-ov" id="hbov"></div>
