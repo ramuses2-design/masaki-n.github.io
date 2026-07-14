@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M2 異常が出たときの初動（まず止める）｜ものづくりハンドブック</title>
-<meta name="description" content="**合言葉**：まず止める、それから直す。一人で抱えない。">
+<title>原材料の切替・グレード変更に伴う品質変動（代替材・再生材・バイオ素材への切替時）｜ものづくりハンドブック</title>
+<meta name="description" content="**症状**：コスト・調達安定・環境対応のために原材料や配合を切り替えたところ、目付・強度・風合い・色調・臭気などがロット単位で変動する。切替直後は問題なくても、別ロット・別グレードで再発する。再生材・バイオ素材でばらつきが大きくなる。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -115,11 +115,11 @@
 <a href="ag-t15.html">T15 品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</a>
 <a href="ag-t16.html">T16 生成AI（Copilot）を品質業務で安全に使う（入力してよい情報・ダメな情報の線引き）</a>
 </details>
-<details class="side-grp" open>
+<details class="side-grp">
 <summary class="side-sum"><span class="sd sd-mfg"></span>🏭 製造向け</summary>
 <a href="aud-mfg.html">概要（一覧）</a>
 <a href="ag-m1.html">M1 日常の検査・検査表運用</a>
-<a class="on" href="ag-m2.html">M2 異常が出たときの初動（まず止める）</a>
+<a href="ag-m2.html">M2 異常が出たときの初動（まず止める）</a>
 <a href="ag-m3.html">M3 4M変化点の申告（無断で変えない）</a>
 <a href="ag-m4.html">M4 測定器・校正の順守</a>
 <a href="ag-m5.html">M5 不良・ヒヤリの報告とトレーサビリティ</a>
@@ -163,7 +163,7 @@
 <a href="ag-v8.html">V8 継続的な品質改善・情報交換のお願い（お取引先向け）</a>
 </details>
 <div class="side-cap">トラブルシューティング</div>
-<details class="side-grp">
+<details class="side-grp" open>
 <summary class="side-sum"><span class="sd sd-ts"></span>🧯 症状から引く</summary>
 <a href="ts-index.html">一覧</a>
 <a href="ts-1.html">異物・黒点（コンタミネーション）</a>
@@ -194,7 +194,7 @@
 <a href="ts-26.html">法改正・規制物質の新規指定への対応漏れ（該非判定・SDSの未更新）</a>
 <a href="ts-27.html">記録・帳票の電子化移行に伴う記録不備（紙→電子の切り替え時）</a>
 <a href="ts-28.html">見える化・IoTを入れたのに改善が回らない（ダッシュボード止まり・アラート疲れ）</a>
-<a href="ts-29.html">原材料の切替・グレード変更に伴う品質変動（代替材・再生材・バイオ素材への切替時）</a>
+<a class="on" href="ts-29.html">原材料の切替・グレード変更に伴う品質変動（代替材・再生材・バイオ素材への切替時）</a>
 </details>
 <div class="side-cap">リファレンス</div>
 <a class="side-item" href="glossary.html">📑 用語・索引</a>
@@ -202,12 +202,19 @@
 <a class="side-item" href="whatsnew.html">🆕 更新履歴</a>
 </nav></aside>
   <main class="hb-main">
-  <div class="crumb"><a href="aud-mfg.html">製造向け</a><span class="sep">/</span><span>M2 異常が出たときの初動（まず止める）</span></div>
+  <div class="crumb"><a href="ts-index.html">トラブルシューティング</a><span class="sep">/</span><span>原材料の切替・グレード変更に伴う品質変動（代替材・再生材・バイオ素材への切替時）</span></div>
   <div class="s-head">
-      <div class="s-tags"><span class="gtag g-mfg">🏭 製造向け</span><span class="ttag">連携先：製造現場</span></div>
-      <h1><span class="s-id">M2</span>異常が出たときの初動（まず止める）</h1>
-    </div><div class="purpose"><span class="p-tag">合言葉</span><p>まず止める、それから直す。一人で抱えない。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">現品・現物を動かす前に記録／写真を撮る</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">止める・隔離する（赤札・識別で区別）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">すぐ連絡する（上長・品証へ）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">勝手に手直し・選別して流さない</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">いつから・どれだけ（数量・期間）を分かる範囲で伝える</span></li></ul></div><div class="rel"><h3>関連する場面</h3><div class="rel-list"><a href="s-b2.html"><span class="rel-id">B2</span>初動・封じ込め（流出を止める）</a><a href="s-b1.html"><span class="rel-id">B1</span>優先順位（トリアージ：上から確認）</a></div></div><div class="rel"><h3>同じ読者向けの他トピック</h3><div class="rel-list"><a href="ag-m1.html"><span class="rel-id">M1</span>日常の検査・検査表運用</a><a href="ag-m3.html"><span class="rel-id">M3</span>4M変化点の申告（無断で変えない）</a><a href="ag-m4.html"><span class="rel-id">M4</span>測定器・校正の順守</a><a href="ag-m5.html"><span class="rel-id">M5</span>不良・ヒヤリの報告とトレーサビリティ</a><a href="ag-m6.html"><span class="rel-id">M6</span>5S・現場管理と監査の日常準備</a><a href="ag-m7.html"><span class="rel-id">M7</span>段取り替え・切替時の初物確認</a><a href="ag-m8.html"><span class="rel-id">M8</span>作業標準の順守と力量</a><a href="ag-m9.html"><span class="rel-id">M9</span>多能工化と応援時の品質担保</a><a href="ag-m10.html"><span class="rel-id">M10</span>ヒューマンエラー防止（ポカヨケ・指差呼称・ダブルチェック）</a><a href="ag-m11.html"><span class="rel-id">M11</span>交替勤務・引き継ぎ時の品質情報の伝達</a><a href="ag-m12.html"><span class="rel-id">M12</span>現場の温湿度・環境管理（吸湿・静電気・異物の予防）</a><a href="ag-m13.html"><span class="rel-id">M13</span>始業前点検・設備コンディション確認（チョコ停・品質異常の予防）</a><a href="ag-m14.html"><span class="rel-id">M14</span>限度見本・現物基準の現場運用（保管・更新・照合）</a><a href="ag-m15.html"><span class="rel-id">M15</span>改善提案・気づきの出し方（小さな異常を言葉にする）</a></div></div>
-    <div class="s-meta">最終更新日：2026-07-11　|　<a href="content/audience-guides.md">原本（Markdown）を開く</a></div>
+      <div class="s-tags"><span class="gtag g-ts">🧯 トラブルシューティング</span><span class="ttag">症状から引く</span></div>
+      <h1><span class="s-id">TS29</span>原材料の切替・グレード変更に伴う品質変動（代替材・再生材・バイオ素材への切替時）</h1>
+    </div><div class="purpose"><span class="p-tag">症状</span><p>コスト・調達安定・環境対応のために原材料や配合を切り替えたところ、目付・強度・風合い・色調・臭気などがロット単位で変動する。切替直後は問題なくても、別ロット・別グレードで再発する。再生材・バイオ素材でばらつきが大きくなる。</p></div><div class="s-body"><h4>まず確認（初動）</h4>
+<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">変わったのは「材料そのもの」か「メーカー・グレード・ロット」か「配合比」かを1つに特定する（4M変更のうち“材料”の変化点）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">切替前後で、同じ試験項目・同じ条件の比較データを取っているかを確認する（比較の土台がないと原因を追えない）</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">代替材・再生材・バイオ素材は、既存材より物性のばらつき幅が広いことがある前提で見る</span></li></ul>
+<h4>起こりやすい要因（4M）</h4>
+<div class="tbl-wrap"><table><thead><tr><th>区分</th><th>よくある要因</th></tr></thead><tbody><tr><td>材料</td><td>代替材・再生材のロット間ばらつき、バイオ素材の融点・流動性の違い、不純物・異物混入、含水率の差</td></tr><tr><td>方法</td><td>既存材と同じ加工条件（温度・張力・速度）のまま切り替えた、切替時の初物確認・工程能力の再取得を省いた</td></tr><tr><td>人</td><td>変更が「材料だけ」と軽く扱われ、4M変更管理・初物確認のフローに乗っていない</td></tr><tr><td>機械</td><td>材料特性に合わせた条件出しをしておらず、設備の設定が旧材のまま</td></tr></tbody></table></div>
+<h4>切り分け・確認</h4>
+<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">変動している特性（強度・目付・色・臭気）が、材料由来か加工条件由来かを、条件を固定した比較で切り分ける</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">供給側のСoA（試験成績書）・グレード規格を入手し、既存材との物性差（融点・粘度・純度・再生材比率）を確認する</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">バイオ・生分解性素材は、吸湿・熱履歴で特性が動きやすいため、保管・乾燥条件も疑う（TS17と併せて確認）</span></li></ul>
+<h4>恒久対策の方向</h4>
+<ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">材料切替は必ず4M変更管理（C1・T2）に乗せ、初物確認・工程能力の再取得（T5）をセットで行う</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">代替材・再生材は「量産切替前に少量で条件出し」を標準化し、条件表を材料グレードごとに残す</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">受入時にロット間ばらつきを監視する項目（融点・目付・色差等）を決め、規格化する（P2・P8と連携）</span></li><li class="chk"><span class="cb"></span><span class="t">環境対応の切替は営業・技術と要求（再生材率・生分解性）を握り、品質妥当性が取れるまで顧客約束を確定しない（S12）</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>自社の代替材承認フロー・条件出しの基準・受入監視項目とロット管理の様式</span></li></ul></div><div class="rel"><h3>関連する場面・症状</h3><div class="rel-list"><a href="s-c1.html"><span class="rel-id">C1</span>4M変更管理（人・機械・材料・方法）</a><a href="ag-t2.html"><span class="rel-id">T2</span>4M変更管理（人・機械・材料・方法）</a><a href="ag-t5.html"><span class="rel-id">T5</span>工程能力・初期流動・データ活用</a><a href="ag-p8.html"><span class="rel-id">P8</span>原材料の値上げ・代替材の評価と切替管理</a><a href="ts-17.html"><span class="rel-id">TS17</span>含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a><a href="ts-18.html"><span class="rel-id">TS18</span>色調・白度のばらつき（色差ΔE・黄変・退色）</a></div></div><div class="rel"><h3>他の症状</h3><div class="rel-list"><a href="ts-1.html"><span class="rel-id">TS</span>異物・黒点（コンタミネーション）</a><a href="ts-2.html"><span class="rel-id">TS</span>目付（坪量）ばらつき</a><a href="ts-3.html"><span class="rel-id">TS</span>地合い不良（ムラ・不均一）</a><a href="ts-4.html"><span class="rel-id">TS</span>幅・寸法不良（幅／厚み／長さ）</a><a href="ts-5.html"><span class="rel-id">TS</span>キズ・スジ・線キズ</a><a href="ts-6.html"><span class="rel-id">TS</span>毛羽・毛玉・繊維脱落（発塵）</a><a href="ts-7.html"><span class="rel-id">TS</span>シワ・折れ・カール</a><a href="ts-8.html"><span class="rel-id">TS</span>接着・熱融着不良（強度・剥離）</a><a href="ts-9.html"><span class="rel-id">TS</span>巻き不良（巻きズレ・巻き硬さ・耳不良）</a><a href="ts-10.html"><span class="rel-id">TS</span>汚れ・油染み・変色</a><a href="ts-11.html"><span class="rel-id">TS</span>臭気（におい）</a><a href="ts-12.html"><span class="rel-id">TS</span>強度・引張・伸度不足</a><a href="ts-13.html"><span class="rel-id">TS</span>ピンホール・地合い透け（開孔・薄部）</a><a href="ts-14.html"><span class="rel-id">TS</span>静電気・帯電（作業性・異物付着）</a><a href="ts-15.html"><span class="rel-id">TS</span>梱包・輸送ダメージ（つぶれ・耳ダメージ・結露）</a><a href="ts-16.html"><span class="rel-id">TS</span>機能加工のムラ・性能未達（親水/撥水・薬剤付着量）</a><a href="ts-17.html"><span class="rel-id">TS</span>含水率・吸湿による特性変動（寸法・強度・変色/カビ）</a><a href="ts-18.html"><span class="rel-id">TS</span>色調・白度のばらつき（色差ΔE・黄変・退色）</a><a href="ts-19.html"><span class="rel-id">TS</span>通気度・ろ過性能のばらつき（圧損・捕集効率）</a><a href="ts-20.html"><span class="rel-id">TS</span>スリット・断裁部の毛羽・バリ・寸法不良（切断品質）</a><a href="ts-21.html"><span class="rel-id">TS</span>硬さ・風合い（剛軟度・ドレープ性）のばらつき</a><a href="ts-22.html"><span class="rel-id">TS</span>エンボス・型付け（凹凸パターン）の不良（欠け・つぶれ・位置ズレ）</a><a href="ts-23.html"><span class="rel-id">TS</span>巻取り芯・紙管由来の不良（コアマーク・巻き始め変形・芯ズレ）</a><a href="ts-24.html"><span class="rel-id">TS</span>ラミネート・貼合不良（層間剥離・気泡・シワ）</a><a href="ts-25.html"><span class="rel-id">TS</span>検針・金属検出の異常（検出漏れ・過検出）と管理</a><a href="ts-26.html"><span class="rel-id">TS</span>法改正・規制物質の新規指定への対応漏れ（該非判定・SDSの未更新）</a><a href="ts-27.html"><span class="rel-id">TS</span>記録・帳票の電子化移行に伴う記録不備（紙→電子の切り替え時）</a><a href="ts-28.html"><span class="rel-id">TS</span>見える化・IoTを入れたのに改善が回らない（ダッシュボード止まり・アラート疲れ）</a></div></div>
+    <div class="s-meta">最終更新日：2026-07-11　|　<a href="content/troubleshooting.md">原本（Markdown）を開く</a></div>
   </main>
 </div>
 <div class="hb-ov" id="hbov"></div>

@@ -113,6 +113,7 @@
 <a href="ag-t13.html">T13 トレーサビリティ設計（ロット管理・識別の作り込み）</a>
 <a href="ag-t14.html">T14 測定システム解析（MSA／Gage R&amp;R）の実施と判断</a>
 <a href="ag-t15.html">T15 品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</a>
+<a href="ag-t16.html">T16 生成AI（Copilot）を品質業務で安全に使う（入力してよい情報・ダメな情報の線引き）</a>
 </details>
 <details class="side-grp">
 <summary class="side-sum"><span class="sd sd-mfg"></span>🏭 製造向け</summary>
@@ -193,6 +194,7 @@
 <a href="ts-26.html">法改正・規制物質の新規指定への対応漏れ（該非判定・SDSの未更新）</a>
 <a href="ts-27.html">記録・帳票の電子化移行に伴う記録不備（紙→電子の切り替え時）</a>
 <a href="ts-28.html">見える化・IoTを入れたのに改善が回らない（ダッシュボード止まり・アラート疲れ）</a>
+<a href="ts-29.html">原材料の切替・グレード変更に伴う品質変動（代替材・再生材・バイオ素材への切替時）</a>
 </details>
 <div class="side-cap">リファレンス</div>
 <a class="side-item" href="glossary.html">📑 用語・索引</a>
@@ -202,9 +204,9 @@
   <main class="hb-main">
   <div class="crumb"><a href="aud-index.html">読者別</a><span class="sep">/</span><span>技術向け</span></div>
   <h1 class="g-title"><span class="g-emoji">🛠️</span>技術向け</h1>
-    <p class="g-sub">連携先：生産技術・開発　|　15 トピック</p>
+    <p class="g-sub">連携先：生産技術・開発　|　16 トピック</p>
     <div class="g-note"><blockquote><strong>合言葉：「前提が変わる＝新しいリスクが生まれる」</strong> 技術（生産技術・開発）の設計・工程・設備の決定は、品質の作り込みそのもの。品証は「検査で止める前に、工程で作り込む」を掲げている。変更・立ち上げ・基準づくりを、品証と“先に”握るほど後戻りが減る。</blockquote></div>
-    <div class="sc-grid"><a class="sc-card" href="ag-t1.html"><span class="sc-id">T1</span><span class="sc-t">新製品・量産立ち上げ（APQP／PPAP 的）</span></a><a class="sc-card" href="ag-t2.html"><span class="sc-id">T2</span><span class="sc-t">4M変更管理（人・機械・材料・方法）</span></a><a class="sc-card" href="ag-t3.html"><span class="sc-id">T3</span><span class="sc-t">工程・検査基準の制定／改訂</span></a><a class="sc-card" href="ag-t4.html"><span class="sc-id">T4</span><span class="sc-t">設備の導入・改善</span></a><a class="sc-card" href="ag-t5.html"><span class="sc-id">T5</span><span class="sc-t">工程能力・初期流動・データ活用</span></a><a class="sc-card" href="ag-t6.html"><span class="sc-id">T6</span><span class="sc-t">化学物質・環境法規の設計織り込み</span></a><a class="sc-card" href="ag-t7.html"><span class="sc-id">T7</span><span class="sc-t">不具合の再発防止と設計・標準へのフィードバック</span></a><a class="sc-card" href="ag-t8.html"><span class="sc-id">T8</span><span class="sc-t">治具・型・設備の維持管理</span></a><a class="sc-card" href="ag-t9.html"><span class="sc-id">T9</span><span class="sc-t">設備保全とデータ活用（予知保全の入口）</span></a><a class="sc-card" href="ag-t10.html"><span class="sc-id">T10</span><span class="sc-t">検査の自動化・AI外観検査導入の進め方</span></a><a class="sc-card" href="ag-t11.html"><span class="sc-id">T11</span><span class="sc-t">工程FMEA（PFMEA）の作成と活用</span></a><a class="sc-card" href="ag-t12.html"><span class="sc-id">T12</span><span class="sc-t">統計的工程管理（SPC）・管理図の導入と工程能力の見える化</span></a><a class="sc-card" href="ag-t13.html"><span class="sc-id">T13</span><span class="sc-t">トレーサビリティ設計（ロット管理・識別の作り込み）</span></a><a class="sc-card" href="ag-t14.html"><span class="sc-id">T14</span><span class="sc-t">測定システム解析（MSA／Gage R&amp;R）の実施と判断</span></a><a class="sc-card" href="ag-t15.html"><span class="sc-id">T15</span><span class="sc-t">品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</span></a></div>
+    <div class="sc-grid"><a class="sc-card" href="ag-t1.html"><span class="sc-id">T1</span><span class="sc-t">新製品・量産立ち上げ（APQP／PPAP 的）</span></a><a class="sc-card" href="ag-t2.html"><span class="sc-id">T2</span><span class="sc-t">4M変更管理（人・機械・材料・方法）</span></a><a class="sc-card" href="ag-t3.html"><span class="sc-id">T3</span><span class="sc-t">工程・検査基準の制定／改訂</span></a><a class="sc-card" href="ag-t4.html"><span class="sc-id">T4</span><span class="sc-t">設備の導入・改善</span></a><a class="sc-card" href="ag-t5.html"><span class="sc-id">T5</span><span class="sc-t">工程能力・初期流動・データ活用</span></a><a class="sc-card" href="ag-t6.html"><span class="sc-id">T6</span><span class="sc-t">化学物質・環境法規の設計織り込み</span></a><a class="sc-card" href="ag-t7.html"><span class="sc-id">T7</span><span class="sc-t">不具合の再発防止と設計・標準へのフィードバック</span></a><a class="sc-card" href="ag-t8.html"><span class="sc-id">T8</span><span class="sc-t">治具・型・設備の維持管理</span></a><a class="sc-card" href="ag-t9.html"><span class="sc-id">T9</span><span class="sc-t">設備保全とデータ活用（予知保全の入口）</span></a><a class="sc-card" href="ag-t10.html"><span class="sc-id">T10</span><span class="sc-t">検査の自動化・AI外観検査導入の進め方</span></a><a class="sc-card" href="ag-t11.html"><span class="sc-id">T11</span><span class="sc-t">工程FMEA（PFMEA）の作成と活用</span></a><a class="sc-card" href="ag-t12.html"><span class="sc-id">T12</span><span class="sc-t">統計的工程管理（SPC）・管理図の導入と工程能力の見える化</span></a><a class="sc-card" href="ag-t13.html"><span class="sc-id">T13</span><span class="sc-t">トレーサビリティ設計（ロット管理・識別の作り込み）</span></a><a class="sc-card" href="ag-t14.html"><span class="sc-id">T14</span><span class="sc-t">測定システム解析（MSA／Gage R&amp;R）の実施と判断</span></a><a class="sc-card" href="ag-t15.html"><span class="sc-id">T15</span><span class="sc-t">品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</span></a><a class="sc-card" href="ag-t16.html"><span class="sc-id">T16</span><span class="sc-t">生成AI（Copilot）を品質業務で安全に使う（入力してよい情報・ダメな情報の線引き）</span></a></div>
   </main>
 </div>
 <div class="hb-ov" id="hbov"></div>
