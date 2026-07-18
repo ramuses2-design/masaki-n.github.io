@@ -29,6 +29,7 @@ GROUPS={
  "B":{"title":"異常対応","type":"異常","emoji":"🚨"},
  "C":{"title":"変化・プロジェクト","type":"変化","emoji":"🔧"},
  "D":{"title":"予防・維持・システム","type":"予防","emoji":"🛡️"},
+ "E":{"title":"教育・OJT","type":"教育","emoji":"🎓"},
 }
 AUD={
  "S":{"key":"sales","title":"営業向け","emoji":"🤝","who":"営業"},
@@ -120,8 +121,8 @@ def parse_play(body):
     groups={}; order=[]; cur_g=None; cur_s=None
     for raw in body.split("\n"):
         line=raw.rstrip()
-        mg=re.match(r"^#\s+([A-D])\.\s+(.*)$", line)
-        ms=re.match(r"^##\s+([A-D][0-9]+(?:-[a-z])?)\.\s+(.*)$", line)
+        mg=re.match(r"^#\s+([A-E])\.\s+(.*)$", line)
+        ms=re.match(r"^##\s+([A-E][0-9]+(?:-[a-z])?)\.\s+(.*)$", line)
         if mg:
             cur_g=mg.group(1); groups.setdefault(cur_g,{"title":mg.group(2).strip(),"scenarios":[],"note":[]}); cur_s=None; continue
         if ms:
