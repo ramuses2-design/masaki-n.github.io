@@ -532,15 +532,26 @@ body=f'''<div class="hub-hero">
   <p>方針・場面別プレイブック・読者別ガイド・トラブルシューティングを1か所に。左のメニュー、または上の検索から探してください。</p>
 </div>
 {wn_banner}
-<div class="quick">
-  <span class="quick-lab">困ったとき</span>
-  <a class="quick-b urgent" href="{slug('B2')}">🚑 クレーム・不適合の初動（B2）</a>
-  <a class="quick-b urgent" href="{slug('B1')}">⚠ 優先順位（B1 トリアージ）</a>
-  <a class="quick-b" href="policy.html#esc">📣 エスカレーション基準</a>
-  <a class="quick-b" href="ts-index.html">🧯 症状から引く</a>
-</div>
+<nav class="entry3" aria-label="はじめの入口">
+  <div class="e3 lead">
+    <span class="e3-lab">困ったとき</span>
+    <a href="{slug('B2')}">🚑 クレーム・不適合の初動（B2）</a>
+    <a href="{slug('B1')}">⚠ 優先順位（B1 トリアージ）</a>
+    <a href="policy.html#esc">📣 エスカレーション基準</a>
+  </div>
+  <div class="e3">
+    <span class="e3-lab">立場から探す</span>
+    <a href="aud-index.html">👥 読者別ガイド（営業・技術・製造・購買・外注先）</a>
+    <a href="#playbooks">📗 場面別プレイブック（A〜D）</a>
+  </div>
+  <div class="e3">
+    <span class="e3-lab">症状から探す</span>
+    <a href="ts-index.html">🧯 トラブルシューティング（症状一覧）</a>
+    <a href="glossary.html">📑 用語・索引</a>
+  </div>
+</nav>
 <section class="hub-sec"><h2>品質の6原則（ブレ防止の共通言語）</h2><ul class="principles">{prin_html}</ul></section>
-<section class="hub-sec"><h2>場面別プレイブック（A〜D）</h2><div class="hub-gcards">{gcards}</div></section>
+<section class="hub-sec" id="playbooks"><h2>場面別プレイブック（A〜D）</h2><div class="hub-gcards">{gcards}</div></section>
 {aud_sec}
 {ts_sec}
 <section class="hub-sec links"><h2>その他</h2>
