@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思考の癖・意思決定バイアス診断｜ものづくりハンドブック</title>
+<meta name="description" content="24問・6領域で、判断が偏りやすい場面のセルフチェック">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
+<style>
+  .ck-wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+  .ck-back{display:inline-block;font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:16px}
+  .ck-back:hover{color:var(--teal)}
+  .ck-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--head);margin:0 0 8px}
+  .ck-lead{color:var(--muted);font-size:.9rem;line-height:1.8;margin:0 0 16px}
+  .ck-note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 24px}
+  .ck-note b{color:var(--head)}
+  .ck-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--faint);margin:0 0 24px}
+  .ck-domain{margin:0 0 8px;padding:16px 0 4px;border-top:1px solid var(--line)}
+  .ck-domain:first-of-type{border-top:none}
+  .ck-domain-h{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 12px}
+  .ck-q{padding:14px 0;border-top:1px solid var(--line)}
+  .ck-q:first-child{border-top:none}
+  .ck-qtext{font-size:.9rem;line-height:1.7;color:var(--ink);margin:0 0 10px}
+  .ck-scale{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-opt{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);text-align:center;border:1px solid var(--line);border-radius:9px;padding:8px 4px;cursor:pointer;background:var(--card)}
+  .ck-opt:has(input:checked){border-color:var(--teal);color:var(--head);font-weight:600}
+  .ck-opt input{margin:0;accent-color:var(--teal)}
+  .ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  .ck-btn.ghost{background:transparent;color:var(--muted);border-color:var(--line-2)}
+  .ck-btn:disabled{opacity:.45;cursor:not-allowed}
+  .ck-warn{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+  #ckResult{display:none;margin-top:32px;padding-top:24px;border-top:2px solid var(--line)}
+  .ck-r-title{font-size:1.15rem;font-weight:700;color:var(--head);margin:0 0 4px}
+  .ck-r-sub{font-size:.82rem;color:var(--muted);margin:0 0 20px}
+  .ck-bar-row{display:grid;grid-template-columns:150px 1fr 46px;align-items:center;gap:10px;margin:0 0 10px;font-size:.82rem}
+  .ck-bar-label{color:var(--ink)}
+  .ck-bar-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-bar-fill{height:100%;background:var(--teal);border-radius:6px}
+  .ck-bar-pct{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+  .ck-sg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+  .ck-sg-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+  .ck-sg-box h4{margin:0 0 8px;font-size:.82rem;color:var(--head)}
+  .ck-sg-box ul{margin:0;padding-left:18px;font-size:.84rem;color:var(--ink);line-height:1.8}
+  .ck-next{margin:8px 0 0}
+  .ck-next h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-next-list{display:flex;flex-direction:column;gap:8px}
+  .ck-next-list a{display:block;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 14px;font-size:.85rem;color:var(--head);text-decoration:none;font-weight:600}
+  .ck-next-list a:hover{border-color:var(--teal)}
+  .ck-next-list a span{display:block;font-weight:400;color:var(--muted);font-size:.76rem;margin-top:2px}
+  @media (max-width:600px){.ck-scale{grid-template-columns:repeat(2,1fr)}.ck-sg{grid-template-columns:1fr}.ck-bar-row{grid-template-columns:110px 1fr 40px}}
+  @media print{
+    .hb-top,.hb-side,.hb-shell aside,.crumb,.hb-foot,.ptabs,.ck-back,#ckForm,.ck-actions,.ck-note{display:none !important}
+    .hb-shell{display:block !important}
+    #ckResult{display:block !important;border-top:none;margin-top:0}
+    body{background:#fff;color:#000}
+  }
+</style>
+</head><body>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../../">📊 今日の情報</a><a href="../../workboard.html">🗂 仕事ボード</a><a class="on" href="../index.html">📘 ハンドブック</a></nav></div></div>
+<header class="hb-top">
+  <div class="hb-top-in">
+    <a class="hb-brand" href="../index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
+  </div>
+</header>
+<div class="hb-shell">
+  <main class="hb-main ck-wrap">
+    <a class="ck-back" href="../index.html">← ものづくりハンドブックへ戻る</a>
+    <h1 class="ck-title">🧭 思考の癖・意思決定バイアス診断</h1>
+    <p class="ck-lead">異常対応や特採判断など、素早い意思決定が求められる場面では、誰でも無意識の「思考の癖（認知バイアス）」に影響されます。24の質問から6つの領域の傾向を見て、判断が偏りやすい場面を先に知っておくためのセルフチェックです。</p>
+    <div class="ck-note">結果は<b>優劣や人格の評価ではなく、あくまで傾向・目安</b>です。断定的な診断ではありません。<b>回答はこの端末内（ブラウザのlocalStorage）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄もありません。途中で閉じても、次に開いたときに回答が復元されます。</div>
+    <div class="ck-meta"><span>約8分・24問</span><span>4段階評価</span><span>関連：B1・B3・B5・B12</span></div>
+
+    <form id="ckForm"></form>
+
+    <div class="ck-actions">
+      <button type="button" class="ck-btn" id="ckSubmit" disabled>結果を見る</button>
+      <button type="button" class="ck-btn ghost" id="ckClear">回答をクリア</button>
+    </div>
+    <p class="ck-warn" id="ckWarn"></p>
+
+    <div id="ckResult">
+      <h2 class="ck-r-title">診断結果（傾向）</h2>
+      <p class="ck-r-sub">スコアが高い領域ほど、その思考の癖が出やすい傾向があります。低い＝優れている、という単純な評価ではありません。</p>
+      <div id="ckBars"></div>
+      <div class="ck-sg">
+        <div class="ck-sg-box"><h4>比較的バランスが取れている領域</h4><ul id="ckStrength"></ul></div>
+        <div class="ck-sg-box"><h4>意識してみるとよい領域</h4><ul id="ckGrowth"></ul></div>
+      </div>
+      <div class="ck-next">
+        <h4>次の一歩</h4>
+        <div class="ck-next-list" id="ckNext"></div>
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="hb-foot"><div class="wrap"><div><b>ものづくりハンドブック</b></div><div class="hb-foot-sub">セルフチェックの共通仕様・原本は <a href="../content/checks.md">content/checks.md</a>。</div></div></footer>
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "hb_ck1_answers_v1";
+
+  var DOMAINS = [
+    {key:"confirm",   label:"確証バイアス",  target:"../s-b3.html",  targetLabel:"B3 原因究明（なぜなぜ分析）"},
+    {key:"normalcy",  label:"正常性バイアス", target:"../s-b1.html",  targetLabel:"B1 トリアージ（優先順位）"},
+    {key:"authority", label:"権威・同調",    target:"../s-b12.html", targetLabel:"B12 記録・データの疑義への対応"},
+    {key:"sunk",      label:"サンクコスト",  target:"../s-b5.html",  targetLabel:"B5 特採判断"},
+    {key:"hindsight", label:"後知恵バイアス", target:"../s-b3.html",  targetLabel:"B3 原因究明（なぜなぜ分析）"},
+    {key:"optimism",  label:"楽観バイアス",  target:"../s-b1.html",  targetLabel:"B1 トリアージ（優先順位）"}
+  ];
+
+  // reverse:true の設問は「あてはまる」ほどバイアスが少ない方向＝スコア反転
+  var QUESTIONS = [
+    {d:"confirm",   reverse:false, t:"自分の最初の見立てを裏付ける情報ばかり集めてしまうことがある。"},
+    {d:"confirm",   reverse:false, t:"見立てに反する情報が出てきたら、都合よく軽視してしまうことがある。"},
+    {d:"confirm",   reverse:true,  t:"結論を出す前に、あえて自分の見立てに反する証拠を探すようにしている。"},
+    {d:"confirm",   reverse:false, t:"一度「原因はこれだ」と思うと、他の可能性を検討しなくなりがちだ。"},
+
+    {d:"normalcy",  reverse:false, t:"多少の異常値でも「いつものことだから大丈夫」と流してしまうことがある。"},
+    {d:"normalcy",  reverse:false, t:"異常の兆候があっても、実際に大きな問題になるまで対応を先延ばしにしがちだ。"},
+    {d:"normalcy",  reverse:true,  t:"いつもと違う数値や状態に気づいたら、すぐに立ち止まって確認するようにしている。"},
+    {d:"normalcy",  reverse:false, t:"「今まで大きな問題はなかったから今回も大丈夫」と考えることが多い。"},
+
+    {d:"authority", reverse:false, t:"上司や経験者の意見に対して、違和感があっても言い出しにくい。"},
+    {d:"authority", reverse:false, t:"周囲の多数派の意見に合わせて、自分の判断を変えてしまうことがある。"},
+    {d:"authority", reverse:true,  t:"立場が上の人の判断でも、根拠が不十分だと感じたら質問するようにしている。"},
+    {d:"authority", reverse:false, t:"会議で誰も反対しないと、それが正しい判断だと思い込みやすい。"},
+
+    {d:"sunk",      reverse:false, t:"これまでにかけた時間や労力を考えると、途中でやめる決断がしにくい。"},
+    {d:"sunk",      reverse:false, t:"一度始めた対応は、状況が変わっても続けてしまいがちだ。"},
+    {d:"sunk",      reverse:true,  t:"状況が変わったら、それまでの経緯にとらわれず判断を見直すようにしている。"},
+    {d:"sunk",      reverse:false, t:"「ここまでやったのだから」という理由で、非効率な対応を続けたことがある。"},
+
+    {d:"hindsight", reverse:false, t:"問題が起きた後、「あの時点で気づけたはずだ」と感じることが多い。"},
+    {d:"hindsight", reverse:false, t:"結果を知ってから振り返ると、当時の判断が甘く見えてしまう。"},
+    {d:"hindsight", reverse:true,  t:"過去の判断を振り返るときは、その時点で分かっていた情報だけで評価するようにしている。"},
+    {d:"hindsight", reverse:false, t:"うまくいかなかった対応を見ると、「自分ならもっと早く気づいた」と思いがちだ。"},
+
+    {d:"optimism",  reverse:false, t:"「今回はきっと大丈夫だろう」と根拠なく楽観的に考えることがある。"},
+    {d:"optimism",  reverse:false, t:"リスクの見積もりで、悪いケースよりも良いケースを想定しがちだ。"},
+    {d:"optimism",  reverse:true,  t:"計画を立てるときは、うまくいかない場合の想定も必ず入れるようにしている。"},
+    {d:"optimism",  reverse:false, t:"期限や工数を見積もるとき、実際より楽観的な数字になりやすい。"}
+  ];
+
+  var SCALE = [
+    {v:1,l:"当てはまらない"},
+    {v:2,l:"あまり"},
+    {v:3,l:"やや"},
+    {v:4,l:"当てはまる"}
+  ];
+
+  var form = document.getElementById("ckForm");
+  var submitBtn = document.getElementById("ckSubmit");
+  var clearBtn = document.getElementById("ckClear");
+  var warnEl = document.getElementById("ckWarn");
+
+  function loadAnswers(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveAnswers(ans){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(ans)); }catch(e){}
+  }
+
+  var answers = loadAnswers();
+
+  function buildForm(){
+    var html = "";
+    var domainIdx = {};
+    DOMAINS.forEach(function(d){ domainIdx[d.key] = []; });
+    QUESTIONS.forEach(function(q, i){ domainIdx[q.d].push(i); });
+
+    DOMAINS.forEach(function(dm){
+      html += '<div class="ck-domain"><h2 class="ck-domain-h">' + dm.label + '</h2>';
+      domainIdx[dm.key].forEach(function(i){
+        var q = QUESTIONS[i];
+        html += '<div class="ck-q"><p class="ck-qtext">Q' + (i+1) + '. ' + q.t + '</p><div class="ck-scale">';
+        SCALE.forEach(function(s){
+          var checked = (answers[i] === s.v) ? " checked" : "";
+          html += '<label class="ck-opt"><input type="radio" name="q'+i+'" value="'+s.v+'"'+checked+'>' + s.l + '</label>';
+        });
+        html += '</div></div>';
+      });
+      html += '</div>';
+    });
+    form.innerHTML = html;
+  }
+  buildForm();
+
+  function countAnswered(){
+    return Object.keys(answers).filter(function(k){ return QUESTIONS[k] !== undefined; }).length;
+  }
+  function refreshState(){
+    var n = countAnswered();
+    submitBtn.disabled = (n < QUESTIONS.length);
+    warnEl.textContent = (n < QUESTIONS.length) ? ("あと " + (QUESTIONS.length - n) + " 問回答すると結果を見られます。") : "";
+  }
+  refreshState();
+
+  form.addEventListener("change", function(e){
+    var t = e.target;
+    if (t && t.name && /^q\d+$/.test(t.name)){
+      var idx = parseInt(t.name.slice(1), 10);
+      answers[idx] = parseInt(t.value, 10);
+      saveAnswers(answers);
+      refreshState();
+    }
+  });
+
+  clearBtn.addEventListener("click", function(){
+    answers = {};
+    saveAnswers(answers);
+    buildForm();
+    refreshState();
+    document.getElementById("ckResult").style.display = "none";
+  });
+
+  function computeScores(){
+    var sums = {}, counts = {};
+    DOMAINS.forEach(function(d){ sums[d.key]=0; counts[d.key]=0; });
+    QUESTIONS.forEach(function(q, i){
+      var raw = answers[i];
+      if (raw === undefined) return;
+      var val = q.reverse ? (5 - raw) : raw;
+      sums[q.d] += val;
+      counts[q.d] += 1;
+    });
+    var result = [];
+    DOMAINS.forEach(function(d){
+      var max = counts[d.key] * 4;
+      var pct = max ? Math.round((sums[d.key] / max) * 100) : 0;
+      result.push({key:d.key, label:d.label, target:d.target, targetLabel:d.targetLabel, pct: pct});
+    });
+    return result;
+  }
+
+  submitBtn.addEventListener("click", function(){
+    if (countAnswered() < QUESTIONS.length) return;
+    var scores = computeScores();
+    var sorted = scores.slice().sort(function(a,b){ return b.pct - a.pct; });
+
+    var barsHtml = "";
+    scores.forEach(function(s){
+      barsHtml += '<div class="ck-bar-row"><span class="ck-bar-label">' + s.label + '</span>' +
+        '<span class="ck-bar-track"><span class="ck-bar-fill" style="width:' + s.pct + '%"></span></span>' +
+        '<span class="ck-bar-pct">' + s.pct + '%</span></div>';
+    });
+    document.getElementById("ckBars").innerHTML = barsHtml;
+
+    var strengths = sorted.slice(-2).reverse();
+    var growth = sorted.slice(0,2);
+    document.getElementById("ckStrength").innerHTML = strengths.map(function(s){ return "<li>" + s.label + "（" + s.pct + "%）</li>"; }).join("");
+    document.getElementById("ckGrowth").innerHTML = growth.map(function(s){ return "<li>" + s.label + "（" + s.pct + "%）</li>"; }).join("");
+
+    var seen = {}, nextLinks = [];
+    sorted.forEach(function(s){
+      if (nextLinks.length >= 4) return;
+      if (seen[s.target]) return;
+      seen[s.target] = true;
+      nextLinks.push(s);
+    });
+    if (nextLinks.length < 2){
+      DOMAINS.forEach(function(d){
+        if (nextLinks.length >= 2) return;
+        if (seen[d.target]) return;
+        seen[d.target] = true;
+        nextLinks.push({target:d.target, targetLabel:d.targetLabel, label:d.label});
+      });
+    }
+    document.getElementById("ckNext").innerHTML = nextLinks.map(function(s){
+      return '<a href="' + s.target + '">' + s.targetLabel + '<span>' + s.label + 'の傾向が比較的高いために表示</span></a>';
+    }).join("");
+
+    document.getElementById("ckResult").style.display = "block";
+    document.getElementById("ckResult").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+})();
+</script>
+</body></html>

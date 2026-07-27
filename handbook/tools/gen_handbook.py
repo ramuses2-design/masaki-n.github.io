@@ -10,9 +10,10 @@ MASTER=os.path.join(CONTENT,"policy-master.md")
 PLAY=os.path.join(CONTENT,"playbooks.md")
 AUDF=os.path.join(CONTENT,"audience-guides.md")
 TSF=os.path.join(CONTENT,"troubleshooting.md")
+CHECKSF=os.path.join(CONTENT,"checks.md")
 
 def rd(p): return open(p,encoding="utf-8").read() if os.path.exists(p) else ""
-master_raw=rd(MASTER); play_raw=rd(PLAY); aud_raw=rd(AUDF); ts_raw=rd(TSF)
+master_raw=rd(MASTER); play_raw=rd(PLAY); aud_raw=rd(AUDF); ts_raw=rd(TSF); checks_raw=rd(CHECKSF)
 
 def strip_fm(t):
     if t.startswith("---"):
@@ -21,6 +22,7 @@ def strip_fm(t):
     return t
 master_body=strip_fm(master_raw); play_body=strip_fm(play_raw)
 aud_body=strip_fm(aud_raw) if aud_raw else ""; ts_body=strip_fm(ts_raw) if ts_raw else ""
+checks_body=strip_fm(checks_raw) if checks_raw else ""
 
 LAST_UPDATED="2026-07-11"
 
@@ -184,6 +186,29 @@ def parse_ts(body):
     return entries
 ts_entries=parse_ts(ts_body) if ts_body else []
 ts_title={e["id"]:e["title"] for e in ts_entries}
+
+# ---------- parse self-check (diagnostic tool) definitions ----------
+def parse_checks(body):
+    entries=[]; cur=None
+    for raw in body.split("\n"):
+        line=raw.rstrip(); st=line.strip()
+        m=re.match(r"^##\s+(CK[0-9]+)\s*\|\s*(.*)$", st)
+        if m:
+            cur={"id":m.group(1),"title":m.group(2).strip(),"file":"","target":"","duration":"","related":[],"desc":[]}
+            entries.append(cur); continue
+        if cur is None: continue
+        mf=re.match(r"^-\s*file[:：]\s*(.+)$", st)
+        if mf: cur["file"]=mf.group(1).strip(); continue
+        mtg=re.match(r"^-\s*対象[:：]\s*(.+)$", st)
+        if mtg: cur["target"]=mtg.group(1).strip(); continue
+        mdd=re.match(r"^-\s*所要[:：]\s*(.+)$", st)
+        if mdd: cur["duration"]=mdd.group(1).strip(); continue
+        mr=re.match(r"^-\s*関連[:：]\s*(.+)$", st)
+        if mr: cur["related"]=[x.strip() for x in re.split(r"[,、/\s]+", mr.group(1)) if x.strip()]; continue
+        if st.startswith("---"): continue
+        if st: cur["desc"].append(st)
+    return entries
+checks_entries=parse_checks(checks_body) if checks_body else []
 CHANGE=os.path.join(CONTENT,"changelog.md")
 change_raw=rd(CHANGE); change_body=strip_fm(change_raw) if change_raw else ""
 def parse_change(body):
@@ -266,6 +291,9 @@ def build_sidebar(active):
         for e in ts_entries:
             p.append(f'<a{on(tsslug(e["id"]))} href="{tsslug(e["id"])}">{esc(e["title"])}</a>')
         p.append('</details>')
+    if checks_entries:
+        p.append('<div class="side-cap">セルフチェック</div>')
+        p.append(f'<a class="side-item"{on("checks.html")} href="checks.html">🧭 セルフチェック（診断ツール）</a>'.replace('class="side-item" class="on"','class="side-item on"'))
     p.append('<div class="side-cap">リファレンス</div>')
     p.append(f'<a class="side-item"{on("glossary.html")} href="glossary.html">📑 用語・索引</a>'.replace('class="side-item" class="on"','class="side-item on"'))
     p.append(f'<a class="side-item"{on("review.html")} href="review.html">🟡 要確認リスト</a>'.replace('class="side-item" class="on"','class="side-item on"'))
@@ -508,6 +536,21 @@ if ts_entries:
              crumb_html=crumb2("ハンドブック","index.html","トラブルシューティング")))
     search_index.append({"url":"ts-index.html","title":"トラブルシューティング（症状から引く）","g":"トラブル","t":"トラブルシューティング 症状 不良 "+plain_text(ts_body.split("\n"))})
 
+# ---------- self-check (diagnostic tools) hub ----------
+if checks_entries:
+    cchecks=""
+    for c in checks_entries:
+        meta=f'<span class="sc-t">{esc(c["title"])}<br><span style="font-weight:400;font-size:.78rem;color:var(--muted)">{esc(c["target"])}　|　{esc(c["duration"])}</span></span>'
+        cchecks+=f'<a class="sc-card" href="{esc(c["file"])}"><span class="sc-id">🧭</span>{meta}</a>'
+    checks_body_html=f'''<h1 class="g-title">🧭 セルフチェック（診断ツール）</h1>
+    <p class="g-sub">自分の状態を測って、該当するハンドブックのページへ。回答はこの端末内にだけ保存され、どこにも送信されません。全{len(checks_entries)}種類。</p>
+    <div class="sc-grid">{cchecks}</div>'''
+    open(os.path.join(OUT,"checks.html"),"w",encoding="utf-8").write(
+        page("セルフチェック", checks_body_html, "checks.html", desc="自分の状態を測って該当ページへ（セルフチェック）",
+             crumb_html=crumb2("ハンドブック","index.html","セルフチェック")))
+    for c in checks_entries:
+        search_index.append({"url":c["file"],"title":c["title"],"g":"セルフチェック","t":c["title"]+" "+c["target"]+" "+" ".join(c["desc"])})
+
 # ---------- hub ----------
 prin_html="".join(f'<li><span class="pn">{i+1}</span><div><b>{esc(t)}</b><span>{inline(d)}</span></div></li>' for i,(t,d) in enumerate(principles))
 gcards=""
@@ -526,6 +569,7 @@ if ts_entries:
     ts_sec=f'''<section class="hub-sec"><h2>トラブルシューティング（症状から引く）</h2>
   <p class="g-sub">不織布の不良を症状から。初動→4M→恒久対策（たたき台・全{len(ts_entries)}症状）。</p>
   <div class="hub-gcard g-ts"><a class="hub-gh" href="ts-index.html"><span class="hub-gemoji">🧯</span><span><b>症状一覧を開く</b><span class="hub-gtype">{len(ts_entries)} 症状</span></span></a><div class="hub-glist">{tscards}</div></div></section>'''
+checks_link_html = '<a href="checks.html">🧭 セルフチェック</a>\n  ' if checks_entries else ''
 wn_banner=('<a class="hub-updated" href="whatsnew.html">🆕 最新更新 '+latest_date+'・'+str(latest_n)+'件 — 更新履歴を見る →</a>') if change_days else ''
 body=f'''<div class="hub-hero">
   <h1>ものづくりハンドブック</h1>
@@ -557,7 +601,7 @@ body=f'''<div class="hub-hero">
 <section class="hub-sec links"><h2>その他</h2>
   <a href="aud-index.html">👥 読者別ガイド</a>
   <a href="policy.html">📘 方針マスター</a>
-  <a href="glossary.html">📑 用語・索引</a>
+  {checks_link_html}<a href="glossary.html">📑 用語・索引</a>
   <a href="review.html">🟡 要確認リスト</a>
   <a href="whatsnew.html">🆕 更新履歴</a>
   <a href="../">← Daily Insight Board に戻る</a>
