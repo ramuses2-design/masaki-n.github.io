@@ -182,6 +182,20 @@
 
   @media(min-width:1200px){body{padding-left:240px}.sidebar{display:block}nav.jump{display:none}}
   @media(max-width:560px){.brand{font-size:1.4rem}.meta{text-align:left}.top-inner{align-items:flex-start}.datepick{justify-content:flex-start}.sheet{padding:24px 20px}}
+  .hero{display:grid;gap:16px;margin:26px 0 4px}
+  .hero.two{grid-template-columns:1fr 1fr}
+  @media(max-width:700px){.hero.two{grid-template-columns:1fr}}
+  .heroC{background:var(--s2);border:1px solid var(--bd);border-radius:18px;padding:24px 26px 20px;cursor:pointer;display:flex;flex-direction:column;transition:border-color .15s,transform .15s}
+  .heroC:hover{transform:translateY(-2px);border-color:var(--bds)}
+  .heroC .hk{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:10px}
+  .heroC .hk-lbl{font-size:.7rem;font-weight:800;letter-spacing:.1em;color:var(--acc-t);background:var(--acc-bg);padding:3px 11px;border-radius:30px}
+  .heroC h3{margin:0 0 10px;font-size:1.42rem;line-height:1.5;font-weight:700}
+  .heroC p{margin:0 0 14px;font-size:.92rem;color:var(--ts);line-height:1.85}
+  .heroC .hfoot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--bd);padding-top:11px}
+  .heroC .hfoot .src{font-size:.72rem;color:var(--tm)}
+  .heroC .hfoot .more{font-size:.78rem;font-weight:500;color:var(--acc-t);display:inline-flex;align-items:center;gap:4px}
+  @media(max-width:700px){.heroC h3{font-size:1.15rem}}
+  @media(min-width:700px){.grid .card.lead{grid-column:span 2}.grid .card.lead h3{font-size:1.2rem}}
   /* --- enhancements --- */
   .duebar{background:var(--s2);border:1px solid var(--bd);border-left:3px solid var(--warn-t);border-radius:12px;padding:14px 16px;margin:16px 0 6px}
   .duebar-h{display:flex;align-items:center;gap:8px;font-size:.92rem;font-weight:700;color:var(--tp)}
@@ -322,7 +336,7 @@ function buildSidebar(d){
   let h='<div class="sb-brand">Daily Insight Board</div><div class="sb-title">テーマ一覧</div>';
   h+='<a href="#tips" data-spy="tips">'+ic("sparkles")+'今日のまとめ</a>';
   h+=(d.sections||[]).map(s=>'<a href="#'+esc(s.id)+'" data-spy="'+esc(s.id)+'"><span class="sdot" style="background:'+esc(s.barColor||"#888888")+'"></span>'+esc(s.title)+'</a>').join("");
-  h+='<div class="sb-title">サイト内ページ</div><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a>';
+  h+='<div class="sb-title">サイト内ページ</div><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a>';
   sb.innerHTML=h;
 }
 function setupSpy(){
@@ -339,6 +353,7 @@ function setupSpy(){
 }
 
 function buildBoard(d){
+  d=Object.assign({},d,{sections:(d.sections||[]).filter(s=>s.id!=="learn")}); /* 2026-07-29 masaki確定: ハンドブック内容はBoardに載せない */
   DATA=d; CARDS=[]; cardById={};
   document.getElementById("date").textContent=d.date||"";
   if(d.updated) document.getElementById("updated").innerHTML=ic("refresh")+esc(d.updated.replace(/^[^　-鿿0-9]+/,"").trim()||d.updated);
@@ -347,6 +362,22 @@ function buildBoard(d){
   document.getElementById("secCount").textContent=(d.sections||[]).length;
   document.getElementById("cardCount").textContent=total;
   let html="";
+
+  /* 今日の注目（featured。無ければ各セクション横断で最初のnowカード） */
+  let feats=[];
+  (d.sections||[]).forEach(s=>(s.cards||[]).forEach(c=>{if(c.featured===true&&feats.length<2)feats.push({c:c,color:s.barColor||"#1f6feb",secTitle:s.title||"",secId:s.id});}));
+  if(!feats.length){outer:for(const s of (d.sections||[])){for(const c of (s.cards||[])){if(lvlClass(c.levelClass)==="now"){feats.push({c:c,color:s.barColor||"#1f6feb",secTitle:s.title||"",secId:s.id});break outer;}}}}
+  if(feats.length){
+    html+='<div class="hero'+(feats.length>1?' two':'')+'">';
+    feats.forEach(f=>{
+      const idx=CARDS.length; const rec=Object.assign({},f.c,{_color:f.color}); CARDS.push(rec);
+      html+='<article class="heroC" data-idx="'+idx+'" data-card role="button" tabindex="0" aria-label="'+esc(f.c.title||"")+'" style="border-top:3px solid '+esc(f.color)+'">';
+      html+='<div class="hk"><span class="hk-lbl">今日の注目</span><span class="cat"><span class="cdot" style="background:'+esc(f.color)+'"></span>'+esc(f.secTitle)+'</span>'+dueBadge(f.c.due)+'</div>';
+      html+='<h3>'+esc(f.c.title||"")+'</h3><p>'+esc(f.c.body||"")+'</p>';
+      html+='<div class="hfoot"><span class="src">'+esc(f.c.source||"")+'</span><span class="more">詳しく '+ic("arrow-right")+'</span></div></article>';
+    });
+    html+='</div>';
+  }
 
   if(Array.isArray(d.quickTips)&&d.quickTips.length){
     html+='<div class="tips" id="tips"><div class="tips-h">'+ic("bulb")+'<span class="lbl">今日のすぐ使える3トピック</span><span class="hint">タップで要約を表示</span></div><div class="tiplist">';
@@ -371,11 +402,10 @@ function buildBoard(d){
     if(sec.tag) html+='<span class="cnt">'+esc(sec.tag)+'</span>';
     html+='</div>';
     if(sec.desc) html+='<p class="sec-desc">'+esc(sec.desc)+'</p>';
-    const nlist=Array.isArray(sec.notices)?sec.notices:(sec.notice?[{type:sec.noticeType,text:sec.notice}]:[]);
-    nlist.forEach(n=>{const nt=["warn","ok","info"].includes(n.type)?n.type:"info";const ni=nt==="warn"?"alert-triangle":(nt==="ok"?"circle-check":"info-circle");html+='<div class="notice '+nt+'">'+ic(ni)+(n.text||"")+'</div>';});
     html+='<div class="grid">';
-    (sec.cards||[]).forEach(c=>{
+    (sec.cards||[]).forEach((c,ci)=>{
       const idx=CARDS.length; const rec=Object.assign({},c,{_color:color}); CARDS.push(rec);
+      const leadCls=ci===0?" lead":"";
       if(c.id) cardById[c.id]=rec;
       const tg=(c.tags||[]);
       const text=((c.title||"")+" "+(c.body||"")+" "+(c.detail||"")+" "+(c.cat||"")+" "+tg.join(" ")).toLowerCase();
@@ -392,8 +422,8 @@ function buildBoard(d){
     html+='</div></section>';
   });
 
-  html+='<footer><p><b>Daily Insight Board</b>｜仕事・ITツール&AI・補助金・展示会・社会情勢の「使える情報」を毎朝7:00に自動更新。カードをタップすると、サイト内で要約の詳細を読めます。<a href="workboard.html" style="color:var(--acc-t);font-weight:500">🗂 仕事ボード</a>・<a href="handbook/" style="color:var(--acc-t);font-weight:500">📘 ものづくりハンドブック</a> もあわせてどうぞ。</p>'
-     +'<div class="disclaimer">各項目は公開情報をもとに編集部（自動）が要約しています。重要な判断・対外対応の前には一次情報をご確認ください。規制・法令（化審法・REACH等）や補助金・展示会の日程は更新されます。生成AIの利用は社内規程に従ってください。</div></footer>';
+  html+='<footer><p><b>Daily Insight Board</b>｜仕事・ITツール&AI・補助金・展示会・社会情勢の「使える情報」を毎朝7:00に自動更新。カードをタップすると、サイト内で要約の詳細を読めます。<a href="workboard.html" style="color:var(--acc-t);font-weight:500">🗂 仕事ボード</a>・<a href="handbook/" style="color:var(--acc-t);font-weight:500">📘 ものづくりハンドブック</a>・<a href="calendar.html" style="color:var(--acc-t);font-weight:500">📅 品質カレンダー</a> もあわせてどうぞ。</p>'
+     +'<div class="disclaimer">各項目は公開情報をもとに編集部（自動）が要約しています。重要な判断・対外対応の前には一次情報をご確認ください。規制・法令（化審法・REACH等）や補助金・展示会の日程は更新されます。</div></footer>';
 
   document.getElementById("app").innerHTML=html;
   bind();
@@ -410,7 +440,7 @@ function openDetail(c){
     '<span class="lvl '+lc+'">'+esc(c.levelText||lvlName[lc])+'</span>'+dueBadge(c.due)+
     '<button class="mclose" id="mclose" aria-label="閉じる">×</button>';
   document.getElementById("mtitle").textContent=c.title||"";
-  document.getElementById("mbody").textContent=c.detail||c.body||"";
+  document.getElementById("mbody").textContent=(c.detail||c.body||"").replace(/→?\s*ハンドブック[^。]*も参照[^。]*。?/g,"").trim();
   const tg=(c.tags||[]);
   document.getElementById("mtags").innerHTML=tg.map(t=>'<span class="tg" data-tag="'+esc(t)+'">#'+esc(t)+'</span>').join("");
   document.getElementById("mfoot").innerHTML='<span class="ms">出典：'+esc(c.source||"—")+'</span>'+(c.url?'<a href="'+esc(c.url)+'" target="_blank" rel="noopener">原文を開く '+ic("external-link")+'</a>':'');
@@ -453,7 +483,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape") closeModal();});
 
 function applyFilters(){
   let shown=0;
-  document.querySelectorAll("[data-card]").forEach(card=>{
+  document.querySelectorAll("section.block [data-card]").forEach(card=>{
     const okLv=F.level==="all"||card.dataset.level===F.level;
     const okTag=!F.tag||("|"+card.dataset.tags+"|").includes("|"+F.tag+"|");
     const okQ=!F.q||card.dataset.text.includes(F.q);
@@ -474,7 +504,7 @@ function loadThemeHistory(){
       HISTORY={}; const seen={};
       const SECMAP={ittools:"tools-ai","ai-copilot":"tools-ai","ai-other":"tools-ai"};
       list.forEach(o=>{ if(!o.d||!o.d.sections) return;
-        o.d.sections.forEach(s=>{ const sid=SECMAP[s.id]||s.id; (s.cards||[]).forEach(c=>{ if(!c.id) return;
+        o.d.sections.forEach(s=>{ const sid=SECMAP[s.id]||s.id; if(sid==="learn") return; (s.cards||[]).forEach(c=>{ if(!c.id) return;
           const key=sid+"::"+c.id; if(curIds.has(key)||seen[key]) return; seen[key]=true;
           (HISTORY[sid]=HISTORY[sid]||[]).push(Object.assign({},c,{_color:s.barColor||"#1f6feb",_date:o.dt}));
         });});
