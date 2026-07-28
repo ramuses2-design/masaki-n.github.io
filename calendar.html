@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>品質カレンダー｜ものづくりポータル</title>
+<meta name="description" content="規制期限・補助金締切・展示会会期・セミナー日程をひとつのタイムラインで確認できる品質カレンダー。毎朝の情報更新と連動。">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%231f6feb'/%3E%3Crect%20x='5'%20y='6'%20width='14'%20height='3'%20rx='1'%20fill='white'/%3E%3Crect%20x='5'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='13'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  /* トークンは index.html と同一（tokens.css 共通化(UX009)後はそちらへ寄せる） */
+  :root{
+    --s0:#f6f7f9; --s1:#eef1f5; --s2:#ffffff;
+    --tp:#1b2431; --ts:#5a6474; --tm:#8b94a3;
+    --bd:#e4e8ee; --bds:#d3d9e2;
+    --acc:#2563eb; --acc-t:#1d4ed8; --acc-bg:#e9f0fe;
+    --ok-t:#0f6e56; --ok-bg:#e3f4ed;
+    --warn-t:#9a4a16; --warn-bg:#fbeede;
+    --dang-t:#a32d2d; --dang-bg:#fcecec;
+    --radius:10px;
+    --sans:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --s0:#141821; --s1:#1b202b; --s2:#222835;
+      --tp:#e8ebf1; --ts:#aab3c2; --tm:#7d8697;
+      --bd:#2e3644; --bds:#3d4657;
+      --acc:#7aa5f8; --acc-t:#a9c4fa; --acc-bg:#1d2c47;
+      --ok-t:#7fd8b8; --ok-bg:#123a30;
+      --warn-t:#efb86a; --warn-bg:#3c2a11;
+      --dang-t:#f0a0a0; --dang-bg:#3e1d1d;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--s0);color:var(--tp);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+  .ptabs{background:var(--s2);border-bottom:1px solid var(--bd)}
+  .ptabs-in{display:flex;align-items:center;gap:10px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .pbrand{font-size:.8rem;font-weight:800;color:var(--ts);letter-spacing:.06em;margin-right:auto}
+  .ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+  .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
+  .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
+  .ptabs nav a.on{background:var(--acc);color:#fff}
+  @media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}
+
+  header.top{background:var(--s2);border-bottom:1px solid var(--bd);padding:26px 0 20px}
+  .brand{font-size:1.7rem;font-weight:700;margin:0;letter-spacing:.03em}
+  .sub{font-size:.84rem;color:var(--ts);margin-top:5px}
+
+  .legend{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+  .lg{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;color:var(--ts);background:var(--s2);border:1px solid var(--bd);padding:4px 11px;border-radius:30px}
+  .lg .dot{width:9px;height:9px;border-radius:50%;flex:none}
+
+  .mon{margin:26px 0 0}
+  .mon-h{font-size:1.04rem;font-weight:700;padding:0 2px 8px;border-bottom:2px solid var(--bds);display:flex;align-items:baseline;gap:10px}
+  .mon-h .cnt{font-size:.76rem;font-weight:500;color:var(--tm)}
+  .item{display:flex;gap:14px;align-items:flex-start;padding:13px 4px;border-bottom:1px solid var(--bd)}
+  .item:hover{background:var(--s1);border-radius:var(--radius)}
+  .dcol{flex:none;width:74px;text-align:center}
+  .dnum{font-size:1.05rem;font-weight:700;line-height:1.3}
+  .dwk{font-size:.7rem;color:var(--tm)}
+  .left{display:inline-block;margin-top:3px;font-size:.68rem;font-weight:500;padding:2px 8px;border-radius:30px;background:var(--s1);color:var(--ts)}
+  .left.l7{background:var(--dang-bg);color:var(--dang-t)}
+  .left.l30{background:var(--warn-bg);color:var(--warn-t)}
+  .body{flex:1;min-width:0}
+  .cat{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--ts)}
+  .cat .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .ttl{display:block;font-size:.95rem;font-weight:500;line-height:1.55;margin-top:2px}
+  a.ttl:hover{color:var(--acc-t)}
+  .lab{display:inline-block;margin-top:4px;font-size:.72rem;color:var(--tm)}
+  .src{font-size:.72rem;color:var(--tm);margin-left:8px}
+  .today .dnum{color:var(--acc-t)}
+
+  .note{font-size:.78rem;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:var(--radius);padding:12px 16px;margin:26px 0}
+  .empty{color:var(--ts);font-size:.88rem;padding:22px 4px}
+  footer{margin:34px 0 40px;font-size:.74rem;color:var(--tm);text-align:center}
+  @media print{.ptabs,.legend,footer{display:none!important}body{background:#fff;color:#000}.item{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a class="on" href="calendar.html">📅 品質カレンダー</a></nav></div></div>
+
+<header class="top"><div class="wrap">
+  <h1 class="brand">品質カレンダー</h1>
+  <div class="sub">規制の期限・補助金の締切・展示会の会期をひとつのタイムラインで。毎朝の「今日の情報」と連動して自動更新されます。</div>
+  <div class="legend" id="legend"></div>
+</div></header>
+
+<main class="wrap" id="main"><div class="empty" id="loading">読み込み中…</div></main>
+
+<div class="wrap"><div class="note">出典は各項目のリンク先（公式サイト・報道）を確認してください。締切・会期は変更される場合があります。掲載範囲: 本日から約120日先まで。</div></div>
+<footer>ものづくりポータル｜品質カレンダー（データ: data.json の期限付き情報から自動生成）</footer>
+
+<script>
+(function(){
+  "use strict";
+  var WK=["日","月","火","水","木","金","土"];
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function ymd(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
+  var today=new Date(); today.setHours(0,0,0,0);
+  var horizon=new Date(today.getTime()+120*86400000);
+
+  fetch("data.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(data){
+    var items=[]; var cats={};
+    (data.sections||[]).forEach(function(sec){
+      (sec.cards||[]).forEach(function(c){
+        if(!c.due||!c.due.date) return;
+        var d=new Date(c.due.date+"T00:00:00");
+        if(isNaN(d)||d<today||d>horizon) return;
+        cats[sec.id]={title:sec.title,color:sec.barColor||"#8b94a3",emoji:sec.emoji||""};
+        items.push({date:d,label:(c.due.label||"期限"),title:c.title,url:c.url,source:c.source,sec:sec.id});
+      });
+    });
+    items.sort(function(a,b){return a.date-b.date;});
+    var lg=document.getElementById("legend");
+    Object.keys(cats).forEach(function(k){
+      var s=cats[k];
+      lg.insertAdjacentHTML("beforeend",'<span class="lg"><span class="dot" style="background:'+esc(s.color)+'"></span>'+esc(s.emoji)+' '+esc(s.title)+'</span>');
+    });
+    var main=document.getElementById("main"); main.innerHTML="";
+    if(!items.length){ main.innerHTML='<div class="empty">今後120日以内の期限情報は現在ありません。明日の朝の更新で追加される場合があります。</div>'; return; }
+    var curKey=""; var monEl=null; var monCount=0;
+    items.forEach(function(it){
+      var key=it.date.getFullYear()+"年"+(it.date.getMonth()+1)+"月";
+      if(key!==curKey){
+        if(monEl) monEl.querySelector(".cnt").textContent=monCount+"件";
+        curKey=key; monCount=0;
+        main.insertAdjacentHTML("beforeend",'<section class="mon"><h2 class="mon-h">'+esc(key)+'<span class="cnt"></span></h2><div class="list"></div></section>');
+        var mons=main.querySelectorAll(".mon"); monEl=mons[mons.length-1];
+      }
+      monCount++;
+      var days=Math.round((it.date-today)/86400000);
+      var leftCls=days<=7?"left l7":(days<=30?"left l30":"left");
+      var leftTxt=days===0?"今日":"残り"+days+"日";
+      var cat=cats[it.sec]||{color:"#8b94a3",title:"",emoji:""};
+      var isToday=days===0?" today":"";
+      var t=esc(it.title);
+      var ttl=it.url?('<a class="ttl" href="'+esc(it.url)+'" target="_blank" rel="noopener">'+t+'</a>'):('<span class="ttl">'+t+'</span>');
+      monEl.querySelector(".list").insertAdjacentHTML("beforeend",
+        '<div class="item'+isToday+'"><div class="dcol"><div class="dnum">'+(it.date.getMonth()+1)+"/"+it.date.getDate()+'</div><div class="dwk">'+WK[it.date.getDay()]+'曜</div><span class="'+leftCls+'">'+leftTxt+'</span></div>'+
+        '<div class="body"><span class="cat"><span class="dot" style="background:'+esc(cat.color)+'"></span>'+esc(cat.emoji)+' '+esc(cat.title)+'</span>'+ttl+
+        '<span class="lab">'+esc(it.label)+(it.source?'<span class="src">出典: '+esc(it.source)+'</span>':"")+'</span></div></div>');
+    });
+    if(monEl) monEl.querySelector(".cnt").textContent=monCount+"件";
+    var note=document.createElement("div");
+  }).catch(function(){
+    document.getElementById("main").innerHTML='<div class="empty">データを読み込めませんでした。時間をおいて再読み込みしてください。</div>';
+  });
+})();
+</script>
+</body>
+</html>
