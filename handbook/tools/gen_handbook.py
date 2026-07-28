@@ -570,6 +570,26 @@ if ts_entries:
   <p class="g-sub">不織布の不良を症状から。初動→4M→恒久対策（たたき台・全{len(ts_entries)}症状）。</p>
   <div class="hub-gcard g-ts"><a class="hub-gh" href="ts-index.html"><span class="hub-gemoji">🧯</span><span><b>症状一覧を開く</b><span class="hub-gtype">{len(ts_entries)} 症状</span></span></a><div class="hub-glist">{tscards}</div></div></section>'''
 checks_link_html = '<a href="checks.html">🧭 セルフチェック</a>\n  ' if checks_entries else ''
+# UX007: トップ入口3枚目を「セルフチェック」へ。公開済みツールを最大2本まで名前で並べ、
+# 3本以上あるときだけ一覧(checks.html)へのリンクを足す。未公開時は従来の「症状から探す」に戻る。
+if checks_entries:
+    _ck_links = "".join(
+        f'\n    <a href="{esc(c["file"])}">🧭 {esc(c["title"])}</a>' for c in checks_entries[:2])
+    if len(checks_entries) > 2:
+        _ck_links += f'\n    <a href="checks.html">🧭 セルフチェック一覧（全{len(checks_entries)}種）</a>'
+    e3_third = f'''<div class="e3">
+    <span class="e3-lab">セルフチェック</span>{_ck_links}
+  </div>'''
+    e3_ts_link = '\n    <a href="ts-index.html">🧯 トラブルシューティング（症状一覧）</a>'
+    e3_gl_link = '\n    <a href="glossary.html">📑 用語・索引</a>'
+else:
+    e3_third = '''<div class="e3">
+    <span class="e3-lab">症状から探す</span>
+    <a href="ts-index.html">🧯 トラブルシューティング（症状一覧）</a>
+    <a href="glossary.html">📑 用語・索引</a>
+  </div>'''
+    e3_ts_link = ''
+    e3_gl_link = ''
 wn_banner=('<a class="hub-updated" href="whatsnew.html">🆕 最新更新 '+latest_date+'・'+str(latest_n)+'件 — 更新履歴を見る →</a>') if change_days else ''
 body=f'''<div class="hub-hero">
   <h1>ものづくりハンドブック</h1>
@@ -581,18 +601,14 @@ body=f'''<div class="hub-hero">
     <span class="e3-lab">困ったとき</span>
     <a href="{slug('B2')}">🚑 クレーム・不適合の初動（B2）</a>
     <a href="{slug('B1')}">⚠ 優先順位（B1 トリアージ）</a>
-    <a href="policy.html#esc">📣 エスカレーション基準</a>
+    <a href="policy.html#esc">📣 エスカレーション基準</a>{e3_ts_link}
   </div>
   <div class="e3">
     <span class="e3-lab">立場から探す</span>
     <a href="aud-index.html">👥 読者別ガイド（営業・技術・製造・購買・外注先）</a>
-    <a href="#playbooks">📗 場面別プレイブック（A〜D）</a>
+    <a href="#playbooks">📗 場面別プレイブック（A〜D）</a>{e3_gl_link}
   </div>
-  <div class="e3">
-    <span class="e3-lab">症状から探す</span>
-    <a href="ts-index.html">🧯 トラブルシューティング（症状一覧）</a>
-    <a href="glossary.html">📑 用語・索引</a>
-  </div>
+  {e3_third}
 </nav>
 <section class="hub-sec"><h2>品質の6原則（ブレ防止の共通言語）</h2><ul class="principles">{prin_html}</ul></section>
 <section class="hub-sec" id="playbooks"><h2>場面別プレイブック（A〜D）</h2><div class="hub-gcards">{gcards}</div></section>
