@@ -411,7 +411,7 @@ function buildBoard(d){
       const text=((c.title||"")+" "+(c.body||"")+" "+(c.detail||"")+" "+(c.cat||"")+" "+tg.join(" ")).toLowerCase();
       const cid=c.id?(' id="'+esc(c.id)+'"'):'';
       const flagNew=(c.id&&NEWIDS.has(c.id))?'<span class="flag new">新着</span>':'';
-      html+='<article class="card"'+cid+' data-idx="'+idx+'" data-card role="button" tabindex="0" aria-label="'+esc(c.title||"")+'" data-level="'+lvlClass(c.levelClass)+'" data-tags="'+esc(tg.join("|"))+'" data-text="'+esc(text)+'">';
+      html+='<article class="card'+leadCls+'"'+cid+' data-idx="'+idx+'" data-card role="button" tabindex="0" aria-label="'+esc(c.title||"")+'" data-level="'+lvlClass(c.levelClass)+'" data-tags="'+esc(tg.join("|"))+'" data-text="'+esc(text)+'">';
       html+='<div class="tagrow"><span class="cat"><span class="cdot" style="background:'+color+'"></span>'+esc(c.cat||"")+'</span><span class="lvl '+lvlClass(c.levelClass)+'">'+esc(c.levelText||lvlName[lvlClass(c.levelClass)])+'</span>'+flagNew+dueBadge(c.due)+'</div>';
       html+='<h3>'+esc(c.title)+'</h3>';
       html+='<p>'+esc(c.body)+'</p>';
