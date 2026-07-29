@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>強み・キャリア棚卸し（壁打ち型ワークシート）｜ものづくりハンドブック</title>
+<meta name="description" content="12の問いに答えると、上司との面談やAIとの壁打ちにそのまま使える棚卸しテキストを組み立てるセルフチェック">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
+<style>
+  .ck-wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+  .ck-back{display:inline-block;font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:16px}
+  .ck-back:hover{color:var(--teal)}
+  .ck-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--head);margin:0 0 8px}
+  .ck-lead{color:var(--muted);font-size:.9rem;line-height:1.8;margin:0 0 16px}
+  .ck-note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 24px}
+  .ck-note b{color:var(--head)}
+  .ck-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--faint);margin:0 0 24px}
+  .ck-domain{margin:0 0 8px;padding:16px 0 4px;border-top:1px solid var(--line)}
+  .ck-domain:first-of-type{border-top:none}
+  .ck-domain-h{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 12px}
+  .ck-q{padding:14px 0;border-top:1px solid var(--line)}
+  .ck-q:first-child{border-top:none}
+  .ck-qtext{font-size:.9rem;line-height:1.7;color:var(--ink);margin:0 0 4px;font-weight:600}
+  .ck-qhint{font-size:.78rem;line-height:1.6;color:var(--muted);margin:0 0 10px}
+  .ck-ta{width:100%;min-height:64px;font-family:inherit;font-size:.86rem;line-height:1.7;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;resize:vertical;box-sizing:border-box}
+  .ck-ta:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal)}
+  .ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  .ck-btn.ghost{background:transparent;color:var(--muted);border-color:var(--line-2)}
+  .ck-btn:disabled{opacity:.45;cursor:not-allowed}
+  .ck-warn{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+  #ckResult{display:none;margin-top:32px;padding-top:24px;border-top:2px solid var(--line)}
+  .ck-r-title{font-size:1.15rem;font-weight:700;color:var(--head);margin:0 0 4px}
+  .ck-r-sub{font-size:.82rem;color:var(--muted);margin:0 0 16px}
+  .ck-comp{width:100%;min-height:320px;font-family:inherit;font-size:.82rem;line-height:1.8;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-sizing:border-box;white-space:pre-wrap}
+  .ck-comp-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 0}
+  .ck-copystate{font-size:.78rem;color:var(--teal);margin:0;min-height:1.2em}
+  .ck-next{margin:24px 0 0}
+  .ck-next h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-next-list{display:flex;flex-direction:column;gap:8px}
+  .ck-next-list a{display:block;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 14px;font-size:.85rem;color:var(--head);text-decoration:none;font-weight:600}
+  .ck-next-list a:hover{border-color:var(--teal)}
+  .ck-next-list a span{display:block;font-weight:400;color:var(--muted);font-size:.76rem;margin-top:2px}
+  @media (max-width:860px){
+    .ck-back{display:inline-flex;align-items:center;min-height:44px}
+    .ck-btn{min-height:44px}
+  }
+  @media print{
+    .hb-top,.hb-side,.hb-shell aside,.crumb,.hb-foot,.ptabs,.ck-back,.ck-lead,.ck-meta,.ck-warn,#ckForm,.ck-actions,.ck-note,.ck-comp-actions,.ck-next{display:none !important}
+    .hb-shell{display:block !important}
+    .ck-wrap{max-width:none;padding:0}
+    #ckResult{display:block !important;border-top:none;margin-top:0;padding-top:0}
+    body{background:#fff;color:#000}
+    .ck-title,.ck-r-title{color:#000}
+    .ck-r-sub{color:#444}
+    .ck-comp{color:#000;background:#fff;border-color:#bbb;white-space:pre-wrap}
+    .ck-comp{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head><body>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../../">📊 今日の情報</a><a href="../../workboard.html">🗂 仕事ボード</a><a class="on" href="../index.html">📘 ハンドブック</a></nav></div></div>
+<header class="hb-top">
+  <div class="hb-top-in">
+    <a class="hb-brand" href="../index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
+  </div>
+</header>
+<div class="hb-shell">
+  <main class="hb-main ck-wrap">
+    <a class="ck-back" href="../index.html">← ものづくりハンドブックへ戻る</a>
+    <h1 class="ck-title">🧭 強み・キャリア棚卸し（壁打ち型ワークシート）</h1>
+    <p class="ck-lead">採点はありません。12の問いに答えると、上司との面談やAIとの壁打ちにそのまま貼れる「棚卸しテキスト」を自動で組み立てます。埋まっていない項目は組み立て時に読み飛ばします。</p>
+    <div class="ck-note">結果は<b>評価や判定ではなく、自分の考えを言語化するための材料</b>です。<b>回答はこの端末内（ブラウザのlocalStorage）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄もありません。途中で閉じても、次に開いたときに回答が復元されます。</div>
+    <div class="ck-meta"><span>約15分・12問（記述式）</span><span>採点なし・壁打ち用</span><span>関連：A4・E3</span></div>
+
+    <form id="ckForm"></form>
+
+    <div class="ck-actions">
+      <button type="button" class="ck-btn" id="ckSubmit">壁打ち用テキストを組み立てる</button>
+      <button type="button" class="ck-btn ghost" id="ckClear">回答をクリア</button>
+    </div>
+    <p class="ck-warn" id="ckWarn">1問以上答えると組み立てられます。すべて埋める必要はありません。</p>
+
+    <div id="ckResult">
+      <h2 class="ck-r-title">壁打ち用テキスト</h2>
+      <p class="ck-r-sub">下のテキストをコピーして、上司との面談前の準備メモや、AIとの壁打ちの最初の入力に使ってください。</p>
+      <textarea class="ck-comp" id="ckComp" readonly></textarea>
+      <div class="ck-comp-actions">
+        <button type="button" class="ck-btn" id="ckCopy">テキストをコピー</button>
+        <p class="ck-copystate" id="ckCopyState"></p>
+      </div>
+      <div class="ck-next">
+        <h4>次の一歩</h4>
+        <div class="ck-next-list">
+          <a href="../s-a4.html">A4 目標設定・評価（期初／期中／期末）<span>棚卸しの内容を、期初の目標設定面談の材料にする</span></a>
+          <a href="../s-e3.html">E3 力量マップの作り方・運用<span>強み・伸びしろを、力量マップの自己評価欄の材料にする</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="hb-foot"><div class="wrap"><div><b>ものづくりハンドブック</b></div><div class="hb-foot-sub">セルフチェックの共通仕様・原本は <a href="../content/checks.md">content/checks.md</a>。</div></div></footer>
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "hb_ck3_answers_v1";
+
+  var SECTIONS = [
+    {
+      label: "I. 強みの棚卸し",
+      items: [0,1,2,3]
+    },
+    {
+      label: "II. 苦手・伸びしろ",
+      items: [4,5,6]
+    },
+    {
+      label: "III. 今後の方向性",
+      items: [7,8,9,10,11]
+    }
+  ];
+
+  var QUESTIONS = [
+    {t:"直近1年で「うまくいった」「手応えがあった」と思う仕事は何ですか。", h:"具体的な場面（いつ・何の仕事か）で書いてください。"},
+    {t:"その仕事で、自分は具体的に何をしましたか。", h:"「頑張った」ではなく、行動レベル（誰に何をどうした）で書いてください。"},
+    {t:"それができたのは、どんな知識・経験・特性のおかげだと思いますか。", h:"技術的なことでも、人との関わり方のようなことでも構いません。"},
+    {t:"周囲（上司・同僚・他部門・取引先）から頼られる、褒められることは何ですか。", h:"具体的に言われたことがあれば、その言葉のまま書いてみてください。"},
+    {t:"逆に「苦手」「気が重い」と感じる業務・場面は何ですか。", h:"避けている理由（苦手意識・経験不足・単純に嫌い、など）も添えてください。"},
+    {t:"その苦手を、今すぐ克服する必要は本当にありますか。", h:"「克服すべき」か「得意な人に任せる／連携する」かを一度考えてみてください。"},
+    {t:"この1年で学び直したい、伸ばしたいと思う力は何ですか。", h:"知識・技能・マネジメントなど種類は問いません。"},
+    {t:"3年後、どんな役割・立場を担っていたいと思いますか。", h:"役職名でなく「どんな仕事の仕方をしていたいか」で書いても構いません。"},
+    {t:"そのために、今年〜来年で経験しておきたいことは何ですか。", h:"担当業務・プロジェクト・資格など、具体的なものがあれば。"},
+    {t:"今の仕事で「もっと権限や裁量があれば」と思うことはありますか。", h:"なければ空欄のままで構いません。"},
+    {t:"これまでのキャリアで、考え方や仕事の仕方が変わった出来事はありますか。", h:"良い出来事でも、つらかった出来事でも構いません。"},
+    {t:"今、一番相談したい・迷っていることは何ですか。", h:"面談やAIとの壁打ちで最初に聞いてほしいことを書いてください。"}
+  ];
+
+  var form = document.getElementById("ckForm");
+  var submitBtn = document.getElementById("ckSubmit");
+  var clearBtn = document.getElementById("ckClear");
+  var warnEl = document.getElementById("ckWarn");
+  var copyBtn = document.getElementById("ckCopy");
+  var copyState = document.getElementById("ckCopyState");
+
+  function loadAnswers(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveAnswers(ans){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(ans)); }catch(e){}
+  }
+
+  var answers = loadAnswers();
+
+  function buildForm(){
+    var html = "";
+    SECTIONS.forEach(function(sec){
+      html += '<div class="ck-domain"><h2 class="ck-domain-h">' + sec.label + '</h2>';
+      sec.items.forEach(function(i){
+        var q = QUESTIONS[i];
+        var val = answers[i] ? String(answers[i]).replace(/</g,"&lt;") : "";
+        html += '<div class="ck-q"><p class="ck-qtext">Q' + (i+1) + '. ' + q.t + '</p>' +
+          '<p class="ck-qhint">' + q.h + '</p>' +
+          '<textarea class="ck-ta" data-idx="' + i + '" placeholder="ここに記入…">' + val + '</textarea></div>';
+      });
+      html += '</div>';
+    });
+    form.innerHTML = html;
+  }
+  buildForm();
+
+  form.addEventListener("input", function(e){
+    var t = e.target;
+    if (t && t.classList && t.classList.contains("ck-ta")){
+      var idx = parseInt(t.getAttribute("data-idx"), 10);
+      var v = t.value.trim();
+      if (v){ answers[idx] = t.value; } else { delete answers[idx]; }
+      saveAnswers(answers);
+    }
+  });
+
+  clearBtn.addEventListener("click", function(){
+    if (!window.confirm("すべての回答を消去します。よろしいですか？")) return;
+    answers = {};
+    saveAnswers(answers);
+    buildForm();
+    document.getElementById("ckResult").style.display = "none";
+    copyState.textContent = "";
+  });
+
+  submitBtn.addEventListener("click", function(){
+    var keys = Object.keys(answers).filter(function(k){ return answers[k] && String(answers[k]).trim(); });
+    if (keys.length === 0){
+      warnEl.textContent = "1問以上答えてから組み立ててください。";
+      return;
+    }
+    warnEl.textContent = "1問以上答えると組み立てられます。すべて埋める必要はありません。";
+
+    var lines = [];
+    lines.push("■ 強み・キャリア棚卸し（壁打ち用メモ）");
+    lines.push("");
+    SECTIONS.forEach(function(sec){
+      var secLines = [];
+      sec.items.forEach(function(i){
+        var v = answers[i] ? String(answers[i]).trim() : "";
+        if (!v) return;
+        secLines.push("Q" + (i+1) + ". " + QUESTIONS[i].t);
+        secLines.push("→ " + v);
+        secLines.push("");
+      });
+      if (secLines.length){
+        lines.push("【" + sec.label + "】");
+        lines = lines.concat(secLines);
+      }
+    });
+    document.getElementById("ckComp").value = lines.join("\n").trim();
+    document.getElementById("ckResult").style.display = "block";
+    document.getElementById("ckResult").scrollIntoView({behavior:"smooth", block:"start"});
+    copyState.textContent = "";
+  });
+
+  copyBtn.addEventListener("click", function(){
+    var ta = document.getElementById("ckComp");
+    ta.focus(); ta.select();
+    var ok = false;
+    try{
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(ta.value);
+        ok = true;
+      } else {
+        ok = document.execCommand("copy");
+      }
+    }catch(e){ ok = false; }
+    copyState.textContent = ok ? "コピーしました。" : "コピーできませんでした。テキストを選択して手動でコピーしてください。";
+  });
+})();
+</script>
+</body></html>
