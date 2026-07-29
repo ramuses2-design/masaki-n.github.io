@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日の1問｜ものづくりポータル</title>
+<meta name="description" content="ものづくりハンドブックの内容から、毎日3択1問。答え合わせのあとに解説と該当ページへのリンクが出ます。">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%231f6feb'/%3E%3Crect%20x='5'%20y='6'%20width='14'%20height='3'%20rx='1'%20fill='white'/%3E%3Crect%20x='5'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='13'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'/%3E%3C/svg%3E">
+<style>
+  /* トークンは index.html / calendar.html と同一。外部CSS・外部フォント・外部ライブラリは読み込まない。 */
+  :root{
+    --s0:#f6f7f9; --s1:#eef1f5; --s2:#ffffff;
+    --tp:#1b2431; --ts:#5a6474; --tm:#8b94a3;
+    --bd:#e4e8ee; --bds:#d3d9e2;
+    --acc:#2563eb; --acc-t:#1d4ed8; --acc-bg:#e9f0fe;
+    --ok-t:#0f6e56; --ok-bg:#e3f4ed;
+    --warn-t:#9a4a16; --warn-bg:#fbeede;
+    --dang-t:#a32d2d; --dang-bg:#fcecec;
+    --radius:10px;
+    --sans:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --s0:#141821; --s1:#1b202b; --s2:#222835;
+      --tp:#e8ebf1; --ts:#aab3c2; --tm:#7d8697;
+      --bd:#2e3644; --bds:#3d4657;
+      --acc:#7aa5f8; --acc-t:#a9c4fa; --acc-bg:#1d2c47;
+      --ok-t:#7fd8b8; --ok-bg:#123a30;
+      --warn-t:#efb86a; --warn-bg:#3c2a11;
+      --dang-t:#f0a0a0; --dang-bg:#3e1d1d;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--s0);color:var(--tp);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+  .ptabs{background:var(--s2);border-bottom:1px solid var(--bd)}
+  .ptabs-in{display:flex;align-items:center;gap:10px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .pbrand{font-size:.8rem;font-weight:800;color:var(--ts);letter-spacing:.06em;margin-right:auto}
+  .ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+  .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
+  .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
+  .ptabs nav a.on{background:var(--acc);color:#fff}
+  @media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}
+
+  header.top{background:var(--s2);border-bottom:1px solid var(--bd);padding:26px 0 20px}
+  .brand{font-size:1.7rem;font-weight:700;margin:0;letter-spacing:.03em}
+  .sub{font-size:.84rem;color:var(--ts);margin-top:5px}
+
+  .card{background:var(--s2);border:1px solid var(--bd);border-radius:var(--radius);padding:22px 22px 18px;margin:26px 0 0}
+  .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.74rem;color:var(--tm)}
+  .tag{display:inline-block;font-size:.72rem;font-weight:500;padding:2px 10px;border-radius:30px;background:var(--s1);color:var(--ts)}
+  .qtxt{font-size:1.08rem;font-weight:700;line-height:1.7;margin:12px 0 0}
+
+  .opts{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .opt{display:flex;gap:12px;align-items:flex-start;width:100%;min-height:44px;text-align:left;font:inherit;font-size:.94rem;line-height:1.65;color:var(--tp);background:var(--s2);border:1px solid var(--bds);border-radius:var(--radius);padding:11px 14px;cursor:pointer}
+  .opt:hover:not(:disabled){border-color:var(--acc);background:var(--acc-bg)}
+  .opt:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+  .opt:disabled{cursor:default}
+  .opt .mk{flex:none;width:24px;height:24px;border-radius:50%;background:var(--s1);color:var(--ts);font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .opt.correct{border-color:var(--ok-t);background:var(--ok-bg)}
+  .opt.correct .mk{background:var(--ok-t);color:var(--s2)}
+  .opt.wrong{border-color:var(--dang-t);background:var(--dang-bg)}
+  .opt.wrong .mk{background:var(--dang-t);color:var(--s2)}
+  .opt.dim{opacity:.62}
+
+  .verdict{display:inline-block;font-size:.86rem;font-weight:700;padding:4px 13px;border-radius:30px;margin:18px 0 0}
+  .verdict.ok{background:var(--ok-bg);color:var(--ok-t)}
+  .verdict.ng{background:var(--dang-bg);color:var(--dang-t)}
+  .exp{font-size:.9rem;color:var(--tp);background:var(--s1);border-radius:var(--radius);padding:14px 16px;margin:12px 0 0}
+  .exp .lb{display:block;font-size:.74rem;font-weight:700;color:var(--ts);letter-spacing:.04em;margin-bottom:4px}
+  .refl{display:inline-flex;align-items:center;gap:8px;margin:14px 0 0;font-size:.9rem;font-weight:500;color:var(--acc-t);border:1px solid var(--bds);border-radius:var(--radius);padding:10px 14px;min-height:44px}
+  .refl:hover{background:var(--acc-bg);border-color:var(--acc)}
+
+  .acts{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}
+  .btn{font:inherit;font-size:.84rem;font-weight:500;color:var(--ts);background:var(--s2);border:1px solid var(--bds);border-radius:var(--radius);padding:9px 16px;min-height:44px;cursor:pointer}
+  .btn:hover{color:var(--acc-t);border-color:var(--acc);background:var(--acc-bg)}
+  .btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+  .stats{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 0}
+  .st{flex:1;min-width:140px;background:var(--s2);border:1px solid var(--bd);border-radius:var(--radius);padding:12px 15px}
+  .st .n{font-size:1.24rem;font-weight:700;line-height:1.4}
+  .st .l{font-size:.73rem;color:var(--tm)}
+
+  .note{font-size:.78rem;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:var(--radius);padding:12px 16px;margin:22px 0 0}
+  .empty{color:var(--ts);font-size:.88rem;padding:22px 4px}
+  footer{margin:34px 0 40px;font-size:.74rem;color:var(--tm);text-align:center}
+
+  @media print{
+    .ptabs,.acts,.stats,.note,footer,.opt:disabled.dim{display:none!important}
+    body{background:#fff;color:#000}
+    .card{border:1px solid #999;break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a class="on" href="quiz.html">🧠 今日の1問</a></nav></div></div>
+
+<header class="top"><div class="wrap">
+  <h1 class="brand">今日の1問</h1>
+  <div class="sub">ものづくりハンドブックの内容から、毎日3択で1問。答え合わせのあとに解説と、もとになったページへのリンクが出ます。</div>
+</div></header>
+
+<main class="wrap">
+  <div id="main"><div class="empty" id="loading">読み込み中…</div></div>
+  <div class="stats" id="stats" hidden>
+    <div class="st"><div class="n" id="stDays">–</div><div class="l">解いた日数</div></div>
+    <div class="st"><div class="n" id="stRate">–</div><div class="l">正解率（今日の1問）</div></div>
+    <div class="st"><div class="n" id="stStreak">–</div><div class="l">連続日数</div></div>
+  </div>
+  <div class="acts" id="acts" hidden>
+    <button class="btn" type="button" id="btnPractice">もう1問（練習モード）</button>
+    <button class="btn" type="button" id="btnClear">記録をクリア</button>
+  </div>
+  <div class="note">出題はハンドブックの記述にもとづく理解確認です。社内の正式な様式・数値・権限は各ページの【要確認】に従ってください。<b>回答と記録はこの端末内（ブラウザ）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄はありません。</div>
+</main>
+
+<footer>ものづくりポータル｜今日の1問（出題データ: quiz-data.json）</footer>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="portal-quiz-v1";
+  var data=null, todayIdx=-1, practiceIdx=-1, mode="daily";
+
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function ymd(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
+  function dayNo(d){return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000);}
+
+  function load(){
+    try{var s=localStorage.getItem(KEY); return s?JSON.parse(s):{};}catch(e){return {};}
+  }
+  function save(st){
+    try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}
+  }
+
+  var today=new Date();
+  var todayKey=ymd(today);
+
+  function pickDaily(n){
+    // 日付から決まる出題。同じ日は誰が開いても同じ問題になる。
+    return ((dayNo(today)%n)+n)%n;
+  }
+
+  function statsFrom(st){
+    var log=st.log||{};
+    var days=Object.keys(log);
+    var ok=0;
+    days.forEach(function(k){ if(log[k]&&log[k].ok) ok++; });
+    // 連続日数（今日、まだ未回答なら昨日を起点にさかのぼる）
+    var streak=0, base=dayNo(today);
+    if(!log[todayKey]) base=base-1;
+    for(var i=0;i<400;i++){
+      var key=new Date((base-i)*86400000).toISOString().slice(0,10);
+      if(log[key]) streak++; else break;
+    }
+    return {days:days.length, ok:ok, streak:streak};
+  }
+
+  function renderStats(){
+    var s=statsFrom(load());
+    document.getElementById("stDays").textContent=s.days+" 日";
+    document.getElementById("stRate").textContent=(s.days?Math.round(s.ok/s.days*100):0)+" %";
+    document.getElementById("stStreak").textContent=s.streak+" 日";
+    document.getElementById("stats").hidden=false;
+    document.getElementById("acts").hidden=false;
+  }
+
+  function render(idx, answered, chosen){
+    var q=data.questions[idx];
+    var main=document.getElementById("main");
+    var h="";
+    h+='<section class="card">';
+    h+='<div class="meta"><span class="tag">'+esc(q.g)+'</span><span>'+(mode==="daily"?esc(todayKey)+" の1問":"練習モード")+'</span><span>'+esc(q.id)+'</span></div>';
+    h+='<p class="qtxt">'+esc(q.q)+'</p>';
+    h+='<ul class="opts" id="opts">';
+    for(var i=0;i<q.c.length;i++){
+      var cls="opt", mk=["A","B","C"][i];
+      if(answered){
+        if(i===q.a){cls+=" correct"; mk="○";}
+        else if(i===chosen){cls+=" wrong"; mk="×";}
+        else {cls+=" dim";}
+      }
+      h+='<li><button class="'+cls+'" type="button" data-i="'+i+'"'+(answered?" disabled":"")+'>';
+      h+='<span class="mk" aria-hidden="true">'+mk+'</span><span>'+esc(q.c[i])+'</span></button></li>';
+    }
+    h+='</ul>';
+    if(answered){
+      var ok=(chosen===q.a);
+      h+='<div class="verdict '+(ok?"ok":"ng")+'">'+(ok?"正解":"惜しい（正解は "+["A","B","C"][q.a]+"）")+'</div>';
+      h+='<div class="exp"><span class="lb">解説</span>'+esc(q.exp)+'</div>';
+      h+='<a class="refl" href="'+esc(q.ref.u)+'">📘 '+esc(q.ref.t)+' を読む</a>';
+    }
+    h+='</section>';
+    main.innerHTML=h;
+
+    if(!answered){
+      var btns=main.querySelectorAll(".opt");
+      for(var j=0;j<btns.length;j++){
+        btns[j].addEventListener("click",function(ev){
+          var pick=parseInt(ev.currentTarget.getAttribute("data-i"),10);
+          if(mode==="daily"){
+            var st=load(); st.log=st.log||{};
+            st.log[todayKey]={id:q.id,pick:pick,ok:(pick===q.a)};
+            save(st);
+            renderStats();
+          }
+          render(idx,true,pick);
+        });
+      }
+    }
+  }
+
+  function showDaily(){
+    mode="daily";
+    var st=load(); var rec=(st.log||{})[todayKey];
+    if(rec&&typeof rec.pick==="number"&&rec.id===data.questions[todayIdx].id){
+      render(todayIdx,true,rec.pick);
+    }else{
+      render(todayIdx,false,-1);
+    }
+  }
+
+  function showPractice(){
+    mode="practice";
+    var n=data.questions.length;
+    var i, guard=0;
+    do{ i=Math.floor(Math.random()*n); guard++; }while(n>2&&(i===todayIdx||i===practiceIdx)&&guard<50);
+    practiceIdx=i;
+    render(i,false,-1);
+  }
+
+  document.getElementById("btnPractice").addEventListener("click",function(){ showPractice(); window.scrollTo(0,0); });
+  document.getElementById("btnClear").addEventListener("click",function(){
+    if(!window.confirm("この端末に保存した回答記録をすべて消します。よろしいですか？")) return;
+    try{localStorage.removeItem(KEY);}catch(e){}
+    renderStats(); showDaily(); window.scrollTo(0,0);
+  });
+
+  fetch("quiz-data.json",{cache:"no-store"}).then(function(r){
+    if(!r.ok) throw new Error("load failed");
+    return r.json();
+  }).then(function(j){
+    data=j;
+    if(!data||!data.questions||!data.questions.length) throw new Error("empty");
+    todayIdx=pickDaily(data.questions.length);
+    renderStats();
+    showDaily();
+  }).catch(function(){
+    document.getElementById("main").innerHTML='<div class="empty">出題データを読み込めませんでした。時間をおいて再読み込みしてください。</div>';
+  });
+})();
+</script>
+</body>
+</html>
