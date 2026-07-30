@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>業界定点｜ものづくりポータル</title>
+<meta name="description" content="仕入コスト・景況感・繊維業の公表統計を、同じ指標・同じ形で並べ続ける定点観測。数字は公表統計の転記であり、将来を予測するものではありません。">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%231f6feb'/%3E%3Crect%20x='5'%20y='6'%20width='14'%20height='3'%20rx='1'%20fill='white'/%3E%3Crect%20x='5'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='13'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'/%3E%3C/svg%3E">
+<style>
+  /* トークンは index.html / calendar.html / quiz.html と同一。外部CSS・外部フォント・外部ライブラリは読み込まない。 */
+  :root{
+    --s0:#f6f7f9; --s1:#eef1f5; --s2:#ffffff;
+    --tp:#1b2431; --ts:#5a6474; --tm:#8b94a3;
+    --bd:#e4e8ee; --bds:#d3d9e2;
+    --acc:#2563eb; --acc-t:#1d4ed8; --acc-bg:#e9f0fe;
+    --ok-t:#0f6e56; --ok-bg:#e3f4ed;
+    --warn-t:#9a4a16; --warn-bg:#fbeede;
+    --dang-t:#a32d2d; --dang-bg:#fcecec;
+    --radius:10px;
+    --sans:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --s0:#141821; --s1:#1b202b; --s2:#222835;
+      --tp:#e8ebf1; --ts:#aab3c2; --tm:#7d8697;
+      --bd:#2e3644; --bds:#3d4657;
+      --acc:#7aa5f8; --acc-t:#a9c4fa; --acc-bg:#1d2c47;
+      --ok-t:#7fd8b8; --ok-bg:#123a30;
+      --warn-t:#efb86a; --warn-bg:#3c2a11;
+      --dang-t:#f0a0a0; --dang-bg:#3e1d1d;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--s0);color:var(--tp);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+  .ptabs{background:var(--s2);border-bottom:1px solid var(--bd)}
+  .ptabs-in{display:flex;align-items:center;gap:10px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .pbrand{font-size:.8rem;font-weight:800;color:var(--ts);letter-spacing:.06em;margin-right:auto}
+  .ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+  .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
+  .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
+  .ptabs nav a.on{background:var(--acc);color:#fff}
+  @media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}
+
+  header.top{background:var(--s2);border-bottom:1px solid var(--bd);padding:26px 0 20px}
+  .brand{font-size:1.7rem;font-weight:700;margin:0;letter-spacing:.03em}
+  .sub{font-size:.84rem;color:var(--ts);margin-top:5px}
+  .upd{font-size:.76rem;color:var(--tm);margin-top:8px}
+  .caution{font-size:.78rem;color:var(--ts);background:var(--s1);border:1px solid var(--bd);border-radius:var(--radius);padding:8px 14px;margin-top:12px}
+
+  .grp{margin:28px 0 0}
+  .grp-h{font-size:1.32rem;font-weight:600;padding:0 2px 8px;border-bottom:2px solid var(--bds);display:flex;align-items:baseline;gap:10px}
+  .grp-h .cnt{font-size:.76rem;font-weight:500;color:var(--tm)}
+
+  .card{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:16px 18px;margin-top:16px}
+  .c-lab{font-size:1rem;font-weight:600;line-height:1.55}
+  .c-unit{font-size:.74rem;color:var(--tm);margin-top:2px}
+  .c-now{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .c-val{font-size:2rem;font-weight:700;line-height:1.2;letter-spacing:.01em}
+  .c-at{font-size:.76rem;color:var(--tm)}
+  .c-chg{font-size:.8rem;color:var(--ts)}
+  .c-chg .mk{font-weight:700;color:var(--ts)}
+  .c-chart{margin-top:12px}
+  .c-chart svg{display:block;max-width:100%;height:auto}
+  .c-use{font-size:.84rem;color:var(--tp);margin-top:12px}
+  .c-note{font-size:.76rem;color:var(--ts);margin-top:8px}
+  .c-refs{margin-top:8px;display:flex;flex-direction:column;gap:2px}
+  .c-refs a{font-size:.8rem;color:var(--acc-t);font-weight:500;min-height:32px;display:flex;align-items:center}
+  .c-refs a:hover{text-decoration:underline}
+  .c-src{font-size:.74rem;color:var(--tm);margin-top:8px;border-top:1px solid var(--bd);padding-top:8px;line-height:1.7}
+  .c-src a{color:var(--ts);text-decoration:underline}
+  .c-old{font-size:.74rem;color:var(--tm);margin-top:4px}
+
+  .note{font-size:.78rem;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 16px;margin:24px 0}
+  .empty{color:var(--ts);font-size:.88rem;padding:24px 4px}
+  footer{margin:32px 0 40px;font-size:.74rem;color:var(--tm);text-align:center}
+  @media(max-width:560px){
+    .card{padding:14px}
+    .c-val{font-size:1.7rem}
+    .c-refs a{min-height:44px}
+  }
+  @media print{.ptabs,footer{display:none!important}body{background:#fff;color:#000}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 今日の1問</a><a class="on" href="trends.html">📈 業界定点</a></nav></div></div>
+
+<header class="top"><div class="wrap">
+  <h1 class="brand">業界定点</h1>
+  <div class="sub">「今どうなっているか」ではなく「どう動いてきたか」。同じ指標を同じ形で並べ続けます。日々のニュースは「今日の情報」、期限は「品質カレンダー」へ。</div>
+  <div class="upd" id="upd">更新日: 読み込み中…</div>
+  <div class="caution">本ページは公表統計の転記であり、将来を予測するものではありません。数値の定義・改定は各系列の出典元で確認してください。</div>
+</div></header>
+
+<main class="wrap" id="main"><div class="empty" id="loading">読み込み中…</div></main>
+
+<div class="wrap"><div class="note">前期比の記号は <b>▲＝前の期より上昇</b>／<b>▼＝前の期より低下</b>／<b>→＝変化なし</b>（上昇が良い・悪いという意味ではありません）。値が取れない期間は点を置かず、線もつなぎません。系列の追記手順は trends-data.json の howto に記載しています。</div></div>
+<footer>ものづくりポータル｜業界定点（データ: trends-data.json・出典は各カード末尾）</footer>
+
+<script>
+(function(){
+  "use strict";
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function fmt(v){return String(Math.round(v*100)/100);}
+  function num(v){return (typeof v==="number"&&isFinite(v));}
+
+  var charts=[];   /* 描画待ちの系列（幅を測ってから描く） */
+
+  /* 折れ線1枚。自前のインラインSVGのみ（外部ライブラリなし）。色は --acc 単色＋グレー。
+     幅は表示領域の実測値をそのまま使う（SVG1単位=1px）。拡大縮小で文字が潰れないようにするため。 */
+  function chart(pts,zeroBase,W){
+    W=Math.max(240,Math.round(W||640));
+    var H=(W<380?152:190), L=8, R=8, T=16, B=28;
+    var iw=W-L-R, ih=H-T-B, n=pts.length;
+    var vs=pts.map(function(p){return p.v;});
+    var dmin=Math.min.apply(null,vs), dmax=Math.max.apply(null,vs);
+    var mn=dmin, mx=dmax;
+    if(zeroBase){ mn=Math.min(mn,0); mx=Math.max(mx,0); }
+    if(mn===mx){ mn=mn-1; mx=mx+1; }
+    var pad=(mx-mn)*0.16; mn-=pad; mx+=pad;
+    function X(i){ return n===1 ? L+iw/2 : L+iw*i/(n-1); }
+    function Y(v){ return T+ih-(v-mn)/(mx-mn)*ih; }
+
+    var h='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" role="img" aria-label="'+esc(pts[0].t)+'から'+esc(pts[n-1].t)+'までの推移。最新値 '+esc(fmt(vs[n-1]))+'">';
+    h+='<line x1="'+L+'" y1="'+(T+ih)+'" x2="'+(W-R)+'" y2="'+(T+ih)+'" stroke="var(--bd)" stroke-width="1"/>';
+    if(zeroBase && dmin<0 && dmax>0){
+      h+='<line x1="'+L+'" y1="'+Y(0).toFixed(1)+'" x2="'+(W-R)+'" y2="'+Y(0).toFixed(1)+'" stroke="var(--bds)" stroke-width="1" stroke-dasharray="4 4"/>';
+      h+='<text x="'+(L+2)+'" y="'+(Y(0)-5).toFixed(1)+'" font-size="11" fill="var(--tm)">0</text>';
+    }
+    h+='<polyline points="'+pts.map(function(p,i){return X(i).toFixed(1)+","+Y(p.v).toFixed(1);}).join(" ")+'" fill="none" stroke="var(--acc)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    pts.forEach(function(p,i){
+      h+='<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(p.v).toFixed(1)+'" r="'+((i===n-1)?4.5:2.5)+'" fill="var(--acc)"/>';
+    });
+    var iMax=vs.indexOf(dmax), iMin=vs.indexOf(dmin);
+    function lab(i,v,dy,anchor){
+      var x=X(i), a=anchor||"middle";
+      if(x<28){ x=L; a="start"; } else if(x>W-28){ x=W-R; a="end"; }
+      return '<text x="'+x.toFixed(1)+'" y="'+(Y(v)+dy).toFixed(1)+'" font-size="11" fill="var(--tm)" text-anchor="'+a+'">'+esc(fmt(v))+'</text>';
+    }
+    h+=lab(iMax,dmax,-9);
+    if(iMin!==iMax) h+=lab(iMin,dmin,16);
+    /* x軸ラベルは points[].t をそのまま出す（日付として解釈しない）。幅に応じて間引く。 */
+    var maxLab=Math.max(2,Math.floor(iw/76));
+    var step=Math.max(1,Math.ceil((n-1)/(maxLab-1)));
+    for(var i=0;i<n;i++){
+      var show=(i===0)||(i===n-1)||(i%step===0);
+      if(!show) continue;
+      if(i>0 && i<n-1 && (n-1-i)<step*0.7) continue;
+      var anchor=(i===0)?"start":((i===n-1)?"end":"middle");
+      var x=(i===0)?L:((i===n-1)?(W-R):X(i));
+      h+='<text x="'+x.toFixed(1)+'" y="'+(H-8)+'" font-size="11" fill="var(--tm)" text-anchor="'+anchor+'">'+esc(pts[i].t)+'</text>';
+    }
+    h+='</svg>';
+    return h;
+  }
+
+  function card(s,idx){
+    var pts=(s.points||[]).filter(function(p){return p&&num(p.v)&&p.t;});
+    if(!pts.length) return "";
+    var n=pts.length, cur=pts[n-1], prev=(n>1?pts[n-2]:null);
+    charts[idx]={pts:pts,zero:/ポイント/.test(s.unit||"")};
+    var h='<section class="card">';
+    h+='<div class="c-lab">'+esc(s.label)+'</div>';
+    h+='<div class="c-unit">'+esc(s.unit||"")+'</div>';
+    h+='<div class="c-now"><span class="c-val">'+esc(fmt(cur.v))+'</span><span class="c-at">'+esc(cur.t)+'</span>';
+    if(prev){
+      var diff=Math.round((cur.v-prev.v)*100)/100;
+      var mk=(diff>0?"▲":(diff<0?"▼":"→"));
+      var body=(diff===0)
+        ? ("前の期（"+esc(prev.t)+"）から変化なし")
+        : ("前の期（"+esc(prev.t)+" "+esc(fmt(prev.v))+"）から "+esc(fmt(Math.abs(diff)))+" "+(diff>0?"上昇":"低下"));
+      h+='<span class="c-chg"><span class="mk">'+mk+'</span> '+body+'</span>';
+    }
+    h+='</div>';
+    h+='<div class="c-chart" data-i="'+idx+'"></div>';
+    if(s.use) h+='<div class="c-use">'+esc(s.use)+'</div>';
+    if(s.note) h+='<div class="c-note">'+esc(s.note)+'</div>';
+    if(s.refs&&s.refs.length){
+      h+='<div class="c-refs">';
+      s.refs.forEach(function(r){ if(r&&r.u&&r.t) h+='<a href="'+esc(r.u)+'">📘 '+esc(r.t)+'</a>'; });
+      h+='</div>';
+    }
+    var srcs=(s.sources&&s.sources.length)?s.sources:(s.source?[s.source]:[]);
+    if(srcs.length){
+      h+='<div class="c-src">出典: '+srcs.map(function(x){return '<a href="'+esc(x.url)+'" rel="noopener">'+esc(x.name)+'</a>';}).join(" ／ ")+'</div>';
+    }
+    var y=parseInt(String(cur.t).slice(0,4),10);
+    if(isFinite(y) && (new Date().getFullYear()-y)>=2){
+      h+='<div class="c-old">最終更新: '+esc(String(y))+'</div>';
+    }
+    h+='</section>';
+    return h;
+  }
+
+  function paint(){
+    var els=document.querySelectorAll(".c-chart");
+    for(var k=0;k<els.length;k++){
+      var el=els[k], i=parseInt(el.getAttribute("data-i"),10), c=charts[i];
+      if(!c) continue;
+      el.innerHTML=chart(c.pts,c.zero,el.clientWidth||640);
+    }
+  }
+
+  function render(data){
+    document.getElementById("upd").textContent="更新日: "+(data.updated||"—")+"（数値は各出典の公表値をそのまま転記）";
+    var list=(data.series||[]).filter(function(s){return s&&s.points&&s.points.length;});
+    var order=[], byCat={};
+    list.forEach(function(s){
+      var c=s.cat||"その他";
+      if(!byCat[c]){ byCat[c]=[]; order.push(c); }
+      byCat[c].push(s);
+    });
+    var h="", idx=0;
+    if(!list.length){
+      h='<div class="empty">表示できる系列がありません。</div>';
+    }else{
+      order.forEach(function(c){
+        h+='<div class="grp"><div class="grp-h">'+esc(c)+'<span class="cnt">'+byCat[c].length+'系列</span></div>';
+        byCat[c].forEach(function(s){ h+=card(s,idx++); });
+        h+='</div>';
+      });
+    }
+    document.getElementById("main").innerHTML=h;
+    paint();
+    var tid=null;
+    window.addEventListener("resize",function(){
+      if(tid) clearTimeout(tid);
+      tid=setTimeout(paint,160);
+    });
+  }
+
+  fetch("trends-data.json",{cache:"no-store"}).then(function(r){return r.json();}).then(render).catch(function(){
+    document.getElementById("main").innerHTML='<div class="empty">データを読み込めませんでした。時間をおいて再度お試しください。</div>';
+  });
+})();
+</script>
+</body>
+</html>

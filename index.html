@@ -259,7 +259,7 @@
 
 <aside class="sidebar" id="sidebar" aria-label="テーマ一覧"></aside>
 
-<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a class="on" href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 今日の1問</a></nav></div></div>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a class="on" href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 今日の1問</a><a href="trends.html">📈 業界定点</a></nav></div></div>
 
 <header class="top">
   <div class="wrap top-inner">
@@ -349,7 +349,7 @@ function buildSidebar(d){
   let h='<div class="sb-brand">Daily Insight Board</div><div class="sb-title">テーマ一覧</div>';
   h+='<a href="#tips" data-spy="tips">'+ic("sparkles")+'今日のまとめ</a>';
   h+=(d.sections||[]).map(s=>'<a href="#'+esc(s.id)+'" data-spy="'+esc(s.id)+'"><span class="sdot" style="background:'+esc(s.barColor||"#888888")+'"></span>'+esc(s.title)+'</a>').join("");
-  h+='<div class="sb-title">サイト内ページ</div><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 今日の1問</a>';
+  h+='<div class="sb-title">サイト内ページ</div><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 今日の1問</a><a href="trends.html">📈 業界定点</a>';
   sb.innerHTML=h;
 }
 function setupSpy(){
