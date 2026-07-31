@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>段取り力・仕組み化診断｜ものづくりハンドブック</title>
+<meta name="description" content="36問・6領域で、仕事の組み立て方と仕組み化の現在地を見て、優先して鍛える領域とトレーニングを知るセルフチェック">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
+<style>
+  .ck-wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+  /* このページはサイドバーを持たないため、hb-shell の2カラムグリッド（262px＋本文）だと
+     本文がサイドバー列に入って幅が潰れる。1カラムに上書きする。 */
+  .hb-shell{grid-template-columns:minmax(0,1fr)}
+  .ck-back{display:inline-block;font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:16px}
+  .ck-back:hover{color:var(--teal)}
+  .ck-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--head);margin:0 0 8px}
+  .ck-lead{color:var(--muted);font-size:.9rem;line-height:1.8;margin:0 0 16px}
+  .ck-note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 24px}
+  .ck-note b{color:var(--head)}
+  .ck-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--faint);margin:0 0 24px}
+
+  .ck-legend{margin:0 0 24px}
+  .ck-legend h2{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 6px}
+  .ck-legend p{font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 12px}
+  .ck-lv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-lv div{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:.76rem;color:var(--muted);line-height:1.6}
+  .ck-lv b{display:block;color:var(--head);font-size:.8rem;margin-bottom:2px}
+
+  .ck-prog{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;margin:0 0 8px;display:flex;align-items:center;gap:12px}
+  .ck-prog .t{font-size:.76rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ck-prog .track{flex:1;height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-prog .fill{height:100%;width:0;background:var(--teal);border-radius:6px}
+
+  .ck-domain{margin:0 0 8px;padding:16px 0 4px;border-top:1px solid var(--line)}
+  .ck-domain:first-of-type{border-top:none}
+  .ck-domain-h{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 2px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .ck-domain-h .cnt{font-size:.74rem;font-weight:400;color:var(--faint);margin-left:auto;font-variant-numeric:tabular-nums}
+  .ck-domain-d{font-size:.8rem;color:var(--muted);line-height:1.7;margin:0 0 12px}
+  .ck-q{padding:14px 0;border-top:1px solid var(--line)}
+  .ck-q:first-of-type{border-top:none}
+  .ck-qtext{font-size:.9rem;line-height:1.7;color:var(--ink);margin:0 0 4px}
+  .ck-qex{font-size:.76rem;line-height:1.7;color:var(--muted);margin:0 0 10px}
+  .ck-qex .tag{display:inline-block;font-size:.7rem;font-weight:700;color:var(--teal-d);border:1px solid var(--line-2);border-radius:20px;padding:0 8px;margin-right:6px}
+  .ck-scale{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-opt{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);text-align:center;border:1px solid var(--line);border-radius:9px;padding:8px 4px;cursor:pointer;background:var(--card)}
+  .ck-opt:has(input:checked){border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt.on{border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt input{margin:0;accent-color:var(--teal)}
+
+  .ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  .ck-btn.ghost{background:transparent;color:var(--muted);border-color:var(--line-2)}
+  .ck-btn:disabled{opacity:.45;cursor:not-allowed}
+  .ck-warn{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+
+  #ckResult{display:none;margin-top:32px;padding-top:24px;border-top:2px solid var(--line)}
+  .ck-r-title{font-size:1.15rem;font-weight:700;color:var(--head);margin:0 0 4px}
+  .ck-r-sub{font-size:.82rem;color:var(--muted);margin:0 0 20px}
+  .ck-total{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:0 0 20px}
+  .ck-total .num{font-size:2.2rem;font-weight:700;color:var(--head);line-height:1.2;font-variant-numeric:tabular-nums}
+  .ck-total .num small{font-size:.9rem;font-weight:400;color:var(--muted)}
+  .ck-total .lv{font-size:.86rem;font-weight:700;color:var(--head);margin-top:2px}
+  .ck-total .txt{font-size:.82rem;color:var(--muted);line-height:1.8;margin-top:6px}
+  .ck-type{font-size:.82rem;color:var(--ink);line-height:1.8;background:var(--a-bg);border-radius:9px;padding:12px 14px;margin:0 0 20px}
+
+  .ck-radar{display:flex;justify-content:center;margin:0 0 20px}
+  .ck-radar svg{max-width:100%;height:auto}
+  .ck-bar-row{display:grid;grid-template-columns:150px 1fr 46px;align-items:center;gap:10px;margin:0 0 10px;font-size:.82rem}
+  .ck-bar-label{color:var(--ink);line-height:1.5;overflow-wrap:anywhere}
+  .ck-bar-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-bar-fill{height:100%;background:var(--teal);border-radius:6px}
+  .ck-bar-pct{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+  .ck-tbl{width:100%;border-collapse:collapse;font-size:.8rem;margin:16px 0 0}
+  .ck-tbl th,.ck-tbl td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;color:var(--ink)}
+  .ck-tbl th{color:var(--muted);font-weight:700;font-size:.74rem}
+  .ck-tbl td.n,.ck-tbl th.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  .ck-plan{margin:24px 0 0}
+  .ck-plan h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-plan-item{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:9px;padding:14px 16px;margin:0 0 12px}
+  .ck-plan-item h5{margin:0 0 2px;font-size:.88rem;color:var(--head)}
+  .ck-plan-item .prio{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:var(--teal);border-radius:20px;padding:1px 9px;margin-right:8px}
+  .ck-plan-item .period{font-size:.74rem;color:var(--faint);margin:0 0 6px}
+  .ck-plan-item p{font-size:.8rem;color:var(--muted);line-height:1.8;margin:0 0 8px}
+  .ck-plan-item ul{margin:0;padding-left:18px;font-size:.82rem;color:var(--ink);line-height:1.8}
+
+  .ck-road{margin:24px 0 0}
+  .ck-road h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-road-step{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:.82rem;line-height:1.8}
+  .ck-road-step:first-of-type{border-top:none}
+  .ck-road-step .when{color:var(--teal-d);font-weight:700}
+  .ck-road-step b{color:var(--head)}
+  .ck-road-step div:last-child{color:var(--muted)}
+
+  .ck-comp-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
+  .ck-copystate{font-size:.78rem;color:var(--teal);margin:0;min-height:1.2em}
+  .ck-next{margin:24px 0 0}
+  .ck-next h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-next-list{display:flex;flex-direction:column;gap:8px}
+  .ck-next-list a{display:block;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 14px;font-size:.85rem;color:var(--head);text-decoration:none;font-weight:600}
+  .ck-next-list a:hover{border-color:var(--teal)}
+  .ck-next-list a span{display:block;font-weight:400;color:var(--muted);font-size:.76rem;margin-top:2px}
+  .ck-src{font-size:.74rem;color:var(--faint);line-height:1.8;margin:24px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+
+  @media (max-width:860px){
+    .ck-back{display:inline-flex;align-items:center;min-height:44px}
+    .ck-btn{min-height:44px}
+  }
+  @media (max-width:600px){
+    .ck-scale{grid-template-columns:repeat(2,1fr)}
+    .ck-lv{grid-template-columns:1fr 1fr}
+    .ck-bar-row{grid-template-columns:110px 1fr 40px}
+    .ck-road-step{grid-template-columns:1fr;gap:2px}
+  }
+  @media print{
+    .hb-top,.hb-side,.hb-shell aside,.crumb,.hb-foot,.ptabs,.ck-back,.ck-lead,.ck-meta,.ck-warn,.ck-legend,.ck-prog,#ckForm,.ck-actions,.ck-note,.ck-comp-actions{display:none !important}
+    .hb-shell{display:block !important}
+    .ck-wrap{max-width:none;padding:0}
+    #ckResult{display:block !important;border-top:none;margin-top:0;padding-top:0}
+    body{background:#fff;color:#000}
+    .ck-title,.ck-r-title,.ck-next h4,.ck-plan h4,.ck-road h4,.ck-bar-label,.ck-next-list a,.ck-tbl td,.ck-plan-item ul,.ck-total .num,.ck-total .lv,.ck-type{color:#000}
+    .ck-r-sub,.ck-bar-pct,.ck-next-list a span,.ck-plan-item p,.ck-total .txt,.ck-tbl th,.ck-plan-item .period,.ck-src{color:#444}
+    .ck-total,.ck-next-list a,.ck-plan-item,.ck-type{background:#fff;border-color:#bbb}
+    .ck-bar-track{background:#e6e6e6}
+    .ck-bar-fill{background:#555}
+    .ck-bar-track,.ck-bar-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-plan-item .prio{background:#555;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-bar-row,.ck-plan-item,.ck-road-step{break-inside:avoid;page-break-inside:avoid}
+  }
+</style>
+</head><body>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../../">📊 今日の情報</a><a href="../../workboard.html">🗂 仕事ボード</a><a class="on" href="../index.html">📘 ハンドブック</a><a href="../../calendar.html">📅 品質カレンダー</a><a href="../../quiz.html">🧠 クイズ</a><a href="../../trends.html">📈 業界定点</a><a href="../../soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<header class="hb-top">
+  <div class="hb-top-in">
+    <a class="hb-brand" href="../index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
+  </div>
+</header>
+<div class="hb-shell">
+  <main class="hb-main ck-wrap">
+    <a class="ck-back" href="../index.html">← ものづくりハンドブックへ戻る</a>
+    <h1 class="ck-title">🗂 段取り力・仕組み化診断</h1>
+    <p class="ck-lead">「あの人は段取りがいい」の中身を分解します。全体像・逆算と期限・依存関係・余裕の設計・仕組み化・記録と引き継ぎの6領域36問で、どこでつまずいているかを見ます。<b>速く片づけることではなく、崩れにくく組むこと</b>を対象にしています。</p>
+    <div class="ck-note">結果は<b>能力を確定的に測るものではなく、自己認識のための目安</b>です。人物評価にも人事評価にも使いません。<b>回答はこの端末内（ブラウザのlocalStorage）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄もありません。途中で閉じても、次に開いたときに回答が復元されます。</div>
+    <div class="ck-meta"><span>約10〜15分・36問</span><span>6領域×6問・4段階</span><span>関連：A15・E6・C9・CK6</span></div>
+
+    <section class="ck-legend">
+      <h2>回答の目安（共通ルール）</h2>
+      <p>ここ1〜2ヶ月の仕事での「実際の自分」で答えてください。「こうありたい」ではなく「実際どうか」が大事です。迷ったら下の頻度を基準に。各設問にも目安を添えてあります。</p>
+      <div class="ck-lv">
+        <div><b>1 あてはまらない</b>ほとんどない（1割以下）。意識したこと・やったことがない。</div>
+        <div><b>2 あまり</b>たまにある（2〜3割）。言われればできる。</div>
+        <div><b>3 やや</b>半分以上できている（5〜7割）。意識すればだいたいできる。</div>
+        <div><b>4 あてはまる</b>ほぼ毎回（8割以上）。意識しなくても自然にそうしている。</div>
+      </div>
+    </section>
+
+    <div class="ck-prog"><span class="t"><span id="ckDone">0</span> / 36 問回答済み</span><span class="track"><span class="fill" id="ckFill"></span></span></div>
+
+    <form id="ckForm"></form>
+
+    <div class="ck-actions">
+      <button type="button" class="ck-btn" id="ckSubmit" disabled>結果を見る</button>
+      <button type="button" class="ck-btn ghost" id="ckClear">回答をクリア</button>
+    </div>
+    <p class="ck-warn" id="ckWarn">すべての設問に答えると結果を出せます。</p>
+
+    <div id="ckResult">
+      <h2 class="ck-r-title">診断結果</h2>
+      <p class="ck-r-sub">各領域は100点満点に換算しています。75点以上＝強み／50〜74点＝発展途上／50点未満＝要強化。低い領域が「伸びしろ」です。</p>
+
+      <div class="ck-total">
+        <div class="num"><span id="ckTotal">–</span><small> / 100点</small></div>
+        <div class="lv" id="ckTotalLv"></div>
+        <div class="txt" id="ckTotalTxt"></div>
+      </div>
+      <p class="ck-type" id="ckType"></p>
+
+      <div class="ck-radar"><svg id="ckRadar" width="340" height="320" viewBox="0 0 340 320" role="img" aria-label="6領域のレーダーチャート"></svg></div>
+
+      <div id="ckBars"></div>
+      <table class="ck-tbl">
+        <thead><tr><th>領域</th><th class="n">素点</th><th class="n">換算</th><th>判定</th></tr></thead>
+        <tbody id="ckTable"></tbody>
+      </table>
+
+      <div class="ck-plan">
+        <h4>優先して鍛えるとよい領域とトレーニング</h4>
+        <p class="ck-r-sub">全部を一度にやらず、<b>優先度1のトレーニングを1つだけ</b>選んで実際の仕事で使い続けるのが定着のコツです。</p>
+        <div id="ckPlan"></div>
+      </div>
+
+      <div class="ck-road">
+        <h4>この力が効いてくる場面</h4>
+        <div class="ck-road-step"><div class="when">立ち上げ・移管</div><div><b>抜けを作らない</b> — 工程が多く関係者が広い仕事ほど、全体像と依存関係の見立てが結果を分けます。</div></div>
+        <div class="ck-road-step"><div class="when">特急・増産対応</div><div><b>無理を事故にしない</b> — 余裕の設計がないと、しわ寄せが検査や記録の省略に向かいます。</div></div>
+        <div class="ck-road-step"><div class="when">業務の棚卸し</div><div><b>抱え込みを解く</b> — 自分しかできない仕事を型にすると、増えた仕事の行き場ができます。</div></div>
+        <div class="ck-road-step"><div class="when">引き継ぎ・休暇</div><div><b>止まらない状態を作る</b> — 決めた理由まで残っていれば、同じ議論の蒸し返しがなくなります。</div></div>
+      </div>
+
+      <div class="ck-comp-actions">
+        <button type="button" class="ck-btn" id="ckCopy">結果をテキストでコピー</button>
+        <button type="button" class="ck-btn ghost" id="ckPrint">印刷 / PDF保存</button>
+        <p class="ck-copystate" id="ckCopyState"></p>
+      </div>
+
+      <div class="ck-next">
+        <h4>次の一歩</h4>
+        <div class="ck-next-list">
+          <a href="../s-a15.html">A15 品証業務の棚卸しと負荷平準化<span>業務一覧化・属人化の解消・やめる業務の決め方</span></a>
+          <a href="../s-e6.html">E6 技能伝承・マニュアル化<span>属人化しているものを、次の人が再現できる形に残す</span></a>
+          <a href="../s-c9.html">C9 急な増産・特急対応時の品質リスク管理<span>余裕がないときに何を守るかの判断</span></a>
+          <a href="ck6.html">CK6 問題設定力（イシュー思考）診断<span>そもそもやる価値のある仕事を選ぶ力。段取りの前段にあたります</span></a>
+        </div>
+      </div>
+
+      <p class="ck-src">診断フレームの主な参考：工程管理・クリティカルパスの一般的な考え方（依存関係とリードタイム）／バッファを設ける計画手法の一般的な整理／標準化・仕組み化に関する実務上の定石（2回目は型にする・注意ではなく仕組みで防ぐ）。本診断は自己認識のための簡易ツールであり、能力を確定的に測定するものではありません。</p>
+    </div>
+  </main>
+</div>
+<footer class="hb-foot"><div class="wrap"><div><b>ものづくりハンドブック</b></div><div class="hb-foot-sub">セルフチェックの共通仕様・原本は <a href="../content/checks.md">content/checks.md</a>。</div></div></footer>
+<script>
+(function(){
+"use strict";
+var CATS = [
+  { id:"A", name:"全体像をつかむ", short:"全体像", desc:"着手前に、終わりまでの絵が描けているか。",
+    qs:[
+      { t:"仕事を始める前に、完了までの流れをひととおり書き出している",
+        ex:"4＝ざっとでも工程を並べてから着手する ／ 1＝目の前の作業から手をつける" },
+      { t:"「終わった」と言える状態を、着手前に決めている",
+        ex:"4＝完了条件を明文化してから始める ／ 1＝やりながら決まっていく" },
+      { t:"自分の担当以外の工程も含めて、誰が何をするかを把握している",
+        ex:"4＝前後の担当と役割を言える ／ 1＝自分の範囲しか見ていない" },
+      { t:"初めての仕事でも、似た仕事の型を思い出して当てはめられる",
+        ex:"4＝過去の型を持ち出して組み立てる ／ 1＝毎回ゼロから考えている" },
+      { t:"全体の中で、どこが失敗しやすいかの見当がついている",
+        ex:"4＝つまずきやすい工程を先に言える ／ 1＝進めてみて初めて気づく" },
+      { t:"一度立てた段取りを、状況が変わったら組み直している",
+        ex:"4＝変化に合わせて組み替える ／ 1＝最初の計画のまま押し切る" }
+    ]},
+  { id:"B", name:"逆算と期限", short:"逆算と期限", desc:"締切から逆にたどって、いつ何を始めるかを置けるか。",
+    qs:[
+      { t:"締切から逆算して、着手日・中間の期日を決めている",
+        ex:"4＝逆算して日付を置く ／ 1＝締切だけ意識して進める" },
+      { t:"自分の作業だけでなく、相手の確認・承認にかかる時間を見込んでいる",
+        ex:"4＝相手の時間を織り込んで期日を置く ／ 1＝自分の作業時間だけで考える" },
+      { t:"中間の期日を設けて、途中で進み具合を確認している",
+        ex:"4＝中間チェックを最初から入れる ／ 1＝終盤まで進捗を見ない" },
+      { t:"遅れそうだと分かった時点で、締切より前に相談している",
+        ex:"4＝分かった時点ですぐ伝える ／ 1＝ぎりぎりまで自分で何とかしようとする" },
+      { t:"見積もった時間と実際にかかった時間を、後で比べている",
+        ex:"4＝ずれを次の見積もりに反映する ／ 1＝比べたことがない" },
+      { t:"複数の仕事があるとき、締切と重さで順番を決めている",
+        ex:"4＝期限と工数で並べ替える ／ 1＝来た順に処理している" }
+    ]},
+  { id:"C", name:"依存関係の見立て", short:"依存関係", desc:"人や物の待ちで止まらないよう、先に手を打てるか。",
+    qs:[
+      { t:"人や物の到着待ちで止まりそうな箇所を、先に洗い出している",
+        ex:"4＝待ちが発生する箇所を事前に列挙する ／ 1＝止まってから気づく" },
+      { t:"時間のかかる依頼（手配・承認・外注）を、先に出している",
+        ex:"4＝リードタイムの長いものから着手する ／ 1＝順番どおりに進めて後半で詰まる" },
+      { t:"自分が止まると誰が止まるかを把握している",
+        ex:"4＝後工程への影響を言える ／ 1＝自分の遅れの波及は考えていない" },
+      { t:"並行して進められる作業を見つけて、同時に動かしている",
+        ex:"4＝待ち時間に別の作業を差し込む ／ 1＝一つずつ順番に進める" },
+      { t:"相手待ちのものは、いつまでに欲しいかを明示して依頼している",
+        ex:"4＝期日と理由を添えて依頼する ／ 1＝お願いしますとだけ伝える" },
+      { t:"止まっている案件を、放置せず定期的に見直している",
+        ex:"4＝週1回など決めて棚卸しする ／ 1＝忘れた頃に思い出す" }
+    ]},
+  { id:"D", name:"余裕の設計", short:"余裕の設計", desc:"想定どおりに進まない前提で組めているか。",
+    qs:[
+      { t:"予定を立てるとき、割り込みや手戻りの分の余裕を入れている",
+        ex:"4＝バッファを明示的に確保する ／ 1＝すべて順調に進む前提で組む" },
+      { t:"うまくいかなかったときの代わりの手を、先に考えている",
+        ex:"4＝代替案を1つ用意してから進める ／ 1＝そのときに考える" },
+      { t:"自分の手が空かない状態が続いていることに、自分で気づける",
+        ex:"4＝負荷の偏りを自覚して相談する ／ 1＝気づいたら限界まで来ている" },
+      { t:"急ぎの割り込みが来たとき、既存の予定への影響を確認してから引き受ける",
+        ex:"4＝何を後ろにずらすか決めてから受ける ／ 1＝とりあえず引き受ける" },
+      { t:"やらないこと・後回しにすることを、意識的に決めている",
+        ex:"4＝落とす判断とその理由を言える ／ 1＝全部やろうとして溢れる" },
+      { t:"締切の直前ではなく、少し前に終わる形で組んでいる",
+        ex:"4＝前倒しで終える設計にする ／ 1＝いつも締切ぎりぎりになる" }
+    ]},
+  { id:"E", name:"仕組み化・属人化の解消", short:"仕組み化", desc:"自分がいなくても回る形にできるか。",
+    qs:[
+      { t:"繰り返す作業を、手順や様式にして誰でもできる形にしている",
+        ex:"4＝2回目からは型を作って使う ／ 1＝毎回自分のやり方でこなす" },
+      { t:"同じミスが起きたとき、注意ではなく仕組みで防ぐ方法を考えている",
+        ex:"4＝チェック欄・順序変更など仕組みで直す ／ 1＝気をつけますで終わることが多い" },
+      { t:"自分しかできない仕事を把握し、渡す準備をしている",
+        ex:"4＝手順化・複数名対応を進めている ／ 1＝自分がやった方が早いので抱えている" },
+      { t:"作った手順を、実際に他の人にやってもらって確かめている",
+        ex:"4＝人にやらせて詰まる箇所を直す ／ 1＝作って置いてあるだけ" },
+      { t:"やめてよい作業・減らせる作業を定期的に見直している",
+        ex:"4＝棚卸しして落とす判断をする ／ 1＝増える一方になっている" },
+      { t:"手順は更新しやすい置き場所・形式にしている",
+        ex:"4＝更新の担当とタイミングまで決めている ／ 1＝作りっぱなしで古くなっている" }
+    ]},
+  { id:"F", name:"記録と引き継ぎ", short:"記録と引き継ぎ", desc:"後から追える形で残せているか。",
+    qs:[
+      { t:"決まったことを、決めた理由とセットで残している",
+        ex:"4＝経緯まで残して後から読める ／ 1＝結論だけ、または残していない" },
+      { t:"やり取りの結論を、その日のうちに書き留めている",
+        ex:"4＝当日中に残す ／ 1＝記憶に頼っている" },
+      { t:"引き継ぎのとき、いま止まっていること・注意点まで伝えている",
+        ex:"4＝進行中と注意点を書面で渡す ／ 1＝資料の場所を教えて終わり" },
+      { t:"次に同じことをする人が困らないよう、つまずいた点を残している",
+        ex:"4＝ハマった箇所と回避法を書き残す ／ 1＝自分が分かればよいと考えている" },
+      { t:"記録の置き場所を決めて、探せる状態にしている",
+        ex:"4＝場所と名前の付け方が決まっている ／ 1＝その都度違う場所に置いている" },
+      { t:"休んだときに、他の人が状況を追える状態にしている",
+        ex:"4＝進行中の案件が誰にでも分かる ／ 1＝自分がいないと分からない" }
+    ]}
+];
+
+var PLANS = {
+  A: { title:"全体像をつかむ力を鍛える", period:"目安：3週間〜1ヶ月",
+    items:[
+      "【着手前に工程を並べる】どんな仕事でも、始める前に工程を5つ前後で書き出す（5分でよい）",
+      "【完了条件を1行】「何がどうなったら終わりか」を着手前に1行で書く",
+      "【型を貯める】終わった仕事の工程リストを残し、次に似た仕事が来たら持ち出す"
+    ],
+    why:"全体像が見えていないと、後半で必ず手戻りが出ます。最初の5分がいちばん費用対効果の高い時間です。"},
+  B: { title:"逆算と期限の設計を鍛える", period:"目安：2〜4週間",
+    items:[
+      "【逆算カレンダー】締切から逆に、着手日と中間期日をカレンダーに置く",
+      "【相手の時間を見込む】確認・承認にかかる日数を、依頼相手ごとに実績で持っておく",
+      "【見積もりの振り返り】かかった時間を記録し、次回の見積もりに反映する（月1回でよい）",
+      "【早めの相談】遅れそうと思った時点で、締切前に一報を入れる"
+    ],
+    why:"締切は守るものではなく設計するものです。逆算して置いた中間期日が、遅れを早く見つけてくれます。"},
+  C: { title:"依存関係の見立てを鍛える", period:"目安：1〜2ヶ月",
+    items:[
+      "【待ちの棚卸し】仕事を始めるとき、人・物の待ちが発生する箇所を先に列挙する",
+      "【長いものから出す】リードタイムの長い依頼・手配・承認から先に着手する",
+      "【期日つきで頼む】依頼には必ず「いつまでに・なぜ」を添える",
+      "【止まり案件の定期確認】週1回、止まっている案件だけを見る時間を取る"
+    ],
+    why:"段取りが崩れる原因の多くは、自分の作業ではなく待ちです。待ちを先に見つけられるかで差がつきます。"},
+  D: { title:"余裕の設計を鍛える", period:"目安：1〜2ヶ月（習慣として定着させる）",
+    items:[
+      "【2割の余白】予定を組むとき、意図的に2割ほど余白を残す",
+      "【代替案を1つ】主要な工程には、うまくいかなかったときの代わりの手を1つ用意する",
+      "【割り込みの受け方】急ぎを受けるときは「何を後ろにずらすか」を決めてから受ける",
+      "【やらないことを書く】やることリストに、必ず1つ「今回はやらない」を書く"
+    ],
+    why:"予定どおりに進む仕事はほとんどありません。余白を最初から入れておくと、想定外が事故になりません。"},
+  E: { title:"仕組み化・属人化の解消を鍛える", period:"目安：2〜3ヶ月（1つずつ型にする）",
+    items:[
+      "【2回目は型にする】同じ作業が2回目になったら、その場で手順か様式にする",
+      "【注意ではなく仕組み】ミスが起きたら「気をつける」で終わらせず、順序・チェック欄・道具で防ぐ",
+      "【自分しかできない仕事リスト】洗い出して、渡しやすい順に1つずつ手順化する",
+      "【人に試してもらう】作った手順は、必ず他の人にやってもらって詰まる箇所を直す"
+    ],
+    why:"自分でやった方が早い状態が続くと、増えた仕事の行き場がなくなります。渡せる形にすることが自分の余白を作ります。"},
+  F: { title:"記録と引き継ぎを鍛える", period:"目安：3週間で習慣化",
+    items:[
+      "【理由もセットで】決まったことは、決めた理由を1行添えて残す",
+      "【当日中に書く】やり取りの結論は、その日のうちに残す（3行でよい）",
+      "【つまずきを残す】自分がハマった箇所と回避法を、次の人のために1行書く",
+      "【置き場所を決める】記録の置き場と名前の付け方を決めて、探せる状態にする"
+    ],
+    why:"記録は自分のためではなく、次の人と未来の自分のためのものです。理由が残っていない決定は、必ずもう一度議論されます。"}
+};
+
+var TYPE_HINT = {
+  A: "「全体像」でつまずくタイプ：目の前の作業から手をつけがちで、後半に手戻りが出やすい傾向。着手前の5分で工程を並べる習慣から。",
+  B: "「逆算と期限」でつまずくタイプ：締切だけを見て進めがち。中間期日を置くだけで、遅れに早く気づけるようになります。",
+  C: "「依存関係」でつまずくタイプ：自分の作業は速くても、待ちで止まりやすい傾向。リードタイムの長い依頼を先に出すのが効きます。",
+  D: "「余裕の設計」でつまずくタイプ：すべて順調に進む前提で組みがち。2割の余白と、やらないことを決める練習を。",
+  E: "「仕組み化」でつまずくタイプ：自分でやった方が早い状態が続きがち。2回目の作業を型にするところから始めましょう。",
+  F: "「記録と引き継ぎ」でつまずくタイプ：頭の中に情報が溜まりやすい傾向。決めた理由を1行添えるだけで、同じ議論の蒸し返しが減ります。"
+};
+
+var SCALE = ["あてはまらない","あまり","やや","あてはまる"];
+var STORAGE_KEY = "hb_ck8_answers_v1";
+var TOTAL_Q = 0;
+CATS.forEach(function(c){ TOTAL_Q += c.qs.length; });
+
+var form      = document.getElementById("ckForm");
+var submitBtn = document.getElementById("ckSubmit");
+var clearBtn  = document.getElementById("ckClear");
+var warnEl    = document.getElementById("ckWarn");
+var doneEl    = document.getElementById("ckDone");
+var fillEl    = document.getElementById("ckFill");
+var resultEl  = document.getElementById("ckResult");
+var copyState = document.getElementById("ckCopyState");
+var lastResult = null;
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+function loadAnswers(){
+  try{ var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveAnswers(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(answers)); }catch(e){}
+}
+var answers = loadAnswers();
+
+function buildForm(){
+  var html = "";
+  CATS.forEach(function(cat, ci){
+    html += '<div class="ck-domain"><h2 class="ck-domain-h">' + esc(cat.id + ". " + cat.name) +
+            '<span class="cnt" data-cnt="' + esc(cat.id) + '">0 / ' + cat.qs.length + '</span></h2>' +
+            '<p class="ck-domain-d">' + esc(cat.desc) + '</p>';
+    cat.qs.forEach(function(q, qi){
+      var key = cat.id + "_" + qi;
+      var no = ci * 6 + qi + 1;
+      html += '<div class="ck-q"><p class="ck-qtext">Q' + no + '. ' + esc(q.t) + '</p>' +
+              '<p class="ck-qex"><span class="tag">目安</span>' + esc(q.ex) + '</p>' +
+              '<div class="ck-scale">';
+      SCALE.forEach(function(lab, si){
+        var v = si + 1;
+        var on = answers[key] === v ? ' on' : '';
+        var chk = answers[key] === v ? ' checked' : '';
+        html += '<label class="ck-opt' + on + '"><input type="radio" name="q_' + key + '" value="' + v + '"' + chk + '>' +
+                '<span>' + v + '</span><span>' + esc(lab) + '</span></label>';
+      });
+      html += '</div></div>';
+    });
+    html += '</div>';
+  });
+  form.innerHTML = html;
+  updateProgress();
+}
+
+function answeredCount(){
+  var n = 0;
+  CATS.forEach(function(cat){
+    cat.qs.forEach(function(_, qi){ if (answers[cat.id + "_" + qi]) n++; });
+  });
+  return n;
+}
+
+function updateProgress(){
+  var n = answeredCount();
+  doneEl.textContent = n;
+  fillEl.style.width = (n / TOTAL_Q * 100) + "%";
+  submitBtn.disabled = (n < TOTAL_Q);
+  warnEl.textContent = (n < TOTAL_Q)
+    ? ("残り " + (TOTAL_Q - n) + " 問です。すべて答えると結果を出せます。")
+    : "すべて回答済みです。「結果を見る」を押してください。";
+  CATS.forEach(function(cat){
+    var c = 0;
+    cat.qs.forEach(function(_, qi){ if (answers[cat.id + "_" + qi]) c++; });
+    var el = form.querySelector('[data-cnt="' + cat.id + '"]');
+    if (el) el.textContent = c + " / " + cat.qs.length;
+  });
+}
+
+form.addEventListener("change", function(e){
+  var t = e.target;
+  if (!t || t.type !== "radio") return;
+  var key = t.name.replace(/^q_/, "");
+  answers[key] = Number(t.value);
+  saveAnswers();
+  var scale = t.parentNode.parentNode;
+  var labels = scale.querySelectorAll(".ck-opt");
+  for (var i = 0; i < labels.length; i++) labels[i].classList.remove("on");
+  t.parentNode.classList.add("on");
+  updateProgress();
+});
+
+function levelOf(pct){
+  if (pct >= 75) return "強み";
+  if (pct >= 50) return "発展途上";
+  return "要強化";
+}
+
+function score(){
+  return CATS.map(function(cat){
+    var sum = 0;
+    cat.qs.forEach(function(_, qi){ sum += (answers[cat.id + "_" + qi] || 0); });
+    var n = cat.qs.length;
+    return { id:cat.id, name:cat.name, short:cat.short, raw:sum, max:n * 4,
+             pct: Math.round((sum - n) / (n * 3) * 100) };
+  });
+}
+
+function drawRadar(scores){
+  var cx = 170, cy = 160, R = 105, n = scores.length;
+  function angle(i){ return (Math.PI * 2 * i / n) - Math.PI / 2; }
+  function pt(i, r){ return [cx + Math.cos(angle(i)) * r, cy + Math.sin(angle(i)) * r]; }
+  var el = "";
+  [25, 50, 75, 100].forEach(function(g){
+    var pts = scores.map(function(_, i){ return pt(i, R * g / 100).map(function(v){ return v.toFixed(1); }).join(","); }).join(" ");
+    el += '<polygon points="' + pts + '" fill="none" stroke="var(--line)" stroke-width="1"/>';
+  });
+  scores.forEach(function(_, i){
+    var p = pt(i, R);
+    el += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0].toFixed(1) + '" y2="' + p[1].toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>';
+  });
+  var dataPts = scores.map(function(s, i){ return pt(i, R * Math.max(s.pct, 3) / 100); });
+  el += '<polygon points="' + dataPts.map(function(p){ return p.map(function(v){ return v.toFixed(1); }).join(","); }).join(" ") +
+        '" fill="var(--a-bg)" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round"/>';
+  dataPts.forEach(function(p){
+    el += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4" fill="var(--teal)"/>';
+  });
+  scores.forEach(function(s, i){
+    var p = pt(i, R + 26);
+    var anchor = Math.abs(p[0] - cx) < 12 ? "middle" : (p[0] > cx ? "start" : "end");
+    el += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 4).toFixed(1) + '" text-anchor="' + anchor +
+          '" font-size="11" fill="var(--muted)">' + esc(s.short) + '</text>';
+    el += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 17).toFixed(1) + '" text-anchor="' + anchor +
+          '" font-size="10" fill="var(--faint)">' + s.pct + '</text>';
+  });
+  document.getElementById("ckRadar").innerHTML = el;
+}
+
+function renderPlan(scores){
+  var sorted = scores.slice().sort(function(a, b){ return a.pct - b.pct; });
+  var targets = sorted.filter(function(s){ return s.pct < 75; }).slice(0, 3);
+  var html = "";
+  if (targets.length === 0){
+    targets = sorted.slice(0, 2);
+    html += '<p class="ck-r-sub">すべての領域が「強み」の水準です。相対的に低い領域をさらに磨くメニューを挙げます。</p>';
+  }
+  targets.forEach(function(s, i){
+    var p = PLANS[s.id];
+    html += '<div class="ck-plan-item"><h5><span class="prio">優先度' + (i + 1) + '</span>' + esc(p.title) +
+            '（現在 ' + s.pct + '点）</h5><div class="period">' + esc(p.period) + '</div><p>' + esc(p.why) + '</p><ul>' +
+            p.items.map(function(it){ return "<li>" + esc(it) + "</li>"; }).join("") + '</ul></div>';
+  });
+  var g = null;
+  scores.forEach(function(s){ if (s.id === "G") g = s; });
+  var hasG = targets.some(function(t){ return t.id === "G"; });
+  if (g && g.pct < 50 && !hasG){
+    html += '<div class="ck-plan-item"><h5>補足：アウトプット習慣づくり（現在 ' + g.pct + '点）</h5>' +
+            '<div class="period">' + esc(PLANS.G.period) + '</div>' +
+            '<p>どのトレーニングも「続ける仕組み」がないと効果が出ません。上のメニューを1日5〜10分の小さな習慣として設計してください。</p></div>';
+  }
+  document.getElementById("ckPlan").innerHTML = html;
+}
+
+function render(scores){
+  var total = Math.round(scores.reduce(function(a, s){ return a + s.pct; }, 0) / scores.length);
+  document.getElementById("ckTotal").textContent = total;
+  document.getElementById("ckTotalLv").textContent = "総合の目安：" + levelOf(total);
+  document.getElementById("ckTotalTxt").textContent = total >= 75
+    ? "仕事の組み立て方の型はおおむね身についています。凹んでいる領域をピンポイントで磨くのが効率的です。"
+    : (total >= 50
+      ? "土台はあります。弱い領域に絞って手を入れれば、1〜2ヶ月で「間に合わない」が減ってきます。"
+      : "伸びしろが大きい状態です。まずは「着手前に工程を書き出す」ところから始めるのが近道です。");
+
+  var sorted = scores.slice().sort(function(a, b){ return a.pct - b.pct; });
+  document.getElementById("ckType").textContent = TYPE_HINT[sorted[0].id];
+
+  var bars = "", tbl = "";
+  scores.forEach(function(s){
+    bars += '<div class="ck-bar-row"><div class="ck-bar-label">' + esc(s.name) + '</div>' +
+            '<div class="ck-bar-track"><div class="ck-bar-fill" style="width:' + s.pct + '%"></div></div>' +
+            '<div class="ck-bar-pct">' + s.pct + '</div></div>';
+    tbl += '<tr><td>' + esc(s.name) + '</td><td class="n">' + s.raw + ' / ' + s.max + '</td>' +
+           '<td class="n">' + s.pct + '点</td><td>' + levelOf(s.pct) + '</td></tr>';
+  });
+  document.getElementById("ckBars").innerHTML = bars;
+  document.getElementById("ckTable").innerHTML = tbl;
+
+  drawRadar(scores);
+  renderPlan(scores);
+}
+
+submitBtn.addEventListener("click", function(){
+  if (answeredCount() < TOTAL_Q) return;
+  lastResult = score();
+  render(lastResult);
+  resultEl.style.display = "block";
+  resultEl.scrollIntoView({ behavior:"smooth", block:"start" });
+  copyState.textContent = "";
+});
+
+clearBtn.addEventListener("click", function(){
+  if (!window.confirm("すべての回答を消去します。よろしいですか？")) return;
+  answers = {};
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  lastResult = null;
+  buildForm();
+  resultEl.style.display = "none";
+  copyState.textContent = "";
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+
+document.getElementById("ckCopy").addEventListener("click", function(){
+  if (!lastResult) return;
+  var total = Math.round(lastResult.reduce(function(a, s){ return a + s.pct; }, 0) / lastResult.length);
+  var sorted = lastResult.slice().sort(function(a, b){ return a.pct - b.pct; });
+  var lines = [];
+  lines.push("■ 段取り力・仕組み化診断 の結果");
+  lines.push("総合の目安：" + total + " / 100点（" + levelOf(total) + "）");
+  lines.push("");
+  lines.push("【領域別】");
+  lastResult.forEach(function(s){ lines.push("・" + s.name + "：" + s.pct + "点（" + levelOf(s.pct) + "）"); });
+  lines.push("");
+  lines.push("【優先して鍛えたい領域】" + sorted[0].name + "、" + sorted[1].name);
+  lines.push("【所見】" + TYPE_HINT[sorted[0].id]);
+  lines.push("");
+  lines.push("※自己認識のための簡易ツールの結果であり、能力を確定的に測ったものではありません。");
+  var text = lines.join("\n");
+  var ok = false;
+  try{
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text); ok = true; }
+    else {
+      var ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+  }catch(e){ ok = false; }
+  copyState.textContent = ok ? "コピーしました。" : "コピーできませんでした。画面の内容を手動で選択してコピーしてください。";
+});
+
+document.getElementById("ckPrint").addEventListener("click", function(){ window.print(); });
+
+buildForm();
+})();
+</script>
+</body>
+</html>

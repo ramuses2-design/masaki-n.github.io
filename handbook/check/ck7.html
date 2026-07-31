@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数字で語る力（定量思考）診断｜ものづくりハンドブック</title>
+<meta name="description" content="36問・6領域で、数字の扱い方の現在地を見て、優先して鍛える領域とトレーニングを知るセルフチェック">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
+<style>
+  .ck-wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+  /* このページはサイドバーを持たないため、hb-shell の2カラムグリッド（262px＋本文）だと
+     本文がサイドバー列に入って幅が潰れる。1カラムに上書きする。 */
+  .hb-shell{grid-template-columns:minmax(0,1fr)}
+  .ck-back{display:inline-block;font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:16px}
+  .ck-back:hover{color:var(--teal)}
+  .ck-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--head);margin:0 0 8px}
+  .ck-lead{color:var(--muted);font-size:.9rem;line-height:1.8;margin:0 0 16px}
+  .ck-note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 24px}
+  .ck-note b{color:var(--head)}
+  .ck-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--faint);margin:0 0 24px}
+
+  .ck-legend{margin:0 0 24px}
+  .ck-legend h2{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 6px}
+  .ck-legend p{font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 12px}
+  .ck-lv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-lv div{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:.76rem;color:var(--muted);line-height:1.6}
+  .ck-lv b{display:block;color:var(--head);font-size:.8rem;margin-bottom:2px}
+
+  .ck-prog{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;margin:0 0 8px;display:flex;align-items:center;gap:12px}
+  .ck-prog .t{font-size:.76rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ck-prog .track{flex:1;height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-prog .fill{height:100%;width:0;background:var(--teal);border-radius:6px}
+
+  .ck-domain{margin:0 0 8px;padding:16px 0 4px;border-top:1px solid var(--line)}
+  .ck-domain:first-of-type{border-top:none}
+  .ck-domain-h{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 2px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .ck-domain-h .cnt{font-size:.74rem;font-weight:400;color:var(--faint);margin-left:auto;font-variant-numeric:tabular-nums}
+  .ck-domain-d{font-size:.8rem;color:var(--muted);line-height:1.7;margin:0 0 12px}
+  .ck-q{padding:14px 0;border-top:1px solid var(--line)}
+  .ck-q:first-of-type{border-top:none}
+  .ck-qtext{font-size:.9rem;line-height:1.7;color:var(--ink);margin:0 0 4px}
+  .ck-qex{font-size:.76rem;line-height:1.7;color:var(--muted);margin:0 0 10px}
+  .ck-qex .tag{display:inline-block;font-size:.7rem;font-weight:700;color:var(--teal-d);border:1px solid var(--line-2);border-radius:20px;padding:0 8px;margin-right:6px}
+  .ck-scale{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-opt{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);text-align:center;border:1px solid var(--line);border-radius:9px;padding:8px 4px;cursor:pointer;background:var(--card)}
+  .ck-opt:has(input:checked){border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt.on{border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt input{margin:0;accent-color:var(--teal)}
+
+  .ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  .ck-btn.ghost{background:transparent;color:var(--muted);border-color:var(--line-2)}
+  .ck-btn:disabled{opacity:.45;cursor:not-allowed}
+  .ck-warn{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+
+  #ckResult{display:none;margin-top:32px;padding-top:24px;border-top:2px solid var(--line)}
+  .ck-r-title{font-size:1.15rem;font-weight:700;color:var(--head);margin:0 0 4px}
+  .ck-r-sub{font-size:.82rem;color:var(--muted);margin:0 0 20px}
+  .ck-total{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:0 0 20px}
+  .ck-total .num{font-size:2.2rem;font-weight:700;color:var(--head);line-height:1.2;font-variant-numeric:tabular-nums}
+  .ck-total .num small{font-size:.9rem;font-weight:400;color:var(--muted)}
+  .ck-total .lv{font-size:.86rem;font-weight:700;color:var(--head);margin-top:2px}
+  .ck-total .txt{font-size:.82rem;color:var(--muted);line-height:1.8;margin-top:6px}
+  .ck-type{font-size:.82rem;color:var(--ink);line-height:1.8;background:var(--a-bg);border-radius:9px;padding:12px 14px;margin:0 0 20px}
+
+  .ck-radar{display:flex;justify-content:center;margin:0 0 20px}
+  .ck-radar svg{max-width:100%;height:auto}
+  .ck-bar-row{display:grid;grid-template-columns:150px 1fr 46px;align-items:center;gap:10px;margin:0 0 10px;font-size:.82rem}
+  .ck-bar-label{color:var(--ink);line-height:1.5;overflow-wrap:anywhere}
+  .ck-bar-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-bar-fill{height:100%;background:var(--teal);border-radius:6px}
+  .ck-bar-pct{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+  .ck-tbl{width:100%;border-collapse:collapse;font-size:.8rem;margin:16px 0 0}
+  .ck-tbl th,.ck-tbl td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;color:var(--ink)}
+  .ck-tbl th{color:var(--muted);font-weight:700;font-size:.74rem}
+  .ck-tbl td.n,.ck-tbl th.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  .ck-plan{margin:24px 0 0}
+  .ck-plan h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-plan-item{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:9px;padding:14px 16px;margin:0 0 12px}
+  .ck-plan-item h5{margin:0 0 2px;font-size:.88rem;color:var(--head)}
+  .ck-plan-item .prio{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:var(--teal);border-radius:20px;padding:1px 9px;margin-right:8px}
+  .ck-plan-item .period{font-size:.74rem;color:var(--faint);margin:0 0 6px}
+  .ck-plan-item p{font-size:.8rem;color:var(--muted);line-height:1.8;margin:0 0 8px}
+  .ck-plan-item ul{margin:0;padding-left:18px;font-size:.82rem;color:var(--ink);line-height:1.8}
+
+  .ck-road{margin:24px 0 0}
+  .ck-road h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-road-step{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:.82rem;line-height:1.8}
+  .ck-road-step:first-of-type{border-top:none}
+  .ck-road-step .when{color:var(--teal-d);font-weight:700}
+  .ck-road-step b{color:var(--head)}
+  .ck-road-step div:last-child{color:var(--muted)}
+
+  .ck-comp-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
+  .ck-copystate{font-size:.78rem;color:var(--teal);margin:0;min-height:1.2em}
+  .ck-next{margin:24px 0 0}
+  .ck-next h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-next-list{display:flex;flex-direction:column;gap:8px}
+  .ck-next-list a{display:block;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 14px;font-size:.85rem;color:var(--head);text-decoration:none;font-weight:600}
+  .ck-next-list a:hover{border-color:var(--teal)}
+  .ck-next-list a span{display:block;font-weight:400;color:var(--muted);font-size:.76rem;margin-top:2px}
+  .ck-src{font-size:.74rem;color:var(--faint);line-height:1.8;margin:24px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+
+  @media (max-width:860px){
+    .ck-back{display:inline-flex;align-items:center;min-height:44px}
+    .ck-btn{min-height:44px}
+  }
+  @media (max-width:600px){
+    .ck-scale{grid-template-columns:repeat(2,1fr)}
+    .ck-lv{grid-template-columns:1fr 1fr}
+    .ck-bar-row{grid-template-columns:110px 1fr 40px}
+    .ck-road-step{grid-template-columns:1fr;gap:2px}
+  }
+  @media print{
+    .hb-top,.hb-side,.hb-shell aside,.crumb,.hb-foot,.ptabs,.ck-back,.ck-lead,.ck-meta,.ck-warn,.ck-legend,.ck-prog,#ckForm,.ck-actions,.ck-note,.ck-comp-actions{display:none !important}
+    .hb-shell{display:block !important}
+    .ck-wrap{max-width:none;padding:0}
+    #ckResult{display:block !important;border-top:none;margin-top:0;padding-top:0}
+    body{background:#fff;color:#000}
+    .ck-title,.ck-r-title,.ck-next h4,.ck-plan h4,.ck-road h4,.ck-bar-label,.ck-next-list a,.ck-tbl td,.ck-plan-item ul,.ck-total .num,.ck-total .lv,.ck-type{color:#000}
+    .ck-r-sub,.ck-bar-pct,.ck-next-list a span,.ck-plan-item p,.ck-total .txt,.ck-tbl th,.ck-plan-item .period,.ck-src{color:#444}
+    .ck-total,.ck-next-list a,.ck-plan-item,.ck-type{background:#fff;border-color:#bbb}
+    .ck-bar-track{background:#e6e6e6}
+    .ck-bar-fill{background:#555}
+    .ck-bar-track,.ck-bar-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-plan-item .prio{background:#555;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-bar-row,.ck-plan-item,.ck-road-step{break-inside:avoid;page-break-inside:avoid}
+  }
+</style>
+</head><body>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../../">📊 今日の情報</a><a href="../../workboard.html">🗂 仕事ボード</a><a class="on" href="../index.html">📘 ハンドブック</a><a href="../../calendar.html">📅 品質カレンダー</a><a href="../../quiz.html">🧠 クイズ</a><a href="../../trends.html">📈 業界定点</a><a href="../../soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<header class="hb-top">
+  <div class="hb-top-in">
+    <a class="hb-brand" href="../index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
+  </div>
+</header>
+<div class="hb-shell">
+  <main class="hb-main ck-wrap">
+    <a class="ck-back" href="../index.html">← ものづくりハンドブックへ戻る</a>
+    <h1 class="ck-title">📊 数字で語る力（定量思考）診断</h1>
+    <p class="ck-lead">同じデータを見ても、人によって結論が変わるのはなぜか。定義・ばらつき・比較・因果・見せ方・打ち手の6領域36問で、数字の扱いのどこでつまずいているかを見ます。<b>統計の知識量ではなく、日々の仕事での扱い方</b>を対象にしています。</p>
+    <div class="ck-note">結果は<b>能力を確定的に測るものではなく、自己認識のための目安</b>です。人物評価にも人事評価にも使いません。<b>回答はこの端末内（ブラウザのlocalStorage）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄もありません。途中で閉じても、次に開いたときに回答が復元されます。</div>
+    <div class="ck-meta"><span>約10〜15分・36問</span><span>6領域×6問・4段階</span><span>関連：D6・T12・T14・CK6</span></div>
+
+    <section class="ck-legend">
+      <h2>回答の目安（共通ルール）</h2>
+      <p>ここ1〜2ヶ月の仕事での「実際の自分」で答えてください。「こうありたい」ではなく「実際どうか」が大事です。迷ったら下の頻度を基準に。各設問にも目安を添えてあります。</p>
+      <div class="ck-lv">
+        <div><b>1 あてはまらない</b>ほとんどない（1割以下）。意識したこと・やったことがない。</div>
+        <div><b>2 あまり</b>たまにある（2〜3割）。言われればできる。</div>
+        <div><b>3 やや</b>半分以上できている（5〜7割）。意識すればだいたいできる。</div>
+        <div><b>4 あてはまる</b>ほぼ毎回（8割以上）。意識しなくても自然にそうしている。</div>
+      </div>
+    </section>
+
+    <div class="ck-prog"><span class="t"><span id="ckDone">0</span> / 36 問回答済み</span><span class="track"><span class="fill" id="ckFill"></span></span></div>
+
+    <form id="ckForm"></form>
+
+    <div class="ck-actions">
+      <button type="button" class="ck-btn" id="ckSubmit" disabled>結果を見る</button>
+      <button type="button" class="ck-btn ghost" id="ckClear">回答をクリア</button>
+    </div>
+    <p class="ck-warn" id="ckWarn">すべての設問に答えると結果を出せます。</p>
+
+    <div id="ckResult">
+      <h2 class="ck-r-title">診断結果</h2>
+      <p class="ck-r-sub">各領域は100点満点に換算しています。75点以上＝強み／50〜74点＝発展途上／50点未満＝要強化。低い領域が「伸びしろ」です。</p>
+
+      <div class="ck-total">
+        <div class="num"><span id="ckTotal">–</span><small> / 100点</small></div>
+        <div class="lv" id="ckTotalLv"></div>
+        <div class="txt" id="ckTotalTxt"></div>
+      </div>
+      <p class="ck-type" id="ckType"></p>
+
+      <div class="ck-radar"><svg id="ckRadar" width="340" height="320" viewBox="0 0 340 320" role="img" aria-label="6領域のレーダーチャート"></svg></div>
+
+      <div id="ckBars"></div>
+      <table class="ck-tbl">
+        <thead><tr><th>領域</th><th class="n">素点</th><th class="n">換算</th><th>判定</th></tr></thead>
+        <tbody id="ckTable"></tbody>
+      </table>
+
+      <div class="ck-plan">
+        <h4>優先して鍛えるとよい領域とトレーニング</h4>
+        <p class="ck-r-sub">全部を一度にやらず、<b>優先度1のトレーニングを1つだけ</b>選んで日々の報告で使い続けるのが定着のコツです。</p>
+        <div id="ckPlan"></div>
+      </div>
+
+      <div class="ck-road">
+        <h4>この力が効いてくる場面</h4>
+        <div class="ck-road-step"><div class="when">KPI・品質目標</div><div><b>数字で打ち手を決める</b> — 定義が揃っていない指標は、部署ごとに違う数字が出て議論が止まります。</div></div>
+        <div class="ck-road-step"><div class="when">工程能力・SPC</div><div><b>ばらつきで語る</b> — 平均だけを見ていると、規格内でも実力が落ちている状態を見逃します。</div></div>
+        <div class="ck-road-step"><div class="when">原因究明</div><div><b>相関を因果と取り違えない</b> — 同時に動いた数字を原因と決めると、効かない対策に時間を使い続けることになります。</div></div>
+        <div class="ck-road-step"><div class="when">報告・提案</div><div><b>伝わる見せ方にする</b> — 内容が正しくても、見せ方で誤解されると信頼を失います。</div></div>
+      </div>
+
+      <div class="ck-comp-actions">
+        <button type="button" class="ck-btn" id="ckCopy">結果をテキストでコピー</button>
+        <button type="button" class="ck-btn ghost" id="ckPrint">印刷 / PDF保存</button>
+        <p class="ck-copystate" id="ckCopyState"></p>
+      </div>
+
+      <div class="ck-next">
+        <h4>次の一歩</h4>
+        <div class="ck-next-list">
+          <a href="../s-d6.html">D6 KPI・品質目標の管理<span>定義・未達時のアクション・打ち手の記録。定量思考をそのまま実務で使う場面</span></a>
+          <a href="../ag-t12.html">T12 SPC・管理図の読み方<span>ばらつきと異常判定。数字の揺れを見分ける代表的な道具</span></a>
+          <a href="../ag-t14.html">T14 測定システム解析（Gage R&R）<span>その数字がそもそも測れているかを確かめる</span></a>
+          <a href="ck6.html">CK6 問題設定力（イシュー思考）診断<span>数字を何のために見るかを決める力。セットで見ると弱点がはっきりします</span></a>
+        </div>
+      </div>
+
+      <p class="ck-src">診断フレームの主な参考：QC七つ道具・統計的工程管理（ばらつきと管理図）／『問題解決のためのデータ分析』系の一般的な整理（定義・比較可能性・相関と因果）／グラフ表現の一般的な指針（軸の起点・強調の絞り込み・言い切る見出し）。本診断は自己認識のための簡易ツールであり、能力を確定的に測定するものではありません。</p>
+    </div>
+  </main>
+</div>
+<footer class="hb-foot"><div class="wrap"><div><b>ものづくりハンドブック</b></div><div class="hb-foot-sub">セルフチェックの共通仕様・原本は <a href="../content/checks.md">content/checks.md</a>。</div></div></footer>
+<script>
+(function(){
+"use strict";
+var CATS = [
+  { id:"A", name:"定義の厳密さ", short:"定義", desc:"その数字が何を数えたものか、分母と分子まで言えるか。",
+    qs:[
+      { t:"自分が出す数字の分母・分子を、聞かれたらすぐ説明できる",
+        ex:"4＝定義を1文で言える ／ 1＝集計元をたどらないと答えられない" },
+      { t:"人から渡された数字を使う前に、集計期間と除外条件を確認する",
+        ex:"4＝確認してから使う ／ 1＝そのまま引用することが多い" },
+      { t:"同じ名前の指標が部署で違う数字になっていることに気づける",
+        ex:"4＝食い違いに気づいて定義を突き合わせる ／ 1＝数字が違うと相手が間違っていると思う" },
+      { t:"「不良率」のような言葉を、必ず何に対する率か添えて使っている",
+        ex:"4＝工程別・製品別など対象を明示する ／ 1＝不良率とだけ言うことが多い" },
+      { t:"数え方が変わったとき、過去の数字と単純に比べないよう注意している",
+        ex:"4＝基準変更の時点を明示して分ける ／ 1＝そのまま並べて推移として見せる" },
+      { t:"件数と率のどちらで語るべきかを、場面に応じて選んでいる",
+        ex:"4＝目的に応じて使い分け、両方示すこともある ／ 1＝いつも同じ出し方をしている" }
+    ]},
+  { id:"B", name:"ばらつきの理解", short:"ばらつき", desc:"平均だけで語らず、散らばりと外れ値を見られるか。",
+    qs:[
+      { t:"平均値を見るとき、必ず散らばり（範囲や標準偏差）もあわせて見る",
+        ex:"4＝平均と散らばりをセットで確認する ／ 1＝平均だけで判断することが多い" },
+      { t:"少数の極端な値に平均が引っ張られていないかを確認する",
+        ex:"4＝外れ値の有無を必ず見る ／ 1＝気にしたことがない" },
+      { t:"「先月より悪化した」と言う前に、通常のばらつきの範囲内かを考える",
+        ex:"4＝いつもの振れ幅と比べてから言う ／ 1＝前月比だけで良し悪しを言う" },
+      { t:"データの分布の形（偏っていないか・山が2つないか）を見ている",
+        ex:"4＝ヒストグラムなどで形を確認する ／ 1＝代表値しか見ない" },
+      { t:"工程能力の話を、規格幅とばらつきの関係として理解している",
+        ex:"4＝規格に対する余裕として説明できる ／ 1＝数値の意味は正直あいまい" },
+      { t:"サンプル数が少ないときは、結論の強さを弱めて伝えている",
+        ex:"4＝「n数が少ないので暫定」と添える ／ 1＝件数にかかわらず同じ強さで言う" }
+    ]},
+  { id:"C", name:"比較のしかた", short:"比較", desc:"比べるときに条件をそろえられるか。",
+    qs:[
+      { t:"2つの数字を比べるとき、条件がそろっているかを先に確認する",
+        ex:"4＝期間・対象・条件をそろえてから比べる ／ 1＝出てきた数字をそのまま並べる" },
+      { t:"良くなった・悪くなったを言うとき、比較の基準を明示している",
+        ex:"4＝「前年同月比」など基準を必ず書く ／ 1＝ただ増えた・減ったと言う" },
+      { t:"季節や繁閑の影響がありそうな数字は、同じ時期どうしで比べている",
+        ex:"4＝前年同月など条件をそろえる ／ 1＝直前の月と比べることが多い" },
+      { t:"合計だけでなく、内訳に分けて比べている",
+        ex:"4＝工程別・原因別に割って見る ／ 1＝全体の数字だけで話す" },
+      { t:"割合の変化を語るとき、母数の変化も一緒に確認している",
+        ex:"4＝分母が変わっていないか必ず見る ／ 1＝率だけを見て判断する" },
+      { t:"他社や他工場の数字と比べるとき、定義の違いを疑っている",
+        ex:"4＝比較可能かを確認してから使う ／ 1＝そのまま比べて優劣を語る" }
+    ]},
+  { id:"D", name:"相関と因果", short:"相関と因果", desc:"一緒に動いているだけのものを原因と呼んでいないか。",
+    qs:[
+      { t:"2つの数字が同じ向きに動いても、それだけで原因とは言わない",
+        ex:"4＝別の要因を必ず考える ／ 1＝関係がありそうなら原因とみなす" },
+      { t:"第三の要因が両方を動かしている可能性を考える",
+        ex:"4＝共通の原因を疑う習慣がある ／ 1＝考えたことがない" },
+      { t:"「対策後に数字が良くなった」を、対策の効果と決めつけない",
+        ex:"4＝他に変わった条件がないか確認する ／ 1＝良くなれば効果ありとする" },
+      { t:"グラフの見かけの相関に、データ点の数や範囲の狭さが影響していないか見る",
+        ex:"4＝点の数と範囲を確認する ／ 1＝線の傾きで判断する" },
+      { t:"数字の裏付けがない主張と、裏付けのある主張を区別して話している",
+        ex:"4＝どこまでがデータで言えるかを明示する ／ 1＝まとめて同じ強さで話す" },
+      { t:"自分の期待に合うデータだけを選んでいないか、意識している",
+        ex:"4＝都合の悪いデータも並べて見る ／ 1＝結論に合うものを中心に集めがち" }
+    ]},
+  { id:"E", name:"見せ方（グラフ・表）", short:"見せ方", desc:"伝えたいことに合った出し方を選べるか。誤解を招く見せ方をしていないか。",
+    qs:[
+      { t:"伝えたい内容に応じて、折れ線・棒・散布図などを使い分けている",
+        ex:"4＝推移は折れ線、内訳は棒などを意識して選ぶ ／ 1＝いつも同じ形にしている" },
+      { t:"縦軸を途中から始めることで差を大きく見せていないか気をつけている",
+        ex:"4＝軸の起点に注意し、必要なら明示する ／ 1＝見栄えの良さで決めている" },
+      { t:"グラフに、何を言いたいのかが分かる見出しを付けている",
+        ex:"4＝「〇〇が△△している」と言い切る見出しを付ける ／ 1＝「不良率推移」など項目名だけ" },
+      { t:"色や装飾を増やしすぎず、見てほしいところが目立つようにしている",
+        ex:"4＝強調は1〜2か所に絞る ／ 1＝色をたくさん使いがち" },
+      { t:"表を出すとき、並び順を意味のある順（大きい順・時系列順）にしている",
+        ex:"4＝読み手が探しやすい順に並べる ／ 1＝出力されたままの順で出す" },
+      { t:"数字を出すとき、桁数や単位を読み手に合わせてそろえている",
+        ex:"4＝有効桁と単位を統一する ／ 1＝計算結果の桁をそのまま載せる" }
+    ]},
+  { id:"F", name:"数字から打ち手へ", short:"打ち手", desc:"見た数字が行動に変わっているか。",
+    qs:[
+      { t:"指標を見たあと、「だから何をするか」まで言葉にしている",
+        ex:"4＝毎回アクションまで書く ／ 1＝報告して終わることが多い" },
+      { t:"未達のとき、要因・対応・担当・期限をセットで示している",
+        ex:"4＝4点セットで書く ／ 1＝未達の事実だけ報告する" },
+      { t:"見ても誰も動かない指標は、やめるか作り直している",
+        ex:"4＝入れ替えの判断をしている ／ 1＝一度作った指標は残り続けている" },
+      { t:"単月の上下ではなく、傾向で判断している",
+        ex:"4＝3か月程度の推移で見る ／ 1＝毎月の増減に一喜一憂しがち" },
+      { t:"数字を見て実際に変えた打ち手を、記録に残している",
+        ex:"4＝打ち手と結果を残して振り返る ／ 1＝残していない" },
+      { t:"数字で説明できない部分は、そう明示したうえで判断している",
+        ex:"4＝定量と定性を分けて示す ／ 1＝数字がないと話が止まるか、逆に印象で押し切る" }
+    ]}
+];
+
+var PLANS = {
+  A: { title:"定義の厳密さを鍛える", period:"目安：2〜4週間で効果を実感しやすい",
+    items:[
+      "【分母を聞く】会議で数字が出たら1回は「その分母は何ですか」と聞く（週1回から）",
+      "【定義を1行で書く】自分が出す指標に、分子・分母・集計期間・除外条件を1行で添える",
+      "【名寄せ】同じ名前で違う数字が出ている指標を1つ選び、部署間で定義を突き合わせる"
+    ],
+    why:"定義が違う数字で議論すると、全員が正しいことを言っているのに結論が出ません。ここは最初に手を付ける価値があります。"},
+  B: { title:"ばらつきの理解を鍛える", period:"目安：1〜2ヶ月",
+    items:[
+      "【平均と一緒に範囲】平均を出したら、最大・最小か標準偏差を必ず併記する",
+      "【いつもの振れ幅】主要指標について、直近1年の通常の振れ幅を1回まとめておく",
+      "【形を見る】月1回、主要データをヒストグラムにして分布の形を見る",
+      "【n数を言う】事例や結果を語るときは必ず「何件中の何件」を添える"
+    ],
+    why:"平均だけを見ていると、実際には問題が起きている一部を見落とします。散らばりを見る癖が、異常の早期発見につながります。"},
+  C: { title:"比較のしかたを鍛える", period:"目安：2〜4週間（型を決めれば早い）",
+    items:[
+      "【条件をそろえる】比べる前に、期間・対象・条件が同じかを声に出して確認する",
+      "【基準を書く】増減を語るときは「前年同月比」「前四半期比」など基準を必ず書く",
+      "【内訳で見る】全体の数字が動いたら、必ず工程別・原因別・製品別のどれかに割って見る"
+    ],
+    why:"条件がそろっていない比較は、間違った打ち手を生みます。そろえる一手間が、後の手戻りをまるごと防ぎます。"},
+  D: { title:"相関と因果の見極めを鍛える", period:"目安：2〜3ヶ月（意識づけに時間がかかる）",
+    items:[
+      "【別の説明を1つ】原因らしきものを見つけたら、必ず別の説明を1つ考えて潰す",
+      "【共通の原因を疑う】2つの数字が一緒に動いていたら、両方を動かす第三の要因を探す",
+      "【効果の確認条件】対策の効果を見るときは、他に何が変わっていないかを先に列挙する",
+      "【反証を集める】自分の結論に合わないデータを、意識して1件は探す"
+    ],
+    why:"相関を因果と取り違えると、効かない対策に時間と費用を使い続けることになります。"},
+  E: { title:"見せ方（グラフ・表）を鍛える", period:"目安：3週間〜1ヶ月",
+    items:[
+      "【言い切る見出し】グラフの見出しを「〇〇が△△している」と言い切る形に書き換える",
+      "【強調は1か所】色や太字は、いちばん見てほしい1か所だけに絞る",
+      "【軸を確認】縦軸の起点をゼロにしたときと、途中から始めたときを見比べてから決める",
+      "【並び替え】表は必ず、大きい順か時系列順に並べ替えてから出す"
+    ],
+    why:"同じデータでも、見せ方で伝わり方が変わります。誤解を招く見せ方は、後で信頼を失う原因になります。"},
+  F: { title:"数字から打ち手へつなげる力を鍛える", period:"目安：1〜2ヶ月（月次のサイクルで回す）",
+    items:[
+      "【だから何をするか】指標を報告するとき、必ず1行で次の行動を添える",
+      "【4点セット】未達の報告は、要因・対応・担当・期限をセットで書く",
+      "【打ち手を記録】数字を見て変えた打ち手を、毎月1件は記録に残す",
+      "【指標の棚卸し】半年に1回、誰も見ていない指標・動かない指標を入れ替える"
+    ],
+    why:"数字は見るためではなく決めるためにあります。打ち手が出ていない指標は、作った時点で止まっています。"}
+};
+
+var TYPE_HINT = {
+  A: "「定義」でつまずくタイプ：数字そのものより、その数字が何を数えたものかの確認が手薄になりがちです。分母を聞く習慣だけで議論の噛み合い方が変わります。",
+  B: "「ばらつき」でつまずくタイプ：平均で判断しがちで、一部で起きている問題を見落としやすい傾向。散らばりを併記するところから始めましょう。",
+  C: "「比較」でつまずくタイプ：条件のそろっていない数字を並べてしまいがち。比べる前に期間・対象・条件を確認する一手間が効きます。",
+  D: "「相関と因果」でつまずくタイプ：一緒に動いているものを原因と見なしやすい傾向。別の説明を1つ考える癖が、効かない対策を減らします。",
+  E: "「見せ方」でつまずくタイプ：内容は正しくても伝わり方で損をしがち。見出しを言い切る形にするだけで受け取られ方が変わります。",
+  F: "「打ち手」でつまずくタイプ：数字を出すところで終わりがち。報告に1行「だから何をするか」を足すところから始めましょう。"
+};
+
+var SCALE = ["あてはまらない","あまり","やや","あてはまる"];
+var STORAGE_KEY = "hb_ck7_answers_v1";
+var TOTAL_Q = 0;
+CATS.forEach(function(c){ TOTAL_Q += c.qs.length; });
+
+var form      = document.getElementById("ckForm");
+var submitBtn = document.getElementById("ckSubmit");
+var clearBtn  = document.getElementById("ckClear");
+var warnEl    = document.getElementById("ckWarn");
+var doneEl    = document.getElementById("ckDone");
+var fillEl    = document.getElementById("ckFill");
+var resultEl  = document.getElementById("ckResult");
+var copyState = document.getElementById("ckCopyState");
+var lastResult = null;
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+function loadAnswers(){
+  try{ var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveAnswers(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(answers)); }catch(e){}
+}
+var answers = loadAnswers();
+
+function buildForm(){
+  var html = "";
+  CATS.forEach(function(cat, ci){
+    html += '<div class="ck-domain"><h2 class="ck-domain-h">' + esc(cat.id + ". " + cat.name) +
+            '<span class="cnt" data-cnt="' + esc(cat.id) + '">0 / ' + cat.qs.length + '</span></h2>' +
+            '<p class="ck-domain-d">' + esc(cat.desc) + '</p>';
+    cat.qs.forEach(function(q, qi){
+      var key = cat.id + "_" + qi;
+      var no = ci * 6 + qi + 1;
+      html += '<div class="ck-q"><p class="ck-qtext">Q' + no + '. ' + esc(q.t) + '</p>' +
+              '<p class="ck-qex"><span class="tag">目安</span>' + esc(q.ex) + '</p>' +
+              '<div class="ck-scale">';
+      SCALE.forEach(function(lab, si){
+        var v = si + 1;
+        var on = answers[key] === v ? ' on' : '';
+        var chk = answers[key] === v ? ' checked' : '';
+        html += '<label class="ck-opt' + on + '"><input type="radio" name="q_' + key + '" value="' + v + '"' + chk + '>' +
+                '<span>' + v + '</span><span>' + esc(lab) + '</span></label>';
+      });
+      html += '</div></div>';
+    });
+    html += '</div>';
+  });
+  form.innerHTML = html;
+  updateProgress();
+}
+
+function answeredCount(){
+  var n = 0;
+  CATS.forEach(function(cat){
+    cat.qs.forEach(function(_, qi){ if (answers[cat.id + "_" + qi]) n++; });
+  });
+  return n;
+}
+
+function updateProgress(){
+  var n = answeredCount();
+  doneEl.textContent = n;
+  fillEl.style.width = (n / TOTAL_Q * 100) + "%";
+  submitBtn.disabled = (n < TOTAL_Q);
+  warnEl.textContent = (n < TOTAL_Q)
+    ? ("残り " + (TOTAL_Q - n) + " 問です。すべて答えると結果を出せます。")
+    : "すべて回答済みです。「結果を見る」を押してください。";
+  CATS.forEach(function(cat){
+    var c = 0;
+    cat.qs.forEach(function(_, qi){ if (answers[cat.id + "_" + qi]) c++; });
+    var el = form.querySelector('[data-cnt="' + cat.id + '"]');
+    if (el) el.textContent = c + " / " + cat.qs.length;
+  });
+}
+
+form.addEventListener("change", function(e){
+  var t = e.target;
+  if (!t || t.type !== "radio") return;
+  var key = t.name.replace(/^q_/, "");
+  answers[key] = Number(t.value);
+  saveAnswers();
+  var scale = t.parentNode.parentNode;
+  var labels = scale.querySelectorAll(".ck-opt");
+  for (var i = 0; i < labels.length; i++) labels[i].classList.remove("on");
+  t.parentNode.classList.add("on");
+  updateProgress();
+});
+
+function levelOf(pct){
+  if (pct >= 75) return "強み";
+  if (pct >= 50) return "発展途上";
+  return "要強化";
+}
+
+function score(){
+  return CATS.map(function(cat){
+    var sum = 0;
+    cat.qs.forEach(function(_, qi){ sum += (answers[cat.id + "_" + qi] || 0); });
+    var n = cat.qs.length;
+    return { id:cat.id, name:cat.name, short:cat.short, raw:sum, max:n * 4,
+             pct: Math.round((sum - n) / (n * 3) * 100) };
+  });
+}
+
+function drawRadar(scores){
+  var cx = 170, cy = 160, R = 105, n = scores.length;
+  function angle(i){ return (Math.PI * 2 * i / n) - Math.PI / 2; }
+  function pt(i, r){ return [cx + Math.cos(angle(i)) * r, cy + Math.sin(angle(i)) * r]; }
+  var el = "";
+  [25, 50, 75, 100].forEach(function(g){
+    var pts = scores.map(function(_, i){ return pt(i, R * g / 100).map(function(v){ return v.toFixed(1); }).join(","); }).join(" ");
+    el += '<polygon points="' + pts + '" fill="none" stroke="var(--line)" stroke-width="1"/>';
+  });
+  scores.forEach(function(_, i){
+    var p = pt(i, R);
+    el += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0].toFixed(1) + '" y2="' + p[1].toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>';
+  });
+  var dataPts = scores.map(function(s, i){ return pt(i, R * Math.max(s.pct, 3) / 100); });
+  el += '<polygon points="' + dataPts.map(function(p){ return p.map(function(v){ return v.toFixed(1); }).join(","); }).join(" ") +
+        '" fill="var(--a-bg)" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round"/>';
+  dataPts.forEach(function(p){
+    el += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4" fill="var(--teal)"/>';
+  });
+  scores.forEach(function(s, i){
+    var p = pt(i, R + 26);
+    var anchor = Math.abs(p[0] - cx) < 12 ? "middle" : (p[0] > cx ? "start" : "end");
+    el += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 4).toFixed(1) + '" text-anchor="' + anchor +
+          '" font-size="11" fill="var(--muted)">' + esc(s.short) + '</text>';
+    el += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 17).toFixed(1) + '" text-anchor="' + anchor +
+          '" font-size="10" fill="var(--faint)">' + s.pct + '</text>';
+  });
+  document.getElementById("ckRadar").innerHTML = el;
+}
+
+function renderPlan(scores){
+  var sorted = scores.slice().sort(function(a, b){ return a.pct - b.pct; });
+  var targets = sorted.filter(function(s){ return s.pct < 75; }).slice(0, 3);
+  var html = "";
+  if (targets.length === 0){
+    targets = sorted.slice(0, 2);
+    html += '<p class="ck-r-sub">すべての領域が「強み」の水準です。相対的に低い領域をさらに磨くメニューを挙げます。</p>';
+  }
+  targets.forEach(function(s, i){
+    var p = PLANS[s.id];
+    html += '<div class="ck-plan-item"><h5><span class="prio">優先度' + (i + 1) + '</span>' + esc(p.title) +
+            '（現在 ' + s.pct + '点）</h5><div class="period">' + esc(p.period) + '</div><p>' + esc(p.why) + '</p><ul>' +
+            p.items.map(function(it){ return "<li>" + esc(it) + "</li>"; }).join("") + '</ul></div>';
+  });
+  var g = null;
+  scores.forEach(function(s){ if (s.id === "G") g = s; });
+  var hasG = targets.some(function(t){ return t.id === "G"; });
+  if (g && g.pct < 50 && !hasG){
+    html += '<div class="ck-plan-item"><h5>補足：アウトプット習慣づくり（現在 ' + g.pct + '点）</h5>' +
+            '<div class="period">' + esc(PLANS.G.period) + '</div>' +
+            '<p>どのトレーニングも「続ける仕組み」がないと効果が出ません。上のメニューを1日5〜10分の小さな習慣として設計してください。</p></div>';
+  }
+  document.getElementById("ckPlan").innerHTML = html;
+}
+
+function render(scores){
+  var total = Math.round(scores.reduce(function(a, s){ return a + s.pct; }, 0) / scores.length);
+  document.getElementById("ckTotal").textContent = total;
+  document.getElementById("ckTotalLv").textContent = "総合の目安：" + levelOf(total);
+  document.getElementById("ckTotalTxt").textContent = total >= 75
+    ? "数字の扱いの型はおおむね身についています。凹んでいる領域をピンポイントで磨くのが効率的です。"
+    : (total >= 50
+      ? "土台はあります。弱い領域に絞って日々の報告で使えば、2〜3ヶ月で数字の説得力が変わってきます。"
+      : "伸びしろが大きい状態です。まずは「その数字の分母は何か」を確認するところから始めるのが近道です。");
+
+  var sorted = scores.slice().sort(function(a, b){ return a.pct - b.pct; });
+  document.getElementById("ckType").textContent = TYPE_HINT[sorted[0].id];
+
+  var bars = "", tbl = "";
+  scores.forEach(function(s){
+    bars += '<div class="ck-bar-row"><div class="ck-bar-label">' + esc(s.name) + '</div>' +
+            '<div class="ck-bar-track"><div class="ck-bar-fill" style="width:' + s.pct + '%"></div></div>' +
+            '<div class="ck-bar-pct">' + s.pct + '</div></div>';
+    tbl += '<tr><td>' + esc(s.name) + '</td><td class="n">' + s.raw + ' / ' + s.max + '</td>' +
+           '<td class="n">' + s.pct + '点</td><td>' + levelOf(s.pct) + '</td></tr>';
+  });
+  document.getElementById("ckBars").innerHTML = bars;
+  document.getElementById("ckTable").innerHTML = tbl;
+
+  drawRadar(scores);
+  renderPlan(scores);
+}
+
+submitBtn.addEventListener("click", function(){
+  if (answeredCount() < TOTAL_Q) return;
+  lastResult = score();
+  render(lastResult);
+  resultEl.style.display = "block";
+  resultEl.scrollIntoView({ behavior:"smooth", block:"start" });
+  copyState.textContent = "";
+});
+
+clearBtn.addEventListener("click", function(){
+  if (!window.confirm("すべての回答を消去します。よろしいですか？")) return;
+  answers = {};
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  lastResult = null;
+  buildForm();
+  resultEl.style.display = "none";
+  copyState.textContent = "";
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+
+document.getElementById("ckCopy").addEventListener("click", function(){
+  if (!lastResult) return;
+  var total = Math.round(lastResult.reduce(function(a, s){ return a + s.pct; }, 0) / lastResult.length);
+  var sorted = lastResult.slice().sort(function(a, b){ return a.pct - b.pct; });
+  var lines = [];
+  lines.push("■ 数字で語る力（定量思考）診断 の結果");
+  lines.push("総合の目安：" + total + " / 100点（" + levelOf(total) + "）");
+  lines.push("");
+  lines.push("【領域別】");
+  lastResult.forEach(function(s){ lines.push("・" + s.name + "：" + s.pct + "点（" + levelOf(s.pct) + "）"); });
+  lines.push("");
+  lines.push("【優先して鍛えたい領域】" + sorted[0].name + "、" + sorted[1].name);
+  lines.push("【所見】" + TYPE_HINT[sorted[0].id]);
+  lines.push("");
+  lines.push("※自己認識のための簡易ツールの結果であり、能力を確定的に測ったものではありません。");
+  var text = lines.join("\n");
+  var ok = false;
+  try{
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text); ok = true; }
+    else {
+      var ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+  }catch(e){ ok = false; }
+  copyState.textContent = ok ? "コピーしました。" : "コピーできませんでした。画面の内容を手動で選択してコピーしてください。";
+});
+
+document.getElementById("ckPrint").addEventListener("click", function(){ window.print(); });
+
+buildForm();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>聞く力（傾聴・質問力）診断｜ものづくりハンドブック</title>
+<meta name="description" content="36問・6領域で、聞き方の現在地を見て、優先して鍛える領域とトレーニングを知るセルフチェック">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
+<style>
+  .ck-wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+  /* このページはサイドバーを持たないため、hb-shell の2カラムグリッド（262px＋本文）だと
+     本文がサイドバー列に入って幅が潰れる。1カラムに上書きする。 */
+  .hb-shell{grid-template-columns:minmax(0,1fr)}
+  .ck-back{display:inline-block;font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:16px}
+  .ck-back:hover{color:var(--teal)}
+  .ck-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--head);margin:0 0 8px}
+  .ck-lead{color:var(--muted);font-size:.9rem;line-height:1.8;margin:0 0 16px}
+  .ck-note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 24px}
+  .ck-note b{color:var(--head)}
+  .ck-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--faint);margin:0 0 24px}
+
+  .ck-legend{margin:0 0 24px}
+  .ck-legend h2{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 6px}
+  .ck-legend p{font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 12px}
+  .ck-lv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-lv div{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:.76rem;color:var(--muted);line-height:1.6}
+  .ck-lv b{display:block;color:var(--head);font-size:.8rem;margin-bottom:2px}
+
+  .ck-prog{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;margin:0 0 8px;display:flex;align-items:center;gap:12px}
+  .ck-prog .t{font-size:.76rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ck-prog .track{flex:1;height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-prog .fill{height:100%;width:0;background:var(--teal);border-radius:6px}
+
+  .ck-domain{margin:0 0 8px;padding:16px 0 4px;border-top:1px solid var(--line)}
+  .ck-domain:first-of-type{border-top:none}
+  .ck-domain-h{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 2px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .ck-domain-h .cnt{font-size:.74rem;font-weight:400;color:var(--faint);margin-left:auto;font-variant-numeric:tabular-nums}
+  .ck-domain-d{font-size:.8rem;color:var(--muted);line-height:1.7;margin:0 0 12px}
+  .ck-q{padding:14px 0;border-top:1px solid var(--line)}
+  .ck-q:first-of-type{border-top:none}
+  .ck-qtext{font-size:.9rem;line-height:1.7;color:var(--ink);margin:0 0 4px}
+  .ck-qex{font-size:.76rem;line-height:1.7;color:var(--muted);margin:0 0 10px}
+  .ck-qex .tag{display:inline-block;font-size:.7rem;font-weight:700;color:var(--teal-d);border:1px solid var(--line-2);border-radius:20px;padding:0 8px;margin-right:6px}
+  .ck-scale{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-opt{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);text-align:center;border:1px solid var(--line);border-radius:9px;padding:8px 4px;cursor:pointer;background:var(--card)}
+  .ck-opt:has(input:checked){border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt.on{border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt input{margin:0;accent-color:var(--teal)}
+
+  .ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  .ck-btn.ghost{background:transparent;color:var(--muted);border-color:var(--line-2)}
+  .ck-btn:disabled{opacity:.45;cursor:not-allowed}
+  .ck-warn{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+
+  #ckResult{display:none;margin-top:32px;padding-top:24px;border-top:2px solid var(--line)}
+  .ck-r-title{font-size:1.15rem;font-weight:700;color:var(--head);margin:0 0 4px}
+  .ck-r-sub{font-size:.82rem;color:var(--muted);margin:0 0 20px}
+  .ck-total{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:0 0 20px}
+  .ck-total .num{font-size:2.2rem;font-weight:700;color:var(--head);line-height:1.2;font-variant-numeric:tabular-nums}
+  .ck-total .num small{font-size:.9rem;font-weight:400;color:var(--muted)}
+  .ck-total .lv{font-size:.86rem;font-weight:700;color:var(--head);margin-top:2px}
+  .ck-total .txt{font-size:.82rem;color:var(--muted);line-height:1.8;margin-top:6px}
+  .ck-type{font-size:.82rem;color:var(--ink);line-height:1.8;background:var(--a-bg);border-radius:9px;padding:12px 14px;margin:0 0 20px}
+
+  .ck-radar{display:flex;justify-content:center;margin:0 0 20px}
+  .ck-radar svg{max-width:100%;height:auto}
+  .ck-bar-row{display:grid;grid-template-columns:150px 1fr 46px;align-items:center;gap:10px;margin:0 0 10px;font-size:.82rem}
+  .ck-bar-label{color:var(--ink);line-height:1.5;overflow-wrap:anywhere}
+  .ck-bar-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-bar-fill{height:100%;background:var(--teal);border-radius:6px}
+  .ck-bar-pct{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+  .ck-tbl{width:100%;border-collapse:collapse;font-size:.8rem;margin:16px 0 0}
+  .ck-tbl th,.ck-tbl td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;color:var(--ink)}
+  .ck-tbl th{color:var(--muted);font-weight:700;font-size:.74rem}
+  .ck-tbl td.n,.ck-tbl th.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  .ck-plan{margin:24px 0 0}
+  .ck-plan h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-plan-item{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:9px;padding:14px 16px;margin:0 0 12px}
+  .ck-plan-item h5{margin:0 0 2px;font-size:.88rem;color:var(--head)}
+  .ck-plan-item .prio{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:var(--teal);border-radius:20px;padding:1px 9px;margin-right:8px}
+  .ck-plan-item .period{font-size:.74rem;color:var(--faint);margin:0 0 6px}
+  .ck-plan-item p{font-size:.8rem;color:var(--muted);line-height:1.8;margin:0 0 8px}
+  .ck-plan-item ul{margin:0;padding-left:18px;font-size:.82rem;color:var(--ink);line-height:1.8}
+
+  .ck-road{margin:24px 0 0}
+  .ck-road h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-road-step{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:.82rem;line-height:1.8}
+  .ck-road-step:first-of-type{border-top:none}
+  .ck-road-step .when{color:var(--teal-d);font-weight:700}
+  .ck-road-step b{color:var(--head)}
+  .ck-road-step div:last-child{color:var(--muted)}
+
+  .ck-comp-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
+  .ck-copystate{font-size:.78rem;color:var(--teal);margin:0;min-height:1.2em}
+  .ck-next{margin:24px 0 0}
+  .ck-next h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-next-list{display:flex;flex-direction:column;gap:8px}
+  .ck-next-list a{display:block;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 14px;font-size:.85rem;color:var(--head);text-decoration:none;font-weight:600}
+  .ck-next-list a:hover{border-color:var(--teal)}
+  .ck-next-list a span{display:block;font-weight:400;color:var(--muted);font-size:.76rem;margin-top:2px}
+  .ck-src{font-size:.74rem;color:var(--faint);line-height:1.8;margin:24px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+
+  @media (max-width:860px){
+    .ck-back{display:inline-flex;align-items:center;min-height:44px}
+    .ck-btn{min-height:44px}
+  }
+  @media (max-width:600px){
+    .ck-scale{grid-template-columns:repeat(2,1fr)}
+    .ck-lv{grid-template-columns:1fr 1fr}
+    .ck-bar-row{grid-template-columns:110px 1fr 40px}
+    .ck-road-step{grid-template-columns:1fr;gap:2px}
+  }
+  @media print{
+    .hb-top,.hb-side,.hb-shell aside,.crumb,.hb-foot,.ptabs,.ck-back,.ck-lead,.ck-meta,.ck-warn,.ck-legend,.ck-prog,#ckForm,.ck-actions,.ck-note,.ck-comp-actions{display:none !important}
+    .hb-shell{display:block !important}
+    .ck-wrap{max-width:none;padding:0}
+    #ckResult{display:block !important;border-top:none;margin-top:0;padding-top:0}
+    body{background:#fff;color:#000}
+    .ck-title,.ck-r-title,.ck-next h4,.ck-plan h4,.ck-road h4,.ck-bar-label,.ck-next-list a,.ck-tbl td,.ck-plan-item ul,.ck-total .num,.ck-total .lv,.ck-type{color:#000}
+    .ck-r-sub,.ck-bar-pct,.ck-next-list a span,.ck-plan-item p,.ck-total .txt,.ck-tbl th,.ck-plan-item .period,.ck-src{color:#444}
+    .ck-total,.ck-next-list a,.ck-plan-item,.ck-type{background:#fff;border-color:#bbb}
+    .ck-bar-track{background:#e6e6e6}
+    .ck-bar-fill{background:#555}
+    .ck-bar-track,.ck-bar-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-plan-item .prio{background:#555;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-bar-row,.ck-plan-item,.ck-road-step{break-inside:avoid;page-break-inside:avoid}
+  }
+</style>
+</head><body>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../../">📊 今日の情報</a><a href="../../workboard.html">🗂 仕事ボード</a><a class="on" href="../index.html">📘 ハンドブック</a><a href="../../calendar.html">📅 品質カレンダー</a><a href="../../quiz.html">🧠 クイズ</a><a href="../../trends.html">📈 業界定点</a><a href="../../soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<header class="hb-top">
+  <div class="hb-top-in">
+    <a class="hb-brand" href="../index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
+  </div>
+</header>
+<div class="hb-shell">
+  <main class="hb-main ck-wrap">
+    <a class="ck-back" href="../index.html">← ものづくりハンドブックへ戻る</a>
+    <h1 class="ck-title">👂 聞く力（傾聴・質問力）診断</h1>
+    <p class="ck-lead">「話を聞ける人」が具体的に何をしているのかを分解します。聞く姿勢・事実を引き出す質問・深掘り・相手の前提を引き出す・要約と確認・聞いたあとの扱いの6領域36問。<b>クレームの一次対応、原因究明のヒアリング、1on1</b>など、聞いた内容の質がそのまま結果になる場面に効きます。</p>
+    <div class="ck-note">結果は<b>能力を確定的に測るものではなく、自己認識のための目安</b>です。人物評価にも人事評価にも使いません。<b>回答はこの端末内（ブラウザのlocalStorage）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄もありません。途中で閉じても、次に開いたときに回答が復元されます。</div>
+    <div class="ck-meta"><span>約10〜15分・36問</span><span>6領域×6問・4段階</span><span>関連：A1・S3・B3・CK6</span></div>
+
+    <section class="ck-legend">
+      <h2>回答の目安（共通ルール）</h2>
+      <p>ここ1〜2ヶ月の仕事での「実際の自分」で答えてください。「こうありたい」ではなく「実際どうか」が大事です。迷ったら下の頻度を基準に。各設問にも目安を添えてあります。</p>
+      <div class="ck-lv">
+        <div><b>1 あてはまらない</b>ほとんどない（1割以下）。意識したこと・やったことがない。</div>
+        <div><b>2 あまり</b>たまにある（2〜3割）。言われればできる。</div>
+        <div><b>3 やや</b>半分以上できている（5〜7割）。意識すればだいたいできる。</div>
+        <div><b>4 あてはまる</b>ほぼ毎回（8割以上）。意識しなくても自然にそうしている。</div>
+      </div>
+    </section>
+
+    <div class="ck-prog"><span class="t"><span id="ckDone">0</span> / 36 問回答済み</span><span class="track"><span class="fill" id="ckFill"></span></span></div>
+
+    <form id="ckForm"></form>
+
+    <div class="ck-actions">
+      <button type="button" class="ck-btn" id="ckSubmit" disabled>結果を見る</button>
+      <button type="button" class="ck-btn ghost" id="ckClear">回答をクリア</button>
+    </div>
+    <p class="ck-warn" id="ckWarn">すべての設問に答えると結果を出せます。</p>
+
+    <div id="ckResult">
+      <h2 class="ck-r-title">診断結果</h2>
+      <p class="ck-r-sub">各領域は100点満点に換算しています。75点以上＝強み／50〜74点＝発展途上／50点未満＝要強化。低い領域が「伸びしろ」です。</p>
+
+      <div class="ck-total">
+        <div class="num"><span id="ckTotal">–</span><small> / 100点</small></div>
+        <div class="lv" id="ckTotalLv"></div>
+        <div class="txt" id="ckTotalTxt"></div>
+      </div>
+      <p class="ck-type" id="ckType"></p>
+
+      <div class="ck-radar"><svg id="ckRadar" width="340" height="320" viewBox="0 0 340 320" role="img" aria-label="6領域のレーダーチャート"></svg></div>
+
+      <div id="ckBars"></div>
+      <table class="ck-tbl">
+        <thead><tr><th>領域</th><th class="n">素点</th><th class="n">換算</th><th>判定</th></tr></thead>
+        <tbody id="ckTable"></tbody>
+      </table>
+
+      <div class="ck-plan">
+        <h4>優先して鍛えるとよい領域とトレーニング</h4>
+        <p class="ck-r-sub">全部を一度にやらず、<b>優先度1のトレーニングを1つだけ</b>選んで実際の会話で使い続けるのが定着のコツです。</p>
+        <div id="ckPlan"></div>
+      </div>
+
+      <div class="ck-road">
+        <h4>この力が効いてくる場面</h4>
+        <div class="ck-road-step"><div class="when">クレーム一次対応</div><div><b>事実が取れるかで決まる</b> — 最初のヒアリングで取れた事実の質が、その後の対応の速さと正確さをそのまま決めます。</div></div>
+        <div class="ck-road-step"><div class="when">原因究明</div><div><b>作業者から本当のことが聞ける</b> — 問い詰めになると事実が出てこなくなります。聞き方が調査の結果を左右します。</div></div>
+        <div class="ck-road-step"><div class="when">1on1・面談</div><div><b>相談される人になる</b> — 解決策を出す前に聞ききることで、本当の困りごとが表に出ます。</div></div>
+        <div class="ck-road-step"><div class="when">部門間の調整</div><div><b>前提の違いを見つける</b> — 噛み合わない議論の多くは、結論ではなく前提が違っています。</div></div>
+      </div>
+
+      <div class="ck-comp-actions">
+        <button type="button" class="ck-btn" id="ckCopy">結果をテキストでコピー</button>
+        <button type="button" class="ck-btn ghost" id="ckPrint">印刷 / PDF保存</button>
+        <p class="ck-copystate" id="ckCopyState"></p>
+      </div>
+
+      <div class="ck-next">
+        <h4>次の一歩</h4>
+        <div class="ck-next-list">
+          <a href="../s-a1.html">A1 1on1（育成・面談）<span>聞く力がそのまま成果になる代表的な場面</span></a>
+          <a href="../ag-s3.html">S3 クレーム・苦情の一次対応<span>聞く項目の順番と、その場で約束しないという原則</span></a>
+          <a href="../s-b3.html">B3 原因究明（発生と流出の両面）<span>事実と推測を分けて聞くことが、そのまま調査の質になる</span></a>
+          <a href="ck5.html">CK5 言語化スキル自己診断<span>聞いた内容を言葉にして返す力。あわせて見ると弱点がはっきりします</span></a>
+        </div>
+      </div>
+
+      <p class="ck-src">診断フレームの主な参考：傾聴（アクティブリスニング）の一般的な整理／コーチングにおける質問の型（開いた質問・閉じた質問・深掘り）／事実確認のヒアリングに関する実務上の定石（5W1H・事実と推測の切り分け）。本診断は自己認識のための簡易ツールであり、能力を確定的に測定するものではありません。</p>
+    </div>
+  </main>
+</div>
+<footer class="hb-foot"><div class="wrap"><div><b>ものづくりハンドブック</b></div><div class="hb-foot-sub">セルフチェックの共通仕様・原本は <a href="../content/checks.md">content/checks.md</a>。</div></div></footer>
+<script>
+(function(){
+"use strict";
+var CATS = [
+  { id:"A", name:"聞く姿勢", short:"聞く姿勢", desc:"相手が話しやすい状態を作れているか。",
+    qs:[
+      { t:"相手が話しているとき、途中でさえぎらずに最後まで聞いている",
+        ex:"4＝言いたいことがあっても一度受け止める ／ 1＝途中で自分の話を始めがち" },
+      { t:"相手が言いよどんでいるとき、急かさずに待てる",
+        ex:"4＝沈黙を数秒待てる ／ 1＝間があくと自分が埋めてしまう" },
+      { t:"相談を受けたとき、まず解決策を出そうとせずに状況を聞ききる",
+        ex:"4＝先に全体を聞いてから話す ／ 1＝聞きながら解決策を考え始める" },
+      { t:"相手の話に対して、表情や相づちで聞いていることを示している",
+        ex:"4＝相手が話しやすい反応を返している ／ 1＝黙って聞いていることが多い" },
+      { t:"忙しいときでも、聞く時間を取れないなら「いつなら聞ける」と伝えている",
+        ex:"4＝時間を約束し直す ／ 1＝手を止めずに生返事になりがち" },
+      { t:"話しにくそうな相手には、場所や人数を変えるなどの配慮をしている",
+        ex:"4＝場を変える判断ができる ／ 1＝その場で聞こうとする" }
+    ]},
+  { id:"B", name:"事実を引き出す質問", short:"事実の質問", desc:"あいまいな話から、確かめられる事実を取り出せるか。",
+    qs:[
+      { t:"「いつ・どこで・どれだけ」を、具体的に聞けている",
+        ex:"4＝数量・時刻・工程まで確認する ／ 1＝だいたいの話のまま進む" },
+      { t:"相手の言葉が抽象的なとき、具体例を挙げてもらっている",
+        ex:"4＝「たとえばどんな場面ですか」と聞ける ／ 1＝そのまま受け取って進む" },
+      { t:"「見た事実」と「その人の推測」を、質問で分けて確認している",
+        ex:"4＝どこまでが確認済みかを聞く ／ 1＝話の全体を事実として扱いがち" },
+      { t:"はい・いいえで終わらない聞き方ができる",
+        ex:"4＝開いた質問と閉じた質問を使い分ける ／ 1＝確認質問ばかりになる" },
+      { t:"誘導せずに聞ける（自分の想定を先に言ってしまわない）",
+        ex:"4＝仮説は伏せて相手の言葉を待つ ／ 1＝「〇〇ですよね」と確認から入る" },
+      { t:"聞いた内容をその場でメモし、あとで確認できる形にしている",
+        ex:"4＝要点を書き取りながら聞く ／ 1＝記憶に頼ることが多い" }
+    ]},
+  { id:"C", name:"深掘りする", short:"深掘り", desc:"表面の答えで止まらず、その先を聞けるか。",
+    qs:[
+      { t:"答えが返ってきたあと、もう一段掘る質問をしている",
+        ex:"4＝「それはなぜですか」を自然に続けられる ／ 1＝答えが出たら次の話題へ移る" },
+      { t:"「忙しい」「難しい」などの言葉を、そのままにせず中身を聞いている",
+        ex:"4＝何がどう難しいのかまで聞く ／ 1＝そういうものかと受け取る" },
+      { t:"相手が困っていることの背景・経緯を聞いている",
+        ex:"4＝いつから・何がきっかけかを確認する ／ 1＝いまの状態だけを聞く" },
+      { t:"問い詰めにならないよう、聞き方の言葉を選んでいる",
+        ex:"4＝「なぜ」を「どういう経緯で」に言い換えるなど工夫する ／ 1＝率直に問い返して相手が固くなることがある" },
+      { t:"相手が言いにくそうにしている部分に、気づいて触れられる",
+        ex:"4＝話していない部分の存在に気づける ／ 1＝話された範囲だけで理解する" },
+      { t:"自分の理解が浅いと感じたとき、分かったふりをせずに聞き直す",
+        ex:"4＝率直に聞き直せる ／ 1＝場の空気で流してしまう" }
+    ]},
+  { id:"D", name:"相手の前提を引き出す", short:"前提を引き出す", desc:"相手が当たり前だと思っていることを、言葉にしてもらえるか。",
+    qs:[
+      { t:"相手にとって当たり前になっている前提を、言葉にしてもらっている",
+        ex:"4＝「そこは何を基準にしていますか」と聞ける ／ 1＝前提は共有できている前提で話す" },
+      { t:"同じ言葉を、相手と自分で同じ意味で使えているか確認している",
+        ex:"4＝用語の意味をすり合わせる ／ 1＝通じている前提で進む" },
+      { t:"相手が何を一番心配しているかを聞き出せている",
+        ex:"4＝懸念を言葉にしてもらえる ／ 1＝要望の表面だけを受け取る" },
+      { t:"相手の立場から見た事情（制約・都合）を確認している",
+        ex:"4＝相手側の制約を必ず聞く ／ 1＝こちらの都合で話を進めがち" },
+      { t:"意見が食い違ったとき、どこで前提が違うのかを探している",
+        ex:"4＝前提の違いを特定しにいく ／ 1＝結論の違いを議論し続ける" },
+      { t:"相手が期待している結果（どうなれば良いか）を確認している",
+        ex:"4＝望む状態を先に聞く ／ 1＝依頼内容だけ受けて着手する" }
+    ]},
+  { id:"E", name:"要約と確認", short:"要約と確認", desc:"聞いた内容を返して、ずれを取り除けるか。",
+    qs:[
+      { t:"聞いた内容を自分の言葉でまとめ直して、相手に確認している",
+        ex:"4＝「つまり〇〇ということですね」と返す ／ 1＝そのまま次へ進む" },
+      { t:"長い話を、要点をしぼって返せる",
+        ex:"4＝1〜2文でまとめられる ／ 1＝全部を繰り返すか、まとめられない" },
+      { t:"確認したときに違うと言われたら、素直に修正して聞き直している",
+        ex:"4＝ずれを歓迎して直す ／ 1＝自分の理解を押し通しがち" },
+      { t:"打ち合わせの最後に、決まったこと・持ち帰りを口頭で確認している",
+        ex:"4＝毎回その場で確認する ／ 1＝解散してから議事録で気づく" },
+      { t:"言った・言わないになりそうな内容は、その場で書いて共有している",
+        ex:"4＝その場でメモを見せて合意する ／ 1＝後から文章にする" },
+      { t:"曖昧なまま終わりそうなとき、あえて明確にする質問をしている",
+        ex:"4＝「誰がいつまでに」を確認する ／ 1＝空気を読んで流すことがある" }
+    ]},
+  { id:"F", name:"聞いたあとの扱い", short:"聞いたあと", desc:"聞きっぱなしにせず、次につなげられるか。",
+    qs:[
+      { t:"相談を受けたあと、その後どうなったかを自分から確認している",
+        ex:"4＝後日こちらから声をかける ／ 1＝相手から言ってくるのを待つ" },
+      { t:"聞いた話のうち、共有してよい範囲と伏せる範囲を分けている",
+        ex:"4＝相手に確認したうえで扱う ／ 1＝良かれと思って共有してしまうことがある" },
+      { t:"自分では解決できない相談を、適切な人につないでいる",
+        ex:"4＝つなぐ先と伝え方を考えて渡す ／ 1＝抱えるか、そのまま返してしまう" },
+      { t:"聞いた内容から、本人が気づいていない論点を返せることがある",
+        ex:"4＝別の見方を1つ差し出せる ／ 1＝聞くだけで終わることが多い" },
+      { t:"相談してくれたことに対して、その場で受け止めを返している",
+        ex:"4＝言ってくれてよかったと伝える ／ 1＝内容の処理だけで終わる" },
+      { t:"同じ相談が繰り返されるとき、仕組みの問題として扱っている",
+        ex:"4＝個別対応で終わらせず原因を見にいく ／ 1＝その都度対応している" }
+    ]}
+];
+
+var PLANS = {
+  A: { title:"聞く姿勢を整える", period:"目安：3週間で変化を実感しやすい",
+    items:[
+      "【最後まで聞く】相手が話し終わるまで、自分の意見を言わないと決めて1週間過ごす",
+      "【3秒待つ】相手が言いよどんだら、心の中で3つ数えてから口を開く",
+      "【時間を約束する】いま聞けないときは「〇時なら聞けます」と時間を返す"
+    ],
+    why:"聞き方の技術より前に、相手が話しやすい状態かどうかで情報の量が決まります。"},
+  B: { title:"事実を引き出す質問を鍛える", period:"目安：1ヶ月（実務で使いながら）",
+    items:[
+      "【いつ・どこで・どれだけ】相談を受けたら、この3つを必ず埋めてから次に進む",
+      "【たとえば？】抽象的な言葉が出たら「たとえばどんな場面ですか」を1回入れる",
+      "【事実か推測か】「それは確認済みですか、それとも見立てですか」を聞けるようにする",
+      "【想定は伏せる】自分の仮説を先に言わずに聞く練習を、週1回意識して行う"
+    ],
+    why:"クレームの一次対応でも原因究明でも、最初に取れた事実の質がその後を決めます。"},
+  C: { title:"深掘りする力を鍛える", period:"目安：1〜2ヶ月",
+    items:[
+      "【もう一段】答えが返ってきたら、必ずもう1つだけ質問を重ねる",
+      "【便利な言葉を掘る】「忙しい」「難しい」が出たら、何がどうなのかを具体化してもらう",
+      "【なぜを言い換える】「なぜ」を「どういう経緯で」「どのあたりが」に言い換えて角を取る",
+      "【分かったふりをやめる】理解が曖昧なとき、その場で聞き直すと決める"
+    ],
+    why:"表面の答えで止まると、対策も表面で終わります。もう一段が本当の論点に届きます。"},
+  D: { title:"相手の前提を引き出す力を鍛える", period:"目安：1〜2ヶ月",
+    items:[
+      "【基準を聞く】「そこは何を基準に判断していますか」を持ち球にする",
+      "【言葉をそろえる】議論が噛み合わないと感じたら、使っている言葉の意味を確認する",
+      "【心配ごとを聞く】要望を聞いたあとに「一番心配なのはどこですか」を足す",
+      "【相手の制約】相手側の都合・制約を必ず1つは聞いてから話を進める"
+    ],
+    why:"意見の対立は、結論ではなく前提の違いから来ていることがほとんどです。"},
+  E: { title:"要約と確認を鍛える", period:"目安：3週間で習慣化",
+    items:[
+      "【つまり〇〇ですね】聞き終わったら、自分の言葉で1〜2文にして返す",
+      "【最後の30秒】打ち合わせの最後に、決まったこと・持ち帰り・期限を口頭で確認する",
+      "【その場で書く】言った・言わないになりそうな内容は、その場で書いて見せる",
+      "【誰がいつまでに】曖昧なまま終わりそうなときに、この一言を必ず入れる"
+    ],
+    why:"聞けていても確認していなければ、ずれたまま進みます。返して確かめるまでが「聞く」です。"},
+  F: { title:"聞いたあとの扱いを鍛える", period:"目安：1〜2ヶ月",
+    items:[
+      "【後日確認】相談を受けた案件は、1〜2週間後に自分から様子を聞く",
+      "【扱いを確認する】共有してよいか、誰までなら良いかを本人に確認してから動く",
+      "【つなぎ方を工夫】自分で解けない相談は、つなぐ先と伝え方を用意して渡す",
+      "【繰り返しは仕組みへ】同じ相談が3回来たら、仕組みの問題として扱う"
+    ],
+    why:"聞きっぱなしが続くと、次から相談が来なくなります。その後を追うことが信頼になります。"}
+};
+
+var TYPE_HINT = {
+  A: "「聞く姿勢」でつまずくタイプ：内容の処理は速い一方、相手が話しにくくなりがち。最後まで聞く・3秒待つの2つだけで印象が変わります。",
+  B: "「事実の質問」でつまずくタイプ：話の全体を事実として受け取りやすい傾向。いつ・どこで・どれだけを埋める習慣が効きます。",
+  C: "「深掘り」でつまずくタイプ：最初の答えで納得しがち。もう一段だけ質問を重ねる練習から始めましょう。",
+  D: "「前提を引き出す」でつまずくタイプ：話が噛み合わないとき、結論の議論を続けてしまいがち。前提の違いを探しにいくと早く抜けられます。",
+  E: "「要約と確認」でつまずくタイプ：理解はしていても返していないため、ずれに気づくのが遅れがち。返して確かめるまでを一組にしましょう。",
+  F: "「聞いたあと」でつまずくタイプ：その場では丁寧でも、その後が続かない傾向。1〜2週間後にこちらから聞くだけで信頼が変わります。"
+};
+
+var SCALE = ["あてはまらない","あまり","やや","あてはまる"];
+var STORAGE_KEY = "hb_ck9_answers_v1";
+var TOTAL_Q = 0;
+CATS.forEach(function(c){ TOTAL_Q += c.qs.length; });
+
+var form      = document.getElementById("ckForm");
+var submitBtn = document.getElementById("ckSubmit");
+var clearBtn  = document.getElementById("ckClear");
+var warnEl    = document.getElementById("ckWarn");
+var doneEl    = document.getElementById("ckDone");
+var fillEl    = document.getElementById("ckFill");
+var resultEl  = document.getElementById("ckResult");
+var copyState = document.getElementById("ckCopyState");
+var lastResult = null;
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+function loadAnswers(){
+  try{ var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveAnswers(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(answers)); }catch(e){}
+}
+var answers = loadAnswers();
+
+function buildForm(){
+  var html = "";
+  CATS.forEach(function(cat, ci){
+    html += '<div class="ck-domain"><h2 class="ck-domain-h">' + esc(cat.id + ". " + cat.name) +
+            '<span class="cnt" data-cnt="' + esc(cat.id) + '">0 / ' + cat.qs.length + '</span></h2>' +
+            '<p class="ck-domain-d">' + esc(cat.desc) + '</p>';
+    cat.qs.forEach(function(q, qi){
+      var key = cat.id + "_" + qi;
+      var no = ci * 6 + qi + 1;
+      html += '<div class="ck-q"><p class="ck-qtext">Q' + no + '. ' + esc(q.t) + '</p>' +
+              '<p class="ck-qex"><span class="tag">目安</span>' + esc(q.ex) + '</p>' +
+              '<div class="ck-scale">';
+      SCALE.forEach(function(lab, si){
+        var v = si + 1;
+        var on = answers[key] === v ? ' on' : '';
+        var chk = answers[key] === v ? ' checked' : '';
+        html += '<label class="ck-opt' + on + '"><input type="radio" name="q_' + key + '" value="' + v + '"' + chk + '>' +
+                '<span>' + v + '</span><span>' + esc(lab) + '</span></label>';
+      });
+      html += '</div></div>';
+    });
+    html += '</div>';
+  });
+  form.innerHTML = html;
+  updateProgress();
+}
+
+function answeredCount(){
+  var n = 0;
+  CATS.forEach(function(cat){
+    cat.qs.forEach(function(_, qi){ if (answers[cat.id + "_" + qi]) n++; });
+  });
+  return n;
+}
+
+function updateProgress(){
+  var n = answeredCount();
+  doneEl.textContent = n;
+  fillEl.style.width = (n / TOTAL_Q * 100) + "%";
+  submitBtn.disabled = (n < TOTAL_Q);
+  warnEl.textContent = (n < TOTAL_Q)
+    ? ("残り " + (TOTAL_Q - n) + " 問です。すべて答えると結果を出せます。")
+    : "すべて回答済みです。「結果を見る」を押してください。";
+  CATS.forEach(function(cat){
+    var c = 0;
+    cat.qs.forEach(function(_, qi){ if (answers[cat.id + "_" + qi]) c++; });
+    var el = form.querySelector('[data-cnt="' + cat.id + '"]');
+    if (el) el.textContent = c + " / " + cat.qs.length;
+  });
+}
+
+form.addEventListener("change", function(e){
+  var t = e.target;
+  if (!t || t.type !== "radio") return;
+  var key = t.name.replace(/^q_/, "");
+  answers[key] = Number(t.value);
+  saveAnswers();
+  var scale = t.parentNode.parentNode;
+  var labels = scale.querySelectorAll(".ck-opt");
+  for (var i = 0; i < labels.length; i++) labels[i].classList.remove("on");
+  t.parentNode.classList.add("on");
+  updateProgress();
+});
+
+function levelOf(pct){
+  if (pct >= 75) return "強み";
+  if (pct >= 50) return "発展途上";
+  return "要強化";
+}
+
+function score(){
+  return CATS.map(function(cat){
+    var sum = 0;
+    cat.qs.forEach(function(_, qi){ sum += (answers[cat.id + "_" + qi] || 0); });
+    var n = cat.qs.length;
+    return { id:cat.id, name:cat.name, short:cat.short, raw:sum, max:n * 4,
+             pct: Math.round((sum - n) / (n * 3) * 100) };
+  });
+}
+
+function drawRadar(scores){
+  var cx = 170, cy = 160, R = 105, n = scores.length;
+  function angle(i){ return (Math.PI * 2 * i / n) - Math.PI / 2; }
+  function pt(i, r){ return [cx + Math.cos(angle(i)) * r, cy + Math.sin(angle(i)) * r]; }
+  var el = "";
+  [25, 50, 75, 100].forEach(function(g){
+    var pts = scores.map(function(_, i){ return pt(i, R * g / 100).map(function(v){ return v.toFixed(1); }).join(","); }).join(" ");
+    el += '<polygon points="' + pts + '" fill="none" stroke="var(--line)" stroke-width="1"/>';
+  });
+  scores.forEach(function(_, i){
+    var p = pt(i, R);
+    el += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0].toFixed(1) + '" y2="' + p[1].toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>';
+  });
+  var dataPts = scores.map(function(s, i){ return pt(i, R * Math.max(s.pct, 3) / 100); });
+  el += '<polygon points="' + dataPts.map(function(p){ return p.map(function(v){ return v.toFixed(1); }).join(","); }).join(" ") +
+        '" fill="var(--a-bg)" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round"/>';
+  dataPts.forEach(function(p){
+    el += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4" fill="var(--teal)"/>';
+  });
+  scores.forEach(function(s, i){
+    var p = pt(i, R + 26);
+    var anchor = Math.abs(p[0] - cx) < 12 ? "middle" : (p[0] > cx ? "start" : "end");
+    el += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 4).toFixed(1) + '" text-anchor="' + anchor +
+          '" font-size="11" fill="var(--muted)">' + esc(s.short) + '</text>';
+    el += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 17).toFixed(1) + '" text-anchor="' + anchor +
+          '" font-size="10" fill="var(--faint)">' + s.pct + '</text>';
+  });
+  document.getElementById("ckRadar").innerHTML = el;
+}
+
+function renderPlan(scores){
+  var sorted = scores.slice().sort(function(a, b){ return a.pct - b.pct; });
+  var targets = sorted.filter(function(s){ return s.pct < 75; }).slice(0, 3);
+  var html = "";
+  if (targets.length === 0){
+    targets = sorted.slice(0, 2);
+    html += '<p class="ck-r-sub">すべての領域が「強み」の水準です。相対的に低い領域をさらに磨くメニューを挙げます。</p>';
+  }
+  targets.forEach(function(s, i){
+    var p = PLANS[s.id];
+    html += '<div class="ck-plan-item"><h5><span class="prio">優先度' + (i + 1) + '</span>' + esc(p.title) +
+            '（現在 ' + s.pct + '点）</h5><div class="period">' + esc(p.period) + '</div><p>' + esc(p.why) + '</p><ul>' +
+            p.items.map(function(it){ return "<li>" + esc(it) + "</li>"; }).join("") + '</ul></div>';
+  });
+  var g = null;
+  scores.forEach(function(s){ if (s.id === "G") g = s; });
+  var hasG = targets.some(function(t){ return t.id === "G"; });
+  if (g && g.pct < 50 && !hasG){
+    html += '<div class="ck-plan-item"><h5>補足：アウトプット習慣づくり（現在 ' + g.pct + '点）</h5>' +
+            '<div class="period">' + esc(PLANS.G.period) + '</div>' +
+            '<p>どのトレーニングも「続ける仕組み」がないと効果が出ません。上のメニューを1日5〜10分の小さな習慣として設計してください。</p></div>';
+  }
+  document.getElementById("ckPlan").innerHTML = html;
+}
+
+function render(scores){
+  var total = Math.round(scores.reduce(function(a, s){ return a + s.pct; }, 0) / scores.length);
+  document.getElementById("ckTotal").textContent = total;
+  document.getElementById("ckTotalLv").textContent = "総合の目安：" + levelOf(total);
+  document.getElementById("ckTotalTxt").textContent = total >= 75
+    ? "聞き方の型はおおむね身についています。凹んでいる領域をピンポイントで磨くのが効率的です。"
+    : (total >= 50
+      ? "土台はあります。弱い領域に絞って意識すれば、1〜2ヶ月で集まる情報の量と質が変わってきます。"
+      : "伸びしろが大きい状態です。まずは「最後までさえぎらずに聞く」ところから始めるのが近道です。");
+
+  var sorted = scores.slice().sort(function(a, b){ return a.pct - b.pct; });
+  document.getElementById("ckType").textContent = TYPE_HINT[sorted[0].id];
+
+  var bars = "", tbl = "";
+  scores.forEach(function(s){
+    bars += '<div class="ck-bar-row"><div class="ck-bar-label">' + esc(s.name) + '</div>' +
+            '<div class="ck-bar-track"><div class="ck-bar-fill" style="width:' + s.pct + '%"></div></div>' +
+            '<div class="ck-bar-pct">' + s.pct + '</div></div>';
+    tbl += '<tr><td>' + esc(s.name) + '</td><td class="n">' + s.raw + ' / ' + s.max + '</td>' +
+           '<td class="n">' + s.pct + '点</td><td>' + levelOf(s.pct) + '</td></tr>';
+  });
+  document.getElementById("ckBars").innerHTML = bars;
+  document.getElementById("ckTable").innerHTML = tbl;
+
+  drawRadar(scores);
+  renderPlan(scores);
+}
+
+submitBtn.addEventListener("click", function(){
+  if (answeredCount() < TOTAL_Q) return;
+  lastResult = score();
+  render(lastResult);
+  resultEl.style.display = "block";
+  resultEl.scrollIntoView({ behavior:"smooth", block:"start" });
+  copyState.textContent = "";
+});
+
+clearBtn.addEventListener("click", function(){
+  if (!window.confirm("すべての回答を消去します。よろしいですか？")) return;
+  answers = {};
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  lastResult = null;
+  buildForm();
+  resultEl.style.display = "none";
+  copyState.textContent = "";
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+
+document.getElementById("ckCopy").addEventListener("click", function(){
+  if (!lastResult) return;
+  var total = Math.round(lastResult.reduce(function(a, s){ return a + s.pct; }, 0) / lastResult.length);
+  var sorted = lastResult.slice().sort(function(a, b){ return a.pct - b.pct; });
+  var lines = [];
+  lines.push("■ 聞く力（傾聴・質問力）診断 の結果");
+  lines.push("総合の目安：" + total + " / 100点（" + levelOf(total) + "）");
+  lines.push("");
+  lines.push("【領域別】");
+  lastResult.forEach(function(s){ lines.push("・" + s.name + "：" + s.pct + "点（" + levelOf(s.pct) + "）"); });
+  lines.push("");
+  lines.push("【優先して鍛えたい領域】" + sorted[0].name + "、" + sorted[1].name);
+  lines.push("【所見】" + TYPE_HINT[sorted[0].id]);
+  lines.push("");
+  lines.push("※自己認識のための簡易ツールの結果であり、能力を確定的に測ったものではありません。");
+  var text = lines.join("\n");
+  var ok = false;
+  try{
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text); ok = true; }
+    else {
+      var ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+  }catch(e){ ok = false; }
+  copyState.textContent = ok ? "コピーしました。" : "コピーできませんでした。画面の内容を手動で選択してコピーしてください。";
+});
+
+document.getElementById("ckPrint").addEventListener("click", function(){ window.print(); });
+
+buildForm();
+})();
+</script>
+</body>
+</html>
