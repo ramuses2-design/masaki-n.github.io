@@ -513,7 +513,7 @@ function renderPlan(scores){
   targets.forEach(function(s, i){
     var p = PLANS[s.id];
     html += '<div class="ck-plan-item"><h5><span class="prio">' + (i===0?"いちばんの持ち味":("持ち味"+(i+1))) + '</span>' + esc(p.title) +
-            '（現在 ' + s.pct + '点）</h5><div class="period">' + esc(p.period) + '</div><p>' + esc(p.why) + '</p><ul>' +
+            '（' + s.pct + '点）</h5><div class="period">' + esc(p.period) + '</div><p>' + esc(p.why) + '</p><ul>' +
             p.items.map(function(it){ return "<li>" + esc(it) + "</li>"; }).join("") + '</ul></div>';
   });
   document.getElementById("ckPlan").innerHTML = html;
