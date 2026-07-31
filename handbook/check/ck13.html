@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>力が出る条件（働き方の相性）診断｜ものづくりハンドブック</title>
+<meta name="description" content="28問・7つの軸で、自分がどんな条件のときに力を出しやすいかを見るセルフチェック。優劣ではなく、環境との相性を知るためのもの">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
+<style>
+  .ck-wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+  /* このページはサイドバーを持たないため、hb-shell の2カラムグリッド（262px＋本文）だと
+     本文がサイドバー列に入って幅が潰れる。1カラムに上書きする。 */
+  .hb-shell{grid-template-columns:minmax(0,1fr)}
+  .ck-back{display:inline-block;font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:16px}
+  .ck-back:hover{color:var(--teal)}
+  .ck-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--head);margin:0 0 8px}
+  .ck-lead{color:var(--muted);font-size:.9rem;line-height:1.8;margin:0 0 16px}
+  .ck-note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 24px}
+  .ck-note b{color:var(--head)}
+  .ck-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--faint);margin:0 0 24px}
+
+  .ck-legend{margin:0 0 24px}
+  .ck-legend h2{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 6px}
+  .ck-legend p{font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 12px}
+  .ck-lv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-lv div{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:.76rem;color:var(--muted);line-height:1.6}
+  .ck-lv b{display:block;color:var(--head);font-size:.8rem;margin-bottom:2px}
+
+  .ck-prog{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;margin:0 0 8px;display:flex;align-items:center;gap:12px}
+  .ck-prog .t{font-size:.76rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ck-prog .track{flex:1;height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-prog .fill{height:100%;width:0;background:var(--teal);border-radius:6px}
+
+  .ck-domain{margin:0 0 8px;padding:16px 0 4px;border-top:1px solid var(--line)}
+  .ck-domain:first-of-type{border-top:none}
+  .ck-domain-h{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 2px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .ck-domain-h .cnt{font-size:.74rem;font-weight:400;color:var(--faint);margin-left:auto;font-variant-numeric:tabular-nums}
+  .ck-domain-d{font-size:.8rem;color:var(--muted);line-height:1.7;margin:0 0 12px}
+  .ck-q{padding:14px 0;border-top:1px solid var(--line)}
+  .ck-q:first-of-type{border-top:none}
+  .ck-qtext{font-size:.9rem;line-height:1.7;color:var(--ink);margin:0 0 4px}
+  .ck-qex{font-size:.76rem;line-height:1.7;color:var(--muted);margin:0 0 10px}
+  .ck-qex .tag{display:inline-block;font-size:.7rem;font-weight:700;color:var(--teal-d);border:1px solid var(--line-2);border-radius:20px;padding:0 8px;margin-right:6px}
+  .ck-scale{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-opt{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);text-align:center;border:1px solid var(--line);border-radius:9px;padding:8px 4px;cursor:pointer;background:var(--card)}
+  .ck-opt:has(input:checked){border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt.on{border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt input{margin:0;accent-color:var(--teal)}
+
+  .ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  .ck-btn.ghost{background:transparent;color:var(--muted);border-color:var(--line-2)}
+  .ck-btn:disabled{opacity:.45;cursor:not-allowed}
+  .ck-warn{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+
+  #ckResult{display:none;margin-top:32px;padding-top:24px;border-top:2px solid var(--line)}
+  .ck-r-title{font-size:1.15rem;font-weight:700;color:var(--head);margin:0 0 4px}
+  .ck-r-sub{font-size:.82rem;color:var(--muted);margin:0 0 20px}
+  .ck-total{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:0 0 20px}
+  .ck-total .num{font-size:2.2rem;font-weight:700;color:var(--head);line-height:1.2;font-variant-numeric:tabular-nums}
+  .ck-total .num small{font-size:.9rem;font-weight:400;color:var(--muted)}
+  .ck-total .lv{font-size:.86rem;font-weight:700;color:var(--head);margin-top:2px}
+  .ck-total .txt{font-size:.82rem;color:var(--muted);line-height:1.8;margin-top:6px}
+  .ck-type{font-size:.82rem;color:var(--ink);line-height:1.8;background:var(--a-bg);border-radius:9px;padding:12px 14px;margin:0 0 20px}
+
+  .ck-radar{display:flex;justify-content:center;margin:0 0 20px}
+  .ck-radar svg{max-width:100%;height:auto}
+  .ck-bar-row{display:grid;grid-template-columns:150px 1fr 46px;align-items:center;gap:10px;margin:0 0 10px;font-size:.82rem}
+  .ck-bar-label{color:var(--ink);line-height:1.5;overflow-wrap:anywhere}
+  .ck-bar-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-bar-fill{height:100%;background:var(--teal);border-radius:6px}
+  .ck-bar-pct{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+  .ck-tbl{width:100%;border-collapse:collapse;font-size:.8rem;margin:16px 0 0}
+  .ck-tbl th,.ck-tbl td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;color:var(--ink)}
+  .ck-tbl th{color:var(--muted);font-weight:700;font-size:.74rem}
+  .ck-tbl td.n,.ck-tbl th.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  /* 両極の目盛り（この診断のみ） */
+  .ax{padding:16px 0;border-top:1px solid var(--line)}
+  .ax:first-of-type{border-top:none}
+  .ax-t{font-size:.9rem;font-weight:700;color:var(--head);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .ax-j{font-size:.78rem;font-weight:700;color:var(--teal-d);background:var(--a-bg);border-radius:20px;padding:1px 10px}
+  .ax-j.mid{color:var(--muted);background:var(--card);border:1px solid var(--line)}
+  .ax-line{display:grid;grid-template-columns:112px 1fr 112px;align-items:center;gap:10px;margin:10px 0 0}
+  .ax-l,.ax-r{font-size:.78rem;color:var(--muted);line-height:1.5}
+  .ax-r{text-align:right}
+  .ax-bar{position:relative;height:10px;background:var(--line);border-radius:6px}
+  .ax-mid{position:absolute;left:50%;top:-4px;width:1px;height:18px;background:var(--line-2)}
+  .ax-dot{position:absolute;top:-4px;width:18px;height:18px;border-radius:50%;background:var(--teal);border:3px solid var(--card);transform:translateX(-9px)}
+  .ax-d{font-size:.82rem;color:var(--muted);line-height:1.8;margin:10px 0 0}
+  .ck-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 0}
+  .ck-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+  .ck-box h4{margin:0 0 8px;font-size:.85rem;color:var(--head)}
+  .ck-box ul{margin:0;padding-left:18px;font-size:.83rem;color:var(--ink);line-height:1.9}
+  .ck-flex{font-size:.8rem;color:var(--muted);margin:12px 0 0}
+  @media (max-width:600px){
+    .ax-line{grid-template-columns:1fr;gap:6px}
+    .ax-r{text-align:left}
+    .ck-two{grid-template-columns:1fr}
+  }
+  .ck-plan{margin:24px 0 0}
+  .ck-plan h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-plan-item{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:9px;padding:14px 16px;margin:0 0 12px}
+  .ck-plan-item h5{margin:0 0 2px;font-size:.88rem;color:var(--head)}
+  .ck-plan-item .prio{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:var(--teal);border-radius:20px;padding:1px 9px;margin-right:8px}
+  .ck-plan-item .period{font-size:.74rem;color:var(--faint);margin:0 0 6px}
+  .ck-plan-item p{font-size:.8rem;color:var(--muted);line-height:1.8;margin:0 0 8px}
+  .ck-plan-item ul{margin:0;padding-left:18px;font-size:.82rem;color:var(--ink);line-height:1.8}
+
+  .ck-road{margin:24px 0 0}
+  .ck-road h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-road-step{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:.82rem;line-height:1.8}
+  .ck-road-step:first-of-type{border-top:none}
+  .ck-road-step .when{color:var(--teal-d);font-weight:700}
+  .ck-road-step b{color:var(--head)}
+  .ck-road-step div:last-child{color:var(--muted)}
+
+  .ck-comp-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
+  .ck-copystate{font-size:.78rem;color:var(--teal);margin:0;min-height:1.2em}
+  .ck-next{margin:24px 0 0}
+  .ck-next h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-next-list{display:flex;flex-direction:column;gap:8px}
+  .ck-next-list a{display:block;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 14px;font-size:.85rem;color:var(--head);text-decoration:none;font-weight:600}
+  .ck-next-list a:hover{border-color:var(--teal)}
+  .ck-next-list a span{display:block;font-weight:400;color:var(--muted);font-size:.76rem;margin-top:2px}
+  .ck-src{font-size:.74rem;color:var(--faint);line-height:1.8;margin:24px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+
+  @media (max-width:860px){
+    .ck-back{display:inline-flex;align-items:center;min-height:44px}
+    .ck-btn{min-height:44px}
+  }
+  @media (max-width:600px){
+    .ck-scale{grid-template-columns:repeat(2,1fr)}
+    .ck-lv{grid-template-columns:1fr 1fr}
+    .ck-bar-row{grid-template-columns:110px 1fr 40px}
+    .ck-road-step{grid-template-columns:1fr;gap:2px}
+  }
+  @media print{
+    .hb-top,.hb-side,.hb-shell aside,.crumb,.hb-foot,.ptabs,.ck-back,.ck-lead,.ck-meta,.ck-warn,.ck-legend,.ck-prog,#ckForm,.ck-actions,.ck-note,.ck-comp-actions{display:none !important}
+    .hb-shell{display:block !important}
+    .ck-wrap{max-width:none;padding:0}
+    #ckResult{display:block !important;border-top:none;margin-top:0;padding-top:0}
+    body{background:#fff;color:#000}
+    .ck-title,.ck-r-title,.ck-next h4,.ck-plan h4,.ck-road h4,.ck-bar-label,.ck-next-list a,.ck-tbl td,.ck-plan-item ul,.ck-total .num,.ck-total .lv,.ck-type{color:#000}
+    .ck-r-sub,.ck-bar-pct,.ck-next-list a span,.ck-plan-item p,.ck-total .txt,.ck-tbl th,.ck-plan-item .period,.ck-src{color:#444}
+    .ck-total,.ck-next-list a,.ck-plan-item,.ck-type{background:#fff;border-color:#bbb}
+    .ck-bar-track{background:#e6e6e6}
+    .ck-bar-fill{background:#555}
+    .ck-bar-track,.ck-bar-fill,.ax-bar,.ax-dot{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ax,.ck-box{break-inside:avoid;page-break-inside:avoid}
+    .ax-t,.ck-box h4,.ck-box ul{color:#000}
+    .ax-d,.ax-l,.ax-r{color:#444}
+    .ck-plan-item .prio{background:#555;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-bar-row,.ck-plan-item,.ck-road-step{break-inside:avoid;page-break-inside:avoid}
+  }
+</style>
+</head><body>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../../">📊 今日の情報</a><a href="../../workboard.html">🗂 仕事ボード</a><a class="on" href="../index.html">📘 ハンドブック</a><a href="../../calendar.html">📅 品質カレンダー</a><a href="../../quiz.html">🧠 クイズ</a><a href="../../trends.html">📈 業界定点</a><a href="../../soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<header class="hb-top">
+  <div class="hb-top-in">
+    <a class="hb-brand" href="../index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
+  </div>
+</header>
+<div class="hb-shell">
+  <main class="hb-main ck-wrap">
+    <a class="ck-back" href="../index.html">← ものづくりハンドブックへ戻る</a>
+    <h1 class="ck-title">🧭 力が出る条件（働き方の相性）診断</h1>
+    <p class="ck-lead">同じ人でも、置かれた条件によって出せる力は変わります。一人で深く⇔人と一緒に、長距離型⇔短距離型、型がある方が力が出る⇔自由度が要る など<b>7つの軸28問</b>で、自分がどんな条件のときに力を出しやすいかを見ます。<b>どちらが良い・悪いというものではありません。</b></p>
+    <div class="ck-note">これは<b>優劣を測るものではありません</b>。どちら寄りかを知って、仕事の受け方や環境の選び方に使うためのものです。人物評価にも人事評価にも使いません。<b>回答はこの端末内（ブラウザのlocalStorage）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄もありません。途中で閉じても、次に開いたときに回答が復元されます。</div>
+    <div class="ck-meta"><span>約8〜10分・28問</span><span>7軸×4問・4段階</span><span>関連：CK12・CK11・CK3</span></div>
+
+    <section class="ck-legend">
+      <h2>回答の目安（共通ルール）</h2>
+      <p>ここ1〜2ヶ月の仕事での「実際の自分」で答えてください。「こうありたい」ではなく「実際どうか」が大事です。<b>各設問は、4に近いほど右側の極、1に近いほど左側の極</b>に寄る形でそろえてあります。</p>
+      <div class="ck-lv">
+        <div><b>1 あてはまらない</b>ほとんどない（1割以下）。</div>
+        <div><b>2 あまり</b>たまにある（2〜3割）。</div>
+        <div><b>3 やや</b>半分以上あてはまる（5〜7割）。</div>
+        <div><b>4 あてはまる</b>ほぼ毎回（8割以上）。</div>
+      </div>
+    </section>
+
+    <div class="ck-prog"><span class="t"><span id="ckDone">0</span> / 28 問回答済み</span><span class="track"><span class="fill" id="ckFill"></span></span></div>
+
+    <form id="ckForm"></form>
+
+    <div class="ck-actions">
+      <button type="button" class="ck-btn" id="ckSubmit" disabled>結果を見る</button>
+      <button type="button" class="ck-btn ghost" id="ckClear">回答をクリア</button>
+    </div>
+    <p class="ck-warn" id="ckWarn">すべての設問に答えると結果を出せます。</p>
+
+    <div id="ckResult">
+      <h2 class="ck-r-title">診断結果</h2>
+      <p class="ck-r-sub">7つの軸それぞれで、自分がどちら寄りかを示しています。<b>真ん中は「どちらでもいける」</b>という意味で、悪いことではありません。</p>
+
+      <div class="ck-total">
+        <div class="lv" id="ckTotalLv"></div>
+        <div class="txt" id="ckTotalTxt"></div>
+      </div>
+
+      <div id="ckAxes"></div>
+      <p class="ck-flex" id="ckFlex"></p>
+
+      <div class="ck-two">
+        <div class="ck-box"><h4>力が出やすい場面</h4><ul id="ckGood"></ul></div>
+        <div class="ck-box"><h4>消耗しやすい場面</h4><ul id="ckHard"></ul></div>
+      </div>
+
+      <div class="ck-plan">
+        <h4>まわりに伝えるとよいこと</h4>
+        <p class="ck-r-sub">はっきり出た軸から、上司や同僚に伝える言い方を用意しました。<b>わがままではなく、力を出すための条件の共有</b>として、面談などで使ってください。</p>
+        <div class="ck-box"><ul id="ckTell"></ul></div>
+      </div>
+
+      <div class="ck-road">
+        <h4>この診断の使い方</h4>
+        <div class="ck-road-step"><div class="when">仕事の受け方</div><div><b>条件を整えてから受ける</b> — 力が出にくい条件の仕事でも、条件を1つ変えられれば結果が変わることがあります。</div></div>
+        <div class="ck-road-step"><div class="when">面談・目標設定</div><div><b>自分の条件を言葉にする</b> — 「こういう条件だと力が出ます」と言えると、任され方が変わります。</div></div>
+        <div class="ck-road-step"><div class="when">チームの組み方</div><div><b>違う軸の人と組む</b> — 動きながら決める人と確かめてから動く人が組むと、速さと精度が両立します。</div></div>
+        <div class="ck-road-step"><div class="when">人を見るとき</div><div><b>合う条件が違うだけと考える</b> — できない人ではなく、力が出る条件が違う人として見ると、任せ方が変わります。</div></div>
+      </div>
+
+      <div class="ck-comp-actions">
+        <button type="button" class="ck-btn" id="ckCopy">結果をテキストでコピー</button>
+        <button type="button" class="ck-btn ghost" id="ckPrint">印刷 / PDF保存</button>
+        <p class="ck-copystate" id="ckCopyState"></p>
+      </div>
+
+      <div class="ck-next">
+        <h4>次の一歩</h4>
+        <div class="ck-next-list">
+          <a href="ck12.html">CK12 活きどころ（貢献タイプ）診断<span>どんな場面で力を発揮するか。この診断が「条件」なら、CK12は「役割」です</span></a>
+          <a href="ck11.html">CK11 気づき・配慮（支える力）診断<span>後ろで支える側に寄った人は、こちらでより細かく見られます</span></a>
+          <a href="ck3.html">CK3 強み・キャリア棚卸し（壁打ち型）<span>出た結果を、面談で使える自分の言葉に落とす</span></a>
+          <a href="../s-a4.html">A4 目標設定・評価（期初／期中／期末）<span>力が出る条件を、期初の目標や働き方の相談に反映する</span></a>
+        </div>
+      </div>
+
+      <p class="ck-src">軸の整理にあたっては、性格や働き方を優劣ではなく傾向として捉える一般的な考え方（内向・外向、計画型・状況対応型など）と、職務設計における自律性・多様性・フィードバックといった観点を参考にしています。特定の性格検査の再現ではありません。本診断は自己認識のための簡易ツールであり、適性を確定的に測定するものではなく、人事評価・採用判断に用いるものでもありません。</p>
+    </div>
+  </main>
+</div>
+<footer class="hb-foot"><div class="wrap"><div><b>ものづくりハンドブック</b></div><div class="hb-foot-sub">セルフチェックの共通仕様・原本は <a href="../content/checks.md">content/checks.md</a>。</div></div></footer>
+<script>
+(function(){
+"use strict";
+/* 各軸は「1に近いほど左の極」「4に近いほど右の極」になるよう設問をそろえている。
+   優劣はなく、どちら寄りかを見るためのもの。 */
+var AXES = [
+  { id:"A", title:"人数・関わる範囲",
+    L:{name:"一人で深く", desc:"自分の時間をまとめて確保できると力が出る。集中して掘り下げる仕事が向く。"},
+    R:{name:"人と一緒に",   desc:"人と話しながら進めると力が出る。関わる人が多い仕事が向く。"},
+    qs:[
+      { t:"考えをまとめるとき、人と話したほうが進む",
+        ex:"4＝話しながら整理するほうが速い ／ 1＝一人で黙って考えたほうが進む" },
+      { t:"一日の中で、人と話す時間が多いほうが調子が良い",
+        ex:"4＝人と関わるほど動ける ／ 1＝話が多い日は消耗する" },
+      { t:"複数人で進める仕事のほうが、一人で完結する仕事より気が乗る",
+        ex:"4＝チームで動くほうが好き ／ 1＝一人で任される仕事が好き" },
+      { t:"分からないことがあると、調べるより先に人に聞くほうだ",
+        ex:"4＝まず聞く ／ 1＝まず自分で調べる" }
+    ]},
+  { id:"B", title:"時間の使い方",
+    L:{name:"長距離型", desc:"じっくり積み上げる仕事で力が出る。継続と深さで成果を出す。"},
+    R:{name:"短距離型", desc:"締切が近いほど力が出る。区切りのある仕事を次々こなすのが向く。"},
+    qs:[
+      { t:"締切が近いほうが集中できる",
+        ex:"4＝追い込まれると力が出る ／ 1＝早めに終わらせたい" },
+      { t:"短い期間で結果が出る仕事のほうが、気が乗る",
+        ex:"4＝短期で区切れるほうが良い ／ 1＝長く関わるほうが良い" },
+      { t:"同じテーマを何ヶ月も続けると、飽きてくる",
+        ex:"4＝飽きやすい ／ 1＝長く続けるのは苦にならない" },
+      { t:"複数の仕事を切り替えながら進めるのが苦にならない",
+        ex:"4＝切り替えは得意 ／ 1＝一つに集中したい" }
+    ]},
+  { id:"C", title:"進め方の自由度",
+    L:{name:"型がある方が力が出る", desc:"手順や基準が決まっている仕事で安定して力を出せる。"},
+    R:{name:"自由度が要る",         desc:"やり方を自分で決められる仕事で力が出る。決められすぎると窮屈になる。"},
+    qs:[
+      { t:"やり方を自分で決められる仕事のほうが、力が出る",
+        ex:"4＝任されるほど動ける ／ 1＝決まっているほうがやりやすい" },
+      { t:"細かく手順が決まっていると、窮屈に感じる",
+        ex:"4＝窮屈に感じる ／ 1＝決まっていると安心する" },
+      { t:"前例のないことを任されると、面白いと感じる",
+        ex:"4＝面白いと感じる ／ 1＝不安のほうが大きい" },
+      { t:"「いい感じにやっておいて」と言われても困らない",
+        ex:"4＝自分で決めて進められる ／ 1＝具体的に決めてほしい" }
+    ]},
+  { id:"D", title:"環境の変化",
+    L:{name:"安定した環境", desc:"落ち着いた環境で、積み上げた質を出せる。変化が続くと消耗しやすい。"},
+    R:{name:"変化の多い環境", desc:"状況が動く環境で力が出る。同じことの繰り返しだと退屈しやすい。"},
+    qs:[
+      { t:"予定が変わることが多い日でも、あまり負担に感じない",
+        ex:"4＝変化は気にならない ／ 1＝予定が崩れると疲れる" },
+      { t:"新しい環境や新しい人の中に入るのは、苦にならない",
+        ex:"4＝すぐ馴染める ／ 1＝慣れるまで時間がかかる" },
+      { t:"毎日同じことの繰り返しだと、退屈してくる",
+        ex:"4＝退屈しやすい ／ 1＝安定しているほうが落ち着く" },
+      { t:"急な依頼が入っても、気持ちの切り替えが早いほうだ",
+        ex:"4＝切り替えが早い ／ 1＝引きずることがある" }
+    ]},
+  { id:"E", title:"立ち位置",
+    L:{name:"後ろで支える", desc:"人が力を出せるように支える立ち位置で活きる。前に出るのは消耗しやすい。"},
+    R:{name:"前に出る",     desc:"自分が矢面に立つ立ち位置で活きる。代表して話す場面で力が出る。"},
+    qs:[
+      { t:"人前で話したり、代表して説明したりするのは苦にならない",
+        ex:"4＝苦にならない ／ 1＝できれば避けたい" },
+      { t:"自分の名前で成果が出るほうが、やりがいを感じる",
+        ex:"4＝自分の成果として見られたい ／ 1＝裏方でも構わない" },
+      { t:"議論の場で、自分から口火を切ることが多い",
+        ex:"4＝自分から話し始める ／ 1＝様子を見てから話す" },
+      { t:"注目される場面でも、力を出せるほうだ",
+        ex:"4＝むしろ力が出る ／ 1＝いつもの力が出しにくい" }
+    ]},
+  { id:"F", title:"決め方",
+    L:{name:"確かめてから動く", desc:"材料をそろえてから動くことで、精度の高い仕事ができる。"},
+    R:{name:"動きながら決める", desc:"まず動いて修正していくことで、速く前に進める。"},
+    qs:[
+      { t:"情報が完全でなくても、まず動き出すほうだ",
+        ex:"4＝動きながら考える ／ 1＝揃えてから動きたい" },
+      { t:"やってみて修正するほうが、性に合っている",
+        ex:"4＝試して直すほうが良い ／ 1＝準備してから始めたい" },
+      { t:"迷ったときは、早く決めてしまうほうだ",
+        ex:"4＝早く決める ／ 1＝納得するまで決めきらない" },
+      { t:"完璧でなくても、まず出してみることに抵抗が少ない",
+        ex:"4＝抵抗がない ／ 1＝形になるまで出したくない" }
+    ]},
+  { id:"G", title:"考えるときのやり方",
+    L:{name:"書いて考える", desc:"書き出して整理することで考えがまとまる。文章や資料に強い。"},
+    R:{name:"話して考える", desc:"人に話すことで考えがまとまる。対話の場で力が出る。"},
+    qs:[
+      { t:"考えがまとまらないとき、誰かに話すと整理される",
+        ex:"4＝話すと整理される ／ 1＝書くと整理される" },
+      { t:"会議では、話しながら考えがまとまっていくことが多い",
+        ex:"4＝話しながらまとまる ／ 1＝事前に整理してから臨む" },
+      { t:"メールや資料より、口頭で伝えるほうが得意だ",
+        ex:"4＝口頭のほうが得意 ／ 1＝文章のほうが得意" },
+      { t:"一人で紙に向かう時間より、人と話す時間で考えが進む",
+        ex:"4＝話す時間で進む ／ 1＝紙に向かう時間で進む" }
+    ]}
+];
+
+/* 極ごとの「活きる場面」「苦手になりやすい場面」「まわりに伝えるとよいこと」 */
+var POLES = {
+  "A-L":{ good:["一人でまとまった時間を取れる仕事","調べる・まとめる・書く作業","静かな環境での集中作業"],
+          hard:["一日中打ち合わせが続く日","割り込みの多い席","即答を求められる場面"],
+          tell:"まとまった時間が取れると質が上がります。会議は午前か午後にまとめてもらえると助かります。" },
+  "A-R":{ good:["複数部門が関わる調整","現場を回って話を聞く仕事","チームで進めるプロジェクト"],
+          hard:["一人で長時間こもる作業","誰とも話さない日が続くこと","黙々と積み上げる作業"],
+          tell:"人と話しながら進めると早く形になります。要件は打ち合わせで詰めさせてください。" },
+  "B-L":{ good:["数ヶ月かけて仕上げる仕事","仕組みづくり・体系の整備","積み上げが効く専門領域"],
+          hard:["毎日締切に追われる状態","短時間で成果を求められる仕事","次々と切り替わる依頼"],
+          tell:"腰を据えて取り組む仕事で力が出ます。短期の依頼が続くときは優先順位を決めてもらえると助かります。" },
+  "B-R":{ good:["締切のある仕事","短期で区切れる案件","複数案件の並行処理"],
+          hard:["終わりが見えない長期テーマ","同じテーマを何ヶ月も続けること","締切のない自主的な取り組み"],
+          tell:"期限を切ってもらえると力が出ます。長期のテーマは、途中に区切りを置いてもらえると進みます。" },
+  "C-L":{ good:["手順や基準が決まっている仕事","品質を安定して出す作業","ルールを守り抜く場面"],
+          hard:["やり方を丸ごと任される仕事","前例のない取り組み","「いい感じに」という指示"],
+          tell:"何をどこまでやるかを決めてもらえると、安定して質を出せます。判断基準を先に共有してください。" },
+  "C-R":{ good:["やり方を任される仕事","改善・新しい仕組みの立ち上げ","前例のない取り組み"],
+          hard:["細かく手順が決まった作業","裁量のない役割","変更が許されない仕事"],
+          tell:"目的と条件を示してもらえれば、やり方は自分で組み立てます。手順まで固定されると力が出にくくなります。" },
+  "D-L":{ good:["落ち着いた環境での積み上げ","継続的な運用・維持","質を守る仕事"],
+          hard:["予定が頻繁に変わる状況","急な割り込みが続く日","環境が変わり続ける時期"],
+          tell:"予定が読めると質が上がります。変更が出るときは早めに教えてもらえると助かります。" },
+  "D-R":{ good:["立ち上げ期・移行期","トラブル対応","状況が動く仕事"],
+          hard:["毎日同じことの繰り返し","変化のない定型作業","長く同じ状態が続くこと"],
+          tell:"状況が動く場面のほうが力が出ます。立ち上げやトラブル対応があれば声をかけてください。" },
+  "E-L":{ good:["人を支える・準備する役割","裏方として全体を回す仕事","記録・整備・段取り"],
+          hard:["代表して説明する場面","人前でのプレゼン","矢面に立つ役割"],
+          tell:"支える側で力が出ます。対外の説明は他の人と組ませてもらえると、準備で貢献できます。" },
+  "E-R":{ good:["対外の説明・交渉","会議の進行","代表して矢面に立つ役割"],
+          hard:["ずっと裏方に回る役割","発言の機会がない場面","黙って準備だけする仕事"],
+          tell:"人前に立つ役割で力が出ます。説明や交渉の場があれば任せてください。" },
+  "F-L":{ good:["精度が求められる仕事","記録・検証・確認","間違えられない判断"],
+          hard:["情報が足りないまま決める場面","走りながら考える進め方","即断を求められる状況"],
+          tell:"材料がそろうと精度の高い判断ができます。急ぐ場合は、どこまで確認すればよいかを決めてください。" },
+  "F-R":{ good:["立ち上げ・試行","止まっている案件を動かす","スピードが要る場面"],
+          hard:["完璧を求められる作業","慎重な確認が続く工程","動く前の準備が長い仕事"],
+          tell:"まず動いて修正するほうが速く形になります。試してよい範囲を決めてもらえると動きやすいです。" },
+  "G-L":{ good:["資料・文書の作成","考えを整理して残す仕事","非同期のやり取り"],
+          hard:["その場で意見を求められる会議","即興の説明","口頭だけで進む打ち合わせ"],
+          tell:"事前に議題をもらえると、整理して臨めます。その場での即答より、書いて返すほうが正確です。" },
+  "G-R":{ good:["打ち合わせ・ヒアリング","対話しながら詰める仕事","口頭での説明・調整"],
+          hard:["長い文書を一人で書く作業","文字だけのやり取り","話す機会のない進め方"],
+          tell:"一度話させてもらえると早く形になります。文書は口頭で方向を決めてから書かせてください。" }
+};
+
+var SCALE = ["あてはまらない","あまり","やや","あてはまる"];
+var STORAGE_KEY = "hb_ck13_answers_v1";
+var TOTAL_Q = 0;
+AXES.forEach(function(a){ TOTAL_Q += a.qs.length; });
+
+var form      = document.getElementById("ckForm");
+var submitBtn = document.getElementById("ckSubmit");
+var clearBtn  = document.getElementById("ckClear");
+var warnEl    = document.getElementById("ckWarn");
+var doneEl    = document.getElementById("ckDone");
+var fillEl    = document.getElementById("ckFill");
+var resultEl  = document.getElementById("ckResult");
+var copyState = document.getElementById("ckCopyState");
+var lastResult = null;
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+function loadAnswers(){
+  try{ var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveAnswers(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(answers)); }catch(e){} }
+var answers = loadAnswers();
+
+function buildForm(){
+  var html = "", no = 0;
+  AXES.forEach(function(ax){
+    html += '<div class="ck-domain"><h2 class="ck-domain-h">' + esc(ax.title) +
+            '<span class="cnt" data-cnt="' + esc(ax.id) + '">0 / ' + ax.qs.length + '</span></h2>' +
+            '<p class="ck-domain-d">' + esc(ax.L.name) + ' ⇔ ' + esc(ax.R.name) + '</p>';
+    ax.qs.forEach(function(q, qi){
+      no++;
+      var key = ax.id + "_" + qi;
+      html += '<div class="ck-q"><p class="ck-qtext">Q' + no + '. ' + esc(q.t) + '</p>' +
+              '<p class="ck-qex"><span class="tag">目安</span>' + esc(q.ex) + '</p>' +
+              '<div class="ck-scale">';
+      SCALE.forEach(function(lab, si){
+        var v = si + 1;
+        var on = answers[key] === v ? ' on' : '';
+        var chk = answers[key] === v ? ' checked' : '';
+        html += '<label class="ck-opt' + on + '"><input type="radio" name="q_' + key + '" value="' + v + '"' + chk + '>' +
+                '<span>' + v + '</span><span>' + esc(lab) + '</span></label>';
+      });
+      html += '</div></div>';
+    });
+    html += '</div>';
+  });
+  form.innerHTML = html;
+  updateProgress();
+}
+
+function answeredCount(){
+  var n = 0;
+  AXES.forEach(function(ax){ ax.qs.forEach(function(_, qi){ if (answers[ax.id + "_" + qi]) n++; }); });
+  return n;
+}
+
+function updateProgress(){
+  var n = answeredCount();
+  doneEl.textContent = n;
+  fillEl.style.width = (n / TOTAL_Q * 100) + "%";
+  submitBtn.disabled = (n < TOTAL_Q);
+  warnEl.textContent = (n < TOTAL_Q)
+    ? ("残り " + (TOTAL_Q - n) + " 問です。すべて答えると結果を出せます。")
+    : "すべて回答済みです。「結果を見る」を押してください。";
+  AXES.forEach(function(ax){
+    var c = 0;
+    ax.qs.forEach(function(_, qi){ if (answers[ax.id + "_" + qi]) c++; });
+    var el = form.querySelector('[data-cnt="' + ax.id + '"]');
+    if (el) el.textContent = c + " / " + ax.qs.length;
+  });
+}
+
+form.addEventListener("change", function(e){
+  var t = e.target;
+  if (!t || t.type !== "radio") return;
+  answers[t.name.replace(/^q_/, "")] = Number(t.value);
+  saveAnswers();
+  var labels = t.parentNode.parentNode.querySelectorAll(".ck-opt");
+  for (var i = 0; i < labels.length; i++) labels[i].classList.remove("on");
+  t.parentNode.classList.add("on");
+  updateProgress();
+});
+
+/* 1に近いほど左、4に近いほど右。pct は 0=完全に左、100=完全に右。 */
+function score(){
+  return AXES.map(function(ax){
+    var sum = 0;
+    ax.qs.forEach(function(_, qi){ sum += (answers[ax.id + "_" + qi] || 0); });
+    var n = ax.qs.length;
+    var pct = Math.round((sum - n) / (n * 3) * 100);
+    var side, label, strength;
+    if (pct >= 68){ side = "R"; strength = "はっきり"; }
+    else if (pct >= 57){ side = "R"; strength = "やや"; }
+    else if (pct > 43){ side = null; strength = ""; }
+    else if (pct > 32){ side = "L"; strength = "やや"; }
+    else { side = "L"; strength = "はっきり"; }
+    label = side ? (strength + esc(ax[side].name) + "寄り") : "どちらでもいける";
+    return { id:ax.id, title:ax.title, L:ax.L, R:ax.R, raw:sum, max:n*4, pct:pct, side:side, strength:strength, label:label };
+  });
+}
+
+function render(scores){
+  var strong = scores.filter(function(s){ return s.side && s.strength === "はっきり"; });
+  var any    = scores.filter(function(s){ return s.side; });
+  var flex   = scores.filter(function(s){ return !s.side; });
+
+  var head = strong.length
+    ? ("力が出る条件がはっきりしています（" + strong.length + "軸）")
+    : (any.length ? "ゆるやかな傾きがあります" : "どの軸も中間です");
+  document.getElementById("ckTotalLv").textContent = head;
+  document.getElementById("ckTotalTxt").textContent = strong.length
+    ? "はっきり出た軸は、意識して環境を選ぶ価値があります。中間の軸は、どちらの状況でも対応できるところです。"
+    : (any.length
+      ? "極端な偏りはありません。状況に合わせて動ける一方、自分の条件を人に説明しにくいので、やや寄っている軸を手がかりにしてください。"
+      : "どの軸も中間でした。適応の幅が広い状態です。ここ1〜2ヶ月で特に調子が良かった仕事を思い出して、そのときの条件を書き出してみてください。");
+
+  /* 目盛り表示 */
+  var h = "";
+  scores.forEach(function(s){
+    h += '<div class="ax">' +
+         '<div class="ax-t">' + esc(s.title) + '<span class="ax-j' + (s.side ? "" : " mid") + '">' + s.label + '</span></div>' +
+         '<div class="ax-line">' +
+           '<div class="ax-l">' + esc(s.L.name) + '</div>' +
+           '<div class="ax-bar"><span class="ax-mid"></span><span class="ax-dot" style="left:' + s.pct + '%"></span></div>' +
+           '<div class="ax-r">' + esc(s.R.name) + '</div>' +
+         '</div>' +
+         '<div class="ax-d">' + esc(s.side ? s[s.side].desc : "どちらの進め方でも力を出せます。相手や状況に合わせて選べるところです。") + '</div>' +
+         '</div>';
+  });
+  document.getElementById("ckAxes").innerHTML = h;
+
+  /* 活きる場面・苦手になりやすい場面 */
+  function collect(kind){
+    var out = [];
+    any.forEach(function(s){
+      var p = POLES[s.id + "-" + s.side];
+      if (!p) return;
+      p[kind].forEach(function(x){ if (out.indexOf(x) < 0) out.push(x); });
+    });
+    return out;
+  }
+  var good = collect("good"), hard = collect("hard");
+  document.getElementById("ckGood").innerHTML = good.length
+    ? good.map(function(x){ return "<li>" + esc(x) + "</li>"; }).join("")
+    : "<li>どの軸も中間のため、特定の条件に絞れませんでした。</li>";
+  document.getElementById("ckHard").innerHTML = hard.length
+    ? hard.map(function(x){ return "<li>" + esc(x) + "</li>"; }).join("")
+    : "<li>どの軸も中間のため、特定の条件に絞れませんでした。</li>";
+
+  /* まわりに伝えるとよいこと */
+  var tells = [];
+  strong.forEach(function(s){
+    var p = POLES[s.id + "-" + s.side];
+    if (p && tells.indexOf(p.tell) < 0) tells.push(p.tell);
+  });
+  if (!tells.length){
+    any.forEach(function(s){
+      var p = POLES[s.id + "-" + s.side];
+      if (p && tells.length < 2 && tells.indexOf(p.tell) < 0) tells.push(p.tell);
+    });
+  }
+  document.getElementById("ckTell").innerHTML = tells.length
+    ? tells.map(function(x){ return "<li>" + esc(x) + "</li>"; }).join("")
+    : "<li>はっきりした傾きが出なかったため、伝える文面は作れませんでした。調子が良かった仕事の条件を思い出して、自分の言葉で書いてみてください。</li>";
+
+  document.getElementById("ckFlex").textContent = flex.length
+    ? ("どちらでもいける軸：" + flex.map(function(s){ return s.title; }).join("、"))
+    : "どちらでもいける軸はありませんでした。";
+}
+
+submitBtn.addEventListener("click", function(){
+  if (answeredCount() < TOTAL_Q) return;
+  lastResult = score();
+  render(lastResult);
+  resultEl.style.display = "block";
+  resultEl.scrollIntoView({ behavior:"smooth", block:"start" });
+  copyState.textContent = "";
+});
+
+clearBtn.addEventListener("click", function(){
+  if (!window.confirm("すべての回答を消去します。よろしいですか？")) return;
+  answers = {};
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  lastResult = null;
+  buildForm();
+  resultEl.style.display = "none";
+  copyState.textContent = "";
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+
+document.getElementById("ckCopy").addEventListener("click", function(){
+  if (!lastResult) return;
+  var lines = [];
+  lines.push("■ 力が出る条件（働き方の相性）診断 の結果");
+  lines.push("");
+  lines.push("【7つの軸】");
+  lastResult.forEach(function(s){
+    lines.push("・" + s.title + "：" + s.label + "（" + s.L.name + " ⇔ " + s.R.name + "／" + s.pct + "）");
+  });
+  var any = lastResult.filter(function(s){ return s.side; });
+  var strong = lastResult.filter(function(s){ return s.side && s.strength === "はっきり"; });
+  function collect(kind){
+    var out = [];
+    any.forEach(function(s){
+      var p = POLES[s.id + "-" + s.side];
+      if (!p) return;
+      p[kind].forEach(function(x){ if (out.indexOf(x) < 0) out.push(x); });
+    });
+    return out;
+  }
+  lines.push("");
+  lines.push("【力が出やすい場面】");
+  collect("good").forEach(function(x){ lines.push("・" + x); });
+  lines.push("");
+  lines.push("【消耗しやすい場面】");
+  collect("hard").forEach(function(x){ lines.push("・" + x); });
+  var tells = [];
+  strong.forEach(function(s){ var p = POLES[s.id + "-" + s.side]; if (p && tells.indexOf(p.tell) < 0) tells.push(p.tell); });
+  if (tells.length){
+    lines.push("");
+    lines.push("【まわりに伝えるとよいこと】");
+    tells.forEach(function(x){ lines.push("・" + x); });
+  }
+  lines.push("");
+  lines.push("※どちらが良い・悪いというものではありません。自己認識のための簡易ツールの結果です。");
+  var text = lines.join("\n");
+  var ok = false;
+  try{
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text); ok = true; }
+    else {
+      var ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+  }catch(e){ ok = false; }
+  copyState.textContent = ok ? "コピーしました。" : "コピーできませんでした。画面の内容を手動で選択してコピーしてください。";
+});
+
+document.getElementById("ckPrint").addEventListener("click", function(){ window.print(); });
+
+buildForm();
+
+})();
+</script>
+</body>
+</html>
