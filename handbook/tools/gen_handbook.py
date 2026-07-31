@@ -41,7 +41,7 @@ AUD={
  "V":{"key":"vendor","title":"外注先向け","emoji":"📦","who":"お取引先（社外共有可）"},
 }
 
-PORTAL_NAV=[("🏠 今日の情報","../index.html"),("🗂 仕事ボード","../workboard.html"),("🗓 品質カレンダー","../calendar.html"),("❓ 今日の1問","../quiz.html")]
+PORTAL_NAV=[("🏠 今日の情報","../index.html"),("🗂 仕事ボード","../workboard.html"),("🗓 品質カレンダー","../calendar.html"),("❓ 今日の1問","../quiz.html"),("📈 業界定点","../trends.html"),("💬 相談・壁打ち","../soudan.html")]
 def _portal_nav_available():
     out=[]
     for label,relpath in PORTAL_NAV:
