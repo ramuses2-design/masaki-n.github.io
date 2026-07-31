@@ -75,6 +75,55 @@
   .c-src a{color:var(--ts);text-decoration:underline}
   .c-old{font-size:.74rem;color:var(--tm);margin-top:4px}
 
+  /* 一覧表（サマリー） */
+  .sum{margin:24px 0 0}
+  .sum-h{font-size:1.12rem;font-weight:700;padding:0 2px 8px;border-bottom:2px solid var(--bds)}
+  .sum-d{font-size:.8rem;color:var(--ts);margin:10px 2px 0}
+  .sum-wrap{margin:12px 0 0;background:var(--s2);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+  table.sum-t{width:100%;border-collapse:collapse;font-size:.84rem}
+  table.sum-t th,table.sum-t td{padding:10px 12px;text-align:left;border-top:1px solid var(--bd);vertical-align:top}
+  table.sum-t thead th{border-top:none;background:var(--s1);color:var(--ts);font-size:.74rem;font-weight:700;white-space:nowrap}
+  table.sum-t td.v{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+  table.sum-t td.c{font-size:.8rem;color:var(--ts);white-space:nowrap}
+  table.sum-t td.c .mk{font-weight:700}
+  table.sum-t td.m{font-size:.8rem;color:var(--ts);line-height:1.7}
+  table.sum-t a.nm{font-weight:700;color:var(--tp)}
+  table.sum-t a.nm:hover{color:var(--acc-t);text-decoration:underline}
+  table.sum-t .cat{display:inline-block;font-size:.7rem;color:var(--ts);background:var(--s1);border-radius:20px;padding:1px 8px;margin-top:3px}
+  @media(max-width:640px){
+    table.sum-t thead{display:none}
+    table.sum-t tr{display:block;border-top:1px solid var(--bd);padding:10px 12px}
+    table.sum-t tbody tr:first-child{border-top:none}
+    table.sum-t td{display:block;border:none;padding:1px 0}
+    table.sum-t td.v{font-size:1.15rem;margin-top:2px}
+  }
+
+  /* 派生指標（当ページで計算） */
+  .drv{background:var(--s2);border:1px solid var(--bd);border-left:3px solid var(--acc);border-radius:12px;padding:14px 16px;margin:12px 0 0}
+  .drv .h{font-size:.9rem;font-weight:700}
+  .drv .val{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:6px}
+  .drv .val b{font-size:1.6rem;font-variant-numeric:tabular-nums;line-height:1.3}
+  .drv .val span{font-size:.78rem;color:var(--tm)}
+  .drv p{font-size:.82rem;color:var(--ts);line-height:1.8;margin:6px 0 0}
+  .drv .calc{font-size:.76rem;color:var(--tm);margin-top:4px}
+  .drv .rf{display:flex;align-items:center;min-height:32px;font-size:.8rem;font-weight:500;color:var(--acc-t)}
+  .drv .rf:hover{text-decoration:underline}
+
+  /* 「どうなったら何が起きるか」 */
+  .imp{margin:14px 0 0;border-top:1px solid var(--bd);padding-top:12px}
+  .imp .cap{display:block;font-size:.74rem;font-weight:700;color:var(--ts);letter-spacing:.04em;margin-bottom:8px}
+  .imp-row{display:grid;grid-template-columns:88px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--bd)}
+  .imp-row:first-of-type{border-top:none}
+  .imp-row .dir{font-size:.78rem;font-weight:700;color:var(--ts);white-space:nowrap}
+  .imp-row .mean{font-size:.84rem;line-height:1.75}
+  .imp-row .act{font-size:.82rem;color:var(--ts);line-height:1.8;margin-top:4px}
+  .imp-row .act b{color:var(--tp);font-weight:700}
+  .imp-row.now{background:var(--acc-bg);border-radius:8px;padding:8px 10px}
+  .imp-row.now .dir{color:var(--acc-t)}
+  .c-what{font-size:.84rem;color:var(--ts);line-height:1.8;margin-top:8px;background:var(--s1);border-radius:9px;padding:10px 12px}
+  @media(max-width:560px){
+    .imp-row{grid-template-columns:1fr;gap:2px}
+  }
   .note{font-size:.78rem;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 16px;margin:24px 0}
   .empty{color:var(--ts);font-size:.88rem;padding:24px 4px}
   footer{margin:32px 0 40px;font-size:.74rem;color:var(--tm);text-align:center}
@@ -95,6 +144,8 @@
   <div class="upd" id="upd">更新日: 読み込み中…</div>
   <div class="caution">本ページは公表統計の転記であり、将来を予測するものではありません。数値の定義・改定は各系列の出典元で確認してください。</div>
 </div></header>
+
+<div class="wrap"><div id="summary"></div></div>
 
 <main class="wrap" id="main"><div class="empty" id="loading">読み込み中…</div></main>
 
@@ -163,7 +214,7 @@
     if(!pts.length) return "";
     var n=pts.length, cur=pts[n-1], prev=(n>1?pts[n-2]:null);
     charts[idx]={pts:pts,zero:/ポイント/.test(s.unit||"")};
-    var h='<section class="card">';
+    var h='<section class="card" id="s-'+esc(s.id||("i"+idx))+'">';
     h+='<div class="c-lab">'+esc(s.label)+'</div>';
     h+='<div class="c-unit">'+esc(s.unit||"")+'</div>';
     h+='<div class="c-now"><span class="c-val">'+esc(fmt(cur.v))+'</span><span class="c-at">'+esc(cur.t)+'</span>';
@@ -177,7 +228,21 @@
     }
     h+='</div>';
     h+='<div class="c-chart" data-i="'+idx+'"></div>';
+    if(s.what) h+='<div class="c-what">'+esc(s.what)+'</div>';
     if(s.use) h+='<div class="c-use">'+esc(s.use)+'</div>';
+    if(s.impact){
+      var dir=prev ? (cur.v>prev.v?"up":(cur.v<prev.v?"down":null)) : null;
+      h+='<div class="imp"><span class="cap">この数字が動くと何が起きるか</span>';
+      [["up","▲ 上がると"],["down","▼ 下がると"]].forEach(function(x){
+        var o=s.impact[x[0]]; if(!o) return;
+        var isNow=(dir===x[0]);
+        h+='<div class="imp-row'+(isNow?" now":"")+'"><div class="dir">'+x[1]+(isNow?"<br>（いまここ）":"")+'</div><div>'+
+           '<div class="mean">'+esc(o.mean||"")+'</div>'+
+           (o.act?'<div class="act"><b>やること：</b>'+esc(o.act)+'</div>':'')+
+           '</div></div>';
+      });
+      h+='</div>';
+    }
     if(s.note) h+='<div class="c-note">'+esc(s.note)+'</div>';
     if(s.refs&&s.refs.length){
       h+='<div class="c-refs">';
@@ -205,6 +270,72 @@
     }
   }
 
+  /* 一覧表（サマリー）。最新値・前期比・意味づけを1行にまとめる */
+  function summary(list,data){
+    if(!list.length) return "";
+    var h='<section class="sum"><h2 class="sum-h">一覧</h2>'+
+          '<p class="sum-d">数値は各出典の公表値をそのまま転記しています。前期比の <b>▲</b> は前の期より上昇、<b>▼</b> は低下で、良い・悪いを意味しません。指標名を押すと、その指標の詳細とグラフに移動します。</p>'+
+          '<div class="sum-wrap"><table class="sum-t">'+
+          '<thead><tr><th>指標</th><th>最新値</th><th>前期比</th><th>何を見ている数字か</th></tr></thead><tbody>';
+    list.forEach(function(s,i){
+      var pts=(s.points||[]).filter(function(p){return p&&num(p.v)&&p.t;});
+      if(!pts.length) return;
+      var n=pts.length, cur=pts[n-1], prev=(n>1?pts[n-2]:null);
+      var chg='—';
+      if(prev){
+        var diff=Math.round((cur.v-prev.v)*100)/100;
+        var mk=(diff>0?"▲":(diff<0?"▼":"→"));
+        chg='<span class="mk">'+mk+'</span> '+(diff===0?"変化なし":esc(fmt(Math.abs(diff))));
+      }
+      h+='<tr><td><a class="nm" href="#s-'+esc(s.id)+'">'+esc(s.label)+'</a>'+
+         (s.cat?'<div><span class="cat">'+esc(s.cat)+'</span></div>':'')+'</td>'+
+         '<td class="v">'+esc(fmt(cur.v))+' <span style="font-weight:400;font-size:.74rem;color:var(--tm)">'+esc(cur.t)+'</span></td>'+
+         '<td class="c">'+chg+'</td>'+
+         '<td class="m">'+esc(s.short||s.what||"")+'</td></tr>';
+    });
+    h+='</tbody></table></div>';
+    h+=derived(list,data);
+    h+='</section>';
+    return h;
+  }
+
+  /* 派生指標（公表値どうしの引き算。当ページで計算した値であることを明記する） */
+  function derived(list,data){
+    var defs=(data.derived||[]);
+    if(!defs.length) return "";
+    var byId={};
+    list.forEach(function(s){ byId[s.id]=s; });
+    var h="";
+    defs.forEach(function(d){
+      var a=byId[(d.from||[])[0]], b=byId[(d.from||[])[1]];
+      if(!a||!b) return;
+      var pa=(a.points||[]).filter(function(p){return num(p.v);});
+      var pb=(b.points||[]).filter(function(p){return num(p.v);});
+      if(!pa.length||!pb.length) return;
+      var ca=pa[pa.length-1], cb=pb[pb.length-1];
+      if(ca.t!==cb.t) return;   /* 同じ時点どうしでなければ計算しない */
+      var v=Math.round((ca.v-cb.v)*100)/100;
+      var pv=null;
+      if(pa.length>1&&pb.length>1&&pa[pa.length-2].t===pb[pb.length-2].t){
+        pv=Math.round((pa[pa.length-2].v-pb[pb.length-2].v)*100)/100;
+      }
+      var trend="";
+      if(pv!==null){
+        trend=(v>pv)?"前の期より差が開いています（転嫁が追いついていない方向）。"
+             :((v<pv)?"前の期より差が縮んでいます（転嫁が進んでいる方向）。":"前の期から差は変わっていません。");
+      }
+      h+='<div class="drv"><div class="h">'+esc(d.label)+'</div>'+
+         '<div class="val"><b>'+esc(fmt(v))+'</b><span>'+esc(d.unit||"")+'（'+esc(ca.t)+'）</span></div>'+
+         '<div class="calc">計算：'+esc(fmt(ca.v))+' − '+esc(fmt(cb.v))+' ＝ '+esc(fmt(v))+'</div>'+
+         (d.what?'<p>'+esc(d.what)+'</p>':'')+
+         (d.read?'<p>'+esc(d.read)+(trend?' '+esc(trend):'')+'</p>':'')+
+         (d.act?'<p><b style="color:var(--tp)">やること：</b>'+esc(d.act)+'</p>':'');
+      (d.refs||[]).forEach(function(r){ if(r&&r.u&&r.t) h+='<a class="rf" href="'+esc(r.u)+'">📘 '+esc(r.t)+'</a>'; });
+      h+='</div>';
+    });
+    return h;
+  }
+
   function render(data){
     document.getElementById("upd").textContent="更新日: "+(data.updated||"—")+"（数値は各出典の公表値をそのまま転記）";
     var list=(data.series||[]).filter(function(s){return s&&s.points&&s.points.length;});
@@ -224,6 +355,7 @@
         h+='</div>';
       });
     }
+    document.getElementById("summary").innerHTML=summary(list,data);
     document.getElementById("main").innerHTML=h;
     paint();
     var tid=null;
