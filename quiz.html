@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>今日の1問｜ものづくりポータル</title>
-<meta name="description" content="ものづくりハンドブックの内容から、毎日3択1問。答え合わせのあとに解説と該当ページへのリンクが出ます。">
+<title>クイズ｜ものづくりポータル</title>
+<meta name="description" content="ものづくりハンドブックの内容から、カテゴリごとに10問。答え合わせのあとに解説と、もとになったページへのリンクが出ます。">
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%231f6feb'/%3E%3Crect%20x='5'%20y='6'%20width='14'%20height='3'%20rx='1'%20fill='white'/%3E%3Crect%20x='5'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='13'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'/%3E%3C/svg%3E">
 <style>
-  /* トークンは index.html / calendar.html と同一。外部CSS・外部フォント・外部ライブラリは読み込まない。 */
   :root{
     --s0:#f6f7f9; --s1:#eef1f5; --s2:#ffffff;
     --tp:#1b2431; --ts:#5a6474; --tm:#8b94a3;
@@ -50,9 +49,20 @@
   .brand{font-size:1.7rem;font-weight:700;margin:0;letter-spacing:.03em}
   .sub{font-size:.84rem;color:var(--ts);margin-top:5px}
 
+  .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:24px 0 0}
+  .cat{display:flex;flex-direction:column;text-align:left;font:inherit;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;cursor:pointer;color:var(--tp);min-height:44px}
+  .cat:hover{border-color:var(--acc);background:var(--acc-bg)}
+  .cat:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+  .cat .n{font-size:.96rem;font-weight:700;line-height:1.5}
+  .cat .d{font-size:.78rem;color:var(--ts);line-height:1.7;margin-top:4px;flex:1}
+  .cat .m{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:.72rem;color:var(--tm)}
+  .cat .best{color:var(--ok-t);background:var(--ok-bg);border-radius:20px;padding:1px 9px;font-weight:700}
+
   .card{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:24px 24px 20px;margin:24px 0 0}
   .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.74rem;color:var(--tm)}
   .tag{display:inline-block;font-size:.72rem;font-weight:500;padding:2px 10px;border-radius:30px;background:var(--s1);color:var(--ts)}
+  .track{flex:1;min-width:80px;height:6px;background:var(--s1);border-radius:6px;overflow:hidden}
+  .track i{display:block;height:100%;background:var(--acc);border-radius:6px}
   .qtxt{font-size:1.08rem;font-weight:700;line-height:1.7;margin:12px 0 0}
 
   .opts{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
@@ -79,179 +89,211 @@
   .btn{font:inherit;font-size:.84rem;font-weight:500;color:var(--ts);background:var(--s2);border:1px solid var(--bds);border-radius:30px;padding:9px 16px;min-height:44px;cursor:pointer}
   .btn:hover{color:var(--acc-t);border-color:var(--acc);background:var(--acc-bg)}
   .btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+  .btn.pri{color:var(--acc-t);border-color:var(--acc);background:var(--acc-bg);font-weight:700}
 
-  .stats{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 0}
-  .st{flex:1;min-width:140px;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 16px}
-  .st .n{font-size:1.24rem;font-weight:700;line-height:1.4}
-  .st .l{font-size:.73rem;color:var(--tm)}
+  .score{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .score .n{font-size:2.4rem;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}
+  .score .n small{font-size:1rem;font-weight:400;color:var(--ts)}
+  .score .cm{font-size:.86rem;color:var(--ts)}
+  .rev{margin:20px 0 0}
+  .rev-i{border-top:1px solid var(--bd);padding:14px 0}
+  .rev-i:first-child{border-top:none}
+  .rev-i .h{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;font-weight:700;line-height:1.6}
+  .rev-i .mk{flex:none;font-size:.74rem;font-weight:700;border-radius:20px;padding:1px 9px;margin-top:3px}
+  .rev-i .mk.ok{background:var(--ok-bg);color:var(--ok-t)}
+  .rev-i .mk.ng{background:var(--dang-bg);color:var(--dang-t)}
+  .rev-i .ans{font-size:.84rem;color:var(--ts);margin-top:6px}
+  .rev-i .ans b{color:var(--tp)}
+  .rev-i .ex{font-size:.82rem;color:var(--ts);line-height:1.8;margin-top:6px}
+  .rev-i a{display:inline-block;font-size:.8rem;font-weight:500;color:var(--acc-t);margin-top:6px}
+  .rev-i a:hover{text-decoration:underline}
 
   .note{font-size:.78rem;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 16px;margin:24px 0 0}
+  .note b{color:var(--tp)}
   .empty{color:var(--ts);font-size:.88rem;padding:24px 4px}
   footer{margin:32px 0 40px;font-size:.74rem;color:var(--tm);text-align:center}
 
+  @media(max-width:560px){.cats{grid-template-columns:1fr}.card{padding:18px 16px}}
   @media print{
-    .ptabs,.acts,.stats,.note,footer,.opt:disabled.dim{display:none!important}
+    .ptabs,.acts,.note,footer,.opts{display:none!important}
     body{background:#fff;color:#000}
     .card{border:1px solid #999;break-inside:avoid}
   }
 </style>
 </head>
 <body>
-<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a class="on" href="quiz.html">🧠 今日の1問</a><a href="trends.html">📈 業界定点</a><a href="soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a class="on" href="quiz.html">🧠 クイズ</a><a href="trends.html">📈 業界定点</a><a href="soudan.html">💬 相談・壁打ち</a></nav></div></div>
 
 <header class="top"><div class="wrap">
-  <h1 class="brand">今日の1問</h1>
-  <div class="sub">ものづくりハンドブックの内容から、毎日3択で1問。答え合わせのあとに解説と、もとになったページへのリンクが出ます。</div>
+  <h1 class="brand">クイズ</h1>
+  <div class="sub">ものづくりハンドブックの内容から、カテゴリごとに10問。1問ずつ答え合わせをして、最後に結果と解説をまとめて見られます。</div>
 </div></header>
 
 <main class="wrap">
   <div id="main"><div class="empty" id="loading">読み込み中…</div></div>
-  <div class="stats" id="stats" hidden>
-    <div class="st"><div class="n" id="stDays">–</div><div class="l">解いた日数</div></div>
-    <div class="st"><div class="n" id="stRate">–</div><div class="l">正解率（今日の1問）</div></div>
-    <div class="st"><div class="n" id="stStreak">–</div><div class="l">連続日数</div></div>
-  </div>
-  <div class="acts" id="acts" hidden>
-    <button class="btn" type="button" id="btnPractice">もう1問（練習モード）</button>
-    <button class="btn" type="button" id="btnClear">記録をクリア</button>
-  </div>
   <div class="note">出題はハンドブックの記述にもとづく理解確認です。社内の正式な様式・数値・権限は各ページの【要確認】に従ってください。<b>回答と記録はこの端末内（ブラウザ）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄はありません。</div>
 </main>
 
-<footer>ものづくりポータル｜今日の1問（出題データ: quiz-data.json）</footer>
+<footer>ものづくりポータル｜クイズ（出題データ: quiz-data.json）</footer>
 
 <script>
 (function(){
   "use strict";
-  var KEY="portal-quiz-v1";
-  var data=null, todayIdx=-1, practiceIdx=-1, mode="daily";
+  var KEY="portal-quiz-v2";
+  var data=null, cat=null, set=[], idx=0, answers=[];
+  var main=document.getElementById("main");
 
   function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
   function ymd(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
-  function dayNo(d){return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000);}
+  function load(){ try{var s=localStorage.getItem(KEY); return s?JSON.parse(s):{};}catch(e){return {};} }
+  function save(st){ try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){} }
 
-  function load(){
-    try{var s=localStorage.getItem(KEY); return s?JSON.parse(s):{};}catch(e){return {};}
+  function shuffle(a){
+    var r=a.slice();
+    for (var i=r.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=r[i]; r[i]=r[j]; r[j]=t; }
+    return r;
   }
-  function save(st){
-    try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}
+  function catById(id){
+    for (var i=0;i<data.categories.length;i++){ if (data.categories[i].id===id) return data.categories[i]; }
+    return null;
   }
-
-  var today=new Date();
-  var todayKey=ymd(today);
-
-  function pickDaily(n){
-    // 日付から決まる出題。同じ日は誰が開いても同じ問題になる。
-    return ((dayNo(today)%n)+n)%n;
-  }
-
-  function statsFrom(st){
-    var log=st.log||{};
-    var days=Object.keys(log);
-    var ok=0;
-    days.forEach(function(k){ if(log[k]&&log[k].ok) ok++; });
-    // 連続日数（今日、まだ未回答なら昨日を起点にさかのぼる）
-    var streak=0, base=dayNo(today);
-    if(!log[todayKey]) base=base-1;
-    for(var i=0;i<400;i++){
-      var key=new Date((base-i)*86400000).toISOString().slice(0,10);
-      if(log[key]) streak++; else break;
-    }
-    return {days:days.length, ok:ok, streak:streak};
+  function poolOf(id){
+    return data.questions.filter(function(q){ return q.cat===id; });
   }
 
-  function renderStats(){
-    var s=statsFrom(load());
-    document.getElementById("stDays").textContent=s.days+" 日";
-    document.getElementById("stRate").textContent=(s.days?Math.round(s.ok/s.days*100):0)+" %";
-    document.getElementById("stStreak").textContent=s.streak+" 日";
-    document.getElementById("stats").hidden=false;
-    document.getElementById("acts").hidden=false;
-  }
-
-  function render(idx, answered, chosen){
-    var q=data.questions[idx];
-    var main=document.getElementById("main");
-    var h="";
-    h+='<section class="card">';
-    h+='<div class="meta"><span class="tag">'+esc(q.g)+'</span><span>'+(mode==="daily"?esc(todayKey)+" の1問":"練習モード")+'</span><span>'+esc(q.id)+'</span></div>';
-    h+='<p class="qtxt">'+esc(q.q)+'</p>';
-    h+='<ul class="opts" id="opts">';
-    for(var i=0;i<q.c.length;i++){
-      var cls="opt", mk=["A","B","C"][i];
-      if(answered){
-        if(i===q.a){cls+=" correct"; mk="○";}
-        else if(i===chosen){cls+=" wrong"; mk="×";}
-        else {cls+=" dim";}
-      }
-      h+='<li><button class="'+cls+'" type="button" data-i="'+i+'"'+(answered?" disabled":"")+'>';
-      h+='<span class="mk" aria-hidden="true">'+mk+'</span><span>'+esc(q.c[i])+'</span></button></li>';
-    }
-    h+='</ul>';
-    if(answered){
-      var ok=(chosen===q.a);
-      h+='<div class="verdict '+(ok?"ok":"ng")+'">'+(ok?"正解":"惜しい（正解は "+["A","B","C"][q.a]+"）")+'</div>';
-      h+='<div class="exp"><span class="lb">解説</span>'+esc(q.exp)+'</div>';
-      h+='<a class="refl" href="'+esc(q.ref.u)+'">📘 '+esc(q.ref.t)+' を読む</a>';
-    }
-    h+='</section>';
+  /* ---------- カテゴリ選択 ---------- */
+  function renderCats(){
+    var st=load();
+    var h='<div class="cats">';
+    data.categories.forEach(function(c){
+      var pool=poolOf(c.id);
+      if (!pool.length) return;
+      var rec=st[c.id]||{};
+      var best=(typeof rec.best==="number") ? '<span class="best">最高 '+rec.best+' / 10</span>' : '';
+      var last=rec.last ? '<span>前回 '+esc(rec.last)+'</span>' : '<span>未挑戦</span>';
+      h+='<button class="cat" type="button" data-cat="'+esc(c.id)+'">'+
+         '<span class="n">'+esc(c.name)+'</span>'+
+         '<span class="d">'+esc(c.desc)+'</span>'+
+         '<span class="m"><span>'+Math.min(10,pool.length)+'問</span>'+best+last+'</span></button>';
+    });
+    h+='</div>';
     main.innerHTML=h;
+    var btns=main.querySelectorAll(".cat");
+    for (var i=0;i<btns.length;i++){
+      btns[i].addEventListener("click", function(){ start(this.getAttribute("data-cat")); });
+    }
+  }
 
-    if(!answered){
-      var btns=main.querySelectorAll(".opt");
-      for(var j=0;j<btns.length;j++){
-        btns[j].addEventListener("click",function(ev){
-          var pick=parseInt(ev.currentTarget.getAttribute("data-i"),10);
-          if(mode==="daily"){
-            var st=load(); st.log=st.log||{};
-            st.log[todayKey]={id:q.id,pick:pick,ok:(pick===q.a)};
-            save(st);
-            renderStats();
-          }
-          render(idx,true,pick);
-        });
+  /* ---------- 出題 ---------- */
+  function start(id){
+    cat=catById(id);
+    set=shuffle(poolOf(id)).slice(0,10);
+    idx=0; answers=[];
+    renderQ();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function renderQ(){
+    var q=set[idx];
+    var pct=Math.round(idx/set.length*100);
+    var h='<div class="card"><div class="meta"><span class="tag">'+esc(cat.name)+'</span>'+
+          '<span>'+(idx+1)+' / '+set.length+' 問</span>'+
+          '<span class="track"><i style="width:'+pct+'%"></i></span></div>'+
+          '<p class="qtxt">'+esc(q.q)+'</p><ul class="opts" id="opts">';
+    var mk=["A","B","C"];
+    q.c.forEach(function(c,i){
+      h+='<li><button class="opt" type="button" data-i="'+i+'"><span class="mk">'+mk[i]+'</span><span>'+esc(c)+'</span></button></li>';
+    });
+    h+='</ul><div id="after"></div></div>'+
+       '<div class="acts"><button class="btn" type="button" id="btnQuit">カテゴリ一覧へ戻る</button></div>';
+    main.innerHTML=h;
+    var opts=main.querySelectorAll(".opt");
+    for (var i=0;i<opts.length;i++){
+      opts[i].addEventListener("click", function(){ answer(parseInt(this.getAttribute("data-i"),10)); });
+    }
+    document.getElementById("btnQuit").addEventListener("click", function(){ renderCats(); window.scrollTo({top:0,behavior:"smooth"}); });
+  }
+
+  function answer(pick){
+    var q=set[idx];
+    var ok=(pick===q.a);
+    answers.push({id:q.id, pick:pick, ok:ok});
+    var opts=main.querySelectorAll(".opt");
+    for (var i=0;i<opts.length;i++){
+      opts[i].disabled=true;
+      if (i===q.a) opts[i].classList.add("correct");
+      else if (i===pick) opts[i].classList.add("wrong");
+      else opts[i].classList.add("dim");
+    }
+    var last=(idx===set.length-1);
+    var h='<div class="verdict '+(ok?"ok":"ng")+'">'+(ok?"正解":"不正解")+'</div>'+
+          '<div class="exp"><span class="lb">解説</span>'+esc(q.exp)+'</div>'+
+          '<a class="refl" href="'+esc(q.ref.u)+'">📘 '+esc(q.ref.t)+' を読む</a>'+
+          '<div class="acts"><button class="btn pri" type="button" id="btnNext">'+(last?"結果を見る":"次の問題へ")+'</button></div>';
+    document.getElementById("after").innerHTML=h;
+    document.getElementById("btnNext").addEventListener("click", function(){
+      if (last){ finish(); } else { idx++; renderQ(); }
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+    document.getElementById("btnNext").focus();
+  }
+
+  /* ---------- 結果 ---------- */
+  function finish(){
+    var n=0;
+    answers.forEach(function(a){ if (a.ok) n++; });
+    var st=load();
+    var rec=st[cat.id]||{};
+    rec.best=Math.max(rec.best||0, n);
+    rec.last=ymd(new Date());
+    rec.plays=(rec.plays||0)+1;
+    st[cat.id]=rec; save(st);
+
+    var cm = n===set.length ? "全問正解です。" :
+             (n>=Math.ceil(set.length*0.8) ? "よく押さえられています。間違えた問題だけ読み直しておきましょう。" :
+             (n>=Math.ceil(set.length*0.5) ? "半分以上は正解です。間違えた問題のページを読み直すと定着します。" :
+              "間違えた問題の解説とリンク先を、ひとつずつ確認してみてください。"));
+    var h='<div class="card"><div class="meta"><span class="tag">'+esc(cat.name)+'</span><span>結果</span></div>'+
+          '<div class="score" style="margin-top:12px"><span class="n">'+n+'<small> / '+set.length+' 問正解</small></span>'+
+          '<span class="cm">'+esc(cm)+'</span></div>'+
+          '<div class="rev">';
+    set.forEach(function(q,i){
+      var a=answers[i];
+      h+='<div class="rev-i"><div class="h"><span class="mk '+(a.ok?"ok":"ng")+'">'+(a.ok?"正解":"不正解")+'</span>'+
+         '<span>'+(i+1)+'. '+esc(q.q)+'</span></div>';
+      if (!a.ok){
+        h+='<div class="ans">あなたの回答：'+esc(q.c[a.pick])+'<br>正解：<b>'+esc(q.c[q.a])+'</b></div>';
+      } else {
+        h+='<div class="ans">正解：<b>'+esc(q.c[q.a])+'</b></div>';
       }
-    }
+      h+='<div class="ex">'+esc(q.exp)+'</div>'+
+         '<a href="'+esc(q.ref.u)+'">📘 '+esc(q.ref.t)+' を読む</a></div>';
+    });
+    h+='</div></div>'+
+       '<div class="acts"><button class="btn pri" type="button" id="btnAgain">同じカテゴリをもう一度</button>'+
+       '<button class="btn" type="button" id="btnBack">カテゴリ一覧へ戻る</button>'+
+       '<button class="btn" type="button" id="btnClear">記録をクリア</button></div>';
+    main.innerHTML=h;
+    document.getElementById("btnAgain").addEventListener("click", function(){ start(cat.id); });
+    document.getElementById("btnBack").addEventListener("click", function(){ renderCats(); window.scrollTo({top:0,behavior:"smooth"}); });
+    document.getElementById("btnClear").addEventListener("click", function(){
+      if (!window.confirm("この端末に保存した最高得点などの記録を消します。よろしいですか？")) return;
+      try{ localStorage.removeItem(KEY); }catch(e){}
+      renderCats(); window.scrollTo({top:0,behavior:"smooth"});
+    });
   }
 
-  function showDaily(){
-    mode="daily";
-    var st=load(); var rec=(st.log||{})[todayKey];
-    if(rec&&typeof rec.pick==="number"&&rec.id===data.questions[todayIdx].id){
-      render(todayIdx,true,rec.pick);
-    }else{
-      render(todayIdx,false,-1);
-    }
+  /* ---------- 読み込み ---------- */
+  function boot(d){
+    data=d;
+    if (!data || !data.categories || !data.questions){ main.innerHTML='<div class="empty">出題データを読み込めませんでした。</div>'; return; }
+    renderCats();
   }
 
-  function showPractice(){
-    mode="practice";
-    var n=data.questions.length;
-    var i, guard=0;
-    do{ i=Math.floor(Math.random()*n); guard++; }while(n>2&&(i===todayIdx||i===practiceIdx)&&guard<50);
-    practiceIdx=i;
-    render(i,false,-1);
-  }
-
-  document.getElementById("btnPractice").addEventListener("click",function(){ showPractice(); window.scrollTo(0,0); });
-  document.getElementById("btnClear").addEventListener("click",function(){
-    if(!window.confirm("この端末に保存した回答記録をすべて消します。よろしいですか？")) return;
-    try{localStorage.removeItem(KEY);}catch(e){}
-    renderStats(); showDaily(); window.scrollTo(0,0);
-  });
-
-  fetch("quiz-data.json",{cache:"no-store"}).then(function(r){
-    if(!r.ok) throw new Error("load failed");
-    return r.json();
-  }).then(function(j){
-    data=j;
-    if(!data||!data.questions||!data.questions.length) throw new Error("empty");
-    todayIdx=pickDaily(data.questions.length);
-    renderStats();
-    showDaily();
-  }).catch(function(){
-    document.getElementById("main").innerHTML='<div class="empty">出題データを読み込めませんでした。時間をおいて再読み込みしてください。</div>';
-  });
+  fetch("quiz-data.json",{cache:"no-cache"})
+    .then(function(r){ if(!r.ok) throw new Error("load"); return r.json(); })
+    .then(boot)
+    .catch(function(){ main.innerHTML='<div class="empty">出題データを読み込めませんでした。時間をおいて開き直してください。</div>'; });
 })();
 </script>
 </body>

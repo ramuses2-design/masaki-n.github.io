@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>言語化スキル自己診断｜ものづくりハンドブック</title>
+<meta name="description" content="42問・7領域で言語化スキルの現在地を見て、優先して鍛える領域とトレーニングを知るセルフチェック">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
+<style>
+  .ck-wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+  .ck-back{display:inline-block;font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:16px}
+  .ck-back:hover{color:var(--teal)}
+  .ck-title{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--head);margin:0 0 8px}
+  .ck-lead{color:var(--muted);font-size:.9rem;line-height:1.8;margin:0 0 16px}
+  .ck-note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 24px}
+  .ck-note b{color:var(--head)}
+  .ck-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--faint);margin:0 0 24px}
+
+  .ck-legend{margin:0 0 24px}
+  .ck-legend h2{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 6px}
+  .ck-legend p{font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 12px}
+  .ck-lv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-lv div{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:.76rem;color:var(--muted);line-height:1.6}
+  .ck-lv b{display:block;color:var(--head);font-size:.8rem;margin-bottom:2px}
+
+  .ck-prog{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 0;margin:0 0 8px;display:flex;align-items:center;gap:12px}
+  .ck-prog .t{font-size:.76rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ck-prog .track{flex:1;height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-prog .fill{height:100%;width:0;background:var(--teal);border-radius:6px}
+
+  .ck-domain{margin:0 0 8px;padding:16px 0 4px;border-top:1px solid var(--line)}
+  .ck-domain:first-of-type{border-top:none}
+  .ck-domain-h{font-size:.95rem;font-weight:700;color:var(--head);margin:0 0 2px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .ck-domain-h .cnt{font-size:.74rem;font-weight:400;color:var(--faint);margin-left:auto;font-variant-numeric:tabular-nums}
+  .ck-domain-d{font-size:.8rem;color:var(--muted);line-height:1.7;margin:0 0 12px}
+  .ck-q{padding:14px 0;border-top:1px solid var(--line)}
+  .ck-q:first-of-type{border-top:none}
+  .ck-qtext{font-size:.9rem;line-height:1.7;color:var(--ink);margin:0 0 4px}
+  .ck-qex{font-size:.76rem;line-height:1.7;color:var(--muted);margin:0 0 10px}
+  .ck-qex .tag{display:inline-block;font-size:.7rem;font-weight:700;color:var(--teal-d);border:1px solid var(--line-2);border-radius:20px;padding:0 8px;margin-right:6px}
+  .ck-scale{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ck-opt{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);text-align:center;border:1px solid var(--line);border-radius:9px;padding:8px 4px;cursor:pointer;background:var(--card)}
+  .ck-opt:has(input:checked){border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt.on{border-color:var(--teal);background:var(--a-bg);color:var(--head);font-weight:600}
+  .ck-opt input{margin:0;accent-color:var(--teal)}
+
+  .ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  .ck-btn.ghost{background:transparent;color:var(--muted);border-color:var(--line-2)}
+  .ck-btn:disabled{opacity:.45;cursor:not-allowed}
+  .ck-warn{font-size:.78rem;color:var(--muted);margin:10px 0 0}
+
+  #ckResult{display:none;margin-top:32px;padding-top:24px;border-top:2px solid var(--line)}
+  .ck-r-title{font-size:1.15rem;font-weight:700;color:var(--head);margin:0 0 4px}
+  .ck-r-sub{font-size:.82rem;color:var(--muted);margin:0 0 20px}
+  .ck-total{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:0 0 20px}
+  .ck-total .num{font-size:2.2rem;font-weight:700;color:var(--head);line-height:1.2;font-variant-numeric:tabular-nums}
+  .ck-total .num small{font-size:.9rem;font-weight:400;color:var(--muted)}
+  .ck-total .lv{font-size:.86rem;font-weight:700;color:var(--head);margin-top:2px}
+  .ck-total .txt{font-size:.82rem;color:var(--muted);line-height:1.8;margin-top:6px}
+  .ck-type{font-size:.82rem;color:var(--ink);line-height:1.8;background:var(--a-bg);border-radius:9px;padding:12px 14px;margin:0 0 20px}
+
+  .ck-radar{display:flex;justify-content:center;margin:0 0 20px}
+  .ck-radar svg{max-width:100%;height:auto}
+  .ck-bar-row{display:grid;grid-template-columns:150px 1fr 46px;align-items:center;gap:10px;margin:0 0 10px;font-size:.82rem}
+  .ck-bar-label{color:var(--ink);line-height:1.5;overflow-wrap:anywhere}
+  .ck-bar-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+  .ck-bar-fill{height:100%;background:var(--teal);border-radius:6px}
+  .ck-bar-pct{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+  .ck-tbl{width:100%;border-collapse:collapse;font-size:.8rem;margin:16px 0 0}
+  .ck-tbl th,.ck-tbl td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;color:var(--ink)}
+  .ck-tbl th{color:var(--muted);font-weight:700;font-size:.74rem}
+  .ck-tbl td.n,.ck-tbl th.n{text-align:right;font-variant-numeric:tabular-nums}
+
+  .ck-plan{margin:24px 0 0}
+  .ck-plan h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-plan-item{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:9px;padding:14px 16px;margin:0 0 12px}
+  .ck-plan-item h5{margin:0 0 2px;font-size:.88rem;color:var(--head)}
+  .ck-plan-item .prio{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:var(--teal);border-radius:20px;padding:1px 9px;margin-right:8px}
+  .ck-plan-item .period{font-size:.74rem;color:var(--faint);margin:0 0 6px}
+  .ck-plan-item p{font-size:.8rem;color:var(--muted);line-height:1.8;margin:0 0 8px}
+  .ck-plan-item ul{margin:0;padding-left:18px;font-size:.82rem;color:var(--ink);line-height:1.8}
+
+  .ck-road{margin:24px 0 0}
+  .ck-road h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-road-step{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:.82rem;line-height:1.8}
+  .ck-road-step:first-of-type{border-top:none}
+  .ck-road-step .when{color:var(--teal-d);font-weight:700}
+  .ck-road-step b{color:var(--head)}
+  .ck-road-step div:last-child{color:var(--muted)}
+
+  .ck-comp-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
+  .ck-copystate{font-size:.78rem;color:var(--teal);margin:0;min-height:1.2em}
+  .ck-next{margin:24px 0 0}
+  .ck-next h4{font-size:.9rem;color:var(--head);margin:0 0 10px}
+  .ck-next-list{display:flex;flex-direction:column;gap:8px}
+  .ck-next-list a{display:block;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 14px;font-size:.85rem;color:var(--head);text-decoration:none;font-weight:600}
+  .ck-next-list a:hover{border-color:var(--teal)}
+  .ck-next-list a span{display:block;font-weight:400;color:var(--muted);font-size:.76rem;margin-top:2px}
+  .ck-src{font-size:.74rem;color:var(--faint);line-height:1.8;margin:24px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+
+  @media (max-width:860px){
+    .ck-back{display:inline-flex;align-items:center;min-height:44px}
+    .ck-btn{min-height:44px}
+  }
+  @media (max-width:600px){
+    .ck-scale{grid-template-columns:repeat(2,1fr)}
+    .ck-lv{grid-template-columns:1fr 1fr}
+    .ck-bar-row{grid-template-columns:110px 1fr 40px}
+    .ck-road-step{grid-template-columns:1fr;gap:2px}
+  }
+  @media print{
+    .hb-top,.hb-side,.hb-shell aside,.crumb,.hb-foot,.ptabs,.ck-back,.ck-lead,.ck-meta,.ck-warn,.ck-legend,.ck-prog,#ckForm,.ck-actions,.ck-note,.ck-comp-actions{display:none !important}
+    .hb-shell{display:block !important}
+    .ck-wrap{max-width:none;padding:0}
+    #ckResult{display:block !important;border-top:none;margin-top:0;padding-top:0}
+    body{background:#fff;color:#000}
+    .ck-title,.ck-r-title,.ck-next h4,.ck-plan h4,.ck-road h4,.ck-bar-label,.ck-next-list a,.ck-tbl td,.ck-plan-item ul,.ck-total .num,.ck-total .lv,.ck-type{color:#000}
+    .ck-r-sub,.ck-bar-pct,.ck-next-list a span,.ck-plan-item p,.ck-total .txt,.ck-tbl th,.ck-plan-item .period,.ck-src{color:#444}
+    .ck-total,.ck-next-list a,.ck-plan-item,.ck-type{background:#fff;border-color:#bbb}
+    .ck-bar-track{background:#e6e6e6}
+    .ck-bar-fill{background:#555}
+    .ck-bar-track,.ck-bar-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-plan-item .prio{background:#555;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .ck-bar-row,.ck-plan-item,.ck-road-step{break-inside:avoid;page-break-inside:avoid}
+  }
+</style>
+</head><body>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../../">📊 今日の情報</a><a href="../../workboard.html">🗂 仕事ボード</a><a class="on" href="../index.html">📘 ハンドブック</a><a href="../../calendar.html">📅 品質カレンダー</a><a href="../../quiz.html">🧠 クイズ</a><a href="../../trends.html">📈 業界定点</a><a href="../../soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<header class="hb-top">
+  <div class="hb-top-in">
+    <a class="hb-brand" href="../index.html"><span class="hb-logo">本</span><span class="hb-brand-t">ものづくりハンドブック</span></a>
+  </div>
+</header>
+<div class="hb-shell">
+  <main class="hb-main ck-wrap">
+    <a class="ck-back" href="../index.html">← ものづくりハンドブックへ戻る</a>
+    <h1 class="ck-title">🗣 言語化スキル自己診断</h1>
+    <p class="ck-lead">「言いたいことがあるのにうまく言えない」を、どこでつまずいているのかに分解します。観察・メタ認知・具体化・構造化・語彙・伝達・習慣の7領域42問に答えると、領域ごとの現在地と、優先して鍛えるトレーニングの候補が出ます。</p>
+    <div class="ck-note">結果は<b>能力を確定的に測るものではなく、自己認識のための目安</b>です。人物評価にも人事評価にも使いません。<b>回答はこの端末内（ブラウザのlocalStorage）にだけ保存され、どこにも送信されません。</b>個人情報の入力欄もありません。途中で閉じても、次に開いたときに回答が復元されます。</div>
+    <div class="ck-meta"><span>約10〜15分・42問</span><span>7領域×6問・4段階</span><span>関連：CK3・A1・A4</span></div>
+
+    <section class="ck-legend">
+      <h2>回答の目安（共通ルール）</h2>
+      <p>ここ1〜2ヶ月の仕事での「実際の自分」で答えてください。「こうありたい」ではなく「実際どうか」が大事です。迷ったら下の頻度を基準に。各設問にも目安を添えてあります。</p>
+      <div class="ck-lv">
+        <div><b>1 あてはまらない</b>ほとんどない（1割以下）。意識したこと・やったことがない。</div>
+        <div><b>2 あまり</b>たまにある（2〜3割）。言われればできる。</div>
+        <div><b>3 やや</b>半分以上できている（5〜7割）。意識すればだいたいできる。</div>
+        <div><b>4 あてはまる</b>ほぼ毎回（8割以上）。意識しなくても自然にそうしている。</div>
+      </div>
+    </section>
+
+    <div class="ck-prog"><span class="t"><span id="ckDone">0</span> / 42 問回答済み</span><span class="track"><span class="fill" id="ckFill"></span></span></div>
+
+    <form id="ckForm"></form>
+
+    <div class="ck-actions">
+      <button type="button" class="ck-btn" id="ckSubmit" disabled>結果を見る</button>
+      <button type="button" class="ck-btn ghost" id="ckClear">回答をクリア</button>
+    </div>
+    <p class="ck-warn" id="ckWarn">すべての設問に答えると結果を出せます。</p>
+
+    <div id="ckResult">
+      <h2 class="ck-r-title">診断結果</h2>
+      <p class="ck-r-sub">各領域は100点満点に換算しています。75点以上＝強み／50〜74点＝発展途上／50点未満＝要強化。低い領域が「伸びしろ」です。</p>
+
+      <div class="ck-total">
+        <div class="num"><span id="ckTotal">–</span><small> / 100点</small></div>
+        <div class="lv" id="ckTotalLv"></div>
+        <div class="txt" id="ckTotalTxt"></div>
+      </div>
+      <p class="ck-type" id="ckType"></p>
+
+      <div class="ck-radar"><svg id="ckRadar" width="340" height="320" viewBox="0 0 340 320" role="img" aria-label="7領域のスキルレーダーチャート"></svg></div>
+
+      <div id="ckBars"></div>
+      <table class="ck-tbl">
+        <thead><tr><th>領域</th><th class="n">素点</th><th class="n">換算</th><th>判定</th></tr></thead>
+        <tbody id="ckTable"></tbody>
+      </table>
+
+      <div class="ck-plan">
+        <h4>優先して鍛えるとよい領域とトレーニング</h4>
+        <p class="ck-r-sub">全部を一度にやらず、<b>優先度1のトレーニングを1つだけ</b>選んで2ヶ月続けるのが挫折しないコツです。</p>
+        <div id="ckPlan"></div>
+      </div>
+
+      <div class="ck-road">
+        <h4>成長の目安期間（一般的なロードマップ）</h4>
+        <div class="ck-road-step"><div class="when">〜3週間</div><div><b>変化の兆し</b> — 毎日のメモ書きを開始。3週間ほどで「言葉が出やすくなった」という最初の効果を実感しやすい時期。</div></div>
+        <div class="ck-road-step"><div class="when">〜66日（約2ヶ月）</div><div><b>習慣の定着</b> — 行動が習慣になるまで平均66日（Lally et al., 2009。個人差18〜254日）。並行してPREP法などの「型」を使い始める。</div></div>
+        <div class="ck-road-step"><div class="when">〜3ヶ月</div><div><b>周囲が気づく変化</b> — 会議での発言・報告・資料に型が反映され、「わかりやすくなった」と言われ始める目安。</div></div>
+        <div class="ck-road-step"><div class="when">〜6ヶ月</div><div><b>スキルとして定着</b> — 語彙力・抽象化力など時間のかかる領域も底上げされる。語彙は読む量に比例するため以降も継続。</div></div>
+      </div>
+
+      <div class="ck-comp-actions">
+        <button type="button" class="ck-btn" id="ckCopy">結果をテキストでコピー</button>
+        <button type="button" class="ck-btn ghost" id="ckPrint">印刷 / PDF保存</button>
+        <p class="ck-copystate" id="ckCopyState"></p>
+      </div>
+
+      <div class="ck-next">
+        <h4>次の一歩</h4>
+        <div class="ck-next-list">
+          <a href="ck3.html">CK3 強み・キャリア棚卸し（壁打ち型ワークシート）<span>診断で見えた課題を、面談やAIとの壁打ちに持っていける文章にする</span></a>
+          <a href="../s-a1.html">A1 1on1（育成・面談）<span>伝え方・報告の仕方について、上司からフィードバックをもらう場として使う</span></a>
+          <a href="../s-a4.html">A4 目標設定・評価（期初／期中／期末）<span>鍛える領域を、期初の目標に1つだけ具体的に書き込む</span></a>
+          <a href="../s-e2.html">E2 仕事の教え方の基本<span>教える側に回ると、具体化・構造化はいちばん速く鍛えられる</span></a>
+        </div>
+      </div>
+
+      <p class="ck-src">診断フレームの主な参考：言語化の要素分解（観察・具体化・要約・語彙・伝達）／梅田悟司『「言葉にできる」は武器になる。』（内なる言葉・T字型思考）／荒木俊哉『瞬時に「言語化できる人」が、うまくいく。』／赤羽雄二『ゼロ秒思考』／馬田隆明『解像度を上げる』／齋藤孝（具体と抽象の往復）／習慣化66日（Lally et al., 2009）。本診断は自己認識のための簡易ツールであり、能力を確定的に測定するものではありません。</p>
+    </div>
+  </main>
+</div>
+<footer class="hb-foot"><div class="wrap"><div><b>ものづくりハンドブック</b></div><div class="hb-foot-sub">セルフチェックの共通仕様・原本は <a href="../content/checks.md">content/checks.md</a>。</div></div></footer>
+<script>
+(function(){
+"use strict";
+var CATS = [
+  { id:"A", name:"観察力", short:"観察力", desc:"物事・変化・自分の感情に「気づく」力。言語化の入口。",
+    qs:[
+      { t:"会議や会話のあと、「誰が何を気にしていたか」を思い出して説明できる",
+        ex:"4＝直近の会議で誰が何を懸念していたか2〜3人分言える ／ 1＝内容はぼんやりとしか思い出せない" },
+      { t:"資料や現場のちょっとした変化・違和感によく気づくほうだ",
+        ex:"4＝数字のズレや小さな変化に週1回以上気づいて指摘している ／ 1＝人に言われて初めて気づくことが多い" },
+      { t:"自分の感情が動いたとき（イラッ、モヤッ）、その瞬間に自分で気づける",
+        ex:"4＝「今イラッとしたな」とその場で自覚できる ／ 1＝後から振り返っても何にモヤモヤしたか分からない" },
+      { t:"人の話を聞くとき、「事実」と「その人の意見」を区別しながら聞いている",
+        ex:"4＝「それは事実？解釈？」を自然に仕分けながら聞いている ／ 1＝区別を意識したことがない" },
+      { t:"うまくいった仕事といかなかった仕事の「何が違ったのか」を考えることがある",
+        ex:"4＝成功・失敗のたびに要因を考える癖がある ／ 1＝終わったことはほぼ振り返らない" },
+      { t:"日常の出来事から、仕事に活かせるヒントを見つけることがある",
+        ex:"4＝月に数回は「これは仕事に使える」と気づく ／ 1＝日常と仕事を結びつけて考えたことがない" }
+    ]},
+  { id:"B", name:"メタ認知（内なる言葉）", short:"メタ認知", desc:"頭の中のモヤモヤ＝「内なる言葉」を捕まえ、自分の思考を客観視する力。",
+    qs:[
+      { t:"自分が今なにを考えているのか、頭の中を言葉で説明できる",
+        ex:"4＝「こういう理由でこう考えている」とその場で言える ／ 1＝「なんとなく」としか言えないことが多い" },
+      { t:"モヤモヤしたとき、「このモヤモヤの正体は何か？」と自問する",
+        ex:"4＝モヤモヤしたら書き出すなどして正体を探りにいく ／ 1＝モヤモヤは放置して忘れるのを待つ" },
+      { t:"「なぜ自分はそう思うのか？」と理由を掘り下げる習慣がある",
+        ex:"4＝意見を持ったら理由を2〜3段掘り下げる ／ 1＝「そう思うから」で止まる" },
+      { t:"自分の思考の癖（結論を急ぎがち・悲観的に考えがち等）を自覚している",
+        ex:"4＝自分の癖を具体的に2つ以上言える ／ 1＝考えたことがない" },
+      { t:"話す前に「自分は結局なにが言いたいのか」を頭の中で確認している",
+        ex:"4＝ほぼ毎回、一言でまとめてから話し始める ／ 1＝話しながら考えることが多い" },
+      { t:"感情的になったとき、一歩引いて自分を客観視できる",
+        ex:"4＝「今自分は怒っているな」と俯瞰できる ／ 1＝感情に飲まれて後で後悔することが多い" }
+    ]},
+  { id:"C", name:"具体化力", short:"具体化", desc:"頭の中のイメージを、例・数字・固有名詞で具体的に表現する力。",
+    qs:[
+      { t:"「具体的には？」と聞かれて、すぐに例を挙げられる",
+        ex:"4＝ほぼ即答で実例が出てくる ／ 1＝例を求められると黙ってしまう" },
+      { t:"抽象的な指示を、自分の言葉で具体的な作業に落とし込める",
+        ex:"4＝「いい感じにまとめて」を自分でタスク分解できる ／ 1＝具体的な手順を毎回聞き返す" },
+      { t:"説明するとき、数字や固有名詞を交えて話せる",
+        ex:"4＝「3件中2件」「A社の◯◯さん」が自然に出る ／ 1＝「いくつか」「あの件」が多い" },
+      { t:"「例えば〜」と、相手の知っている事柄にたとえて説明できる",
+        ex:"4＝相手の業務や身近な物事にたとえて説明できる ／ 1＝たとえ話はほとんど使わない" },
+      { t:"経験談を「いつ・どこで・何があって・どうなった」の形で話せる",
+        ex:"4＝経験談が自然と5W1Hの形になっている ／ 1＝「この前アレがあって大変だった」となりがち" },
+      { t:"感想を「良かった」以外の言葉で、何がどう良かったのか言える",
+        ex:"4＝「◯◯の場面の△△が良かった」と言える ／ 1＝「良かったです」で終わることが多い" }
+    ]},
+  { id:"D", name:"構造化・要約力", short:"構造化・要約", desc:"情報を整理し、要点をまとめ、「要するに」と抽象化する力。",
+    qs:[
+      { t:"長い話や文章の要点を、1〜2文でまとめられる",
+        ex:"4＝1時間の会議も「要は◯◯が決まった」とまとめられる ／ 1＝全部を順番に話さないとまとめられない" },
+      { t:"自分の話が、一度で意図どおりに相手へ伝わることが多い",
+        ex:"4＝「結局何が言いたいの？」と言われるのは月1回以下 ／ 1＝週1回以上言われる・聞き返される" },
+      { t:"話す前に、内容を「結論・理由・例」のような枠で整理している",
+        ex:"4＝頭の中で型に並べ替えてから話す ／ 1＝思いついた順に話す" },
+      { t:"たくさんの情報を、分類・グルーピングして整理するのが得意だ",
+        ex:"4＝雑多な情報を3〜5グループに分けてラベルを付けられる ／ 1＝整理の切り口が浮かばない" },
+      { t:"「要するに◯◯ということ」と一言で言い換えるのが得意だ",
+        ex:"4＝長い議論を一言に言い換えて「そう、それ」と言われる ／ 1＝「要するに？」と聞かれると困る" },
+      { t:"時系列でダラダラ話すのではなく、重要なことから順に話せる",
+        ex:"4＝まず結論・重要事項から話し始められる ／ 1＝出来事を最初から時系列で話してしまう" }
+    ]},
+  { id:"E", name:"語彙力", short:"語彙力", desc:"感覚や状況にぴったり合う言葉の引き出しと、使い分ける技術。",
+    qs:[
+      { t:"気持ちや状況を表す言葉のバリエーションが多いほうだ",
+        ex:"4＝「嬉しい」を場面に応じて5通り以上に言い分けられる ／ 1＝いつも同じ言葉を使っている" },
+      { t:"感想や報告を「やばい」「すごい」などの便利な言葉だけで済ませず、別の言葉で表現している",
+        ex:"4＝言いそうになったら別の言葉に置き換えている ／ 1＝感想の大半が「やばい」「すごい」" },
+      { t:"同じ内容を、相手に合わせて別の言葉で言い換えられる",
+        ex:"4＝相手が分からなそうなら即座に別の表現に切り替える ／ 1＝同じ説明を繰り返してしまう" },
+      { t:"業務に関わる用語を、意味を理解して正しく使い分けられる",
+        ex:"4＝用語の意味を聞かれたら自分の言葉で説明できる ／ 1＝雰囲気で使っている用語がある" },
+      { t:"本や記事を読んでいて「良い表現だ」とストックすることがある",
+        ex:"4＝メモする仕組みがあり月数回追加している ／ 1＝ストックする習慣はない" },
+      { t:"似た言葉のニュアンスの違い（例：課題と問題）を意識して選んでいる",
+        ex:"4＝違いを意識して選び、聞かれれば説明できる ／ 1＝違いを考えたことがない" }
+    ]},
+  { id:"F", name:"伝達力", short:"伝達力", desc:"相手に合わせて、結論から、わかりやすく伝える力。",
+    qs:[
+      { t:"相手の知識レベルや立場に合わせて、説明の仕方を変えている",
+        ex:"4＝新人と役員で説明の粒度・言葉を変えている ／ 1＝誰にでも同じ説明をしている" },
+      { t:"報告や説明で、結論から先に話せている",
+        ex:"4＝第一声がほぼ毎回結論になっている ／ 1＝経緯から話し始めることが多い" },
+      { t:"報告・説明のあとに、相手からの質問や聞き返しが少ない",
+        ex:"4＝確認の質問をされるのは月1回程度 ／ 1＝毎回のように聞き返される" },
+      { t:"メール・チャット・資料が「わかりやすい」と言われることがある",
+        ex:"4＝半年に1回以上言われる ／ 1＝言われたことがない・読みにくいと指摘される" },
+      { t:"相手にしてほしいこと（依頼・確認など）を明確に示している",
+        ex:"4＝最後に必ず「お願いしたいこと」を添えている ／ 1＝相手が「で、何をすれば？」となることがある" },
+      { t:"伝わっていないと感じたら、伝え方を変えてもう一度試みる",
+        ex:"4＝図・たとえ・順番替えなど手を変えて再挑戦する ／ 1＝同じ説明を繰り返すか諦める" }
+    ]},
+  { id:"G", name:"思考・アウトプット習慣", short:"習慣", desc:"書く・読む・共有する習慣。言語化力が育つ土台。",
+    qs:[
+      { t:"考えごとを紙やメモに書き出して整理する習慣がある",
+        ex:"4＝週3回以上、考えを書き出している ／ 1＝頭の中だけで考えている" },
+      { t:"日記・日報・ブログなど、定期的にまとまった文章を書いている",
+        ex:"4＝週3回以上書いている ／ 1＝業務で必要な最低限しか書かない" },
+      { t:"本・新聞・記事などを定期的に読んでいる",
+        ex:"4＝月2冊以上の本、または毎日記事を読む ／ 1＝ここ3ヶ月ほとんど読んでいない" },
+      { t:"学んだことや考えたことを、人に話したり共有したりしている",
+        ex:"4＝週1回以上、学びを誰かに話している ／ 1＝学んだことは自分の中だけに留まる" },
+      { t:"自分の説明や文章について、人からフィードバックをもらうことがある",
+        ex:"4＝月1回以上、感想や指摘をもらっている ／ 1＝もらう機会がほぼない" },
+      { t:"言語化がうまい人の話し方・書き方を観察して真似ることがある",
+        ex:"4＝うまい人の構成をメモして真似したことが複数回ある ／ 1＝意識して観察したことはない" }
+    ]}
+];
+var PLANS = {
+  A: { title:"観察力を鍛える", period:"目安：1〜2ヶ月（習慣化まで約66日）",
+    items:[
+      "【1日1気づきメモ】その日に気づいた変化・違和感・心が動いたことを、寝る前に1行だけ書く（毎日）",
+      "【事実と解釈の分離】会議メモを「事実」と「自分の解釈」の2列で取る練習をする",
+      "【違い探し】うまくいった仕事とそうでない仕事を並べて「何が違ったか」を3つ書き出す（週1回）"
+    ],
+    why:"言語化は「気づく」ことから始まります。気づいていないものは言葉にできません。"},
+  B: { title:"メタ認知・内なる言葉を鍛える", period:"目安：3週間で効果実感、66日で習慣化",
+    items:[
+      "【ゼロ秒思考メモ書き】A4横置き・1テーマ1分・1日10枚。頭に浮かんだことを文章で書き殴る（赤羽雄二式）",
+      "【T字型思考】書いたことに「なぜ？」「本当に？」「それで？」と自問して掘り下げる（梅田悟司式）",
+      "【2分言語化メモ】「今モヤモヤしていること」をテーマにA4メモ1枚×2分（荒木俊哉式）"
+    ],
+    why:"言葉が出ないのは表現力不足ではなく、考えが明確になっていないことが根本原因。まず頭の中を紙に出す訓練が最優先です。"},
+  C: { title:"具体化力を鍛える", period:"目安：1〜2ヶ月",
+    items:[
+      "【「例えば？」の口癖化】自分の発言に自分で「例えば？」とツッコみ、必ず具体例を1つ足す",
+      "【5W1H日記】その日の出来事を「いつ・どこで・誰が・何を・なぜ・どのように」で3行日記にする",
+      "【100字具体化ワーク】「楽しかった」等の感想を「何があって・どのように・感じた」の100字に膨らませる"
+    ],
+    why:"具体例・数字・固有名詞が入ると、聞き手の頭に映像が浮かび、一気に伝わるようになります。"},
+  D: { title:"構造化・要約力を鍛える", period:"目安：型の習得2〜4週間＋定着1〜2ヶ月",
+    items:[
+      "【PREP法】報告・発言を「結論→理由→具体例→再結論」の型に当てはめて話す（まず週3回から）",
+      "【1文要約】読んだ記事・受けた会議を「要するに◯◯」と1文でまとめる（毎日1本）",
+      "【具体⇄抽象の往復】「例えば？」（具体化）と「要するに？」（抽象化）をセットで使う練習（齋藤孝式）",
+      "【グルーピング】書き出したメモを仲間分けしてラベルを付ける（梅田式ステップ3）"
+    ],
+    why:"「結局何が言いたいの？」と言われるのは能力不足ではなく型を知らないだけのことが多く、型の習得で劇的に改善します。"},
+  E: { title:"語彙力を鍛える", period:"目安：3〜6ヶ月の継続（最も時間がかかる領域）",
+    items:[
+      "【読書習慣】月2冊を目安に本を読む（ジャンルを散らす）。新聞・良質な記事でも可",
+      "【表現ストックノート】「いいな」と思った言葉・言い回しをメモアプリに貯めて、週1回見返す",
+      "【言い換え練習】「やばい」「すごい」を使ったら、別の言葉で言い直す（3個言い換えチャレンジ）",
+      "【写経】わかりやすいと感じた文章を書き写し、音読して構造とリズムを体に入れる"
+    ],
+    why:"語彙はインプット量に比例して育つ長期戦。即効性はありませんが、他の全領域の天井を引き上げます。"},
+  F: { title:"伝達力を鍛える", period:"目安：1〜3ヶ月（フィードバック込み）",
+    items:[
+      "【結論ファースト】メール・チャット・口頭報告の第一声を必ず結論にする（「結論から言うと」を口癖に）",
+      "【30秒設計】報告の前に「相手は何を知りたいか」「してほしいアクションは何か」を30秒考えてから話す",
+      "【フィードバックサイクル】週1回、上司や同僚に「今の説明わかりやすかった？」と聞き、改善点を1つもらう",
+      "【アクション明示】依頼・報告の最後に「〜をお願いします／確認いただきたい点は〜です」を必ず付ける"
+    ],
+    why:"伝達力は相手の反応というフィードバックがあって初めて伸びます。実践→FB→修正のサイクルを回しましょう。"},
+  G: { title:"アウトプット習慣をつくる", period:"目安：66日（約2ヶ月）で習慣定着",
+    items:[
+      "【スモールスタート】まず「メモ書き1日3枚」など小さく始めて毎日続ける（66日ルール）",
+      "【日報・日記】1日の終わりに「今日の学び」を3行書く",
+      "【共有】学んだことを週1回、誰かに話す・チームに共有する（アウトプット前提のインプットになる）",
+      "【観察・模倣】説明がうまい人の話し方の「構造」をメモして真似る"
+    ],
+    why:"習慣は全領域の成長エンジン。行動が習慣になるまで平均66日（個人差18〜254日）——3週間でやめないことが鍵です。"}
+};
+var TYPE_HINT = {
+  A: "「観察」でつまずくタイプ：そもそも気づき・インプットの解像度が粗いと、言語化する材料が不足します。まず観察の習慣から。",
+  B: "「思考の言語化」でつまずくタイプ：頭の中のモヤモヤを捕まえる前に話し始めてしまう傾向。書いて考える習慣が特効薬です。",
+  C: "「具体化」でつまずくタイプ：話が抽象的でふわっとしがち。例・数字・固有名詞を1つ足すだけで伝わり方が変わります。",
+  D: "「構造化」でつまずくタイプ：時系列でダラダラ話して「結局何が言いたいの？」と言われがち。型（PREP法）の習得で劇的に改善します。",
+  E: "「言葉選び」でつまずくタイプ：言いたいことはあるのにぴったりの言葉が出てこない状態。語彙のインプットを増やしましょう。",
+  F: "「伝え方」でつまずくタイプ：考えはあるのに相手に合わせた出し方で損をしています。結論ファーストとフィードバックで整えましょう。",
+  G: "「習慣」でつまずくタイプ：能力以前に、書く・読む・共有する機会が少ない状態。小さな習慣づくりから始めるのが近道です。"
+};
+var SCALE = ["あてはまらない","あまり","やや","あてはまる"];
+var STORAGE_KEY = "hb_ck5_answers_v1";
+var TOTAL_Q = 0;
+CATS.forEach(function(c){ TOTAL_Q += c.qs.length; });
+
+var form      = document.getElementById("ckForm");
+var submitBtn = document.getElementById("ckSubmit");
+var clearBtn  = document.getElementById("ckClear");
+var warnEl    = document.getElementById("ckWarn");
+var doneEl    = document.getElementById("ckDone");
+var fillEl    = document.getElementById("ckFill");
+var resultEl  = document.getElementById("ckResult");
+var copyState = document.getElementById("ckCopyState");
+var lastResult = null;
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+function loadAnswers(){
+  try{ var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveAnswers(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(answers)); }catch(e){}
+}
+var answers = loadAnswers();
+
+function buildForm(){
+  var html = "";
+  CATS.forEach(function(cat, ci){
+    html += '<div class="ck-domain"><h2 class="ck-domain-h">' + esc(cat.id + ". " + cat.name) +
+            '<span class="cnt" data-cnt="' + esc(cat.id) + '">0 / ' + cat.qs.length + '</span></h2>' +
+            '<p class="ck-domain-d">' + esc(cat.desc) + '</p>';
+    cat.qs.forEach(function(q, qi){
+      var key = cat.id + "_" + qi;
+      var no = ci * 6 + qi + 1;
+      html += '<div class="ck-q"><p class="ck-qtext">Q' + no + '. ' + esc(q.t) + '</p>' +
+              '<p class="ck-qex"><span class="tag">目安</span>' + esc(q.ex) + '</p>' +
+              '<div class="ck-scale">';
+      SCALE.forEach(function(lab, si){
+        var v = si + 1;
+        var on = answers[key] === v ? ' on' : '';
+        var chk = answers[key] === v ? ' checked' : '';
+        html += '<label class="ck-opt' + on + '"><input type="radio" name="q_' + key + '" value="' + v + '"' + chk + '>' +
+                '<span>' + v + '</span><span>' + esc(lab) + '</span></label>';
+      });
+      html += '</div></div>';
+    });
+    html += '</div>';
+  });
+  form.innerHTML = html;
+  updateProgress();
+}
+
+function answeredCount(){
+  var n = 0;
+  CATS.forEach(function(cat){
+    cat.qs.forEach(function(_, qi){ if (answers[cat.id + "_" + qi]) n++; });
+  });
+  return n;
+}
+
+function updateProgress(){
+  var n = answeredCount();
+  doneEl.textContent = n;
+  fillEl.style.width = (n / TOTAL_Q * 100) + "%";
+  submitBtn.disabled = (n < TOTAL_Q);
+  warnEl.textContent = (n < TOTAL_Q)
+    ? ("残り " + (TOTAL_Q - n) + " 問です。すべて答えると結果を出せます。")
+    : "すべて回答済みです。「結果を見る」を押してください。";
+  CATS.forEach(function(cat){
+    var c = 0;
+    cat.qs.forEach(function(_, qi){ if (answers[cat.id + "_" + qi]) c++; });
+    var el = form.querySelector('[data-cnt="' + cat.id + '"]');
+    if (el) el.textContent = c + " / " + cat.qs.length;
+  });
+}
+
+form.addEventListener("change", function(e){
+  var t = e.target;
+  if (!t || t.type !== "radio") return;
+  var key = t.name.replace(/^q_/, "");
+  answers[key] = Number(t.value);
+  saveAnswers();
+  var scale = t.parentNode.parentNode;
+  var labels = scale.querySelectorAll(".ck-opt");
+  for (var i = 0; i < labels.length; i++) labels[i].classList.remove("on");
+  t.parentNode.classList.add("on");
+  updateProgress();
+});
+
+function levelOf(pct){
+  if (pct >= 75) return "強み";
+  if (pct >= 50) return "発展途上";
+  return "要強化";
+}
+
+function score(){
+  return CATS.map(function(cat){
+    var sum = 0;
+    cat.qs.forEach(function(_, qi){ sum += (answers[cat.id + "_" + qi] || 0); });
+    var n = cat.qs.length;
+    return { id:cat.id, name:cat.name, short:cat.short, raw:sum, max:n * 4,
+             pct: Math.round((sum - n) / (n * 3) * 100) };
+  });
+}
+
+function drawRadar(scores){
+  var cx = 170, cy = 160, R = 105, n = scores.length;
+  function angle(i){ return (Math.PI * 2 * i / n) - Math.PI / 2; }
+  function pt(i, r){ return [cx + Math.cos(angle(i)) * r, cy + Math.sin(angle(i)) * r]; }
+  var el = "";
+  [25, 50, 75, 100].forEach(function(g){
+    var pts = scores.map(function(_, i){ return pt(i, R * g / 100).map(function(v){ return v.toFixed(1); }).join(","); }).join(" ");
+    el += '<polygon points="' + pts + '" fill="none" stroke="var(--line)" stroke-width="1"/>';
+  });
+  scores.forEach(function(_, i){
+    var p = pt(i, R);
+    el += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0].toFixed(1) + '" y2="' + p[1].toFixed(1) + '" stroke="var(--line)" stroke-width="1"/>';
+  });
+  var dataPts = scores.map(function(s, i){ return pt(i, R * Math.max(s.pct, 3) / 100); });
+  el += '<polygon points="' + dataPts.map(function(p){ return p.map(function(v){ return v.toFixed(1); }).join(","); }).join(" ") +
+        '" fill="var(--a-bg)" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round"/>';
+  dataPts.forEach(function(p){
+    el += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4" fill="var(--teal)"/>';
+  });
+  scores.forEach(function(s, i){
+    var p = pt(i, R + 26);
+    var anchor = Math.abs(p[0] - cx) < 12 ? "middle" : (p[0] > cx ? "start" : "end");
+    el += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 4).toFixed(1) + '" text-anchor="' + anchor +
+          '" font-size="11" fill="var(--muted)">' + esc(s.short) + '</text>';
+    el += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 17).toFixed(1) + '" text-anchor="' + anchor +
+          '" font-size="10" fill="var(--faint)">' + s.pct + '</text>';
+  });
+  document.getElementById("ckRadar").innerHTML = el;
+}
+
+function renderPlan(scores){
+  var sorted = scores.slice().sort(function(a, b){ return a.pct - b.pct; });
+  var targets = sorted.filter(function(s){ return s.pct < 75; }).slice(0, 3);
+  var html = "";
+  if (targets.length === 0){
+    targets = sorted.slice(0, 2);
+    html += '<p class="ck-r-sub">すべての領域が「強み」の水準です。相対的に低い領域をさらに磨くメニューを挙げます。</p>';
+  }
+  targets.forEach(function(s, i){
+    var p = PLANS[s.id];
+    html += '<div class="ck-plan-item"><h5><span class="prio">優先度' + (i + 1) + '</span>' + esc(p.title) +
+            '（現在 ' + s.pct + '点）</h5><div class="period">' + esc(p.period) + '</div><p>' + esc(p.why) + '</p><ul>' +
+            p.items.map(function(it){ return "<li>" + esc(it) + "</li>"; }).join("") + '</ul></div>';
+  });
+  var g = null;
+  scores.forEach(function(s){ if (s.id === "G") g = s; });
+  var hasG = targets.some(function(t){ return t.id === "G"; });
+  if (g && g.pct < 50 && !hasG){
+    html += '<div class="ck-plan-item"><h5>補足：アウトプット習慣づくり（現在 ' + g.pct + '点）</h5>' +
+            '<div class="period">' + esc(PLANS.G.period) + '</div>' +
+            '<p>どのトレーニングも「続ける仕組み」がないと効果が出ません。上のメニューを1日5〜10分の小さな習慣として設計してください。</p></div>';
+  }
+  document.getElementById("ckPlan").innerHTML = html;
+}
+
+function render(scores){
+  var total = Math.round(scores.reduce(function(a, s){ return a + s.pct; }, 0) / scores.length);
+  document.getElementById("ckTotal").textContent = total;
+  document.getElementById("ckTotalLv").textContent = "総合の目安：" + levelOf(total);
+  document.getElementById("ckTotalTxt").textContent = total >= 75
+    ? "全体として言語化の型は身についています。凹んでいる領域をピンポイントで磨くのが効率的です。"
+    : (total >= 50
+      ? "土台はあります。弱い領域に絞って続ければ、3ヶ月ほどで周囲が気づく変化が出やすい水準です。"
+      : "伸びしろが大きい状態です。まずは「書いて考える習慣」から始めるのが近道です。");
+
+  var sorted = scores.slice().sort(function(a, b){ return a.pct - b.pct; });
+  document.getElementById("ckType").textContent = TYPE_HINT[sorted[0].id];
+
+  var bars = "", tbl = "";
+  scores.forEach(function(s){
+    bars += '<div class="ck-bar-row"><div class="ck-bar-label">' + esc(s.name) + '</div>' +
+            '<div class="ck-bar-track"><div class="ck-bar-fill" style="width:' + s.pct + '%"></div></div>' +
+            '<div class="ck-bar-pct">' + s.pct + '</div></div>';
+    tbl += '<tr><td>' + esc(s.name) + '</td><td class="n">' + s.raw + ' / ' + s.max + '</td>' +
+           '<td class="n">' + s.pct + '点</td><td>' + levelOf(s.pct) + '</td></tr>';
+  });
+  document.getElementById("ckBars").innerHTML = bars;
+  document.getElementById("ckTable").innerHTML = tbl;
+
+  drawRadar(scores);
+  renderPlan(scores);
+}
+
+submitBtn.addEventListener("click", function(){
+  if (answeredCount() < TOTAL_Q) return;
+  lastResult = score();
+  render(lastResult);
+  resultEl.style.display = "block";
+  resultEl.scrollIntoView({ behavior:"smooth", block:"start" });
+  copyState.textContent = "";
+});
+
+clearBtn.addEventListener("click", function(){
+  if (!window.confirm("すべての回答を消去します。よろしいですか？")) return;
+  answers = {};
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  lastResult = null;
+  buildForm();
+  resultEl.style.display = "none";
+  copyState.textContent = "";
+  window.scrollTo({ top:0, behavior:"smooth" });
+});
+
+document.getElementById("ckCopy").addEventListener("click", function(){
+  if (!lastResult) return;
+  var total = Math.round(lastResult.reduce(function(a, s){ return a + s.pct; }, 0) / lastResult.length);
+  var sorted = lastResult.slice().sort(function(a, b){ return a.pct - b.pct; });
+  var lines = [];
+  lines.push("■ 言語化スキル自己診断 の結果");
+  lines.push("総合の目安：" + total + " / 100点（" + levelOf(total) + "）");
+  lines.push("");
+  lines.push("【領域別】");
+  lastResult.forEach(function(s){ lines.push("・" + s.name + "：" + s.pct + "点（" + levelOf(s.pct) + "）"); });
+  lines.push("");
+  lines.push("【優先して鍛えたい領域】" + sorted[0].name + "、" + sorted[1].name);
+  lines.push("【所見】" + TYPE_HINT[sorted[0].id]);
+  lines.push("");
+  lines.push("※自己認識のための簡易ツールの結果であり、能力を確定的に測ったものではありません。");
+  var text = lines.join("\n");
+  var ok = false;
+  try{
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text); ok = true; }
+    else {
+      var ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+  }catch(e){ ok = false; }
+  copyState.textContent = ok ? "コピーしました。" : "コピーできませんでした。画面の内容を手動で選択してコピーしてください。";
+});
+
+document.getElementById("ckPrint").addEventListener("click", function(){ window.print(); });
+
+buildForm();
+})();
+</script>
+</body></html>

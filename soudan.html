@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>相談・壁打ち｜ものづくりポータル</title>
-<meta name="description" content="モヤモヤしている状態を、そのまま相談できる文章1本に組み立てるページ。困りごとの型を選び、いくつかの問いに答えると、上司への相談用とAIへの壁打ち用の2書式ができます。">
+<meta name="description" content="考えを整理するためのセルフチェック・診断ツールの入口。言語化スキル診断、思考の癖・バイアス診断、マネジメント傾向診断、強み・キャリア棚卸し、品質実務の力量チェックをここから開けます。">
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%231f6feb'/%3E%3Crect%20x='5'%20y='6'%20width='14'%20height='3'%20rx='1'%20fill='white'/%3E%3Crect%20x='5'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='13'%20y='11'%20width='6'%20height='7'%20rx='1'%20fill='white'/%3E%3C/svg%3E">
@@ -44,439 +44,117 @@
   .brand{font-size:1.7rem;font-weight:700;margin:0;letter-spacing:.03em}
   .sub{font-size:.84rem;color:var(--ts);margin-top:5px}
 
-  .step{margin:28px 0 0}
-  .step-h{font-size:1.02rem;font-weight:700;line-height:1.6;margin:0 0 4px;display:flex;align-items:baseline;gap:8px}
-  .step-h .no{font-size:.72rem;font-weight:700;color:var(--tm);letter-spacing:.06em}
-  .step-s{font-size:.82rem;color:var(--ts);margin:0 0 12px}
+  .grp{margin:28px 0 0}
+  .grp-h{font-size:1.12rem;font-weight:700;padding:0 2px 8px;border-bottom:2px solid var(--bds);display:flex;align-items:baseline;gap:10px}
+  .grp-h .cnt{font-size:.74rem;font-weight:500;color:var(--tm)}
+  .grp-d{font-size:.82rem;color:var(--ts);margin:10px 2px 0}
 
-  .types{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
-  .type{flex:1 1 240px;min-height:44px;text-align:left;font:inherit;font-size:.9rem;line-height:1.6;color:var(--tp);background:var(--s2);border:1px solid var(--bds);border-radius:var(--radius);padding:12px 16px;cursor:pointer}
-  .type:hover{border-color:var(--acc);background:var(--acc-bg)}
-  .type:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-  .type[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-bg);color:var(--acc-t);font-weight:700}
-  .type .d{display:block;font-size:.76rem;font-weight:400;color:var(--ts);margin-top:2px}
-
-  .q{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:16px 18px;margin:12px 0 0}
-  .q-t{font-size:.94rem;font-weight:600;line-height:1.7;margin:0}
-  .q-h{font-size:.78rem;color:var(--ts);line-height:1.7;margin:2px 0 10px}
-  .q-ta{width:100%;min-height:68px;font:inherit;font-size:.88rem;line-height:1.75;color:var(--tp);background:var(--s0);border:1px solid var(--bds);border-radius:var(--radius);padding:10px 12px;resize:vertical}
-  .q-ta:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:var(--acc)}
-
-  .refs{margin:16px 0 0;background:var(--s1);border-radius:12px;padding:12px 16px}
-  .refs .lb{display:block;font-size:.74rem;font-weight:700;color:var(--ts);letter-spacing:.04em;margin-bottom:4px}
-  .refs a{display:flex;align-items:center;min-height:34px;font-size:.84rem;font-weight:500;color:var(--acc-t)}
-  .refs a:hover{text-decoration:underline}
-
-  .acts{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 0}
-  .btn{font:inherit;font-size:.84rem;font-weight:500;color:var(--ts);background:var(--s2);border:1px solid var(--bds);border-radius:30px;padding:9px 18px;min-height:44px;cursor:pointer}
-  .btn:hover{color:var(--acc-t);border-color:var(--acc);background:var(--acc-bg)}
-  .btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-  .btn.pri{color:var(--acc-t);border-color:var(--acc);background:var(--acc-bg);font-weight:700}
-  .btn[aria-pressed="true"]{color:var(--acc-t);border-color:var(--acc);background:var(--acc-bg);font-weight:700}
-  .msg{font-size:.8rem;color:var(--ts);margin:10px 0 0;min-height:1.4em}
-
-  #result{display:none;margin:28px 0 0;padding-top:20px;border-top:2px solid var(--bds)}
-  .r-h{font-size:1.14rem;font-weight:700;margin:0 0 4px}
-  .r-s{font-size:.82rem;color:var(--ts);margin:0 0 12px}
-  .out{width:100%;min-height:340px;font:inherit;font-size:.85rem;line-height:1.85;color:var(--tp);background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;white-space:pre-wrap;resize:vertical}
-  .out-print{display:none;white-space:pre-wrap;font-size:.9rem;line-height:1.85;margin:0}
+  .tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin:16px 0 0}
+  .tool{display:flex;flex-direction:column;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:16px 18px}
+  .tool:hover{border-color:var(--acc)}
+  .tool .id{display:inline-block;align-self:flex-start;font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--acc-t);background:var(--acc-bg);border-radius:20px;padding:1px 10px}
+  .tool .ttl{font-size:1rem;font-weight:700;line-height:1.55;margin-top:8px}
+  .tool .desc{font-size:.83rem;color:var(--ts);line-height:1.8;margin-top:6px;flex:1}
+  .tool .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .tool .meta span{font-size:.72rem;color:var(--ts);background:var(--s1);border-radius:20px;padding:2px 10px}
+  .tool .go{font-size:.82rem;font-weight:700;color:var(--acc-t);margin-top:12px}
 
   .note{font-size:.78rem;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 16px;margin:24px 0 0}
   .note b{color:var(--tp)}
-  .cross{display:block;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin:16px 0 0;font-size:.88rem;font-weight:600;color:var(--tp)}
-  .cross:hover{border-color:var(--acc)}
-  .cross span{display:block;font-size:.78rem;font-weight:400;color:var(--ts);margin-top:2px}
+  .steps{margin:16px 0 0;padding:0;list-style:none;counter-reset:st}
+  .steps li{position:relative;padding:10px 0 10px 34px;border-top:1px solid var(--bd);font-size:.86rem;line-height:1.8;counter-increment:st}
+  .steps li:first-child{border-top:none}
+  .steps li::before{content:counter(st);position:absolute;left:0;top:12px;width:22px;height:22px;border-radius:50%;background:var(--s1);color:var(--ts);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .steps b{color:var(--tp)}
   footer{margin:32px 0 40px;font-size:.74rem;color:var(--tm);text-align:center}
 
   @media(max-width:560px){
-    .type{flex:1 1 100%}
-    .out{min-height:300px}
+    .tools{grid-template-columns:1fr}
   }
-  @media print{
-    .ptabs,header.top,.step,.acts,.msg,.note,.cross,footer,.out{display:none!important}
-    #result{display:block!important;border-top:none;margin:0;padding:0}
-    .r-s{display:none}
-    .out-print{display:block!important}
-    body{background:#fff;color:#000}
-    .r-h{color:#000}
-  }
+  @media print{.ptabs,footer{display:none!important}body{background:#fff;color:#000}.tool{break-inside:avoid}}
 </style>
 </head>
 <body>
-<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 今日の1問</a><a href="trends.html">📈 業界定点</a><a class="on" href="soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 クイズ</a><a href="trends.html">📈 業界定点</a><a class="on" href="soudan.html">💬 相談・壁打ち</a></nav></div></div>
 
 <header class="top"><div class="wrap">
   <h1 class="brand">相談・壁打ち</h1>
-  <div class="sub">「モヤモヤしているが、何をどう相談すればいいか分からない」を、そのまま持っていける文章1本にします。採点も診断もしません。出てくるのは、あなたが書いた言葉を並べ替えたものだけです。</div>
+  <div class="sub">考えを整理するためのツールを置いておく場所です。答えを出してくれるものではなく、「自分がいま何をどう考えているか」を自分で見えるようにするための道具です。診断結果はどれも人物評価ではありません。</div>
 </div></header>
 
 <main class="wrap">
 
-  <section class="step">
-    <h2 class="step-h"><span class="no">STEP 1</span>困りごとの型を選ぶ</h2>
-    <p class="step-s">一番近いものを一つ。選ぶと、次の問いがその型に合わせて変わります。あとから選び直せます。</p>
-    <div class="types" id="types" role="group" aria-label="困りごとの型"></div>
-  </section>
-
-  <section class="step" id="stepQ" hidden>
-    <h2 class="step-h"><span class="no">STEP 2</span>問いに答える</h2>
-    <p class="step-s">全部埋める必要はありません。空欄の問いは組み立てのときに読み飛ばします。<b>特定の個人名・取引先名・社外秘の情報は書かないでください。</b></p>
-    <div id="qs"></div>
-    <div class="refs" id="refs" hidden><span class="lb">この型に関係するハンドブック</span><div id="refsList"></div></div>
-    <div class="acts">
-      <button class="btn pri" type="button" id="btnBuild">相談文を組み立てる</button>
-      <button class="btn" type="button" id="btnClear">入力をクリア</button>
+  <section class="grp">
+    <h2 class="grp-h">言語化・考えの整理<span class="cnt">2ツール</span></h2>
+    <p class="grp-d">「言いたいことがうまく言えない」「モヤモヤの正体が分からない」ときに使います。</p>
+    <div class="tools">
+      <a class="tool" href="handbook/check/ck5.html">
+        <span class="id">CK5</span>
+        <span class="ttl">🗣 言語化スキル自己診断</span>
+        <span class="desc">言語化のつまずきを観察力・メタ認知・具体化・構造化・語彙・伝達・習慣の7領域に分けて現在地を見ます。低い領域から優先度をつけて、トレーニングと目安期間を出します。</span>
+        <span class="meta"><span>約10〜15分</span><span>42問・4段階</span><span>レーダー表示</span></span>
+        <span class="go">診断をはじめる →</span>
+      </a>
+      <a class="tool" href="handbook/check/ck3.html">
+        <span class="id">CK3</span>
+        <span class="ttl">🧭 強み・キャリア棚卸し（壁打ち型）</span>
+        <span class="desc">採点はありません。12の記述式の問いに答えると、上司との面談やAIとの壁打ちにそのまま貼れる「棚卸しテキスト」を組み立てます。</span>
+        <span class="meta"><span>約15分</span><span>12問・記述式</span><span>テキストをコピー</span></span>
+        <span class="go">ワークシートを開く →</span>
+      </a>
     </div>
-    <p class="msg" id="msg"></p>
   </section>
 
-  <section id="result">
-    <h2 class="r-h">組み立てた相談文</h2>
-    <p class="r-s">書式を選んでコピーしてください。ボタンを押すと、その書式に切り替わってコピーされます。印刷するとこの相談文だけがA4に出ます。</p>
-    <textarea class="out" id="out" readonly aria-label="組み立てた相談文"></textarea>
-    <pre class="out-print" id="outPrint"></pre>
-    <div class="acts">
-      <button class="btn" type="button" id="btnBoss" aria-pressed="true">上司への相談用をコピー</button>
-      <button class="btn" type="button" id="btnAi" aria-pressed="false">AIへの壁打ち用をコピー</button>
-      <button class="btn" type="button" id="btnPrint">印刷する</button>
+  <section class="grp">
+    <h2 class="grp-h">判断・マネジメントの傾向<span class="cnt">2ツール</span></h2>
+    <p class="grp-d">自分の判断や人との関わり方に出やすい癖を、先に知っておくためのものです。</p>
+    <div class="tools">
+      <a class="tool" href="handbook/check/ck1.html">
+        <span class="id">CK1</span>
+        <span class="ttl">🧠 思考の癖・意思決定バイアス診断</span>
+        <span class="desc">異常対応や特採判断など、素早い判断が要る場面で誰にでも出る「思考の癖」を6領域で見ます。判断が偏りやすい場面を先に知るためのものです。</span>
+        <span class="meta"><span>約8分</span><span>24問・4段階</span><span>関連 B1・B3・B5</span></span>
+        <span class="go">診断をはじめる →</span>
+      </a>
+      <a class="tool" href="handbook/check/ck2.html">
+        <span class="id">CK2</span>
+        <span class="ttl">👥 マネジメント／リーダーシップ傾向診断</span>
+        <span class="desc">任せ方・フィードバック・育成・対立の扱いなど7領域の傾向を見ます。1on1やOJT計画、部門間調整の実務ページへつながります。</span>
+        <span class="meta"><span>約9分</span><span>28問・4段階</span><span>管理者・リーダー向け</span></span>
+        <span class="go">診断をはじめる →</span>
+      </a>
     </div>
-    <p class="msg" id="copyMsg"></p>
   </section>
 
-  <a class="cross" href="handbook/check/ck3.html">🧭 強み・キャリア棚卸し（壁打ち型ワークシート）へ<span>このページは「目の前の困りごと」を扱います。「自分は何ができる人か」を棚卸ししたいときは、ハンドブックのCK3へ。</span></a>
+  <section class="grp">
+    <h2 class="grp-h">実務の力量<span class="cnt">1ツール</span></h2>
+    <p class="grp-d">品質実務の型がどれだけ身についているかを、自分で棚卸しします。</p>
+    <div class="tools">
+      <a class="tool" href="handbook/check/ck4.html">
+        <span class="id">CK4</span>
+        <span class="ttl">📐 品質実務の力量セルフチェック</span>
+        <span class="desc">定例・マネジメント／異常対応／変化・プロジェクト／予防・維持／教育・OJTの5領域40問。伸びしろの領域から該当ページへ誘導し、力量マップの自己評価の下書きにも使えます。</span>
+        <span class="meta"><span>約12分</span><span>40問・4段階</span><span>関連 E3 力量マップ</span></span>
+        <span class="go">診断をはじめる →</span>
+      </a>
+    </div>
+  </section>
 
-  <div class="note"><b>入力内容はこの端末内（ブラウザのlocalStorage）にだけ保存され、どこにも送信されません。</b>氏名・所属・メールアドレスなど個人を特定する入力欄はありません。共用のパソコンを使っている場合は、終わったら「入力をクリア」を押してください。<br>このページは<b>診断も評価もしません</b>。スコアも判定も出しません。組み立てた文章は、あなたが書いた言葉を順番に並べ替えただけのものです。</div>
+  <section class="grp">
+    <h2 class="grp-h">使い方の目安</h2>
+    <ol class="steps">
+      <li><b>モヤモヤの正体が分からないとき</b>は CK5（言語化スキル診断）から。どこでつまずいているかが分かると、相談する相手も内容も決まります。</li>
+      <li><b>面談や1on1の前</b>は CK3。書き出した内容がそのまま持っていける文章になります。</li>
+      <li><b>判断に迷いが続くとき</b>は CK1。自分がどの方向に偏りやすいかを知っておくと、迷ったときの確認の型ができます。</li>
+      <li><b>人を持つ立場になったとき</b>は CK2 と CK4。年に1回、同じものをやり直して変化を見るのが向いています。</li>
+    </ol>
+  </section>
+
+  <div class="note"><b>どのツールも、入力内容はこの端末内（ブラウザ）にだけ保存され、どこにも送信されません。</b>氏名・所属・メールアドレスなど個人を特定する入力欄はありません。共用のパソコンを使ったときは、各ツールの「回答をクリア」を押してから閉じてください。<br>結果は<b>評価や判定ではなく、自分の考えを整理するための材料</b>です。人事評価や他人の評価には使いません。</div>
 
 </main>
 
-<footer>ものづくりポータル｜相談・壁打ち（入力はこの端末内のみ・送信なし）</footer>
+<footer>ものづくりポータル｜相談・壁打ち（診断ツールはハンドブックの check/ 配下・入力は端末内のみ）</footer>
 
-<script>
-(function(){
-  "use strict";
-  var KEY = "portal-soudan-v1";
-
-  /* role: sit=状況 / prob=困っていること / think=自分の考え / ask=相談したいこと */
-  var TYPES = [
-    { id:"judge", label:"判断に迷っている", desc:"止める／流す、OK／NGを自分で決めきれない",
-      refs:[["handbook/s-b1.html","B1 優先順位（トリアージ：上から確認）"],["handbook/s-b5.html","B5 特採（特別採用）申請の判断"],["handbook/ag-m17.html","M17 応急処置後の生産再開判断"]],
-      qs:[
-        {r:"sit", t:"いつ、どの製品・工程で、どんな事象が起きていますか。", h:"日付・工程・数量など、事実だけを書いてください。"},
-        {r:"sit", t:"いまわかっている事実と、まだ確認できていないことは何ですか。", h:"「確かめた事実」と「推測」を分けて書くと、相談が一気に短くなります。"},
-        {r:"prob", t:"何と何のあいだで判断が止まっていますか。", h:"例「止めると納期に響く／流すと流出のおそれ」のように、二択の形にしてみてください。"},
-        {r:"think", t:"いまの時点で、自分はどちらが妥当だと思っていますか。その理由は。", h:"迷ったままで構いません。「今なら6割こちら」と書くだけでも相談は前に進みます。"},
-        {r:"think", t:"一番避けたい結末は何ですか。", h:"避けたいことがはっきりすると、判断の基準が決まります。"},
-        {r:"ask", t:"相手に何を決めてほしい／確認してほしいですか。", h:"「判断そのもの」を求めるのか、「判断材料の妥当性」を見てほしいのかを書き分けてください。"}
-      ]},
-    { id:"ask", label:"人に頼めない・言い出せない", desc:"抱え込んでいるが、切り出し方が分からない",
-      refs:[["handbook/s-a1.html","A1 1on1（育成・面談）"],["handbook/s-a15.html","A15 業務の棚卸しと負荷平準化"],["handbook/ag-m15.html","M15 改善提案・気づきの出し方"]],
-      qs:[
-        {r:"sit", t:"どんな場面で「頼めない」「言い出せない」と感じていますか。いつからですか。", h:"相手は役割で書いてください（例「上司」「隣の工程の担当者」）。"},
-        {r:"prob", t:"頼めないまま、自分が抱え込んでいることは具体的に何ですか。", h:"作業名・件数・かかっている時間など、量が分かる形で書けると伝わります。"},
-        {r:"think", t:"頼めない理由は、自分ではどこにあると思いますか。", h:"例「相手も忙しそう」「断られるのが怖い」「頼み方が分からない」。どれでも構いません。"},
-        {r:"think", t:"相手からは、いまの自分の状況はどう見えていそうですか。", h:"「何も言わない＝回っている」と見えていることは、よくあります。"},
-        {r:"think", t:"このまま何も言わなかった場合、一番避けたい結末は何ですか。", h:""},
-        {r:"ask", t:"今日か明日にできる一番小さい一歩は何ですか。誰に、何を一言だけ伝えますか。", h:"「全部お願いする」ではなく「状況だけ伝える」でも一歩です。"}
-      ]},
-    { id:"between", label:"板挟みになっている", desc:"品質と納期・コスト、部門と部門のあいだで動けない",
-      refs:[["handbook/s-a12.html","A12 部門間コンフリクトの調整"],["handbook/ag-s18.html","S18 納期回答と品質保証の両立"],["handbook/s-b5.html","B5 特採（特別採用）申請の判断"]],
-      qs:[
-        {r:"sit", t:"誰と誰（どの部門とどの部門）のあいだで板挟みになっていますか。いつからですか。", h:"個人名ではなく、部門名・役割で書いてください。"},
-        {r:"sit", t:"それぞれが求めていることを、一つずつ書いてください。", h:"「言い方」ではなく「要求の中身」を書くのがコツです。"},
-        {r:"prob", t:"自分がいま、決めきれずに止まっていることは何ですか。", h:""},
-        {r:"think", t:"双方の言い分のうち、事実として妥当なのはどこまでだと思いますか。", h:"どちらかを悪者にせず、線を引ける場所を探してみてください。"},
-        {r:"think", t:"一番避けたい結末は何ですか。", h:"例「基準を下げて通してしまう」「関係が壊れる」「決まらないまま時間が過ぎる」。"},
-        {r:"ask", t:"相談相手に、どこから先を引き取ってほしいですか。", h:"「自分の権限では決められない範囲」を明示すると、相手が動きやすくなります。"}
-      ]},
-    { id:"eval", label:"評価されている気がしない", desc:"やっていることが伝わっていない感じがある",
-      refs:[["handbook/s-a4.html","A4 目標設定・評価（期初／期中／期末）"],["handbook/s-e3.html","E3 力量マップの作り方・運用"],["handbook/check/ck3.html","CK3 強み・キャリア棚卸し（壁打ち型）"]],
-      qs:[
-        {r:"sit", t:"どんな場面で「評価されていない」と感じましたか。いつのことですか。", h:""},
-        {r:"sit", t:"その前後で自分が実際にやったことを、行動レベルで書いてください。", h:"「頑張った」ではなく「誰に何をどうした」で書くと、相手に届きます。"},
-        {r:"prob", t:"評価されていないと感じるのは、何が伝わっていないからだと思いますか。", h:"成果そのものか、そこに至る過程か、負荷の大きさか。"},
-        {r:"think", t:"相手からは、自分の仕事はどう見えていそうですか。", h:"見えていない仕事（未然に防いだ・止めた仕事）は特に伝わりにくいものです。"},
-        {r:"think", t:"このまま1年が過ぎたら、一番困ることは何ですか。", h:""},
-        {r:"ask", t:"面談で相手に確認したいことを一つに絞ると何ですか。", h:"「評価を上げてほしい」ではなく「何が足りないと見えているか」を聞く形にすると話が進みます。"}
-      ]},
-    { id:"busy", label:"忙しくて手が回らない", desc:"仕事が積み上がって、優先順位がつけられない",
-      refs:[["handbook/s-a15.html","A15 業務の棚卸しと負荷平準化"],["handbook/s-b1.html","B1 優先順位（トリアージ：上から確認）"],["handbook/s-a13.html","A13 年間計画・予算要求の立て方"]],
-      qs:[
-        {r:"sit", t:"いま抱えている仕事を、思いつく順に並べてください。", h:"順位づけはあとでします。まず全部出すのが目的です。"},
-        {r:"sit", t:"そのうち、期限が決まっているものと、決まっていないものはどれですか。", h:""},
-        {r:"prob", t:"手が回らないことで、実際に何が起き始めていますか。", h:"「まだ何も起きていない」なら、そう書いてください。それも大事な情報です。"},
-        {r:"think", t:"自分の判断で「やめてよい」「後回しでよい」と思うものはどれですか。", h:"「なぜ後回しでよいか」の理由も一言そえてください。"},
-        {r:"think", t:"一番避けたい結末は何ですか。", h:""},
-        {r:"ask", t:"相手に決めてほしいのは、優先順位ですか、人の手当てですか、期限の調整ですか。", h:"三つのうちどれを求めるかで、相談の受け取られ方が変わります。"}
-      ]},
-    { id:"tech", label:"技術的に詰まった", desc:"原因が分からない・対策が決まらない",
-      refs:[["handbook/ts-index.html","トラブルシューティング（症状から引く）"],["handbook/s-b3.html","B3 原因究明（発生と流出の両面）"],["handbook/s-d9.html","D9 外部試験機関の活用"]],
-      qs:[
-        {r:"sit", t:"どんな現象で詰まっていますか。いつから、どの条件で起きますか。", h:"再現するかどうか、条件を変えると変わるかも書けると強い材料になります。"},
-        {r:"sit", t:"すでに試したことと、その結果を書いてください。", h:"「効かなかった」も立派な情報です。相手の手戻りを防ぎます。"},
-        {r:"prob", t:"いまわからないのは、原因ですか、対策ですか、確認方法ですか。", h:""},
-        {r:"think", t:"現時点で自分が疑っている原因は何ですか。その根拠は。", h:"外れていても構いません。仮説があると議論が速く進みます。"},
-        {r:"think", t:"このまま解決しない場合、一番避けたい結末は何ですか。", h:""},
-        {r:"ask", t:"相手に聞きたいことを一つに絞ると何ですか。", h:"「見てください」ではなく「この仮説の潰し方を教えてください」の形が動きやすいです。"}
-      ]},
-    { id:"teach", label:"人を育てられない", desc:"教え方・任せ方が分からない、伝わらない",
-      refs:[["handbook/s-e2.html","E2 仕事の教え方の基本"],["handbook/s-e1.html","E1 OJT計画の立て方"],["handbook/s-a5.html","A5 教育・力量管理／新任受け入れ"]],
-      qs:[
-        {r:"sit", t:"誰の、どんな場面での育成に困っていますか。いつからですか。", h:"名前は書かず「配属2年目の担当者」のように役割で書いてください。"},
-        {r:"sit", t:"これまでに教えたこと・やってみせたことを書いてください。", h:""},
-        {r:"prob", t:"いまつまずいているのは、知識ですか、手順ですか、意欲ですか、時間ですか。", h:"複数あるなら、一番効きそうなものから書いてください。"},
-        {r:"think", t:"相手の側から見ると、何が分かりにくそうですか。", h:"「なぜそうするのか」が抜けていると、手順だけでは動けません。"},
-        {r:"think", t:"このままだと一番避けたい結末は何ですか。", h:""},
-        {r:"ask", t:"相談相手に、教え方の助言がほしいですか、体制（時間・人）の手当てがほしいですか。", h:""}
-      ]},
-    { id:"customer", label:"顧客対応がしんどい", desc:"要求が重い・約束の線引きに困っている",
-      refs:[["handbook/s-b6.html","B6 顧客連絡・対外対応の作法"],["handbook/ag-s3.html","S3 クレーム・苦情の一次対応"],["handbook/ag-s9.html","S9 クレーム後のフォロー・信頼回復"]],
-      qs:[
-        {r:"sit", t:"どんなやり取りが続いていますか。いつからですか。", h:"取引先名・担当者名は書かず「ある取引先」のように書いてください。"},
-        {r:"sit", t:"先方から求められていることと、こちらが約束したことを分けて書いてください。", h:"どちらが「言った・言わない」になっているかも分かると助かります。"},
-        {r:"prob", t:"いま一番しんどいのは、どの部分ですか。", h:"要求の中身か、頻度か、期限か、伝え方か。"},
-        {r:"think", t:"先方の要求のうち、こちらが応えるべき範囲はどこまでだと思いますか。", h:"契約・仕様書で決まっている範囲と、好意で対応している範囲を分けてみてください。"},
-        {r:"think", t:"一番避けたい結末は何ですか。", h:""},
-        {r:"ask", t:"相談相手に、どこから先を引き取ってほしいですか。", h:"「同席してほしい」「窓口を代わってほしい」など、具体的な形で書くと通りやすいです。"}
-      ]}
-  ];
-
-  var ROLES = [
-    {k:"sit",  h:"状況"},
-    {k:"prob", h:"困っていること"},
-    {k:"think",h:"自分としての考え"},
-    {k:"ask",  h:"相談したいこと"}
-  ];
-
-  var state = load();
-  var fmt = "boss";
-
-  var elTypes  = document.getElementById("types");
-  var elStepQ  = document.getElementById("stepQ");
-  var elQs     = document.getElementById("qs");
-  var elRefs   = document.getElementById("refs");
-  var elRefsL  = document.getElementById("refsList");
-  var elResult = document.getElementById("result");
-  var elOut    = document.getElementById("out");
-  var elOutP   = document.getElementById("outPrint");
-  var elMsg    = document.getElementById("msg");
-  var elCopyMsg= document.getElementById("copyMsg");
-
-  function load(){
-    try{ var s = localStorage.getItem(KEY); var o = s ? JSON.parse(s) : null;
-      if (o && typeof o === "object") { o.a = o.a && typeof o.a === "object" ? o.a : {}; return o; }
-    }catch(e){}
-    return {type:null, a:{}};
-  }
-  function save(){
-    try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
-  }
-  function typeById(id){
-    for (var i=0;i<TYPES.length;i++){ if (TYPES[i].id === id) return TYPES[i]; }
-    return null;
-  }
-  function ansOf(id){
-    if (!state.a[id]) state.a[id] = {};
-    return state.a[id];
-  }
-
-  function renderTypes(){
-    elTypes.innerHTML = "";
-    TYPES.forEach(function(t){
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "type";
-      b.setAttribute("aria-pressed", state.type === t.id ? "true" : "false");
-      b.setAttribute("data-id", t.id);
-      var strong = document.createElement("span");
-      strong.textContent = t.label;
-      var d = document.createElement("span");
-      d.className = "d";
-      d.textContent = t.desc;
-      b.appendChild(strong); b.appendChild(d);
-      elTypes.appendChild(b);
-    });
-  }
-
-  function renderQs(){
-    var t = typeById(state.type);
-    elQs.innerHTML = "";
-    elRefsL.innerHTML = "";
-    if (!t){ elStepQ.hidden = true; elRefs.hidden = true; return; }
-    elStepQ.hidden = false;
-    var a = ansOf(t.id);
-    t.qs.forEach(function(q, i){
-      var box = document.createElement("div");
-      box.className = "q";
-      var p = document.createElement("p");
-      p.className = "q-t";
-      p.textContent = (i+1) + ". " + q.t;
-      box.appendChild(p);
-      if (q.h){
-        var h = document.createElement("p");
-        h.className = "q-h";
-        h.textContent = q.h;
-        box.appendChild(h);
-      }
-      var ta = document.createElement("textarea");
-      ta.className = "q-ta";
-      ta.setAttribute("data-idx", String(i));
-      ta.setAttribute("aria-label", q.t);
-      ta.placeholder = "ここに記入…";
-      ta.value = a[i] ? String(a[i]) : "";
-      box.appendChild(ta);
-      elQs.appendChild(box);
-    });
-    t.refs.forEach(function(r){
-      var link = document.createElement("a");
-      link.href = r[0];
-      link.textContent = "→ " + r[1];
-      elRefsL.appendChild(link);
-    });
-    elRefs.hidden = false;
-  }
-
-  function sections(){
-    var t = typeById(state.type);
-    if (!t) return null;
-    var a = ansOf(t.id);
-    var out = [];
-    ROLES.forEach(function(role){
-      var lines = [];
-      t.qs.forEach(function(q, i){
-        if (q.r !== role.k) return;
-        var v = a[i] ? String(a[i]).trim() : "";
-        if (!v) return;
-        lines.push(v.replace(/\r?\n+/g, " "));
-      });
-      if (lines.length) out.push({h:role.h, lines:lines});
-    });
-    return out.length ? out : null;
-  }
-
-  function body(secs){
-    var s = [];
-    secs.forEach(function(sec){
-      s.push("【" + sec.h + "】");
-      sec.lines.forEach(function(l){ s.push("・" + l); });
-      s.push("");
-    });
-    return s;
-  }
-
-  function compose(kind){
-    var t = typeById(state.type);
-    var secs = sections();
-    if (!t || !secs) return "";
-    var s = [];
-    if (kind === "ai"){
-      s.push("あなたは製造業の品質部門で長く実務をしてきた先輩として、私の相談に付き合ってください。");
-      s.push("いきなり結論や決めつけを出さず、次の順番でお願いします。");
-      s.push("(1) 私の状況の理解が合っているかを、あなたの言葉で確認する");
-      s.push("(2) 論点を3つ以内に整理する");
-      s.push("(3) 私が今日か明日にできる一番小さい一歩を、2〜3案出す");
-      s.push("");
-      s.push("--- ここから相談内容 ---");
-      s.push("困りごとの型: " + t.label + "（" + t.desc + "）");
-      s.push("");
-      s = s.concat(body(secs));
-      s.push("--- ここまで ---");
-      s.push("");
-      s.push("なお、社名・個人名・取引先名は伏せています。足りない情報があれば、決めつける前に質問してください。");
-    } else {
-      s.push("ご相談したいことが1件あります。10分ほどお時間をいただけないでしょうか。");
-      s.push("（相談の種類: " + t.label + "）");
-      s.push("");
-      s = s.concat(body(secs));
-      s.push("以上です。よろしくお願いいたします。");
-    }
-    return s.join("\n").replace(/\n{3,}/g, "\n\n").trim();
-  }
-
-  function showResult(kind){
-    var text = compose(kind);
-    if (!text){
-      elMsg.textContent = "1問以上答えてから組み立ててください。すべて埋める必要はありません。";
-      return false;
-    }
-    fmt = kind;
-    elOut.value = text;
-    elOutP.textContent = text;
-    elResult.style.display = "block";
-    document.getElementById("btnBoss").setAttribute("aria-pressed", kind === "boss" ? "true" : "false");
-    document.getElementById("btnAi").setAttribute("aria-pressed", kind === "ai" ? "true" : "false");
-    elMsg.textContent = "";
-    return true;
-  }
-
-  function copyOut(){
-    var ok = false;
-    try{
-      elOut.focus(); elOut.select();
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(elOut.value);
-        ok = true;
-      } else {
-        ok = document.execCommand("copy");
-      }
-    }catch(e){ ok = false; }
-    elCopyMsg.textContent = ok
-      ? (fmt === "ai" ? "AIへの壁打ち用をコピーしました。" : "上司への相談用をコピーしました。")
-      : "コピーできませんでした。上の枠の文章を選択して、手動でコピーしてください。";
-  }
-
-  elTypes.addEventListener("click", function(e){
-    var b = e.target;
-    while (b && b !== elTypes && !(b.classList && b.classList.contains("type"))) b = b.parentNode;
-    if (!b || b === elTypes) return;
-    state.type = b.getAttribute("data-id");
-    save();
-    renderTypes();
-    renderQs();
-    elResult.style.display = "none";
-    elMsg.textContent = "";
-    elCopyMsg.textContent = "";
-    elStepQ.scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-  elQs.addEventListener("input", function(e){
-    var t = e.target;
-    if (!t || !t.classList || !t.classList.contains("q-ta")) return;
-    var i = t.getAttribute("data-idx");
-    var a = ansOf(state.type);
-    if (t.value.trim()) { a[i] = t.value; } else { delete a[i]; }
-    save();
-  });
-
-  document.getElementById("btnBuild").addEventListener("click", function(){
-    if (showResult(fmt)) elResult.scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-  document.getElementById("btnClear").addEventListener("click", function(){
-    if (!window.confirm("この端末に保存した入力内容をすべて消します。よろしいですか？")) return;
-    try{ localStorage.removeItem(KEY); }catch(e){}
-    state = {type:null, a:{}};
-    fmt = "boss";
-    elOut.value = "";
-    elOutP.textContent = "";
-    elResult.style.display = "none";
-    elMsg.textContent = "入力を消しました。";
-    elCopyMsg.textContent = "";
-    renderTypes();
-    renderQs();
-    window.scrollTo({top:0, behavior:"smooth"});
-  });
-
-  document.getElementById("btnBoss").addEventListener("click", function(){
-    if (showResult("boss")) copyOut();
-  });
-  document.getElementById("btnAi").addEventListener("click", function(){
-    if (showResult("ai")) copyOut();
-  });
-  document.getElementById("btnPrint").addEventListener("click", function(){ window.print(); });
-
-  renderTypes();
-  renderQs();
-})();
-</script>
 </body>
 </html>
