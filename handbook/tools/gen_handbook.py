@@ -41,6 +41,16 @@ AUD={
  "V":{"key":"vendor","title":"外注先向け","emoji":"📦","who":"お取引先（社外共有可）"},
 }
 
+PORTAL_NAV=[("🏠 今日の情報","../index.html"),("🗂 仕事ボード","../workboard.html"),("🗓 品質カレンダー","../calendar.html"),("❓ 今日の1問","../quiz.html")]
+def _portal_nav_available():
+    out=[]
+    for label,relpath in PORTAL_NAV:
+        target=relpath[3:] if relpath.startswith("../") else relpath
+        if os.path.exists(os.path.join(OUT,"..",target)):
+            out.append((label,relpath))
+    return out
+PORTAL_NAV_AVAILABLE=_portal_nav_available()
+
 def esc(s): return html.escape(s, quote=True)
 def inline(s):
     s=esc(s)
@@ -299,6 +309,10 @@ def build_sidebar(active):
     p.append(f'<a class="side-item"{on("review.html")} href="review.html">🟡 要確認リスト</a>'.replace('class="side-item" class="on"','class="side-item on"'))
     if change_days:
         p.append(f'<a class="side-item"{on("whatsnew.html")} href="whatsnew.html">🆕 更新履歴</a>'.replace('class="side-item" class="on"','class="side-item on"'))
+    if PORTAL_NAV_AVAILABLE:
+        p.append('<div class="side-cap">ポータル</div>')
+        for label,relpath in PORTAL_NAV_AVAILABLE:
+            p.append(f'<a class="side-item" href="{relpath}">{esc(label)}</a>')
     p.append('</nav>')
     return "\n".join(p)
 
@@ -590,6 +604,7 @@ else:
   </div>'''
     e3_ts_link = ''
     e3_gl_link = ''
+portal_nav_html = "".join(f'<a href="{relpath}">{esc(label)}</a>\n  ' for label,relpath in PORTAL_NAV_AVAILABLE)
 wn_banner=('<a class="hub-updated" href="whatsnew.html">🆕 最新更新 '+latest_date+'・'+str(latest_n)+'件 — 更新履歴を見る →</a>') if change_days else ''
 body=f'''<div class="hub-hero">
   <h1>ものづくりハンドブック</h1>
@@ -620,7 +635,7 @@ body=f'''<div class="hub-hero">
   {checks_link_html}<a href="glossary.html">📑 用語・索引</a>
   <a href="review.html">🟡 要確認リスト</a>
   <a href="whatsnew.html">🆕 更新履歴</a>
-  <a href="../">← Daily Insight Board に戻る</a>
+  {portal_nav_html}<a href="../">← Daily Insight Board に戻る</a>
 </section>'''
 open(os.path.join(OUT,"index.html"),"w",encoding="utf-8").write(
     page("ハンドブック", body, "index.html", desc="ものづくりハンドブック（場面別・読者別・トラブルシューティング）"))
