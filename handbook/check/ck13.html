@@ -85,7 +85,8 @@
   .ax-r{text-align:right}
   .ax-bar{position:relative;height:10px;background:var(--line);border-radius:6px}
   .ax-mid{position:absolute;left:50%;top:-4px;width:1px;height:18px;background:var(--line-2)}
-  .ax-dot{position:absolute;top:-4px;width:18px;height:18px;border-radius:50%;background:var(--teal);border:3px solid var(--card);transform:translateX(-9px)}
+  .ax-dot{position:absolute;top:-4px;width:18px;height:18px;border-radius:50%;background:var(--teal);border:3px solid var(--card);margin-left:-9px}
+  .ax-bar{margin:0 9px}
   .ax-d{font-size:.82rem;color:var(--muted);line-height:1.8;margin:10px 0 0}
   .ck-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0 0}
   .ck-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
@@ -483,7 +484,7 @@ function score(){
     else if (pct > 43){ side = null; strength = ""; }
     else if (pct > 32){ side = "L"; strength = "やや"; }
     else { side = "L"; strength = "はっきり"; }
-    label = side ? (strength + esc(ax[side].name) + "寄り") : "どちらでもいける";
+    label = side ? (esc(ax[side].name) + "寄り（" + strength + "）") : "どちらでもいける";
     return { id:ax.id, title:ax.title, L:ax.L, R:ax.R, raw:sum, max:n*4, pct:pct, side:side, strength:strength, label:label };
   });
 }
