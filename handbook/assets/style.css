@@ -1,24 +1,5 @@
-:root{
-  --navy:#1e293b; --navy-2:#28374d; --teal:#2563eb; --teal-d:#1d4ed8;
-  --ink:#1b2431; --muted:#5a6474; --faint:#8b94a3; --head:#1e293b;
-  --line:#e4e8ee; --line-2:#d3d9e2; --bg:#f6f7f9; --card:#ffffff;
-  --star:#b54708; --star-bg:#fff4e8;
-  --rev:#9a6a00; --rev-bg:#fff8e6; --rev-line:#f0dca8;
-  --a:#2563eb; --a-bg:#e9f0fe;
-  --radius:11px;
-  --serif:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
-  --sans:"Noto Sans JP",-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --navy:#101927; --navy-2:#1a2438; --teal:#3b82f6; --teal-d:#5e8cf0;
-    --ink:#e8ebf1; --muted:#aab3c2; --faint:#7d8697; --head:#dbe3ee;
-    --line:#2e3644; --line-2:#3d4657; --bg:#141821; --card:#222835;
-    --star:#e8a35f; --star-bg:#33260f;
-    --rev:#e3bd6a; --rev-bg:#2e2710; --rev-line:#4a3d18;
-    --a:#7aa5f8; --a-bg:#1d2c47;
-  }
-}
+@import url("tokens.css"); /* UX009: デザイントークンの正本は tokens.css */
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.85;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
