@@ -24,7 +24,7 @@ master_body=strip_fm(master_raw); play_body=strip_fm(play_raw)
 aud_body=strip_fm(aud_raw) if aud_raw else ""; ts_body=strip_fm(ts_raw) if ts_raw else ""
 checks_body=strip_fm(checks_raw) if checks_raw else ""
 
-LAST_UPDATED="2026-07-11"
+LAST_UPDATED="2026-07-11"  # fallback: changelog が空のときだけ使う
 
 GROUPS={
  "A":{"title":"定例・マネジメント","type":"定例","emoji":"📋"},
@@ -41,7 +41,7 @@ AUD={
  "V":{"key":"vendor","title":"外注先向け","emoji":"📦","who":"お取引先（社外共有可）"},
 }
 
-PORTAL_NAV=[("🏠 今日の情報","../index.html"),("🗂 仕事ボード","../workboard.html"),("🗓 品質カレンダー","../calendar.html"),("❓ クイズ","../quiz.html"),("📈 業界定点","../trends.html"),("💬 相談・壁打ち","../soudan.html")]
+PORTAL_NAV=[("📊 今日の情報","../index.html"),("📅 品質カレンダー","../calendar.html"),("🧠 理解度クイズ","../quiz.html"),("📈 指標の推移","../trends.html"),("💬 セルフ診断","../soudan.html")]
 def _portal_nav_available():
     out=[]
     for label,relpath in PORTAL_NAV:
@@ -234,6 +234,7 @@ def parse_change(body):
 change_days=parse_change(change_body)
 latest_date=change_days[0]["date"] if change_days else ""
 latest_n=len(change_days[0]["items"]) if change_days else 0
+if latest_date: LAST_UPDATED=latest_date  # フッター「最終更新」と上部バナー「最新更新」を一致させる
 def tsslug(tid):
     num=re.sub(r"\D","",tid); return f"ts-{num}.html"
 
@@ -330,7 +331,7 @@ def page(title, body, active, desc="", crumb_html=""):
 <link rel="stylesheet" href="assets/style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%2316314D'/%3E%3Cpath%20d='M6%205h8a3%203%200%200%201%203%203v11a3%203%200%200%200-3-3H6z'%20fill='%230E8074'/%3E%3C/svg%3E">
 </head><body>
-<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../">📊 今日の情報</a><a href="../workboard.html">🗂 仕事ボード</a><a class="on" href="index.html">📘 ハンドブック</a></nav></div></div>
+<div class="ptabs"><div class="ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="../">📊 今日の情報</a><a class="on" href="index.html">📘 ハンドブック</a><a href="../calendar.html">📅 品質カレンダー</a><a href="../quiz.html">🧠 理解度クイズ</a><a href="../trends.html">📈 指標の推移</a><a href="../soudan.html">💬 セルフ診断</a></nav></div></div>
 <header class="hb-top">
   <div class="hb-top-in">
     <button class="hb-burger" id="hbburger" aria-label="メニューを開閉">☰</button>

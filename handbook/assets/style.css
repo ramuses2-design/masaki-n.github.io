@@ -228,7 +228,7 @@ details[open]>.side-sum::after{transform:rotate(-90deg)}
 .ptabs{background:var(--card);border-bottom:1px solid var(--line)}
 .ptabs-in{display:flex;align-items:center;gap:10px;padding:10px 20px;flex-wrap:wrap;max-width:1400px;margin:0 auto}
 .pbrand{font-size:.8rem;font-weight:800;color:var(--muted);letter-spacing:.06em;margin-right:auto}
-.ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+.ptabs nav{display:flex;gap:6px;flex-wrap:wrap;row-gap:4px;max-width:100%}
 .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--muted);padding:6px 13px;border-radius:30px}
 .ptabs nav a:hover{color:var(--teal-d);background:var(--a-bg)}
 .ptabs nav a.on{background:var(--teal);color:#fff}

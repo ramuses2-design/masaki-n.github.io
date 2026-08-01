@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Insight Board｜仕事・ITツール&AI・補助金・展示会・社会情勢</title>
-<meta name="description" content="仕事（不織布・品質・生産技術・化学物質管理）・ITツール&AI・補助金・展示会・社会情勢の5テーマの『今日の使える情報』を毎朝7:00に自動更新。仕事ボード・ものづくりハンドブックと一体のポータル。">
+<title>今日の情報｜ものづくりポータル</title>
+<meta name="description" content="仕事（不織布・品質・生産技術・化学物質管理）・ITツール&AI・補助金・展示会・社会情勢の5テーマの『今日の使える情報』を毎朝7:00に自動更新。ものづくりハンドブック・品質カレンダーと一体のポータル。">
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:site_name" content="Daily Insight Board">
-<meta property="og:title" content="Daily Insight Board｜今日の使える情報まとめ">
-<meta property="og:description" content="仕事・ITツール&AI・補助金・展示会・社会情勢の要点を毎朝7:00に自動更新。仕事ボード・ハンドブックと一体のポータル。">
+<meta property="og:site_name" content="ものづくりポータル">
+<meta property="og:title" content="今日の情報｜ものづくりポータル">
+<meta property="og:description" content="仕事・ITツール&AI・補助金・展示会・社会情勢の要点を毎朝7:00に自動更新。ハンドブック・品質カレンダーと一体のポータル。">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Crect%20width='24'%20height='24'%20rx='5'%20fill='%231f6feb'/%3E%3Crect%20x='5'%20y='6'%20width='6'%20height='5'%20rx='1'%20fill='white'/%3E%3Crect%20x='13'%20y='6'%20width='6'%20height='5'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='5'%20y='13'%20width='6'%20height='5'%20rx='1'%20fill='white'%20opacity='.7'/%3E%3Crect%20x='13'%20y='13'%20width='6'%20height='5'%20rx='1'%20fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +57,7 @@
   .ptabs{background:var(--s2);border-bottom:1px solid var(--bd)}
   .ptabs-in{display:flex;align-items:center;gap:10px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
   .pbrand{font-size:.8rem;font-weight:800;color:var(--ts);letter-spacing:.06em;margin-right:auto}
-  .ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+  .ptabs nav{display:flex;gap:6px;flex-wrap:wrap;row-gap:4px;max-width:100%}
   .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
   .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
   .ptabs nav a.on{background:var(--acc);color:#fff}
@@ -160,6 +160,10 @@
   .card .tg:hover{color:var(--acc-t);border-color:var(--acc)}
   .cardfoot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--bd);padding-top:12px}
   .cardfoot .src{font-size:.72rem;color:var(--tm)}
+  .srclink{font-size:.72rem;color:var(--tm);display:inline-flex;align-items:center;gap:4px;text-decoration:none;border-bottom:1px solid transparent;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .srclink .ic{width:13px;height:13px;flex:none;opacity:.75}
+  .srclink:hover{color:var(--acc-t);border-bottom-color:currentColor}
+  .srclink:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
   .cardfoot .more{font-size:.78rem;font-weight:500;color:var(--acc-t);display:inline-flex;align-items:center;gap:4px}
 
   footer{margin:42px 0 30px;padding-top:20px;border-top:1px solid var(--bd);color:var(--tm);font-size:.79rem;line-height:1.75}
@@ -259,12 +263,12 @@
 
 <aside class="sidebar" id="sidebar" aria-label="テーマ一覧"></aside>
 
-<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a class="on" href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 クイズ</a><a href="trends.html">📈 業界定点</a><a href="soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a class="on" href="./">📊 今日の情報</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 理解度クイズ</a><a href="trends.html">📈 指標の推移</a><a href="soudan.html">💬 セルフ診断</a></nav></div></div>
 
 <header class="top">
   <div class="wrap top-inner">
     <div>
-      <h1 class="brand">Daily Insight Board</h1>
+      <h1 class="brand">今日の情報</h1>
       <div class="sub">仕事・ITツール&AI・補助金・展示会・社会情勢 — 毎朝の「使える情報」まとめ</div>
       <div class="stats">
         <span class="pill"><span class="ico" data-ic="layout-grid"></span><span id="secCount">—</span> テーマ</span>
@@ -274,7 +278,10 @@
     <div class="meta">
       <div class="date" id="date">—</div>
       <span class="updated" id="updated"><span class="ico" data-ic="refresh"></span>毎朝 7:00 自動更新</span>
-      
+      <div class="datepick" id="datepickWrap" hidden>
+        <label for="datePick">表示日</label>
+        <select id="datePick" aria-label="表示する日を選ぶ"></select>
+      </div>
     </div>
   </div>
   <div class="wrap"><div class="archnote" id="archnote"></div></div>
@@ -306,8 +313,29 @@ const lvlName = {now:"すぐ使える",know:"知っておく",deep:"深掘り"};
 const SECICON = {work:"building-factory",ittools:"tools","tools-ai":"tools",subsidy:"cash",events:"calendar-event","ai-copilot":"robot","ai-other":"flask",society:"world"};
 function hexA(hex,a){const h=(hex||"#888888").replace("#","");return "rgba("+parseInt(h.substr(0,2),16)+","+parseInt(h.substr(2,2),16)+","+parseInt(h.substr(4,2),16)+","+a+")";}
 let DATA=null, CARDS=[], cardById={}, NEWIDS=new Set(); let lastFocus=null; let HISTORY={};
+const ARCHIVE_DAYS=7;
+function archDates(m){
+  const a = Array.isArray(m) ? m : (m && Array.isArray(m.dates) ? m.dates : []);
+  return a.filter(x=>typeof x==="string").slice().sort().reverse();
+}
+function dateLabel(d){
+  const t=new Date(d+"T00:00:00");
+  if(isNaN(t.getTime())) return d;
+  return (t.getMonth()+1)+"/"+t.getDate()+"（"+"日月火水木金土"[t.getDay()]+"）";
+}
 const F={q:"",level:"all",tag:null};
 
+function safeUrl(u){
+  if(!u) return "";
+  try{ const x=new URL(u, location.href); return (x.protocol==="https:"||x.protocol==="http:")?x.href:""; }catch(e){ return ""; }
+}
+function srcHtml(c){
+  const name=esc(c.source||"出典");
+  const u=safeUrl(c.url);
+  if(!u) return '<span class="src">'+esc(c.source||"")+'</span>';
+  return '<a class="src srclink" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer" data-nocard'
+       + ' title="'+name+'（元記事を新しいタブで開く）">'+name+' '+ic("external-link")+'</a>';
+}
 function dueBadge(due){
   if(!due||!due.date) return "";
   const d=new Date(due.date+"T00:00:00"); if(isNaN(d.getTime())) return "";
@@ -346,10 +374,10 @@ function buildNav(d){
 }
 function buildSidebar(d){
   const sb=document.getElementById("sidebar"); if(!sb) return;
-  let h='<div class="sb-brand">Daily Insight Board</div><div class="sb-title">テーマ一覧</div>';
+  let h='<div class="sb-brand">今日の情報</div><div class="sb-title">テーマ一覧</div>';
   h+='<a href="#tips" data-spy="tips">'+ic("sparkles")+'今日のまとめ</a>';
   h+=(d.sections||[]).map(s=>'<a href="#'+esc(s.id)+'" data-spy="'+esc(s.id)+'"><span class="sdot" style="background:'+esc(s.barColor||"#888888")+'"></span>'+esc(s.title)+'</a>').join("");
-  h+='<div class="sb-title">サイト内ページ</div><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 クイズ</a><a href="trends.html">📈 業界定点</a><a href="soudan.html">💬 相談・壁打ち</a>';
+  h+='<div class="sb-title">サイト内ページ</div><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 理解度クイズ</a><a href="trends.html">📈 指標の推移</a><a href="soudan.html">💬 セルフ診断</a>';
   sb.innerHTML=h;
 }
 function setupSpy(){
@@ -387,7 +415,7 @@ function buildBoard(d){
       html+='<article class="heroC" data-idx="'+idx+'" data-card role="button" tabindex="0" aria-label="'+esc(f.c.title||"")+'" style="border-top:3px solid '+esc(f.color)+'">';
       html+='<div class="hk"><span class="hk-lbl">今日の注目</span><span class="cat"><span class="cdot" style="background:'+esc(f.color)+'"></span>'+esc(f.secTitle)+'</span>'+dueBadge(f.c.due)+'</div>';
       html+='<h3>'+esc(f.c.title||"")+'</h3><p>'+esc(f.c.body||"")+'</p>';
-      html+='<div class="hfoot"><span class="src">'+esc(f.c.source||"")+'</span><span class="more">詳しく '+ic("arrow-right")+'</span></div></article>';
+      html+='<div class="hfoot">'+srcHtml(f.c)+'<span class="more">詳しく '+ic("arrow-right")+'</span></div></article>';
     });
     html+='</div>';
   }
@@ -429,13 +457,13 @@ function buildBoard(d){
       html+='<h3>'+esc(c.title)+'</h3>';
       html+='<p>'+esc(c.body)+'</p>';
       if(tg.length) html+='<div class="chips">'+tg.map(t=>'<span class="tg" data-tag="'+esc(t)+'">#'+esc(t)+'</span>').join("")+'</div>';
-      html+='<div class="cardfoot"><span class="src">'+esc(c.source||"")+'</span><span class="more">詳しく '+ic("arrow-right")+'</span></div>';
+      html+='<div class="cardfoot">'+srcHtml(c)+'<span class="more">詳しく '+ic("arrow-right")+'</span></div>';
       html+='</article>';
     });
     html+='</div></section>';
   });
 
-  html+='<footer><p><b>Daily Insight Board</b>｜仕事・ITツール&AI・補助金・展示会・社会情勢の「使える情報」を毎朝7:00に自動更新。カードをタップすると、サイト内で要約の詳細を読めます。<a href="workboard.html" style="color:var(--acc-t);font-weight:500">🗂 仕事ボード</a>・<a href="handbook/" style="color:var(--acc-t);font-weight:500">📘 ものづくりハンドブック</a>・<a href="calendar.html" style="color:var(--acc-t);font-weight:500">📅 品質カレンダー</a> もあわせてどうぞ。</p>'
+  html+='<footer><p><b>今日の情報</b>｜仕事・ITツール&AI・補助金・展示会・社会情勢の「使える情報」を毎朝7:00に自動更新。カードをタップすると要約の詳細が開き、出典名を押すと元記事へ移動します。<a href="handbook/" style="color:var(--acc-t);font-weight:500">📘 ものづくりハンドブック</a>・<a href="calendar.html" style="color:var(--acc-t);font-weight:500">📅 品質カレンダー</a>・<a href="trends.html" style="color:var(--acc-t);font-weight:500">📈 指標の推移</a> もあわせてどうぞ。</p>'
      +'<div class="disclaimer">各項目は公開情報をもとに編集部（自動）が要約しています。重要な判断・対外対応の前には一次情報をご確認ください。規制・法令（化審法・REACH等）や補助金・展示会の日程は更新されます。</div></footer>';
 
   document.getElementById("app").innerHTML=html;
@@ -482,7 +510,7 @@ function bind(){
   document.querySelectorAll(".chip[data-lv]").forEach(el=>el.addEventListener("click",()=>{F.level=el.dataset.lv;document.querySelectorAll(".chip[data-lv]").forEach(x=>x.classList.toggle("on",x.dataset.lv===F.level));applyFilters();}));
   document.querySelectorAll(".chip.tagchip").forEach(el=>el.addEventListener("click",()=>setTag(el.dataset.tag)));
   const fc=document.getElementById("fclear"); if(fc) fc.addEventListener("click",resetFilters);
-  document.querySelectorAll("[data-card]").forEach(card=>card.addEventListener("click",()=>openDetail(CARDS[+card.dataset.idx])));
+  document.querySelectorAll("[data-card]").forEach(card=>card.addEventListener("click",e=>{if(e.target.closest("[data-nocard]"))return;openDetail(CARDS[+card.dataset.idx]);}));
   document.querySelectorAll("[data-card]").forEach(card=>card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(CARDS[+card.dataset.idx]);}}));
   document.querySelectorAll(".dueitem[data-jump]").forEach(el=>el.addEventListener("click",()=>openDetail(cardById[el.dataset.jump])));
   document.querySelectorAll(".dueitem[data-jump]").forEach(el=>el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(cardById[el.dataset.jump]);}}));
@@ -547,7 +575,7 @@ function loadData(file,isArchive,label){
     if(isArchive){NEWIDS=new Set();finish();return;}
     const cur=collectIds(d);
     fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
-      const dates=(m&&Array.isArray(m.dates))?m.dates.slice().sort().reverse():[];
+      const dates=archDates(m);
       if(dates.length<2){NEWIDS=new Set();finish();return;}
       fetch("archive/"+dates[1]+".json?_="+Date.now()).then(r=>r.ok?r.json():null).then(pd=>{
         NEWIDS=new Set();
@@ -559,13 +587,17 @@ function loadData(file,isArchive,label){
 }
 function initDatePicker(){
   fetch("archive/index.json?_="+Date.now()).then(r=>r.ok?r.json():null).then(m=>{
-    if(!m||!Array.isArray(m.dates)||!m.dates.length) return;
-    const sel=document.getElementById("datePick");const dates=m.dates.slice().sort().reverse();
-    sel.innerHTML='<option value="__latest__">最新</option>'+dates.map(d=>'<option value="'+esc(d)+'">'+esc(d)+'</option>').join("");
+    const dates=archDates(m);
+    if(!dates.length) return;
+    const sel=document.getElementById("datePick");
+    const wrap=document.getElementById("datepickWrap"); if(wrap) wrap.hidden=false;
+    sel.innerHTML='<option value="__latest__">最新（今日）</option>'
+      +dates.slice(0,ARCHIVE_DAYS).map(d=>'<option value="'+esc(d)+'">'+esc(dateLabel(d))+'</option>').join("");
     sel.addEventListener("change",()=>{if(sel.value==="__latest__")loadData("data.json",false);else loadData("archive/"+sel.value+".json",true,sel.value);});
   }).catch(()=>{});
 }
 hydrateIcons();
+initDatePicker();
 (function(){var b=document.getElementById("totop");if(b){window.addEventListener("scroll",function(){b.classList.toggle("show",window.scrollY>560);},{passive:true});b.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});}})();
 loadData("data.json",false);
 </script>

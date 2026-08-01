@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>業界定点｜ものづくりポータル</title>
+<title>指標の推移｜ものづくりポータル</title>
 <meta name="description" content="仕入コスト・景況感・繊維業の公表統計を、同じ指標・同じ形で並べ続ける定点観測。数字は公表統計の転記であり、将来を予測するものではありません。">
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1a18" media="(prefers-color-scheme: dark)">
@@ -35,12 +35,12 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--s0);color:var(--tp);font-family:var(--sans);line-height:1.8;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 22px}
 
   .ptabs{background:var(--s2);border-bottom:1px solid var(--bd)}
   .ptabs-in{display:flex;align-items:center;gap:10px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
   .pbrand{font-size:.8rem;font-weight:800;color:var(--ts);letter-spacing:.06em;margin-right:auto}
-  .ptabs nav{display:flex;gap:6px;overflow-x:auto;max-width:100%}
+  .ptabs nav{display:flex;gap:6px;flex-wrap:wrap;row-gap:4px;max-width:100%}
   .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
   .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
   .ptabs nav a.on{background:var(--acc);color:#fff}
@@ -136,10 +136,10 @@
 </style>
 </head>
 <body>
-<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="workboard.html">🗂 仕事ボード</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 クイズ</a><a class="on" href="trends.html">📈 業界定点</a><a href="soudan.html">💬 相談・壁打ち</a></nav></div></div>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a href="./">📊 今日の情報</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 理解度クイズ</a><a class="on" href="trends.html">📈 指標の推移</a><a href="soudan.html">💬 セルフ診断</a></nav></div></div>
 
 <header class="top"><div class="wrap">
-  <h1 class="brand">業界定点</h1>
+  <h1 class="brand">指標の推移</h1>
   <div class="sub">「今どうなっているか」ではなく「どう動いてきたか」。同じ指標を同じ形で並べ続けます。日々のニュースは「今日の情報」、期限は「品質カレンダー」へ。</div>
   <div class="upd" id="upd">更新日: 読み込み中…</div>
   <div class="caution">本ページは公表統計の転記であり、将来を予測するものではありません。数値の定義・改定は各系列の出典元で確認してください。</div>
@@ -150,7 +150,7 @@
 <main class="wrap" id="main"><div class="empty" id="loading">読み込み中…</div></main>
 
 <div class="wrap"><div class="note">前期比の記号は <b>▲＝前の期より上昇</b>／<b>▼＝前の期より低下</b>／<b>→＝変化なし</b>（上昇が良い・悪いという意味ではありません）。値が取れない期間は点を置かず、線もつなぎません。系列の追記手順は trends-data.json の howto に記載しています。</div></div>
-<footer>ものづくりポータル｜業界定点（データ: trends-data.json・出典は各カード末尾）</footer>
+<footer>ものづくりポータル｜指標の推移（旧「業界定点」・データ: trends-data.json・出典は各カード末尾）</footer>
 
 <script>
 (function(){
