@@ -22,7 +22,7 @@
    "title": "仕事（専門）",
    "barColor": "#2f8f63",
    "tag": "不織布・品質・生産技術・化学物質",
-   "desc": "",
+   "desc": "不織布・品質管理/品質保証・生産技術・化学物質管理の最新動向",
    "cards": [
     {
      "id": "chem-pfhxa-entry79-2026",
@@ -113,7 +113,7 @@
    "title": "ITツール & AI",
    "barColor": "#3f8f86",
    "tag": "生成AI最新動向・Copilot・Kintone・SharePoint・Power Platform",
-   "desc": "",
+   "desc": "生成AIの最新動向と社内ITツールの活用Tips",
    "cards": [
     {
      "id": "eu-ai-act-transparency-effective",
@@ -235,7 +235,7 @@
    "title": "補助金・助成金",
    "barColor": "#a6772f",
    "tag": "ものづくり・省力化・省エネ・IT/DX・人材",
-   "desc": "",
+   "desc": "申請・締切が動く補助金・助成金の最新情報",
    "cards": [
     {
      "id": "subsidy-shoryokuka-ippan-8th-2026",
@@ -353,7 +353,7 @@
    "title": "展示会・セミナー",
    "barColor": "#b0518f",
    "tag": "不織布・素材・品質・DX・化学・営業",
-   "desc": "",
+   "desc": "出張・参加の検討に役立つ展示会・セミナー情報",
    "cards": [
     {
      "id": "events-chemican-seminar-2026",
@@ -483,7 +483,7 @@
    "title": "社会情勢（一般ニュース）",
    "barColor": "#d98e3d",
    "tag": "政治・経済・世界",
-   "desc": "",
+   "desc": "直近の政治・経済・世界情勢のトピック",
    "cards": [
     {
      "id": "society-food-tax-cut-cabinet-decision-2026",
