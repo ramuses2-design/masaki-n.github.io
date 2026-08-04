@@ -61,6 +61,9 @@
 
   .note{font-size:.78rem;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 16px;margin:24px 0 0}
   .note b{color:var(--tp)}
+  /* UX020: ハンドブックの一覧ページへの導線（既存トークンのみ・JSなし） */
+  .alltools{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;min-height:44px;background:var(--s2);border:1px solid var(--bds);border-radius:12px;padding:12px 18px;margin:16px 0 0;font-size:.86rem;font-weight:700;color:var(--acc-t)}
+  .alltools:hover{border-color:var(--acc)}
   .steps{margin:16px 0 0;padding:0;list-style:none;counter-reset:st}
   .steps li{position:relative;padding:10px 0 10px 34px;border-top:1px solid var(--bd);font-size:.86rem;line-height:1.8;counter-increment:st}
   .steps li:first-child{border-top:none}
@@ -232,6 +235,8 @@
   </section>
 
   <div class="note"><b>どのツールも、入力内容はこの端末内（ブラウザ）にだけ保存され、どこにも送信されません。</b>氏名・所属・メールアドレスなど個人を特定する入力欄はありません。共用のパソコンを使ったときは、各ツールの「回答をクリア」を押してから閉じてください。<br>結果は<b>評価や判定ではなく、自分の考えを整理するための材料</b>です。人事評価や他人の評価には使いません。</div>
+
+  <a class="alltools" href="handbook/checks.html">すべての診断ツールを見る →</a>
 
 </main>
 
