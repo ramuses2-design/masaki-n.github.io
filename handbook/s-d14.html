@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>T20 工程条件変更の社内実験計画の立て方（1因子ずつ・判定基準の先決め）｜ものづくりハンドブック</title>
-<meta name="description" content="**目的／考え方**：工程条件を勘や思いつきで一度に複数変更すると、結果が良くても悪くても「何が効いたか」が分からなくなる。変える条件を絞り、判定基準を先に決めてから実験することで、再現性のある結論を得る。">
+<title>D14 サプライヤー監査の年間計画と実施（書面／訪問の使い分け・チェックリスト設計）｜ものづくりハンドブック</title>
+<meta name="description" content="**目的／考え方**：サプライヤー監査は思いつきで実施すると重要先が漏れたり、逆に一部の先に負担が偏ったりする。年間計画として重要度・リスクに応じた頻度と手法（書面／訪問）を先に決め、チェックリストで抜け漏れなく実施する。P6が監査・改善の伴走全般を扱うのに対し、D14は「年間計画の立て方」と「監査の中身（書面か訪問か・何を確認するか）」に絞って扱う。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -81,7 +81,7 @@
 <a href="s-c12.html">C12 包装仕様・表示変更時の品質確認（法定表示・顧客指定表示・切替日管理）</a>
 <a href="s-c13.html">C13 倉庫・保管場所の変更／移転時の品質管理（環境確認・在庫移動時の識別維持）</a>
 </details>
-<details class="side-grp">
+<details class="side-grp" open>
 <summary class="side-sum"><span class="sd sd-D"></span>🛡️ D. 予防・維持・システム</summary>
 <a href="group-d.html">概要（一覧）</a>
 <a href="s-d1.html">D1 日常の検査・検査表運用</a>
@@ -97,7 +97,7 @@
 <a href="s-d11.html">D11 長期連休・生産停止前後の品質管理（停止前の処置・再開時の確認事項）</a>
 <a href="s-d12.html">D12 内部監査の年間運営（計画・監査員の力量・指摘のランク付け・経営層報告）</a>
 <a href="s-d13.html">D13 ヒヤリハット・未然防止活動の運営（収集→評価→ポカヨケ展開の回し方）</a>
-<a href="s-d14.html">D14 サプライヤー監査の年間計画と実施（書面／訪問の使い分け・チェックリスト設計）</a>
+<a class="on" href="s-d14.html">D14 サプライヤー監査の年間計画と実施（書面／訪問の使い分け・チェックリスト設計）</a>
 </details>
 <details class="side-grp">
 <summary class="side-sum"><span class="sd sd-E"></span>🎓 E. 教育・OJT</summary>
@@ -134,7 +134,7 @@
 <a href="ag-s18.html">S18 納期回答と品質保証の両立（検査短縮を安易に約束しない）</a>
 <a href="ag-s19.html">S19 顧客からの技術問い合わせの一次回答の型（答えてよい範囲・持ち帰る範囲）</a>
 </details>
-<details class="side-grp" open>
+<details class="side-grp">
 <summary class="side-sum"><span class="sd sd-tech"></span>🛠️ 技術向け</summary>
 <a href="aud-tech.html">概要（一覧）</a>
 <a href="ag-t1.html">T1 新製品・量産立ち上げ（APQP／PPAP 的）</a>
@@ -156,7 +156,7 @@
 <a href="ag-t17.html">T17 試作品の品質評価依頼の出し方（依頼様式・リードタイム・判定基準）</a>
 <a href="ag-t18.html">T18 工程データの品証への共有ルール（どのデータを・いつ・どの形式で）</a>
 <a href="ag-t19.html">T19 顧客規格から社内管理値への落とし込み方（管理値と規格値の区別・安全率の考え方。T12 SPCと連携）</a>
-<a class="on" href="ag-t20.html">T20 工程条件変更の社内実験計画の立て方（1因子ずつ・判定基準の先決め）</a>
+<a href="ag-t20.html">T20 工程条件変更の社内実験計画の立て方（1因子ずつ・判定基準の先決め）</a>
 <a href="ag-t21.html">T21 検査基準書の作り方（判定基準の書き方・写真／限度見本の使い分け）</a>
 <a href="ag-t22.html">T22 検査データの統計処理でやりがちな誤り5類型（n数不足・外れ値の恣意的除外・平均だけで判断・工程能力の前提無視・丸めの誤り）</a>
 </details>
@@ -273,15 +273,12 @@
 <a class="side-item" href="../soudan.html">💬 セルフ診断</a>
 </nav></aside>
   <main class="hb-main">
-  <div class="crumb"><a href="aud-tech.html">技術向け</a><span class="sep">/</span><span>T20 工程条件変更の社内実験計画の立て方（1因子ずつ・判定基準の先決め）</span></div>
+  <div class="crumb"><a href="group-d.html">D 予防・維持・システム</a><span class="sep">/</span><span>D14 サプライヤー監査の年間計画と実施（書面／訪問の使い分け・チェックリスト設計）</span></div>
   <div class="s-head">
-      <div class="s-tags"><span class="gtag g-tech">🛠️ 技術向け</span><span class="ttag">連携先：生産技術・開発</span></div>
-      <h1><span class="s-id">T20</span>工程条件変更の社内実験計画の立て方（1因子ずつ・判定基準の先決め）</h1>
-    </div><div class="purpose"><span class="p-tag">目的／考え方</span><p>工程条件を勘や思いつきで一度に複数変更すると、結果が良くても悪くても「何が効いたか」が分からなくなる。変える条件を絞り、判定基準を先に決めてから実験することで、再現性のある結論を得る。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">変更したい条件（因子）を洗い出し、まず1因子ずつ変えて確認する（複数同時変更は避ける）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">実験前に「何を測るか」「合否・採否の判定基準」を先に決めておく（結果を見てから基準を決めない）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">比較対象となる現行条件（対照区）を必ず設け、変更区と条件をそろえて比較する</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">サンプル数・測定回数をあらかじめ決め、母数不足で結論を急がない</span></li><li class="chk star"><span class="cb"></span><span class="t">実験条件・結果・判定・実施者・日付を記録様式に残す（口頭やメモだけで終わらせない）</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">良い結果が出ても、正式な工程条件への反映はC1（4M変更管理）の手順に沿って行う</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">想定外の結果が出た場合の中断基準（安全・品質に影響が出たら即中止）を先に決めておく</span></li></ul>
-<h4>記録様式の項目例</h4>
-<ul><li>実験目的・変更する条件（因子）と変更しない条件</li><li>対照区・変更区の条件一覧</li><li>判定基準（先に決めたもの）・サンプル数</li><li>結果データ・判定・次のアクション（採用／不採用／追加検証）</li><li>実施者・確認者・日付</li></ul>
-<div class="callout review"><span class="rev-badge">要確認</span><span>社内実験記録の正式様式・承認者、量産条件反映までの承認フロー。</span></div></div><div class="rel"><h3>関連する場面</h3><div class="rel-list"><a href="s-c1.html"><span class="rel-id">C1</span>4M変更管理（人・機械・材料・方法）</a><a href="ag-t11.html"><span class="rel-id">T11</span>工程FMEA（PFMEA）の作成と活用</a></div></div><div class="rel"><h3>同じ読者向けの他トピック</h3><div class="rel-list"><a href="ag-t1.html"><span class="rel-id">T1</span>新製品・量産立ち上げ（APQP／PPAP 的）</a><a href="ag-t2.html"><span class="rel-id">T2</span>4M変更管理（人・機械・材料・方法）</a><a href="ag-t3.html"><span class="rel-id">T3</span>工程・検査基準の制定／改訂</a><a href="ag-t4.html"><span class="rel-id">T4</span>設備の導入・改善</a><a href="ag-t5.html"><span class="rel-id">T5</span>工程能力・初期流動・データ活用</a><a href="ag-t6.html"><span class="rel-id">T6</span>化学物質・環境法規の設計織り込み</a><a href="ag-t7.html"><span class="rel-id">T7</span>不具合の再発防止と設計・標準へのフィードバック</a><a href="ag-t8.html"><span class="rel-id">T8</span>治具・型・設備の維持管理</a><a href="ag-t9.html"><span class="rel-id">T9</span>設備保全とデータ活用（予知保全の入口）</a><a href="ag-t10.html"><span class="rel-id">T10</span>検査の自動化・AI外観検査導入の進め方</a><a href="ag-t11.html"><span class="rel-id">T11</span>工程FMEA（PFMEA）の作成と活用</a><a href="ag-t12.html"><span class="rel-id">T12</span>統計的工程管理（SPC）・管理図の導入と工程能力の見える化</a><a href="ag-t13.html"><span class="rel-id">T13</span>トレーサビリティ設計（ロット管理・識別の作り込み）</a><a href="ag-t14.html"><span class="rel-id">T14</span>測定システム解析（MSA／Gage R&amp;R）の実施と判断</a><a href="ag-t15.html"><span class="rel-id">T15</span>品質業務のノーコード自動化（申請・記録ワークフローの内製）の進め方</a><a href="ag-t16.html"><span class="rel-id">T16</span>生成AI（Copilot）を品質業務で安全に使う（入力してよい情報・ダメな情報の線引き）</a><a href="ag-t17.html"><span class="rel-id">T17</span>試作品の品質評価依頼の出し方（依頼様式・リードタイム・判定基準）</a><a href="ag-t18.html"><span class="rel-id">T18</span>工程データの品証への共有ルール（どのデータを・いつ・どの形式で）</a><a href="ag-t19.html"><span class="rel-id">T19</span>顧客規格から社内管理値への落とし込み方（管理値と規格値の区別・安全率の考え方。T12 SPCと連携）</a><a href="ag-t21.html"><span class="rel-id">T21</span>検査基準書の作り方（判定基準の書き方・写真／限度見本の使い分け）</a><a href="ag-t22.html"><span class="rel-id">T22</span>検査データの統計処理でやりがちな誤り5類型（n数不足・外れ値の恣意的除外・平均だけで判断・工程能力の前提無視・丸めの誤り）</a></div></div>
-    <div class="s-meta">最終更新日：2026-08-04　|　<a href="content/audience-guides.md">原本（Markdown）を開く</a></div>
+      <div class="s-tags"><span class="gtag g-D">🛡️ D・予防・維持・システム</span><span class="ttag">種類：予防</span></div>
+      <h1><span class="s-id">D14</span>サプライヤー監査の年間計画と実施（書面／訪問の使い分け・チェックリスト設計）</h1>
+    </div><div class="purpose"><span class="p-tag">目的／考え方</span><p>サプライヤー監査は思いつきで実施すると重要先が漏れたり、逆に一部の先に負担が偏ったりする。年間計画として重要度・リスクに応じた頻度と手法（書面／訪問）を先に決め、チェックリストで抜け漏れなく実施する。P6が監査・改善の伴走全般を扱うのに対し、D14は「年間計画の立て方」と「監査の中身（書面か訪問か・何を確認するか）」に絞って扱う。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">サプライヤーを重要度・リスク（供給依存度・過去の不適合・重要部材か）で区分し、区分ごとに監査頻度を決める</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">区分に応じて書面監査（質問票・提出書類の確認）と訪問監査（現地での工程・記録確認）を使い分ける</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">チェックリストは品質体制・工程管理・記録管理・変更管理の4観点を最低限含めて設計する</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">年間計画は購買・品証で合意し、対象サプライヤーへの事前案内（V9の流れ）に反映する</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">監査結果はP6の枠組みで是正・改善の伴走につなげ、指摘のランク付け（重大／軽微）を行う</span></li><li class="chk"><span class="cb"></span><span class="t">訪問できない遠方・小規模先は書面監査を基本とし、リスクが高い場合のみ訪問に切り替える判断基準を決めておく</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>監査頻度の区分基準、チェックリストの正式様式、監査員の力量要件</span></li></ul></div><div class="rel"><h3>関連する場面（他カテゴリ）</h3><div class="rel-list"><a href="ag-p15.html"><span class="rel-id">P15</span>新規サプライヤーの評価・登録の流れ（書類審査→サンプル評価→監査→登録）</a><a href="ag-v9.html"><span class="rel-id">V9</span>訪問監査受け入れのお願い（流れ・準備物・当日の動き）</a><a href="ag-p6.html"><span class="rel-id">P6</span>サプライヤー監査・品質改善の伴走</a></div></div><div class="rel"><h3>関連する場面（同じグループ）</h3><div class="rel-list"><a href="s-d1.html"><span class="rel-id">D1</span>日常の検査・検査表運用</a><a href="s-d2.html"><span class="rel-id">D2</span>測定器・校正・MSA管理</a><a href="s-d3.html"><span class="rel-id">D3</span>監査対応（内部監査・顧客監査・審査）</a><a href="s-d4.html"><span class="rel-id">D4</span>化学物質管理・法規対応</a><a href="s-d5.html"><span class="rel-id">D5</span>文書・記録管理</a><a href="s-d6.html"><span class="rel-id">D6</span>KPI・品質目標の管理</a><a href="s-d7.html"><span class="rel-id">D7</span>BCP・災害時の品質維持（緊急時の検査・記録）</a><a href="s-d8.html"><span class="rel-id">D8</span>層別工程監査（LPA）・工程パトロールの運用</a><a href="s-d9.html"><span class="rel-id">D9</span>外部試験機関の活用（依頼試験・成績書・技能試験）</a><a href="s-d10.html"><span class="rel-id">D10</span>品質コスト（COQ）の見える化と改善テーマ選定</a><a href="s-d11.html"><span class="rel-id">D11</span>長期連休・生産停止前後の品質管理（停止前の処置・再開時の確認事項）</a><a href="s-d12.html"><span class="rel-id">D12</span>内部監査の年間運営（計画・監査員の力量・指摘のランク付け・経営層報告）</a><a href="s-d13.html"><span class="rel-id">D13</span>ヒヤリハット・未然防止活動の運営（収集→評価→ポカヨケ展開の回し方）</a></div></div>
+    <div class="s-meta">最終更新日：2026-08-04　|　<a href="content/playbooks.md">原本（Markdown）を開く</a></div>
   </main>
 </div>
 <div class="hb-ov" id="hbov"></div>

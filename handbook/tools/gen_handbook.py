@@ -219,6 +219,18 @@ def parse_checks(body):
         if st: cur["desc"].append(st)
     return entries
 checks_entries=parse_checks(checks_body) if checks_body else []
+def parse_checks_intro(body):
+    lines=[]
+    for raw in body.split("\n"):
+        st=raw.strip()
+        if re.match(r"^##\s+CK[0-9]+\s*\|", st): break
+        if st.startswith("#"): continue
+        if st.startswith(">"): continue
+        lines.append(raw)
+    while lines and lines[0].strip()=="": lines.pop(0)
+    while lines and lines[-1].strip()=="": lines.pop()
+    return lines
+checks_intro_lines=parse_checks_intro(checks_body) if checks_body else []
 CHANGE=os.path.join(CONTENT,"changelog.md")
 change_raw=rd(CHANGE); change_body=strip_fm(change_raw) if change_raw else ""
 def parse_change(body):
@@ -557,8 +569,10 @@ if checks_entries:
     for c in checks_entries:
         meta=f'<span class="sc-t">{esc(c["title"])}<br><span style="font-weight:400;font-size:.78rem;color:var(--muted)">{esc(c["target"])}　|　{esc(c["duration"])}</span></span>'
         cchecks+=f'<a class="sc-card" href="{esc(c["file"])}"><span class="sc-id">🧭</span>{meta}</a>'
+    checks_intro_html = ('<div class="s-body">'+render_blocks(checks_intro_lines)+'</div>') if checks_intro_lines else ''
     checks_body_html=f'''<h1 class="g-title">🧭 セルフチェック（診断ツール）</h1>
     <p class="g-sub">自分の状態を測って、該当するハンドブックのページへ。回答はこの端末内にだけ保存され、どこにも送信されません。全{len(checks_entries)}種類。</p>
+    {checks_intro_html}
     <div class="sc-grid">{cchecks}</div>'''
     open(os.path.join(OUT,"checks.html"),"w",encoding="utf-8").write(
         page("セルフチェック", checks_body_html, "checks.html", desc="自分の状態を測って該当ページへ（セルフチェック）",
