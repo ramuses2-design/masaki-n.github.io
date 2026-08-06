@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A15 品証業務の棚卸しと負荷平準化（業務一覧化・属人化解消・やめる業務の決め方）｜ものづくりハンドブック</title>
-<meta name="description" content="**目的／考え方**：品証の業務は増える一方で減ることは少なく、気づけば特定の人に業務が集中していることが多い。定期的に業務を一覧化し、属人化の解消と「やめる・減らす」判断をセットで行うことで、持続可能な体制を保つ。">
+<title>P19 サプライヤーの製造拠点変更（工場移管・海外化）を通知されたときの確認事項（初回品確認・工程能力の再取得・移行期の二重管理。C8/V3と連携）｜ものづくりハンドブック</title>
+<meta name="description" content="**目的／考え方**：サプライヤーから製造拠点の変更（別工場への移管・海外生産への切替等）を通知されたとき、「同じ図面・同じ仕様だから大丈夫」と流さず、設備・人・環境が変わる前提で確認を組み直す。C8（自社の生産移管）と考え方は同じだが、購買側は相手先の変更を「受け止める」立場になる点が異なる。">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -24,7 +24,7 @@
 <a class="side-home" href="index.html">🏠 ハンドブック トップ</a>
 <a class="side-item" href="policy.html">📘 方針マスター</a>
 <div class="side-cap">場面別プレイブック</div>
-<details class="side-grp" open>
+<details class="side-grp">
 <summary class="side-sum"><span class="sd sd-A"></span>📋 A. 定例・マネジメント</summary>
 <a href="group-a.html">概要（一覧）</a>
 <a href="s-a1.html">A1 1on1（育成・面談）</a>
@@ -41,7 +41,7 @@
 <a href="s-a12.html">A12 部門間コンフリクトの調整（品質と納期・コストの対立場面）</a>
 <a href="s-a13.html">A13 品質保証の年間計画・予算要求の立て方</a>
 <a href="s-a14.html">A14 品質方針・年度目標の現場への浸透（朝礼・掲示・個人目標への落とし込み）</a>
-<a class="on" href="s-a15.html">A15 品証業務の棚卸しと負荷平準化（業務一覧化・属人化解消・やめる業務の決め方）</a>
+<a href="s-a15.html">A15 品証業務の棚卸しと負荷平準化（業務一覧化・属人化解消・やめる業務の決め方）</a>
 <a href="s-a16.html">A16 品質教育の年間運営（対象別カリキュラム・実施記録・効果確認の回し方。E1〜E3・A5と連携）</a>
 <a href="s-a17.html">A17 品質に関する社内アンケート・風土調査の設計と使い方（聞き方の型・匿名性の扱い・結果の返し方・改善に結びつける手順。A14/A8と連携）</a>
 </details>
@@ -196,7 +196,7 @@
 <a href="ag-m21.html">M21 作業標準どおりにできないときの申告の仕方（守れない標準は変える）</a>
 <a href="ag-m22.html">M22 検査で迷ったときの相談の出し方（止める／流すを自分で決めない基準・誰にいつ聞くか・迷った事実を記録に残す形。M17/M21と連携）</a>
 </details>
-<details class="side-grp">
+<details class="side-grp" open>
 <summary class="side-sum"><span class="sd sd-buy"></span>🧺 購買向け</summary>
 <a href="aud-buy.html">概要（一覧）</a>
 <a href="ag-p1.html">P1 サプライヤーの選定・承認</a>
@@ -217,7 +217,7 @@
 <a href="ag-p16.html">P16 価格改定・契約更新時の品質条件の見直し（仕様書・検査条件・保証範囲の有効期限確認）</a>
 <a href="ag-p17.html">P17 廃番・供給終了通知を受けたときの動き（代替評価の依頼・在庫確保・顧客連絡）</a>
 <a href="ag-p18.html">P18 サプライヤーの是正回答が不十分なときの差し戻し方（差し戻しの判断基準・再提出期限・エスカレーションの段取り。P5・V8と連携）</a>
-<a href="ag-p19.html">P19 サプライヤーの製造拠点変更（工場移管・海外化）を通知されたときの確認事項（初回品確認・工程能力の再取得・移行期の二重管理。C8/V3と連携）</a>
+<a class="on" href="ag-p19.html">P19 サプライヤーの製造拠点変更（工場移管・海外化）を通知されたときの確認事項（初回品確認・工程能力の再取得・移行期の二重管理。C8/V3と連携）</a>
 </details>
 <details class="side-grp">
 <summary class="side-sum"><span class="sd sd-vendor"></span>📦 外注先向け</summary>
@@ -287,12 +287,12 @@
 <a class="side-item" href="../soudan.html">💬 セルフ診断</a>
 </nav></aside>
   <main class="hb-main">
-  <div class="crumb"><a href="group-a.html">A 定例・マネジメント</a><span class="sep">/</span><span>A15 品証業務の棚卸しと負荷平準化（業務一覧化・属人化解消・やめる業務の決め方）</span></div>
+  <div class="crumb"><a href="aud-buy.html">購買向け</a><span class="sep">/</span><span>P19 サプライヤーの製造拠点変更（工場移管・海外化）を通知されたときの確認事項（初回品確認・工程能力の再取得・移行期の二重管理。C8/V3と連携）</span></div>
   <div class="s-head">
-      <div class="s-tags"><span class="gtag g-A">📋 A・定例・マネジメント</span><span class="ttag">種類：定例</span></div>
-      <h1><span class="s-id">A15</span>品証業務の棚卸しと負荷平準化（業務一覧化・属人化解消・やめる業務の決め方）</h1>
-    </div><div class="purpose"><span class="p-tag">目的／考え方</span><p>品証の業務は増える一方で減ることは少なく、気づけば特定の人に業務が集中していることが多い。定期的に業務を一覧化し、属人化の解消と「やめる・減らす」判断をセットで行うことで、持続可能な体制を保つ。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">現状の業務を、定例・随時・非公式（本来は誰かの役割だが記録に残っていない業務）まで含めて洗い出す</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">各業務の頻度・所要工数・実施者を記録し、特定の人への偏りがないかを可視化する</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">業務ごとに「なぜ必要か」を問い直し、目的が不明確な業務・形骸化した業務を見直し候補として挙げる</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">属人化している業務は、マニュアル化・技能伝承（E6）や複数名対応化の優先順位をつける</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">棚卸し結果を「やめる／減らす／自動化する／このまま続ける」の4分類で整理する</span></li><li class="chk"><span class="cb"></span><span class="t">見直しの結論は関係者（実施者・上位者）に共有し、独断でやめない（影響範囲を先に確認する）</span></li><li class="chk"><span class="cb"></span><span class="t">棚卸しの実施頻度（年1回等）をあらかじめ決め、一度きりで終わらせない</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>棚卸しの実施頻度・様式、業務見直し（やめる／減らす）の承認プロセスと最終承認者、関係部門への確認範囲</span></li></ul></div><div class="rel"><h3>関連する場面（他カテゴリ）</h3><div class="rel-list"><a href="s-e6.html"><span class="rel-id">E6</span>技能伝承・マニュアル化（動画・写真基準書の作り方と更新ルール）</a><a href="s-a13.html"><span class="rel-id">A13</span>品質保証の年間計画・予算要求の立て方</a><a href="s-d6.html"><span class="rel-id">D6</span>KPI・品質目標の管理</a></div></div><div class="rel"><h3>関連する場面（同じグループ）</h3><div class="rel-list"><a href="s-a1.html"><span class="rel-id">A1</span>1on1（育成・面談）</a><a href="s-a2.html"><span class="rel-id">A2</span>週次ミーティング（グループ内）</a><a href="s-a3.html"><span class="rel-id">A3</span>月次報告（部門横断：製造係長＋他GL＋事業部長）</a><a href="s-a4.html"><span class="rel-id">A4</span>目標設定・評価（期初／期中／期末）</a><a href="s-a5.html"><span class="rel-id">A5</span>教育・力量管理／新任受け入れ</a><a href="s-a6.html"><span class="rel-id">A6</span>改善提案・小集団活動（QCサークル）の運営</a><a href="s-a7.html"><span class="rel-id">A7</span>協力会社・外注先との定例品質会議の運営</a><a href="s-a8.html"><span class="rel-id">A8</span>品質KPIの朝礼・見える化ボード運用（現場への浸透）</a><a href="s-a9.html"><span class="rel-id">A9</span>品質月間・全社品質イベントの企画運営（年間の品質意識向上）</a><a href="s-a10.html"><span class="rel-id">A10</span>顧客監査・第三者審査（ISO等）の受審準備と当日運営</a><a href="s-a11.html"><span class="rel-id">A11</span>展示会・外部セミナーの視察（狙いを決めて行き、持ち帰りを形にする）</a><a href="s-a12.html"><span class="rel-id">A12</span>部門間コンフリクトの調整（品質と納期・コストの対立場面）</a><a href="s-a13.html"><span class="rel-id">A13</span>品質保証の年間計画・予算要求の立て方</a><a href="s-a14.html"><span class="rel-id">A14</span>品質方針・年度目標の現場への浸透（朝礼・掲示・個人目標への落とし込み）</a><a href="s-a16.html"><span class="rel-id">A16</span>品質教育の年間運営（対象別カリキュラム・実施記録・効果確認の回し方。E1〜E3・A5と連携）</a><a href="s-a17.html"><span class="rel-id">A17</span>品質に関する社内アンケート・風土調査の設計と使い方（聞き方の型・匿名性の扱い・結果の返し方・改善に結びつける手順。A14/A8と連携）</a></div></div>
-    <div class="s-meta">最終更新日：2026-08-06　|　<a href="content/playbooks.md">原本（Markdown）を開く</a></div>
+      <div class="s-tags"><span class="gtag g-buy">🧺 購買向け</span><span class="ttag">連携先：購買・調達</span></div>
+      <h1><span class="s-id">P19</span>サプライヤーの製造拠点変更（工場移管・海外化）を通知されたときの確認事項（初回品確認・工程能力の再取得・移行期の二重管理。C8/V3と連携）</h1>
+    </div><div class="purpose"><span class="p-tag">目的／考え方</span><p>サプライヤーから製造拠点の変更（別工場への移管・海外生産への切替等）を通知されたとき、「同じ図面・同じ仕様だから大丈夫」と流さず、設備・人・環境が変わる前提で確認を組み直す。C8（自社の生産移管）と考え方は同じだが、購買側は相手先の変更を「受け止める」立場になる点が異なる。</p></div><div class="s-body"><ul class="checklist"><li class="chk star"><span class="cb"></span><span class="t">変更の範囲（全量移管か一部か）・時期・理由（コスト／能力／事業判断等）を書面で確認する</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">移管先の設備・工程・検査体制が移管元と同等であることを、初回品評価で確認する</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">移管先の工程能力データ（初期流動を含む）を新たに取得してもらい、移管元の実績と比較する</span><span class="star-badge">重点</span></li><li class="chk star"><span class="cb"></span><span class="t">移行期間中は移管元・移管先どちらのロットかを識別し、二重管理（並行生産期の追跡）を行う</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">移管先の要員教育・力量確認の状況をサプライヤーに確認する</span></li><li class="chk star"><span class="cb"></span><span class="t">顧客への通知・承認が必要な変更か（4M変更の対象）を確認し、必要な場合は早めに連絡する</span><span class="star-badge">重点</span></li><li class="chk"><span class="cb"></span><span class="t">移管完了の判定基準（初物確認・工程能力・一定期間の実績確認）をサプライヤーとすり合わせておく</span></li><li class="chk"><span class="cb"></span><span class="t"><span class="ic-rev">【要確認】</span>移管時の初回品評価の実施基準・移行期間の目安、顧客通知の要否判断基準</span></li></ul></div><div class="rel"><h3>関連する場面</h3><div class="rel-list"><a href="s-c8.html"><span class="rel-id">C8</span>生産移管（ライン移設・工場間・外注化）の品質保証</a><a href="ag-v3.html"><span class="rel-id">V3</span>4M変更・工程変更の事前連絡</a></div></div><div class="rel"><h3>同じ読者向けの他トピック</h3><div class="rel-list"><a href="ag-p1.html"><span class="rel-id">P1</span>サプライヤーの選定・承認</a><a href="ag-p2.html"><span class="rel-id">P2</span>受入検査・受入基準</a><a href="ag-p3.html"><span class="rel-id">P3</span>サプライヤーの4M変更・製造中止管理</a><a href="ag-p4.html"><span class="rel-id">P4</span>化学物質・法規エビデンスの収集</a><a href="ag-p5.html"><span class="rel-id">P5</span>サプライヤー不適合・クレーム対応</a><a href="ag-p6.html"><span class="rel-id">P6</span>サプライヤー監査・品質改善の伴走</a><a href="ag-p7.html"><span class="rel-id">P7</span>供給BCP・二社購買（供給途絶リスク）</a><a href="ag-p8.html"><span class="rel-id">P8</span>原材料の値上げ・代替材の評価と切替管理</a><a href="ag-p9.html"><span class="rel-id">P9</span>受入ロット管理・FIFO と保管品質の維持</a><a href="ag-p10.html"><span class="rel-id">P10</span>副資材・包装資材の品質管理（インク・粘着・段ボール等の変更管理）</a><a href="ag-p11.html"><span class="rel-id">P11</span>輸入材・調達リスク管理（為替・関税・長納期の変動対応）</a><a href="ag-p12.html"><span class="rel-id">P12</span>受入データの活用・サプライヤー品質スコアリング（受入不良率の見える化）</a><a href="ag-p13.html"><span class="rel-id">P13</span>商社経由調達の品質管理（製造元が見えない場合の要求事項）</a><a href="ag-p14.html"><span class="rel-id">P14</span>支給材・預り材の品質管理（受入・保管・返却）</a><a href="ag-p15.html"><span class="rel-id">P15</span>新規サプライヤーの評価・登録の流れ（書類審査→サンプル評価→監査→登録）</a><a href="ag-p16.html"><span class="rel-id">P16</span>価格改定・契約更新時の品質条件の見直し（仕様書・検査条件・保証範囲の有効期限確認）</a><a href="ag-p17.html"><span class="rel-id">P17</span>廃番・供給終了通知を受けたときの動き（代替評価の依頼・在庫確保・顧客連絡）</a><a href="ag-p18.html"><span class="rel-id">P18</span>サプライヤーの是正回答が不十分なときの差し戻し方（差し戻しの判断基準・再提出期限・エスカレーションの段取り。P5・V8と連携）</a></div></div>
+    <div class="s-meta">最終更新日：2026-08-06　|　<a href="content/audience-guides.md">原本（Markdown）を開く</a></div>
   </main>
 </div>
 <div class="hb-ov" id="hbov"></div>
