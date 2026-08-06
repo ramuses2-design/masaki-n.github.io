@@ -8,7 +8,7 @@ a{color:inherit;text-decoration:none}
 .hb-top{position:sticky;top:0;z-index:40;background:var(--navy);color:#eef3f8;box-shadow:0 1px 0 rgba(0,0,0,.12)}
 .hb-top-in{display:flex;align-items:center;gap:16px;padding:13px 20px;flex-wrap:wrap}
 .hb-brand{display:inline-flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;font-size:1.06rem;color:#fff;white-space:nowrap}
-.hb-logo{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--teal);color:#fff;font-family:var(--sans);font-weight:700;font-size:.82rem;letter-spacing:.02em}
+.hb-logo{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;font-family:var(--sans);font-weight:700;font-size:.82rem;letter-spacing:.02em}
 .hb-search-wrap{position:relative;flex:1;min-width:200px}
 #hbsearch{width:100%;font-family:var(--sans);font-size:.88rem;padding:9px 14px;border-radius:30px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.1);color:#fff}
 #hbsearch::placeholder{color:#b9c6d4}
@@ -72,11 +72,11 @@ h1,h2,h3,h4{line-height:1.5}
 .sc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .sc-card{display:flex;gap:11px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 15px;transition:.15s}
 .sc-card:hover{border-color:var(--teal);transform:translateY(-2px)}
-.sc-id{flex:none;font-weight:700;font-size:.74rem;color:#fff;background:var(--teal);border-radius:7px;padding:3px 8px}
+.sc-id{flex:none;font-weight:700;font-size:.74rem;border-radius:7px;padding:3px 8px}
 .sc-t{font-size:.9rem;font-weight:500;color:var(--ink);line-height:1.5}
 .s-head{margin:2px 0 14px}
 .s-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px}
-.gtag{font-size:.74rem;font-weight:600;color:#fff;background:var(--teal);border-radius:30px;padding:4px 12px}
+.gtag{font-size:.74rem;font-weight:600;color:#fff;border-radius:30px;padding:4px 12px}
 .gtag.g-A{background:#2f6f9f}.gtag.g-B{background:#c0533f}.gtag.g-C{background:#8a6d2f}.gtag.g-D{background:#0E8074}
 .ttag{font-size:.74rem;color:var(--muted);background:var(--bg);border:1px solid var(--line-2);border-radius:30px;padding:4px 12px}
 .s-head h1{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--head);margin:0;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
@@ -139,7 +139,7 @@ th{background:var(--a-bg);color:var(--head);font-weight:700}
 .hb-main{padding:20px 30px 60px;min-width:0}
 .side-nav a{display:block;font-size:.82rem;color:var(--ink);padding:6px 10px;border-radius:8px;line-height:1.5}
 .side-nav a:hover{background:var(--a-bg);color:var(--teal-d)}
-.side-nav a.on{background:var(--teal);color:#fff;font-weight:700}
+.side-nav a.on{font-weight:700}
 .side-home{font-weight:700;color:var(--head);margin-bottom:2px}
 .side-item{font-weight:600;color:var(--head)}
 .side-cap{font-size:.66rem;font-weight:700;letter-spacing:.08em;color:var(--faint);margin:15px 10px 4px}
@@ -206,5 +206,47 @@ details[open]>.side-sum::after{transform:rotate(-90deg)}
 .ptabs nav{display:flex;gap:6px;flex-wrap:wrap;row-gap:4px;max-width:100%}
 .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--muted);padding:6px 13px;border-radius:30px}
 .ptabs nav a:hover{color:var(--teal-d);background:var(--a-bg)}
-.ptabs nav a.on{background:var(--teal);color:#fff}
 @media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}
+
+/* ===== UX022（2026-08-06）「白抜きの塗りバッジ」の共通定義 =====
+   同じ見た目（--teal 地 × 白文字）を共有していた .hb-logo / .sc-id / .gtag / .side-nav a.on /
+   .ptabs nav a.on / .ck-btn の色指定をここ1箇所へ集約する。今後のコントラスト調整はこのブロックだけを触ればよい。
+   ・.pill-on は今後の新規要素が使うための別名。既存クラス名はそのまま残してある（HTML側は未変更）。
+   ・形・寸法（角丸・余白・文字サイズ）は各コンポーネント側に残す＝ここは色だけを持つ。
+   ・.gtag.g-A 〜 .g-ts は分類識別色を持つため対象外（:not で除外。文字色 #fff は .gtag 側に残置）。
+   ・.ck-btn は handbook/check/ck1〜13.html のインライン style から色指定を引き上げたもの
+     （インライン側には border-width/border-style だけを残し、色はここが正）。 */
+.pill-on,
+.hb-logo,
+.sc-id,
+.gtag:not(.g-A):not(.g-B):not(.g-C):not(.g-D):not(.g-sales):not(.g-tech):not(.g-mfg):not(.g-buy):not(.g-vendor):not(.g-ts),
+.side-nav a.on,
+.ptabs nav a.on,
+.ck-btn{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+/* ===== UX013（2026-08-06）ダークモードのコントラストAA対応 =====
+   ダークの「--teal(#3b82f6) 地 × 白文字」は 3.678:1 で AA(4.5:1) 未達。
+   ダーク時のみ、透明地＋--teal-d 文字＋1px --teal-d の枠（アウトライン表示）へ切り替える。
+   ・ライトモードは変更しない／新しい色・変数は作らない（--teal-d はダーク既存トークン #5e8cf0）
+   ・枠は outline（offset -1px）で描き、ライト↔ダークで箱の寸法が変わらないようにする
+     （.ck-btn だけは元から 1px の border を持つため border-color の差し替えで揃える）
+   到達値: --card 4.558 / --bg 5.485 / --navy 5.448（いずれも AA 達成） */
+@media (prefers-color-scheme: dark){
+  .pill-on,
+  .hb-logo,
+  .sc-id,
+  .gtag:not(.g-A):not(.g-B):not(.g-C):not(.g-D):not(.g-sales):not(.g-tech):not(.g-mfg):not(.g-buy):not(.g-vendor):not(.g-ts),
+  .side-nav a.on,
+  .ptabs nav a.on,
+  .ck-btn{background:transparent;color:var(--teal-d);border-color:var(--teal-d)}
+  /* border を持たない5要素の枠は outline で描く（.ck-btn は元から 1px の border を持つので不要） */
+  .pill-on,
+  .hb-logo,
+  .sc-id,
+  .gtag:not(.g-A):not(.g-B):not(.g-C):not(.g-D):not(.g-sales):not(.g-tech):not(.g-mfg):not(.g-buy):not(.g-vendor):not(.g-ts),
+  .side-nav a.on,
+  .ptabs nav a.on{outline:1px solid var(--teal-d);outline-offset:-1px}
+  /* hover の地色 --a-bg 上では 4.314 で AA 未達になるため、選択中の項目だけ --card に留める（4.558） */
+  .side-nav a.on:hover,
+  .ptabs nav a.on:hover{background:var(--card);color:var(--teal-d)}
+}

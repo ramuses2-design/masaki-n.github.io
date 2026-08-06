@@ -43,6 +43,11 @@
   .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
   .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
   .ptabs nav a.on{background:var(--acc);color:#fff}
+  /* UX013: ダークの「--acc(#7aa5f8) 地 × 白文字」は 2.452:1 で AA 未達。
+     ハンドブック側と同じアウトライン表示に揃える（--acc-t は既存トークン。--s2 上 8.408:1） */
+  @media (prefers-color-scheme: dark){
+    .ptabs nav a.on{background:transparent;color:var(--acc-t);border-color:var(--acc-t)}
+  }
   @media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}
 
   header.top{background:var(--s2);border-bottom:1px solid var(--bd);padding:26px 0 20px}
@@ -50,12 +55,13 @@
   .sub{font-size:.84rem;color:var(--ts);margin-top:5px}
 
   .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:24px 0 0}
-  .cat{display:flex;flex-direction:column;text-align:left;font:inherit;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;cursor:pointer;color:var(--tp);min-height:44px}
+  /* UX021: 余白を既存の4px刻みへ（14px→16px / 10px→12px）。タップ領域44px・1カラム折り返しは既に充足 */
+  .cat{display:flex;flex-direction:column;text-align:left;font:inherit;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:16px;cursor:pointer;color:var(--tp);min-height:44px}
   .cat:hover{border-color:var(--acc);background:var(--acc-bg)}
   .cat:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
   .cat .n{font-size:.96rem;font-weight:700;line-height:1.5}
   .cat .d{font-size:.78rem;color:var(--ts);line-height:1.7;margin-top:4px;flex:1}
-  .cat .m{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:.72rem;color:var(--tm)}
+  .cat .m{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:.72rem;color:var(--tm)}
   .cat .best{color:var(--ok-t);background:var(--ok-bg);border-radius:20px;padding:1px 9px;font-weight:700}
 
   .card{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:24px 24px 20px;margin:24px 0 0}

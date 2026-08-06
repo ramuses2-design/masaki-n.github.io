@@ -38,6 +38,11 @@
   .ptabs nav a{white-space:nowrap;font-size:.8rem;font-weight:500;color:var(--ts);padding:6px 13px;border-radius:30px;border:1px solid transparent}
   .ptabs nav a:hover{color:var(--acc-t);background:var(--acc-bg)}
   .ptabs nav a.on{background:var(--acc);color:#fff}
+  /* UX013: ダークの「--acc(#7aa5f8) 地 × 白文字」は 2.452:1 で AA 未達。
+     ハンドブック側と同じアウトライン表示に揃える（--acc-t は既存トークン。--s2 上 8.408:1） */
+  @media (prefers-color-scheme: dark){
+    .ptabs nav a.on{background:transparent;color:var(--acc-t);border-color:var(--acc-t)}
+  }
   @media(max-width:560px){.ptabs-in{justify-content:center}.pbrand{width:100%;text-align:center;margin-right:0}}
 
   header.top{background:var(--s2);border-bottom:1px solid var(--bd);padding:26px 0 20px}

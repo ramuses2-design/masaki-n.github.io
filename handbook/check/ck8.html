@@ -47,7 +47,8 @@
   .ck-opt input{margin:0;accent-color:var(--teal)}
 
   .ck-actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
-  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+  /* UX022: 塗りの色指定は assets/style.css の共通ブロック（.pill-on 群）が正。ここは形・寸法だけ持つ */
+  .ck-btn{font-family:inherit;font-size:.85rem;font-weight:700;border-radius:9px;padding:11px 20px;border-width:1px;border-style:solid;cursor:pointer}
   .ck-btn.ghost{background:transparent;color:var(--muted);border-color:var(--line-2)}
   .ck-btn:disabled{opacity:.45;cursor:not-allowed}
   .ck-warn{font-size:.78rem;color:var(--muted);margin:10px 0 0}
