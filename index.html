@@ -98,20 +98,20 @@
   .sidebar a .ic{font-size:18px}
   .sidebar .sdot{width:9px;height:9px;border-radius:50%;flex:none}
 
-  .tips{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:24px 0 6px}
+  .tips{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:20px;margin:24px 0 8px}
   .tips-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
   .tips-h .ic{font-size:20px;color:var(--acc-t)}
   .tips-h span.lbl{font-size:1.04rem;font-weight:700}
   .tips-h .hint{font-size:.72rem;color:var(--tm)}
   .tiplist{display:flex;flex-direction:column;margin-top:13px}
-  .tipitem{display:flex;align-items:center;gap:13px;padding:13px 4px;border-top:1px solid var(--bd);cursor:pointer;transition:.15s}
+  .tipitem{display:flex;align-items:center;gap:12px;padding:12px 4px;border-top:1px solid var(--bd);cursor:pointer;transition:.15s}
   .tipitem:first-child{border-top:none}
   .tipitem:hover{background:var(--s1);padding-left:10px;border-radius:10px}
   .tipnum{flex:none;width:27px;height:27px;border-radius:50%;background:var(--acc-bg);color:var(--acc-t);font-weight:500;font-size:.84rem;display:flex;align-items:center;justify-content:center}
   .tiptxt{flex:1;font-size:.92rem;line-height:1.65}
   .tipgo{flex:none;font-size:.76rem;font-weight:500;color:var(--acc-t);white-space:nowrap}
 
-  .filter{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:15px 18px;margin:18px 0 8px}
+  .filter{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:16px 20px;margin:16px 0 8px}
   .frow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:11px}
   .frow:last-child{margin-bottom:0}
   .flab{font-size:.74rem;font-weight:500;color:var(--tm);min-width:46px}
@@ -130,13 +130,13 @@
 
   section.block{margin:32px 0 8px;scroll-margin-top:64px}
   #tips{scroll-margin-top:64px}
-  .sec-head{display:flex;align-items:center;gap:12px;margin:0 0 5px;flex-wrap:wrap}
+  .sec-head{display:flex;align-items:center;gap:12px;margin:0 0 4px;flex-wrap:wrap}
   .sec-tile{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}
   .sec-tile .ic{font-size:20px}
   .sec-head h2{font-family:var(--serif);margin:0;font-size:1.32rem;font-weight:600;letter-spacing:.02em}
   .sec-head .cnt{font-size:.73rem;color:var(--ts);background:var(--s1);border:1px solid var(--bd);padding:3px 12px;border-radius:30px}
-  .sec-desc{color:var(--ts);font-size:.84rem;margin:3px 0 16px}
-  .notice{border-radius:12px;padding:12px 16px;margin:0 0 16px;font-size:.84rem;line-height:1.7;border:1px solid var(--bd)}
+  .sec-desc{color:var(--ts);font-size:.84rem;margin:4px 0 16px}
+  .notice{border-radius:12px;padding:12px 20px;margin:0 0 16px;font-size:.84rem;line-height:1.7;border:1px solid var(--bd)}
   .notice .ic{margin-right:6px;font-size:16px}
   .notice.warn{background:var(--dang-bg);color:var(--dang-t)}
   .notice.ok{background:var(--ok-bg);color:var(--ok-t)}
@@ -193,7 +193,7 @@
 
   @media(min-width:1200px){body{padding-left:240px}.sidebar{display:block}nav.jump{display:none}}
   @media(max-width:560px){.brand{font-size:1.4rem}.meta{text-align:left}.top-inner{align-items:flex-start}.datepick{justify-content:flex-start}.sheet{padding:24px 20px}}
-  .hero{display:grid;gap:16px;margin:24px 0 4px}
+  .hero{display:grid;gap:16px;margin:24px 0 8px}
   .hero.two{grid-template-columns:1fr 1fr}
   @media(max-width:700px){.hero.two{grid-template-columns:1fr}}
   .heroC{background:var(--s2);border:1px solid var(--bd);border-radius:18px;padding:24px 24px 20px;cursor:pointer;display:flex;flex-direction:column;transition:border-color .15s,transform .15s}
@@ -208,18 +208,20 @@
   @media(max-width:700px){.heroC h3{font-size:1.15rem}}
   @media(min-width:700px){.grid .card.lead{grid-column:span 2}.grid .card.lead h3{font-size:1.2rem}}
   /* --- enhancements --- */
-  .duebar{background:var(--s2);border:1px solid var(--bd);border-left:3px solid var(--warn-t);border-radius:12px;padding:14px 16px;margin:16px 0 6px}
+  /* UX004: 期限は見出しアイコンと .dueitem.soon のバッジで既に示されているため、
+     意味の重複するサイドストライプ（border-left の警告色）を外して1画面の強調色を減らす */
+  .duebar{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:16px 20px;margin:16px 0 8px}
   .duebar-h{display:flex;align-items:center;gap:8px;font-size:.92rem;font-weight:700;color:var(--tp)}
   .duebar-h .ic{font-size:18px;color:var(--warn-t)}
   .duebar-h .duebar-hint{font-size:.7rem;font-weight:400;color:var(--tm);margin-left:auto}
-  .duelist{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}
+  .duelist{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
   .dueitem{display:inline-flex;align-items:center;gap:9px;background:var(--s1);border:1px solid var(--bd);border-radius:30px;padding:6px 13px;cursor:pointer;font-family:var(--sans);color:var(--ts);text-align:left;max-width:100%}
   .dueitem:hover{border-color:var(--acc);color:var(--tp)}
   .dueitem .duewhen{font-size:.72rem;font-weight:700;color:var(--ts);background:var(--s2);border:1px solid var(--bd);border-radius:30px;padding:1px 9px;flex:none}
   .dueitem.soon .duewhen{background:var(--warn-bg);color:var(--warn-t);border-color:var(--warn-bg)}
   .dueitem .duename{font-size:.8rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
   .dueitem .duelabel{font-size:.7rem;color:var(--tm);flex:none}
-  .emptystate{text-align:center;padding:46px 18px;color:var(--tm);background:var(--s2);border:1px dashed var(--bds);border-radius:14px;margin:16px 0}
+  .emptystate{text-align:center;padding:48px 20px;color:var(--tm);background:var(--s2);border:1px dashed var(--bds);border-radius:14px;margin:16px 0}
   .emptystate p{margin:0 0 14px;font-size:.9rem}
   .emptystate button{font-size:.8rem;font-weight:500;color:#fff;background:var(--acc);border:none;border-radius:30px;padding:8px 18px;cursor:pointer;font-family:var(--sans)}
   .totop{position:fixed;right:18px;bottom:18px;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid var(--bd);background:var(--s2);color:var(--ts);font-size:1.2rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.14);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
@@ -236,7 +238,7 @@
     header.top{border:none}
   }
   /* --- theme history --- */
-  .hist{margin-top:18px;border-top:1px dashed var(--bds);padding-top:14px}
+  .hist{margin-top:16px;border-top:1px dashed var(--bds);padding-top:16px}
   .hist-toggle{display:inline-flex;align-items:center;gap:8px;background:var(--s1);border:1px solid var(--bd);border-radius:30px;padding:7px 15px;font-size:.82rem;font-weight:500;color:var(--ts);cursor:pointer;font-family:var(--sans)}
   .hist-toggle:hover{border-color:var(--acc);color:var(--acc-t)}
   .hist-toggle .ic{font-size:16px}
@@ -268,7 +270,7 @@
 
 <aside class="sidebar" id="sidebar" aria-label="テーマ一覧"></aside>
 
-<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a class="on" href="./">📊 今日の情報</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 理解度クイズ</a><a href="trends.html">📈 指標の推移</a><a href="soudan.html">💬 セルフ診断</a></nav></div></div>
+<div class="ptabs"><div class="wrap ptabs-in"><span class="pbrand">ものづくりポータル</span><nav aria-label="サイト内ページ"><a class="on" aria-current="page" href="./">📊 今日の情報</a><a href="handbook/">📘 ハンドブック</a><a href="calendar.html">📅 品質カレンダー</a><a href="quiz.html">🧠 理解度クイズ</a><a href="trends.html">📈 指標の推移</a><a href="soudan.html">💬 セルフ診断</a></nav></div></div>
 
 <header class="top">
   <div class="wrap top-inner">
